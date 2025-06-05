@@ -1,4 +1,4 @@
-```markdown
+```
 # Yummeals API Documentation
 
 This document outlines the setup instructions, base URL, authentication details, and available endpoints for the Yummeals API.
@@ -9,7 +9,7 @@ This document outlines the setup instructions, base URL, authentication details,
 
 To set up the Yummeals web application locally, follow these steps:
 
-```bash
+```
 # Clone the repository
 git clone https://github.com/LuminousDigital/Yummeals_wep-app.git
 cd Yummeals_wep-app
