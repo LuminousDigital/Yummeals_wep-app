@@ -1,28 +1,19 @@
-```
-# Yummeals API Documentation
-
-This document outlines the setup instructions, base URL, authentication details, and available endpoints for the Yummeals API.
-
----
+```markdown
+# API Documentation
 
 ## 🛠️ Setup Instructions
-
-To set up the Yummeals web application locally, follow these steps:
-
-```
-# Clone the repository
+```bash
+# Clone and setup
 git clone https://github.com/LuminousDigital/Yummeals_wep-app.git
 cd Yummeals_wep-app
-
-# Set up environment
 cp .env.example .env
 composer install
 php artisan key:generate
 
-# Set up database
+# Database
 php artisan migrate --seed
 
-# Configure permissions
+# Permissions
 php artisan storage:link
 chmod -R 775 storage bootstrap/cache
 ```
@@ -30,21 +21,13 @@ chmod -R 775 storage bootstrap/cache
 ---
 
 ## 🌐 API Base URL
-
-```
-https://app.yummealsapp.com/api/v1
-```
-
----
+`https://app.yummealsapp.com/api/v1`
 
 ## 🔐 Authentication
-
-All API requests require the following headers:
-
 ```
 x-api-key: z8p53xn6-n2f5-29w7-7193-s500c15553h171620
 Content-Type: application/json
-Authorization: Bearer {token}  # Required for protected routes
+Authorization: Bearer {token}  # For protected routes
 ```
 
 ---
@@ -54,11 +37,9 @@ Authorization: Bearer {token}  # Required for protected routes
 ### 🔑 Authentication
 
 #### Login
-- **Method**: `POST`
-- **Endpoint**: `/auth/login`
-- **Description**: Authenticates a user and returns a token.
+`POST /auth/login`
 
-**Request Body:**
+**Request:**
 ```json
 {
   "email": "user@example.com",
@@ -79,9 +60,7 @@ Authorization: Bearer {token}  # Required for protected routes
 ```
 
 #### Logout
-- **Method**: `POST`
-- **Endpoint**: `/auth/logout`
-- **Description**: Logs out the authenticated user.
+`POST /auth/logout`
 
 **Response:**
 ```json
@@ -95,11 +74,9 @@ Authorization: Bearer {token}  # Required for protected routes
 ### 👤 User Management
 
 #### Registration
-- **Method**: `POST`
-- **Endpoint**: `/auth/signup/register`
-- **Description**: Registers a new user.
+`POST /auth/signup/register`
 
-**Request Body:**
+**Request:**
 ```json
 {
   "first_name": "John",
@@ -135,9 +112,7 @@ Authorization: Bearer {token}  # Required for protected routes
 ### 📊 Referral System
 
 #### Get Referral Info
-- **Method**: `GET`
-- **Endpoint**: `/referral`
-- **Description**: Retrieves the user's referral information.
+`GET /referral`
 
 **Response:**
 ```json
@@ -157,9 +132,7 @@ Authorization: Bearer {token}  # Required for protected routes
 ```
 
 #### Leaderboard
-- **Method**: `GET`
-- **Endpoint**: `/referral/leaderboard`
-- **Description**: Retrieves the referral leaderboard.
+`GET /referral/leaderboard`
 
 **Response:**
 ```json
@@ -178,11 +151,9 @@ Authorization: Bearer {token}  # Required for protected routes
 ```
 
 #### Claim Bonus
-- **Method**: `POST`
-- **Endpoint**: `/referral/claim`
-- **Description**: Claims a referral bonus.
+`POST /referral/claim`
 
-**Request Body:**
+**Request:**
 ```json
 {
   "amount": 25.00
@@ -202,58 +173,54 @@ Authorization: Bearer {token}  # Required for protected routes
 ### 👤 Profile Management
 
 #### Get Profile
-- **Method**: `GET`
-- **Endpoint**: `/profile`
-- **Description**: Retrieves the authenticated user's profile information.
+`GET /profile`
 
 **Response:**
 ```json
 {
-  "data": {
-    "id": 7,
-    "name": "John Doe",
-    "first_name": "John",
-    "last_name": "Doe",
-    "phone": "1234569890",
-    "email": "john.doe@example.com",
-    "username": "john-doe",
-    "balance": "0.00",
-    "currency_balance": "$0.00",
-    "referral_code": "JOHNDO123",
-    "referrals": [
-      {
-        "id": 8,
-        "name": "Referred User 1",
-        "email": "user1@example.com",
-        "phone": "1235439890",
-        "referral_code": "USER1CODE",
-        "referred_by": 7,
+    "data": {
+        "id": 7,
+        "name": "John Doe",
+        "first_name": "John",
+        "last_name": "Doe",
+        "phone": "1234569890",
+        "email": "john.doe@example.com",
+        "username": "john-doe",
+        "balance": "0.00",
+        "currency_balance": "$0.00",
+        "referral_code": "JOHNDO123",
+        "referrals": [
+            {
+                "id": 8,
+                "name": "Referred User 1",
+                "email": "user1@example.com",
+                "phone": "1235439890",
+                "referral_code": "USER1CODE",
+                "referred_by": 7,
+                "referral_balance": "0.00",
+                "total_referrals": 0
+            }
+        ],
+        "referrer": {
+            "id": 4,
+            "name": "Referrer User",
+            "email": "referrer@example.com",
+            "phone": "1234577890",
+            "referral_code": "REFERRER1",
+            "total_referrals": 2
+        },
         "referral_balance": "0.00",
-        "total_referrals": 0
-      }
-    ],
-    "referrer": {
-      "id": 4,
-      "name": "Referrer User",
-      "email": "referrer@example.com",
-      "phone": "1234577890",
-      "referral_code": "REFERRER1",
-      "total_referrals": 2
-    },
-    "referral_balance": "0.00",
-    "total_referrals": 4,
-    "image": "https://app.yummealsapp.com/images/default/profile.png",
-    "country_code": "+1"
-  }
+        "total_referrals": 4,
+        "image": "https://app.yummealsapp.com/images/default/profile.png",
+        "country_code": "+1"
+    }
 }
 ```
 
 #### Update Profile
-- **Method**: `PUT`
-- **Endpoint**: `/profile`
-- **Description**: Updates the authenticated user's profile.
+`PUT /profile`
 
-**Request Body:**
+**Request:**
 ```json
 {
   "name": "John Updated",
