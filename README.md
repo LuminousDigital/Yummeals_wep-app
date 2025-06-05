@@ -1,4 +1,4 @@
-```markdown
+```
 # Yummeals API Documentation
 
 ## Setup Instructions
