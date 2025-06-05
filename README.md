@@ -1,4 +1,4 @@
-```
+
 # Yummeals API Documentation
 
 ## Setup Instructions
