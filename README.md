@@ -264,3 +264,4 @@ Authorization: Bearer {token}  # For protected routes
   "message": "Profile updated successfully"
 }
 ```
+```
