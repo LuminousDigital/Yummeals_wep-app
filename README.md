@@ -82,8 +82,8 @@ Authorization: Bearer {token}  # For protected routes
   "first_name": "John",
   "last_name": "Doe",
   "email": "john.doe@example.com",
-  "phone": "+1234567890",
-  "country_code": "+1",
+  "phone": "1234567890",
+  "country_code": "+234",
   "password": "SecurePass123!",
   "password_confirmation": "SecurePass123!",
   "referral_code": "FRIEND123"
