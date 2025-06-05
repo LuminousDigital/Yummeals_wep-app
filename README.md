@@ -3,7 +3,7 @@
 
 ## 🛠️ Setup Instructions
 
-```bash
+```
 # Clone and setup
 git clone https://github.com/LuminousDigital/Yummeals_wep-app.git
 cd Yummeals_wep-app
