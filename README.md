@@ -1,8 +1,3 @@
-
----
-
-### Improved API Documentation
-
 ```markdown
 # Yummeals API Documentation
 
