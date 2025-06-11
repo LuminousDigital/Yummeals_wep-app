@@ -88,7 +88,7 @@
 </head>
 
 <body>
-    @php 
+    @php
          $total = 0;
          $total_discount = 0;
          $total_delivery_charge = 0;
@@ -102,12 +102,12 @@
             'payment_gateway.' . $order->payment_method,[],'en'
         );
          }
-    @endphp 
+    @endphp
     <div class="container">
         <div class="report">
             <p style="margin: 0px 0px 8px 0px;font-size: 16px;font-weight: bold">{{ App\Libraries\AppLibrary::textShortener($company['company_name'], 60) }}</p>
             <p>{{ App\Libraries\AppLibrary::textShortener($company['company_address'],60) }}</p>
-            <p  style="color: #ff006b;margin: 0px 0px 8px 0px;font-size: 16px;font-weight: bold;">{{ trans('all.label.sales_report', [], 'en') }}</p>
+            <p  style="color:rgb(242, 91, 10, 1)margin: 0px 0px 8px 0px;font-size: 16px;font-weight: bold;">{{ trans('all.label.sales_report', [], 'en') }}</p>
             <table>
                 <thead>
                     <tr>
@@ -130,7 +130,7 @@
                         <tr>
                             <td>{{$order->order_serial_no}}</td>
                             <td>{{ App\Libraries\AppLibrary::datetime($order->order_datetime) }}</td>
-                            <td>{{  $order->transaction ? strtoupper($order->transaction->payment_method) 
+                            <td>{{  $order->transaction ? strtoupper($order->transaction->payment_method)
                 : getPaymentMethod($order)}}</td>
                             <td>{{ trans('payment_status.'. $order->payment_status, [], 'en') }}</td>
                             <td>{{ App\Libraries\AppLibrary::reportCurrencyAmountFormat($order->discount) }}</td>

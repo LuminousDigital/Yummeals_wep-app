@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div class="py-8 mt-8 border-t border-[#ff3388]">
+        <div class="py-8 mt-8 border-t border-[#e5e7eb]">
             <p class="text-sm text-center text-white">{{ setting.site_copyright }}</p>
         </div>
     </footer>

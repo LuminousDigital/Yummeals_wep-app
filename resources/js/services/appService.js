@@ -83,7 +83,7 @@ export default {
             {
                 confirmButtonText: "Yes, Log Out!",
                 cancelButtonText: "No, Cancel!",
-                confirmButtonColor: "#696cff",
+                confirmButtonColor: "#f25b0a",
                 cancelButtonColor: "#8592a3",
             }
         );
@@ -96,7 +96,7 @@ export default {
             {
                 confirmButtonText: "Yes, Delete it!",
                 cancelButtonText: "No, Cancel!",
-                confirmButtonColor: "#696cff",
+                confirmButtonColor: "#f25b0a",
                 cancelButtonColor: "#8592a3",
             }
         );
@@ -109,7 +109,7 @@ export default {
             {
                 confirmButtonText: "Yes, Accept it!",
                 cancelButtonText: "No, Cancel!",
-                confirmButtonColor: "#696cff",
+                confirmButtonColor: "#f25b0a",
                 cancelButtonColor: "#8592a3",
             }
         );
@@ -122,7 +122,7 @@ export default {
             {
                 confirmButtonText: "Yes, Cancel it!",
                 cancelButtonText: "No, Cancel",
-                confirmButtonColor: "#696cff",
+                confirmButtonColor: "#f25b0a",
                 cancelButtonColor: "#8592a3",
             }
         );

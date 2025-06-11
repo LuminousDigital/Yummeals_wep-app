@@ -29,10 +29,11 @@ module.exports = {
               "lab": ["'Lab'"]
           },
           colors: {
-              "heading": "#1F1F39",
+              "heading": "rgb(100, 150, 26, 1)",
               "paragraph": "#6E7191",
               "placeholder": "#A0A3BD",
-              "primary": "rgb(255 0 107 / <alpha-value>)",
+            //   "primary": "rgb(242 91 10 / <alpha-value>)",
+              "primary": "rgb(242, 91, 10, 1)",
               "primary-light": "rgb(220 234 255 / <alpha-value>)",
           },
           boxShadow: {

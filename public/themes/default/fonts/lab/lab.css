@@ -208,6 +208,7 @@
 
 .lab-dashboard:before {
   content: "\e02d";
+  color: rgb(100, 150, 26, 1);
 }
 
 .lab-customers:before {
