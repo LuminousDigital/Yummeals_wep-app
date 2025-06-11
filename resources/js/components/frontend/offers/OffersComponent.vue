@@ -2,7 +2,7 @@
   <section class="mb-16 mt-12">
     <div class="container">
       <h2 class="capitalize text-[26px] leading-[40px] font-semibold mb-6 text-primary">
-        {{ $t("label.all_offers") }}
+        {{ $t("label.all_referrals") }}
       </h2>
       <OfferComponent :limit="limit" />
     </div>

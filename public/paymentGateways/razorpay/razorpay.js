@@ -11,7 +11,7 @@ if (razorpayKey) {
             email: razorpayUserEmail
         },
         theme: {
-            color: '#FF006B'
+            color: ''
         },
         handler: function (response) {
             fetch(razorpayPayLink, {

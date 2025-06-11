@@ -18,10 +18,16 @@
                     class="capitalize text-sm font-medium text-heading">
                     {{ $t('label.menu') }}
                 </router-link>
-                <router-link :to="{ name: 'frontend.offers' }"
+                <!-- <router-link :to="{ name: 'frontend.offers' }"
                     :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
                     class="capitalize text-sm font-medium text-heading">
                     {{ $t('label.offers') }}
+                </router-link> -->
+                <router-link :to="{ name: 'frontend.offers' }"
+                    :class="checkIsPathAndRoutePathSame('/referrals') ? 'text-primary' : ''"
+                    class="capitalize text-sm font-medium text-heading">
+                    Referrals
+                    <!-- {{ $t('label.offers') }} -->
                 </router-link>
             </nav>
 

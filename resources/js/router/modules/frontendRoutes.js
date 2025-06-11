@@ -32,7 +32,8 @@ export default [
         },
     },
     {
-        path: "/offers",
+        // path: "/offers",
+        path: "/referrals",
         component: OffersComponent,
         name: "frontend.offers",
         meta: {

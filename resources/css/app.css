@@ -5,22 +5,23 @@
 
 @layer base {
     :root {
-        --primary: 255 0 107;
+        --primary: rgb(242, 91, 10, 1);
+        /* --primary: 242 91 10; */
         --primary-slate: 255 59 142;
         --primary-light: 255 237 244;
         --client-font: 'Rubik', sans-serif;
         --admin-font: 'Public Sans', sans-serif;
     }
-    
+
     a,
     button,
     label,
     span { @apply inline-block; font-style: initial; }
-    
+
     input,
     select,
     textarea {
-        @apply 
+        @apply
         placeholder:text-sm placeholder:text-placeholder
         focus-within:outline-0 bg-transparent text-[15px]
     }
@@ -108,7 +109,7 @@
               LAYOUT PART END
     ====================================*/
 
- 
+
     /*===================================
             COMPONENTS PART START
     ====================================*/
@@ -142,8 +143,8 @@
     #profile.active { @apply translate-x-0 }
     .profile-paper { @apply invisible opacity-0 scale-0 transition }
     .profile-paper.active { @apply visible opacity-100 scale-100 transition }
-    .veg-navs .veg-active { @apply shadow-filter bg-white } 
-    .veg-navs .veg-active i { @apply opacity-100 ltr:ml-0 rtl:mr-0 } 
+    .veg-navs .veg-active { @apply shadow-filter bg-white }
+    .veg-navs .veg-active i { @apply opacity-100 ltr:ml-0 rtl:mr-0 }
     .menu-slides .menu-category-active { @apply bg-primary-light border-primary }
     .dimension-navs .dimension-active { @apply text-heading }
     .ff-header.landing-header.active { @apply shadow-xs bg-white }
@@ -220,7 +221,7 @@
     .chat-footer-data-list::-webkit-scrollbar-thumb { @apply rounded-xl bg-gray-400 border-2 border-solid border-slate-200 }
     .chat-footer-data-input { @apply h-full w-full py-2 }
     .chat-footer-sent { @apply flex-shrink-0 }
- 
+
 
     /* THIN SCROLL BAR */
     .thin-scrolling { @apply overflow-y-auto transition }
@@ -350,12 +351,12 @@
     .checkbox:checked + .check-icon { @apply flex }
     .checkbox:checked + .checkmark { @apply bg-primary border-primary }
 
-    input:checked + div { @apply border-primary }  
+    input:checked + div { @apply border-primary }
     input:checked + div svg { @apply block }
 
     .custom-switch { @apply inline-flex items-center justify-center cursor-pointer }
     .custom-switch input { @apply relative w-5 h-3 cursor-pointer
-                                before:content-[''] before:inline-block before:absolute before:inset-0 before:w-full before:h-full before:rounded-3xl before:bg-paragraph before:transition-all before:duration-300 
+                                before:content-[''] before:inline-block before:absolute before:inset-0 before:w-full before:h-full before:rounded-3xl before:bg-paragraph before:transition-all before:duration-300
                                 after:content-[''] after:absolute after:top-1/2 after:left-[30%] after:-translate-y-1/2 after:-translate-x-1/2 after:w-1.5 after:h-1.5 after:rounded-full after:bg-white after:transition-all after:duration-300 }
     .custom-switch input:checked { @apply before:bg-primary after:left-[70%] }
     .custom-switch label { @apply cursor-pointer ltr:pl-2 rtl:pr-2 text-sm uppercase text-paragraph transition-all duration-300 }
@@ -370,7 +371,7 @@
     .custom-radio-field { @apply absolute z-10 opacity-0 w-full h-full appearance-none cursor-pointer }
     .custom-radio-span { @apply absolute top-0 left-0 w-full h-full text-center rounded-full border cursor-pointer border-[#d9dee3] }
     .custom-radio-field:checked + .custom-radio-span { @apply border-[5px] bg-white border-primary shadow-checkRound }
-    
+
     .custom-radio.sm { @apply w-3 h-3 }
     .custom-radio.sm .custom-radio-field:checked + .custom-radio-span { @apply border-[3px] }
 
@@ -392,7 +393,7 @@
     .table-filter-div { @apply h-0 overflow-hidden transition-all duration-500 ease-linear }
 
     /* TOOLTIP */
-    .db-tooltip { 
+    .db-tooltip {
         @apply absolute left-1/2 -translate-x-1/2 text-[10px] whitespace-nowrap font-medium tracking-wide uppercase pt-[1px] pb-[2px] px-[7px] rounded bg-gray-700 text-white
         after:content-[''] after:absolute after:-bottom-[3px] after:left-1/2 after:-translate-x-1/2 after:rotate-45 after:border-solid after:border-t-4 after:border-4 after:rounded-sm
         after:border-t-transparent after:border-l-transparent after:border-r-gray-700 after:border-b-gray-700
@@ -432,12 +433,12 @@
     .db-list-item { @apply flex flex-col items-start sm:flex-row sm:items-center py-1.5 rounded-md transition }
     .db-list-item-title { @apply ltr:text-left rtl:text-right text-sm capitalize font-semibold whitespace-nowrap after:inline-block sm:after:hidden after:content-[':'] after:pl-1 text-heading }
     .db-list-item-text { @apply ltr:text-left rtl:text-right text-sm }
-    
+
     .db-list.single .db-list-item-title { @apply w-full max-w-full sm:max-w-[180px] }
     .db-list.single .db-list-item-text { @apply w-full }
 
-    .db-list.multiple { @apply flex-row flex-wrap }    
-    .db-list.multiple .db-list-item { @apply w-full sm:w-1/2 }    
+    .db-list.multiple { @apply flex-row flex-wrap }
+    .db-list.multiple .db-list-item { @apply w-full sm:w-1/2 }
     .db-list.multiple .db-list-item-title { @apply w-full sm:w-1/2 }
     .db-list.multiple .db-list-item-text { @apply w-full sm:w-1/2 }
 
@@ -506,11 +507,11 @@
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance:textfield; 
+    -moz-appearance:textfield;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -528,8 +529,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .btnr { @apply py-1.5 px-2 shadow-[0px_3px_8px_rgba(0,0,0,0.24)] bg-white rounded-md cursor-pointer w-full flex items-center justify-center}
 #cursor { @apply text-3xl inline-block pt-2.5}
 .btnr:active{@apply bg-[rgb(177,176,176)]}
-.btnr:hover{@apply bg-[#ff006b0d]}
-.num:hover{@apply bg-[#ff006b0d]}
+.btnr:hover{@apply bg-[0d]}
+.num:hover{@apply bg-[0d]}
 .btnr::selection {
     user-select: none;
 }

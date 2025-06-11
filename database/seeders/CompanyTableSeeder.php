@@ -18,7 +18,7 @@ class CompanyTableSeeder extends Seeder
     public function run()
     {
         Settings::group('company')->set([
-            'company_name'         => 'FoodKing - Restaurant Food Ordering & Delivery App',
+            'company_name'         => 'Yummeals - Restaurant Food Ordering & Delivery App',
             'company_email'        => 'info@inilabs.net',
             'company_phone'        => '+13333846282',
             'company_website'      => 'https://foodking.dev',
@@ -31,7 +31,7 @@ class CompanyTableSeeder extends Seeder
 
         $envService = new EnvEditor();
         $envService->addData([
-            'APP_NAME' => "FoodKing - Restaurant Food Ordering & Delivery App"
+            'APP_NAME' => "Yummeals - Restaurant Food Ordering & Delivery App"
         ]);
         Artisan::call('optimize:clear');
     }
