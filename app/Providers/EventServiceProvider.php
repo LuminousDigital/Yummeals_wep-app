@@ -29,6 +29,8 @@ use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Events\CouponWon;
+use App\Listeners\SendCouponNotifications;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -73,7 +75,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         SendOrderGotPush::class         => [
             SendOrderGotPushNotification::class
-        ]
+        ],
+        CouponWon::class => [
+            SendCouponNotifications::class,
+        ],
     ];
 
     /**

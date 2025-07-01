@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <footer class="footer-part pt-12 mb-14 lg:mb-0">
+    <footer class="footer-part pt-12 mb-14 lg:mb-0 bg-[#1a0c05]">
         <div class="container">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-6">
                 <div>

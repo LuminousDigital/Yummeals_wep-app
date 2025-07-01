@@ -28,6 +28,7 @@ class SignupPhoneRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // 'phone' => ['required', 'string', 'min:2000', new ValidPhone(), Rule::unique("users", "phone")->whereNull('deleted_at')->where('is_guest', Ask::NO)],
             'phone' => ['required', 'string', 'max:190', new ValidPhone(), Rule::unique("users", "phone")->whereNull('deleted_at')->where('is_guest', Ask::NO)],
             'code'  => ['required', 'string'],
         ];

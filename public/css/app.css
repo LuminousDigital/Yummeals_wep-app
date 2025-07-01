@@ -4638,6 +4638,13 @@ input:checked + div svg {
 .bg-white\/90 {
   background-color: rgb(255 255 255 / 0.9);
 }
+.bg-\[\] {
+  background-color: ;
+}
+.bg-\[\#1a0c05\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 12 5 / var(--tw-bg-opacity, 1));
+}
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
