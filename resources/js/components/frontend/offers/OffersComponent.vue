@@ -37,8 +37,6 @@
                                 {{ referralLink }}
                             </p>
                         </div>
-
-                        <!-- Social Icons -->
                         <div
                             class="flex flex-wrap justify-center items-center gap-5 md:gap-6 lg:gap-8 mb-12 mt-10 w-full transition-all"
                         >
@@ -66,8 +64,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Right Column -->
                 <div class="bg-white rounded-lg shadow-sm px-4 sm:px-6">
                     <h2
                         class="text-sm md:text-lg lg:text-xl font-semibold text-gray-900 mb-4 md:mb-6"
@@ -98,16 +94,12 @@
                                 </p>
                             </div>
                         </div>
-
-                        <!-- Optional fade-out gradient -->
                         <div
                             class="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"
                         ></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Offer Component -->
             <OfferComponent :limit="limit" />
         </div>
     </section>
