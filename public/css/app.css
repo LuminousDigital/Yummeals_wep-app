@@ -4961,6 +4961,9 @@ input:checked + div svg {
 .text-\[12px\] {
   font-size: 12px;
 }
+.text-\[13px\] {
+  font-size: 13px;
+}
 .text-\[14px\] {
   font-size: 14px;
 }
@@ -5001,9 +5004,6 @@ input:checked + div svg {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-.text-\[13px\] {
-  font-size: 13px;
 }
 .font-\[300\] {
   font-weight: 300;
@@ -6653,6 +6653,11 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     font-size: 17px;
   }
 
+  .lg\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
   .lg\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -6661,11 +6666,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   .lg\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .lg\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 }
 @media (min-width: 1280px) {

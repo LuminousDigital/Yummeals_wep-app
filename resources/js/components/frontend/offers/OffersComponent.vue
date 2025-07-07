@@ -122,7 +122,7 @@ export default {
       try {
         const response = await axios.get("/referral");
         const data = response.data;
-        this.referralLink = `${window.location.origin}/register?ref=${data.referral_code}`;
+        this.referralLink = `${window.location.origin}/signup/register?ref=${data.referral_code}`;
         this.referralBalance = `₦${parseFloat(data.referral_balance || 0).toFixed(2)}`;
 
         this.socialIcons = [
