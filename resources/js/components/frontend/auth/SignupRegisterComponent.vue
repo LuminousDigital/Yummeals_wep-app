@@ -120,7 +120,11 @@ export default {
                             password: "",
                             phone: "",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                             referral_code: "",
+=======
+                            country_code: "",
+>>>>>>> Stashed changes
 =======
                             country_code: "",
 >>>>>>> Stashed changes

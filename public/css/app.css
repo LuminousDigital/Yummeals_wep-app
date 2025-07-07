@@ -3378,9 +3378,12 @@ input:checked + div svg {
 /*===================================
             COMPONENTS PART END
     ====================================*/
+<<<<<<< Updated upstream
 .pointer-events-none {
   pointer-events: none;
 }
+=======
+>>>>>>> Stashed changes
 .visible {
   visibility: visible;
 }
@@ -3648,9 +3651,12 @@ input:checked + div svg {
 .mt-1\.5 {
   margin-top: 0.375rem;
 }
+<<<<<<< Updated upstream
 .mt-10 {
   margin-top: 2.5rem;
 }
+=======
+>>>>>>> Stashed changes
 .mt-12 {
   margin-top: 3rem;
 }
@@ -3738,9 +3744,12 @@ input:checked + div svg {
 .h-4 {
   height: 1rem;
 }
+<<<<<<< Updated upstream
 .h-40 {
   height: 10rem;
 }
+=======
+>>>>>>> Stashed changes
 .h-5 {
   height: 1.25rem;
 }
@@ -4187,6 +4196,7 @@ input:checked + div svg {
 .gap-y-5 {
   row-gap: 1.25rem;
 }
+<<<<<<< Updated upstream
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -4197,6 +4207,8 @@ input:checked + div svg {
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
+=======
+>>>>>>> Stashed changes
 .overflow-auto {
   overflow: auto;
 }
@@ -4218,9 +4230,12 @@ input:checked + div svg {
 .break-words {
   overflow-wrap: break-word;
 }
+<<<<<<< Updated upstream
 .break-all {
   word-break: break-all;
 }
+=======
+>>>>>>> Stashed changes
 .rounded {
   border-radius: 0.25rem;
 }
@@ -4446,6 +4461,13 @@ input:checked + div svg {
   --tw-bg-opacity: 1;
   background-color: rgb(26 183 89 / var(--tw-bg-opacity, 1));
 }
+<<<<<<< Updated upstream
+=======
+.bg-\[\#1a0c05\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 12 5 / var(--tw-bg-opacity, 1));
+}
+>>>>>>> Stashed changes
 .bg-\[\#2AC769\] {
   --tw-bg-opacity: 1;
   background-color: rgb(42 199 105 / var(--tw-bg-opacity, 1));
@@ -4586,10 +4608,13 @@ input:checked + div svg {
   --tw-bg-opacity: 1;
   background-color: rgb(252 252 252 / var(--tw-bg-opacity, 1));
 }
+<<<<<<< Updated upstream
 .bg-\[rgb\(242\2c 91\2c 10\)\] {
   --tw-bg-opacity: 1;
   background-color: rgb(242 91 10 / var(--tw-bg-opacity, 1));
 }
+=======
+>>>>>>> Stashed changes
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
@@ -4675,6 +4700,7 @@ input:checked + div svg {
   --tw-gradient-to: rgb(255 122 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+<<<<<<< Updated upstream
 .from-white {
   --tw-gradient-from: #fff var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
@@ -4686,6 +4712,11 @@ input:checked + div svg {
 .to-transparent {
   --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }
+=======
+.to-\[\#FF016C\] {
+  --tw-gradient-to: #FF016C var(--tw-gradient-to-position);
+}
+>>>>>>> Stashed changes
 .bg-cover {
   background-size: cover;
 }
@@ -4701,10 +4732,13 @@ input:checked + div svg {
 .stroke-\[\#6E7191\] {
   stroke: #6E7191;
 }
+<<<<<<< Updated upstream
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
 }
+=======
+>>>>>>> Stashed changes
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -4796,10 +4830,13 @@ input:checked + div svg {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
 }
+<<<<<<< Updated upstream
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
+=======
+>>>>>>> Stashed changes
 .py-14 {
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
@@ -4958,6 +4995,7 @@ input:checked + div svg {
 .text-\[11px\] {
   font-size: 11px;
 }
+<<<<<<< Updated upstream
 .text-\[12px\] {
   font-size: 12px;
 }
@@ -4967,6 +5005,8 @@ input:checked + div svg {
 .text-\[14px\] {
   font-size: 14px;
 }
+=======
+>>>>>>> Stashed changes
 .text-\[15px\] {
   font-size: 15px;
 }
@@ -5092,9 +5132,12 @@ input:checked + div svg {
 .leading-none {
   line-height: 1;
 }
+<<<<<<< Updated upstream
 .leading-snug {
   line-height: 1.375;
 }
+=======
+>>>>>>> Stashed changes
 .tracking-wide {
   letter-spacing: 0.025em;
 }
@@ -5178,10 +5221,13 @@ input:checked + div svg {
   --tw-text-opacity: 1;
   color: rgb(255 140 26 / var(--tw-text-opacity, 1));
 }
+<<<<<<< Updated upstream
 .text-\[rgb\(242\2c 91\2c 10\)\] {
   --tw-text-opacity: 1;
   color: rgb(242 91 10 / var(--tw-text-opacity, 1));
 }
+=======
+>>>>>>> Stashed changes
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
@@ -5198,10 +5244,13 @@ input:checked + div svg {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
 }
+<<<<<<< Updated upstream
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
+=======
+>>>>>>> Stashed changes
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity, 1));
@@ -5213,10 +5262,13 @@ input:checked + div svg {
   --tw-text-opacity: 1;
   color: rgb(249 115 22 / var(--tw-text-opacity, 1));
 }
+<<<<<<< Updated upstream
 .text-orange-600 {
   --tw-text-opacity: 1;
   color: rgb(234 88 12 / var(--tw-text-opacity, 1));
 }
+=======
+>>>>>>> Stashed changes
 .text-paragraph {
   --tw-text-opacity: 1;
   color: rgb(110 113 145 / var(--tw-text-opacity, 1));
@@ -5704,6 +5756,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   content: var(--tw-content);
   right: 72%;
 }
+<<<<<<< Updated upstream
 
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -5713,6 +5766,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+=======
+>>>>>>> Stashed changes
 @media (min-width: 640px) {
     .sm\:col-5 {
     width: 40%;
@@ -6055,10 +6110,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
+<<<<<<< Updated upstream
 .hover\:bg-orange-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(234 88 12 / var(--tw-bg-opacity, 1));
 }
+=======
+>>>>>>> Stashed changes
 .hover\:bg-primary:hover {
   background-color: rgb(242, 91, 10, 1);
 }
@@ -6185,6 +6243,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     display: none;
   }
 
+<<<<<<< Updated upstream
   .sm\:h-10 {
     height: 2.5rem;
   }
@@ -6193,22 +6252,34 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     height: calc(100vh - 290px);
   }
 
+=======
+  .sm\:h-\[calc\(100vh_-_290px\)\] {
+    height: calc(100vh - 290px);
+  }
+
+>>>>>>> Stashed changes
   .sm\:h-auto {
     height: auto;
   }
 
+<<<<<<< Updated upstream
   .sm\:max-h-\[350px\] {
     max-height: 350px;
   }
 
+=======
+>>>>>>> Stashed changes
   .sm\:w-1\/2 {
     width: 50%;
   }
 
+<<<<<<< Updated upstream
   .sm\:w-10 {
     width: 2.5rem;
   }
 
+=======
+>>>>>>> Stashed changes
   .sm\:w-36 {
     width: 9rem;
   }
@@ -6380,6 +6451,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   .md\:mb-0 {
     margin-bottom: 0px;
   }
+<<<<<<< Updated upstream
 
   .md\:mb-6 {
     margin-bottom: 1.5rem;
@@ -6421,14 +6493,52 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     height: calc(100vh - 85px);
   }
 
+=======
+
+  .md\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .md\:mt-4 {
+    margin-top: 1rem;
+  }
+
+  .md\:block {
+    display: block;
+  }
+
+  .md\:grid {
+    display: grid;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:h-\[calc\(100vh-117px\)\] {
+    height: calc(100vh - 117px);
+  }
+
+  .md\:h-\[calc\(100vh-127px\)\] {
+    height: calc(100vh - 127px);
+  }
+
+  .md\:h-\[calc\(100vh-85px\)\] {
+    height: calc(100vh - 85px);
+  }
+
+>>>>>>> Stashed changes
   .md\:h-auto {
     height: auto;
   }
 
+<<<<<<< Updated upstream
   .md\:w-11 {
     width: 2.75rem;
   }
 
+=======
+>>>>>>> Stashed changes
   .md\:w-80 {
     width: 20rem;
   }
@@ -6474,10 +6584,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     justify-content: center;
   }
 
+<<<<<<< Updated upstream
   .md\:gap-10 {
     gap: 2.5rem;
   }
 
+=======
+>>>>>>> Stashed changes
   .md\:gap-4 {
     gap: 1rem;
   }
@@ -6494,6 +6607,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     border-radius: 0.5rem;
   }
 
+<<<<<<< Updated upstream
   .md\:p-4 {
     padding: 1rem;
   }
@@ -6508,6 +6622,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     padding-bottom: 0.75rem;
   }
 
+=======
+>>>>>>> Stashed changes
   .md\:pl-0 {
     padding-left: 0px;
   }
@@ -6515,6 +6631,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   .md\:pl-8 {
     padding-left: 2rem;
   }
+<<<<<<< Updated upstream
 
   .md\:text-2xl {
     font-size: 1.5rem;
@@ -6539,6 +6656,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
+=======
+>>>>>>> Stashed changes
 }
 @media (min-width: 1024px) {
 
@@ -6575,26 +6694,35 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     display: none;
   }
 
+<<<<<<< Updated upstream
   .lg\:h-12 {
     height: 3rem;
   }
 
+=======
+>>>>>>> Stashed changes
   .lg\:h-\[calc\(100vh-220px\)\] {
     height: calc(100vh - 220px);
   }
 
+<<<<<<< Updated upstream
   .lg\:max-h-\[450px\] {
     max-height: 450px;
   }
 
+=======
+>>>>>>> Stashed changes
   .lg\:\!w-full {
     width: 100% !important;
   }
 
+<<<<<<< Updated upstream
   .lg\:w-12 {
     width: 3rem;
   }
 
+=======
+>>>>>>> Stashed changes
   .lg\:w-52 {
     width: 13rem;
   }
@@ -6632,6 +6760,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     justify-content: flex-start;
   }
 
+<<<<<<< Updated upstream
   .lg\:gap-12 {
     gap: 3rem;
   }
@@ -6667,6 +6796,11 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+=======
+  .lg\:gap-6 {
+    gap: 1.5rem;
+  }
+>>>>>>> Stashed changes
 }
 @media (min-width: 1280px) {
 
