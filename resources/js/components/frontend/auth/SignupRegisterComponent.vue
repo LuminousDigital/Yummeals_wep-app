@@ -72,6 +72,7 @@ export default {
                     password: "",
                     phone: "",
                     country_code: "",
+                    referral_code: ""
                 },
             },
             errors: {},
@@ -118,7 +119,11 @@ export default {
                             email: "",
                             password: "",
                             phone: "",
+<<<<<<< Updated upstream
                             referral_code: "",
+=======
+                            country_code: "",
+>>>>>>> Stashed changes
                         };
                         if (this.carts.length > 0) {
                             this.$router.push({ name: "frontend.checkout" });
