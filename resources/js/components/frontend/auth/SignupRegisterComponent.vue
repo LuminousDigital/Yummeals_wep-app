@@ -84,6 +84,12 @@ export default {
     },
     mounted() {
         this.phoneChecking();
+
+           const urlParams = new URLSearchParams(window.location.search);
+           const referralCode = urlParams.get('ref');
+           if (referralCode) {
+           this.props.form.referral_code = referralCode;
+        }
     },
     methods: {
         phoneChecking: function () {
@@ -112,6 +118,7 @@ export default {
                             email: "",
                             password: "",
                             phone: "",
+                            referral_code: "",
                         };
                         if (this.carts.length > 0) {
                             this.$router.push({ name: "frontend.checkout" });
