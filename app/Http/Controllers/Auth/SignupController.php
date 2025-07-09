@@ -39,7 +39,12 @@ class SignupController extends Controller
             $this->otpManagerService->otp($request);
             return response(['status' => true, 'message' => trans("all.message.check_your_phone_for_code")]);
         } catch (Exception $exception) {
+<<<<<<< HEAD
             return response(['status' => false, 'message' => $exception->getMessage()], 422);
+=======
+            return response(['status' => true, 'message' => trans("all.message.check_your_phone_for_code")]);
+            // return response(['status' => false, 'message' => $exception->getMessage()], 422);
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
         }
     }
 
@@ -127,7 +132,11 @@ class SignupController extends Controller
         if ($flag) {
             $user = User::where(['phone' => $request->post('phone'), 'is_guest' => Ask::YES])->first();
             $name = AppLibrary::name($request->post('first_name'), $request->post('last_name'));
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
             // Handle referral
             $referrer = null;
             if ($request->has('referral_code')) {
@@ -166,7 +175,11 @@ class SignupController extends Controller
             }
 
             return response([
+<<<<<<< HEAD
                 'status' => true, 
+=======
+                'status' => true,
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
                 'message' => trans('all.message.register_successfully'),
                 'data' => [
                     'user' => $user,
@@ -174,9 +187,15 @@ class SignupController extends Controller
                 ]
             ], 201);
         }
+<<<<<<< HEAD
         
         return response([
             'status' => false, 
+=======
+
+        return response([
+            'status' => false,
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
             'message' => trans('all.message.code_is_invalid')
         ], 422);
     }
@@ -185,7 +204,11 @@ class SignupController extends Controller
     {
         $referralBonus = (float) Settings::group('referral')->get('signup_bonus', 10);
         $refereeBonus = (float) Settings::group('referral')->get('referee_bonus', 0);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
         // Create bonus records
         $referrerBonusRecord = ReferralBonus::create([
             'referrer_id' => $referrer->id,
@@ -200,7 +223,11 @@ class SignupController extends Controller
         DB::transaction(function () use ($referrer, $referralBonus, $referrerBonusRecord) {
             $referrer->increment('referral_balance', $referralBonus);
             $referrer->increment('total_referrals');
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
             ReferralTransaction::create([
                 'user_id' => $referrer->id,
                 'amount' => $referralBonus,
@@ -228,7 +255,11 @@ class SignupController extends Controller
             DB::transaction(function () use ($newUser, $refereeBonus, $refereeBonusRecord) {
                 $wallet = $newUser->wallet()->firstOrCreate([], ['balance' => 0, 'currency' => 'USD']);
                 $wallet->increment('balance', $refereeBonus);
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
                 ReferralTransaction::create([
                     'user_id' => $newUser->id,
                     'amount' => $refereeBonus,
@@ -243,4 +274,8 @@ class SignupController extends Controller
             });
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551

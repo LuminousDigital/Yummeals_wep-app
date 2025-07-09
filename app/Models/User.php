@@ -153,7 +153,11 @@ class User extends Authenticatable implements HasMedia
     {
         $baseCode = Str::upper(Str::substr(preg_replace('/[^A-Za-z]/', '', Str::slug($username)), 0, 6));
         $code = $baseCode . rand(100, 999);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
         $counter = 1;
         while (self::where('referral_code', $code)->exists()) {
             $code = $baseCode . rand(100, 999);
@@ -162,7 +166,11 @@ class User extends Authenticatable implements HasMedia
                 break;
             }
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
         return $code;
     }
 
@@ -190,4 +198,13 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(Wallet::class);
     }
+<<<<<<< HEAD
+=======
+
+    public function coupon()
+    {
+        return $this->hasMany(Coupon::class);
+    }
+
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
 }
