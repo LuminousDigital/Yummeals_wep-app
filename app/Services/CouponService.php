@@ -195,30 +195,129 @@ class CouponService
     /**
      * @throws Exception
      */
+    //     public function couponChecking(CouponCheckRequest $request)
+    //     {
+    //         try {
+    //             $coupon = Coupon::where(['code' => $request->code])->first();
+    //             if ($coupon) {
+    //                 if ($coupon->minimum_order > $request->total) {
+    //                     throw new Exception(trans('all.message.minimum_order_amount') . AppLibrary::currencyAmountFormat($coupon->minimum_order), 422);
+    //                 } else {
+    //                     if (strtotime($coupon->end_date) >= strtotime(Carbon::now())) {
+    //                         $ordered_coupon_count = OrderCoupon::where(['user_id' => auth()->user()->id, 'coupon_id' => $coupon->id])->count();
+    //                         if ($coupon->limit_per_user <= $ordered_coupon_count) {
+    //                             throw new Exception(trans('all.message.coupon_limit_exceeded'), 422);
+    //                         }
+    //                         return $coupon;
+    //                     } else {
+    //                         throw new Exception(trans('all.message.coupon_date_expired'), 422);
+    //                     }
+    //                 }
+    //             } else {
+    //                 throw new Exception(trans('all.message.coupon_not_exist'), 422);
+    //             }
+    //         } catch (Exception $exception) {
+    //             Log::info($exception->getMessage());
+    //             throw new Exception($exception->getMessage(), 422);
+    //         }
+    //     }
+    // }
+    // public function couponChecking(CouponCheckRequest $request)
+    // {
+    //     try {
+    //         $coupon = Coupon::where(['code' => $request->code])->first();
+    //         if ($coupon) {
+    //             if ($coupon->minimum_order > $request->total) {
+    //                 throw new Exception(trans('all.message.minimum_order_amount') . AppLibrary::currencyAmountFormat($coupon->minimum_order), 422);
+    //             } else {
+    //                 if (strtotime($coupon->end_date) >= strtotime(Carbon::now())) {
+    //                     $ordered_coupon_count = OrderCoupon::where(['user_id' => auth()->user()->id, 'coupon_id' => $coupon->id])->count();
+    //                     if ($coupon->limit_per_user <= $ordered_coupon_count) {
+    //                         throw new Exception(trans('all.message.coupon_limit_exceeded'), 422);
+    //                     }
+    //                     return $coupon;
+    //                 } else {
+    //                     throw new Exception(trans('all.message.coupon_date_expired'), 422);
+    //                 }
+    //             }
+    //         } else {
+    //             throw new Exception(trans('all.message.coupon_not_exist'), 422);
+    //         }
+    //     } catch (Exception $exception) {
+    //         Log::info($exception->getMessage());
+    //         throw new Exception($exception->getMessage(), 422);
+    //     }
+    // }
+
     public function couponChecking(CouponCheckRequest $request)
     {
         try {
-            $coupon = Coupon::where(['code' => $request->code])->first();
-            if ($coupon) {
-                if ($coupon->minimum_order > $request->total) {
-                    throw new Exception(trans('all.message.minimum_order_amount') . AppLibrary::currencyAmountFormat($coupon->minimum_order), 422);
-                } else {
-                    if (strtotime($coupon->end_date) >= strtotime(Carbon::now())) {
-                        $ordered_coupon_count = OrderCoupon::where(['user_id' => auth()->user()->id, 'coupon_id' => $coupon->id])->count();
-                        if ($coupon->limit_per_user <= $ordered_coupon_count) {
-                            throw new Exception(trans('all.message.coupon_limit_exceeded'), 422);
-                        }
-                        return $coupon;
-                    } else {
-                        throw new Exception(trans('all.message.coupon_date_expired'), 422);
-                    }
-                }
-            } else {
-                throw new Exception(trans('all.message.coupon_not_exist'), 422);
+            $coupons = Coupon::where('code', $request->code)
+                ->orderBy('start_date', 'desc')
+                ->get();
+
+            if ($coupons->isEmpty()) {
+                throw new Exception('Coupon does not exist', 422);
             }
-        } catch (Exception $exception) {
-            Log::info($exception->getMessage());
-            throw new Exception($exception->getMessage(), 422);
+
+            $validCoupon = null;
+
+            foreach ($coupons as $coupon) {
+                if (strtotime($coupon->start_date) > time() || strtotime($coupon->end_date) < time()) {
+                    continue;
+                }
+
+                // Check minimum order requirement
+                if ($coupon->minimum_order > $request->total) {
+                    continue;
+                }
+
+                // Check usage limits
+                $usedTotal = OrderCoupon::where('user_id', auth()->id())
+                    ->where('coupon_id', $coupon->id)
+                    ->count();
+
+                $usedToday = OrderCoupon::where('user_id', auth()->id())
+                    ->where('coupon_id', $coupon->id)
+                    ->whereDate('created_at', date('Y-m-d'))
+                    ->count();
+
+                if ($coupon->limit_per_user && $usedTotal >= $coupon->limit_per_user) {
+                    continue;
+                }
+
+                if ($coupon->daily_limit_per_user && $usedToday >= $coupon->daily_limit_per_user) {
+                    continue;
+                }
+
+                // Check winning coupon eligibility
+                if ($coupon->is_winning_coupon && $coupon->user_id !== auth()->id()) {
+                    continue;
+                }
+
+                $validCoupon = $coupon;
+                break; // Use the first valid coupon we find
+            }
+
+            if (!$validCoupon) {
+                // Determine which specific validation failed
+                $coupon = $coupons->first();
+                if ($coupon->minimum_order > $request->total) {
+                    throw new Exception('Minimum order not met', 422);
+                }
+                if (strtotime($coupon->end_date) < time()) {
+                    throw new Exception('Coupon expired', 422);
+                }
+                if ($coupon->is_winning_coupon && $coupon->user_id !== auth()->id()) {
+                    throw new Exception('Not eligible for this winning coupon', 422);
+                }
+                throw new Exception('Coupon usage limits exceeded', 422);
+            }
+
+            return $validCoupon;
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            throw $e;
         }
     }
 }

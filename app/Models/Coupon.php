@@ -14,6 +14,7 @@ class Coupon extends Model implements HasMedia
     protected $table = "coupons";
 
     protected $fillable = [
+        'user_id',
         'name',
         'description',
         'code',
@@ -23,7 +24,10 @@ class Coupon extends Model implements HasMedia
         'discount_type',
         'minimum_order',
         'maximum_discount',
-        'limit_per_user'
+        'limit_per_user',
+        'daily_limit_per_user',
+        'is_reusable',
+        'is_winning_coupon'
     ];
     protected $casts = [
         'id'               => 'integer',
@@ -45,5 +49,10 @@ class Coupon extends Model implements HasMedia
             return asset($this->getFirstMediaUrl('coupon'));
         }
         return asset('images/default/offer.png');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

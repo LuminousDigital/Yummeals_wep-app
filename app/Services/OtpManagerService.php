@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Events\SendSmsCode;
 use Exception;
 use App\Models\Otp;
+use App\Jobs\SendSmsJob;
 use App\Enums\OtpType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -49,6 +50,11 @@ class OtpManagerService
                 'created_at' => now(),
             ]);
 
+            // if (!blank($otp)) {
+            //     SendSmsJob::dispatch(
+            //         ['phone' => $request->post('phone'), 'code' => $request->post('code'), 'token' => $token]
+            //     );
+            // }
             if (!blank($otp)) {
                 SendSmsCode::dispatch(
                     ['phone' => $request->post('phone'), 'code' => $request->post('code'), 'token' => $token]

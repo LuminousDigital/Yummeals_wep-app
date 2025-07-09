@@ -168,11 +168,18 @@ Route::prefix('auth')->middleware(['installed', 'apiKey', 'localization'])->name
 });
 
 /* all routes must be singular word*/
+// Profile routes
 Route::prefix('profile')->name('profile.')->middleware(['installed', 'apiKey', 'auth:sanctum', 'localization'])->group(function () {
     Route::get('/', [ProfileController::class, 'profile']);
     Route::match(['put', 'patch'], '/', [ProfileController::class, 'update']);
     Route::match(['put', 'patch'], '/change-password', [ProfileController::class, 'changePassword']);
     Route::post('/change-image', [ProfileController::class, 'changeImage']);
+});
+
+// Protected coupon routes
+Route::prefix('coupon')->middleware('auth:sanctum')->group(function() {
+    Route::get('/bonus/check-eligibility', [CouponController::class, 'checkBonusEligibility'])
+         ->name('coupon.check-bonus-eligibility');
 });
 
 Route::prefix('referral')->group(function () {
@@ -785,6 +792,7 @@ Route::prefix('frontend')->name('frontend.')->middleware(['installed', 'apiKey',
         Route::get('/tomorrow', [FrontendTimeSlotController::class, 'tomorrowTimeSlot']);
     });
 
+    // Public coupon routes
     Route::prefix('coupon')->name('coupon.')->group(function () {
         Route::get('/', [FrontendCouponController::class, 'index']);
         Route::post('/coupon-checking', [FrontendCouponController::class, 'couponChecking']);

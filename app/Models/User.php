@@ -153,7 +153,8 @@ class User extends Authenticatable implements HasMedia
     {
         $baseCode = Str::upper(Str::substr(preg_replace('/[^A-Za-z]/', '', Str::slug($username)), 0, 6));
         $code = $baseCode . rand(100, 999);
-        
+
+
         $counter = 1;
         while (self::where('referral_code', $code)->exists()) {
             $code = $baseCode . rand(100, 999);
@@ -162,7 +163,8 @@ class User extends Authenticatable implements HasMedia
                 break;
             }
         }
-        
+
+
         return $code;
     }
 
@@ -190,4 +192,10 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(Wallet::class);
     }
+
+    public function coupon()
+    {
+        return $this->hasMany(Coupon::class);
+    }
+
 }

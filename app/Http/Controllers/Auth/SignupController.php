@@ -40,6 +40,8 @@ class SignupController extends Controller
             return response(['status' => true, 'message' => trans("all.message.check_your_phone_for_code")]);
         } catch (Exception $exception) {
             return response(['status' => false, 'message' => $exception->getMessage()], 422);
+            // return response(['status' => true, 'message' => trans("all.message.check_your_phone_for_code")]);
+            // return response(['status' => false, 'message' => $exception->getMessage()], 422);
         }
     }
 
@@ -127,7 +129,8 @@ class SignupController extends Controller
         if ($flag) {
             $user = User::where(['phone' => $request->post('phone'), 'is_guest' => Ask::YES])->first();
             $name = AppLibrary::name($request->post('first_name'), $request->post('last_name'));
-            
+
+
             // Handle referral
             $referrer = null;
             if ($request->has('referral_code')) {
@@ -166,7 +169,7 @@ class SignupController extends Controller
             }
 
             return response([
-                'status' => true, 
+                'status' => true,
                 'message' => trans('all.message.register_successfully'),
                 'data' => [
                     'user' => $user,
@@ -174,9 +177,9 @@ class SignupController extends Controller
                 ]
             ], 201);
         }
-        
+
         return response([
-            'status' => false, 
+            'status' => false,
             'message' => trans('all.message.code_is_invalid')
         ], 422);
     }
@@ -185,7 +188,8 @@ class SignupController extends Controller
     {
         $referralBonus = (float) Settings::group('referral')->get('signup_bonus', 10);
         $refereeBonus = (float) Settings::group('referral')->get('referee_bonus', 0);
-        
+
+
         // Create bonus records
         $referrerBonusRecord = ReferralBonus::create([
             'referrer_id' => $referrer->id,
@@ -200,7 +204,8 @@ class SignupController extends Controller
         DB::transaction(function () use ($referrer, $referralBonus, $referrerBonusRecord) {
             $referrer->increment('referral_balance', $referralBonus);
             $referrer->increment('total_referrals');
-            
+
+
             ReferralTransaction::create([
                 'user_id' => $referrer->id,
                 'amount' => $referralBonus,
@@ -228,7 +233,8 @@ class SignupController extends Controller
             DB::transaction(function () use ($newUser, $refereeBonus, $refereeBonusRecord) {
                 $wallet = $newUser->wallet()->firstOrCreate([], ['balance' => 0, 'currency' => 'USD']);
                 $wallet->increment('balance', $refereeBonus);
-                
+
+
                 ReferralTransaction::create([
                     'user_id' => $newUser->id,
                     'amount' => $refereeBonus,
@@ -244,3 +250,4 @@ class SignupController extends Controller
         }
     }
 }
+
