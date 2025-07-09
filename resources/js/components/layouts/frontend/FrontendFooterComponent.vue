@@ -1,6 +1,10 @@
 <template>
     <LoadingComponent :props="loading" />
+<<<<<<< HEAD
+    <footer class="footer-part pt-12 mb-14 lg:mb-0">
+=======
     <footer class="footer-part pt-12 mb-14 lg:mb-0 bg-[#1a0c05]">
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
         <div class="container">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-6">
                 <div>

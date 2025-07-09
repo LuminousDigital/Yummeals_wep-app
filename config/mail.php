@@ -96,8 +96,11 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+<<<<<<< HEAD
+=======
     'admin_address' => env('MAIL_ADMIN_ADDRESS', 'admin@example.com'),
 
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
