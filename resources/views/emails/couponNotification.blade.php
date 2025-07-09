@@ -12,7 +12,7 @@
         **Coupon Details:**
         - Code: {{ $data['coupon_code'] }}
         - Discount: {{ 100 }}%
-        {{-- - Discount: {{ $data['discount'] }}% --}}
+        {{-- {{ number_format($data['discount'], 0) }}% --}}
         - Valid Until: {{ $data['valid_until'] }}
     @endif
 
