@@ -5,7 +5,10 @@ namespace App\Services;
 use App\Events\SendSmsCode;
 use Exception;
 use App\Models\Otp;
+<<<<<<< HEAD
+=======
 use App\Jobs\SendSmsJob;
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
 use App\Enums\OtpType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -50,11 +53,14 @@ class OtpManagerService
                 'created_at' => now(),
             ]);
 
+<<<<<<< HEAD
+=======
             // if (!blank($otp)) {
             //     SendSmsJob::dispatch(
             //         ['phone' => $request->post('phone'), 'code' => $request->post('code'), 'token' => $token]
             //     );
             // }
+>>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
             if (!blank($otp)) {
                 SendSmsCode::dispatch(
                     ['phone' => $request->post('phone'), 'code' => $request->post('code'), 'token' => $token]
