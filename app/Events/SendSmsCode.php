@@ -21,8 +21,6 @@ class SendSmsCode
         $this->info = $info;
     }
 }
-<<<<<<< HEAD
-=======
 
 
 // namespace App\Events;
@@ -52,4 +50,3 @@ class SendSmsCode
 //     ]);
 // }
 // }
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551

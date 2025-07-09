@@ -167,11 +167,8 @@ Route::prefix('auth')->middleware(['installed', 'apiKey', 'localization'])->name
     });
 });
 
-<<<<<<< HEAD
 /* all routes must be singular word*/
-=======
 // Profile routes
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
 Route::prefix('profile')->name('profile.')->middleware(['installed', 'apiKey', 'auth:sanctum', 'localization'])->group(function () {
     Route::get('/', [ProfileController::class, 'profile']);
     Route::match(['put', 'patch'], '/', [ProfileController::class, 'update']);
@@ -179,15 +176,12 @@ Route::prefix('profile')->name('profile.')->middleware(['installed', 'apiKey', '
     Route::post('/change-image', [ProfileController::class, 'changeImage']);
 });
 
-<<<<<<< HEAD
-=======
 // Protected coupon routes
 Route::prefix('coupon')->middleware('auth:sanctum')->group(function() {
     Route::get('/bonus/check-eligibility', [CouponController::class, 'checkBonusEligibility'])
          ->name('coupon.check-bonus-eligibility');
 });
 
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
 Route::prefix('referral')->group(function () {
     Route::get('/', [ReferralController::class, 'index']);
     Route::get('/leaderboard', [ReferralController::class, 'leaderboard']);
@@ -798,10 +792,7 @@ Route::prefix('frontend')->name('frontend.')->middleware(['installed', 'apiKey',
         Route::get('/tomorrow', [FrontendTimeSlotController::class, 'tomorrowTimeSlot']);
     });
 
-<<<<<<< HEAD
-=======
     // Public coupon routes
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
     Route::prefix('coupon')->name('coupon.')->group(function () {
         Route::get('/', [FrontendCouponController::class, 'index']);
         Route::post('/coupon-checking', [FrontendCouponController::class, 'couponChecking']);

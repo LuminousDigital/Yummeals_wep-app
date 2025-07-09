@@ -1,10 +1,9 @@
 <template>
-<<<<<<< HEAD
     <LoadingComponent :props="loading" />
-    <section class="mb-16 mt-12">
+    <section class="mt-12 mb-16">
         <div class="container">
             <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-12 mb-12 pt-4"
+                class="grid grid-cols-1 gap-6 pt-4 mb-12 md:grid-cols-2 md:gap-10 lg:gap-12"
             >
                 <div class="space-y-8">
                     <div>
@@ -24,7 +23,7 @@
                         class="text-[13px] md:text-sm lg:text-base text-gray-700 font-medium mb-2"
                     >
                         Referral Balance:
-                        <span class="text-green-600 font-semibold">{{
+                        <span class="font-semibold text-green-600">{{
                             referralBalance
                         }}</span>
                     </p>
@@ -42,7 +41,7 @@
                             </p>
                         </div>
                         <div
-                            class="flex flex-wrap justify-center items-center gap-5 md:gap-6 lg:gap-8 mb-12 mt-10 w-full transition-all"
+                            class="flex flex-wrap items-center justify-center w-full gap-5 mt-10 mb-12 transition-all md:gap-6 lg:gap-8"
                         >
                             <a
                                 v-for="icon in socialIcons"
@@ -55,7 +54,7 @@
                                 <img
                                     :src="icon.src"
                                     :alt="icon.alt"
-                                    class="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 object-contain"
+                                    class="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12"
                                 />
                             </a>
                         </div>
@@ -67,9 +66,9 @@
                         </button>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-sm px-4 sm:px-6">
+                <div class="px-4 bg-white rounded-lg shadow-sm sm:px-6">
                     <h2
-                        class="text-sm md:text-lg lg:text-xl font-semibold text-gray-900 mb-4 md:mb-6"
+                        class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
                     >
                         Referral History ({{ referralHistory.length }})
                     </h2>
@@ -78,15 +77,15 @@
                     >
                         <div
                             v-if="referralHistory.length === 0"
-                            class="w-full text-center py-10 flex flex-col items-center justify-center"
+                            class="flex flex-col items-center justify-center w-full py-10 text-center"
                         >
                             <img
                                 src="/images/social-icon/empty-referrals.png"
                                 alt="No referrals"
-                                class="w-40 h-40 object-contain mb-4"
+                                class="object-contain w-40 h-40 mb-4"
                             />
                             <p
-                                class="text-orange-600 text-sm md:text-base font-semibold"
+                                class="text-sm font-semibold text-orange-600 md:text-base"
                             >
                                 You have not referred anybody
                             </p>
@@ -99,11 +98,11 @@
                         >
                             <div>
                                 <h3
-                                    class="text-sm md:text-base lg:text-lg font-medium text-orange-500"
+                                    class="text-sm font-medium text-orange-500 md:text-base lg:text-lg"
                                 >
                                     {{ referral.name }}
                                 </h3>
-                                <p class="text-xs md:text-sm text-gray-500">
+                                <p class="text-xs text-gray-500 md:text-sm">
                                     {{ referral.date }}
                                 </p>
                             </div>
@@ -114,7 +113,7 @@
                             </div>
                         </div>
                         <div
-                            class="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"
+                            class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
                         ></div>
                     </div>
                 </div>
@@ -207,30 +206,28 @@ export default {
             }
         },
     },
-=======
-  <section class="mb-16 mt-12">
-    <div class="container">
-      <h2 class="capitalize text-[26px] leading-[40px] font-semibold mb-6 text-primary">
-        {{ $t("label.all_referrals") }}
-      </h2>
-      <OfferComponent :limit="limit" />
-    </div>
-  </section>
-</template>
+//   <section class="mt-12 mb-16">
+//     <div class="container">
+//       <h2 class="capitalize text-[26px] leading-[40px] font-semibold mb-6 text-primary">
+//         {{ $t("label.all_referrals") }}
+//       </h2>
+//       <OfferComponent :limit="limit" />
+//     </div>
+//   </section>
+// </template>
 
-<script>
-import OfferComponent from "../components/OfferComponent";
+// <script>
+// import OfferComponent from "../components/OfferComponent";
 
-export default {
-    name: "OffersComponent",
-    components: {
-        OfferComponent,
-    },
-    data() {
-        return {
-            limit: null,
-        };
-    },
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
+// export default {
+//     name: "OffersComponent",
+//     components: {
+//         OfferComponent,
+//     },
+//     data() {
+//         return {
+//             limit: null,
+//         };
+//     },
 };
 </script>

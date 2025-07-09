@@ -7,11 +7,6 @@ use Exception;
 use App\Services\CouponService;
 use App\Http\Requests\CouponRequest;
 use App\Http\Requests\PaginateRequest;
-<<<<<<< HEAD
-use App\Http\Resources\CouponResource;
-use App\Models\Coupon;
-use Maatwebsite\Excel\Facades\Excel;
-=======
 use App\Http\Resources\CouponCheckResource;
 use App\Http\Resources\CouponResource;
 use App\Models\Coupon;
@@ -19,20 +14,17 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Services\MealCouponService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
 
 
 class CouponController extends AdminController
 {
 
     private CouponService $couponService;
-<<<<<<< HEAD
 
-    public function __construct(CouponService $coupon)
-    {
-        parent::__construct();
-        $this->couponService = $coupon;
-=======
+    // public function __construct(CouponService $coupon)
+    // {
+    //     parent::__construct();
+    //     $this->couponService = $coupon;
     private MealCouponService $mealCouponService;
 
     public function __construct(CouponService $coupon, MealCouponService $mealCouponService)
@@ -40,7 +32,6 @@ class CouponController extends AdminController
         parent::__construct();
         $this->couponService = $coupon;
         $this->mealCouponService = $mealCouponService;
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
         $this->middleware(['permission:coupons'])->only('index', 'export');
         $this->middleware(['permission:coupons_create'])->only('store');
         $this->middleware(['permission:coupons_edit'])->only('update');
@@ -106,8 +97,6 @@ class CouponController extends AdminController
             return response(['status' => false, 'message' => $exception->getMessage()], 422);
         }
     }
-<<<<<<< HEAD
-=======
 
     // public function checkBonusEligibility(Request $request)
     // {
@@ -183,5 +172,4 @@ class CouponController extends AdminController
             ], $e->getCode() ?: 500);
         }
     }
->>>>>>> d38913bcf1d8d577a7729a1b02ad0194e20e5551
 }
