@@ -54,6 +54,7 @@ class OrderDetailsResource extends JsonResource
             'pos_received_currency_amount'        => AppLibrary::currencyAmountFormat($this->pos_received_amount),
             'cash_back_amount'                    => $this->pos_received_amount - $this->total,
             'cash_back_currency_amount'           => AppLibrary::currencyAmountFormat($this->pos_received_amount - $this->total),
+            'payment_link'                        => route('payment.index', ['order' => $this->id,]),
         ];
     }
 }

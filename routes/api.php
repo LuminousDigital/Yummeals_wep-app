@@ -754,6 +754,10 @@ Route::prefix('frontend')->name('frontend.')->middleware(['installed', 'apiKey',
         Route::get('/show/{language}', [FrontendLanguageController::class, 'show']);
     });
 
+    Route::prefix('cart')->name('cart.')->middleware(['auth:sanctum'])->group(function () {
+        Route::post('/checkout', [FrontendOrderController::class, 'store']);
+    });
+
     Route::prefix('order')->name('order.')->middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [FrontendOrderController::class, 'index']);
         Route::get('/show/{frontendOrder}', [FrontendOrderController::class, 'show']);

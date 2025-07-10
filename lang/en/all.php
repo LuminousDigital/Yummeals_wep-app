@@ -81,6 +81,7 @@ return [
         'payment_successful'          => 'Your payment has been successfully processed',
         'payment_canceled'            => 'The payment is canceled',
         'payment_gateway_disable'     => 'The payment gateway is disable',
+        'frontend_order_not_identified'   => 'This order associated with this payment cannot be identified',
         'token_save'                  => 'The token saved successfully.',
         'token_is_invalid'            => 'The token is invalid.',
         'order_accept'                => 'The order already accepted.',
