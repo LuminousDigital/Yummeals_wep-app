@@ -101,8 +101,8 @@ class FrontendOrderService
                     $request->validated() + [
                         'user_id'          => Auth::user()->id,
                         'status'           => OrderStatus::PENDING,
-                        'order_datetime'   => date('Y-m-d H:i:s'),
-                        'preparation_time' => Settings::group('order_setup')->get('order_setup_food_preparation_time')
+                        // 'order_datetime'   => date('Y-m-d H:i:s'),
+                        // 'preparation_time' => Settings::group('order_setup')->get('order_setup_food_preparation_time')
                     ]
                 );
 
@@ -174,13 +174,13 @@ class FrontendOrderService
                         'discount'  => $request->discount
                     ]);
                 }
-                SendOrderMail::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
-                SendOrderSms::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
-                SendOrderPush::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
+                // SendOrderMail::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
+                // SendOrderSms::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
+                // SendOrderPush::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
 
-                SendOrderGotMail::dispatch(['order_id' => $this->frontendOrder->id]);
-                SendOrderGotSms::dispatch(['order_id' => $this->frontendOrder->id]);
-                SendOrderGotPush::dispatch(['order_id' => $this->frontendOrder->id]);
+                // SendOrderGotMail::dispatch(['order_id' => $this->frontendOrder->id]);
+                // SendOrderGotSms::dispatch(['order_id' => $this->frontendOrder->id]);
+                // SendOrderGotPush::dispatch(['order_id' => $this->frontendOrder->id]);
             });
             return $this->frontendOrder;
         } catch (Exception $exception) {
