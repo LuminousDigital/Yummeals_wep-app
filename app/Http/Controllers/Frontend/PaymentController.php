@@ -37,15 +37,53 @@ class PaymentController extends Controller
         $this->paymentManagerService = $paymentManagerService;
     }
 
-    public function index(
-        Order $order
-    ): \Illuminate\Contracts\View\Factory | \Illuminate\Contracts\View\View | \Illuminate\Contracts\Foundation\Application | \Illuminate\Http\RedirectResponse {
-        $credit          = false;
-        $paymentGateways = PaymentGateway::with('gatewayOptions')->whereNotIn('id', [1])->where(['status' => Activity::ENABLE])->get();
-        $company         = Settings::group('company')->all();
-        $logo            = ThemeSetting::where(['key' => 'theme_logo'])->first();
-        $faviconLogo     = ThemeSetting::where(['key' => 'theme_favicon_logo'])->first();
-        $currency        = Currency::findOrFail(Settings::group('site')->get('site_default_currency'));
+    // public function index(
+    //     Order $order
+    // ): \Illuminate\Contracts\View\Factory | \Illuminate\Contracts\View\View | \Illuminate\Contracts\Foundation\Application | \Illuminate\Http\RedirectResponse {
+    //     $credit          = false;
+    //     // $paymentGateways = PaymentGateway::with('gatewayOptions')->whereNotIn('id', [1])->where(['status' => Activity::ENABLE])->get();
+    //     $paymentGateways = PaymentGateway::with('gatewayOptions')->where(['status' => Activity::ENABLE])->get();
+    //     $company         = Settings::group('company')->all();
+    //     $logo            = ThemeSetting::where(['key' => 'theme_logo'])->first();
+    //     $faviconLogo     = ThemeSetting::where(['key' => 'theme_favicon_logo'])->first();
+    //     $currency        = Currency::findOrFail(Settings::group('site')->get('site_default_currency'));
+    //     if ($order?->user?->balance >= $order->total) {
+    //         $credit = true;
+    //     }
+
+    //     if (blank($order->transaction) && $order->payment_status === PaymentStatus::UNPAID) {
+    //         return view('payment', [
+    //             'company'         => $company,
+    //             'logo'            => $logo,
+    //             'currency'        => $currency,
+    //             'faviconLogo'     => $faviconLogo,
+    //             'paymentGateways' => $paymentGateways,
+    //             'order'           => $order,
+    //             'creditAmount'    => AppLibrary::currencyAmountFormat($order?->user?->balance),
+    //             'credit'          => $credit
+    //         ]);
+    //     }
+    //     return redirect()->route('home')->with('error', trans('all.message.payment_canceled'));
+    // }
+
+    public function index(Order $order): \Illuminate\Contracts\View\Factory | \Illuminate\Contracts\View\View | \Illuminate\Contracts\Foundation\Application | \Illuminate\Http\RedirectResponse
+    {
+        $credit = false;
+
+        $paymentGatewaysQuery = PaymentGateway::with('gatewayOptions')
+            ->where('status', Activity::ENABLE);
+
+        if ($order->status === OrderStatus::PENDING) {
+            $paymentGatewaysQuery->whereNotIn('id', [1]);
+        }
+
+        $paymentGateways = $paymentGatewaysQuery->get();
+
+        $company     = Settings::group('company')->all();
+        $logo        = ThemeSetting::where('key', 'theme_logo')->first();
+        $faviconLogo = ThemeSetting::where('key', 'theme_favicon_logo')->first();
+        $currency    = Currency::findOrFail(Settings::group('site')->get('site_default_currency'));
+
         if ($order?->user?->balance >= $order->total) {
             $credit = true;
         }
@@ -62,20 +100,29 @@ class PaymentController extends Controller
                 'credit'          => $credit
             ]);
         }
+
         return redirect()->route('home')->with('error', trans('all.message.payment_canceled'));
     }
 
+
     public function payment(Order $order, PaymentRequest $request)
     {
+        $orderDatetime = Carbon::now();
+
+        if ($request->paymentMethod === "cash-on-delivery") {
+            $order->update([
+                'status'           => OrderStatus::PENDING,
+                'order_datetime'   => $orderDatetime->toDateTimeString(),
+            ]);
+
+            return redirect()->route('payment.successful', ['order' => $order->id]);
+        }
 
         if ($this->paymentManagerService->gateway($request->paymentMethod)->status()) {
             $className = 'App\\Http\\PaymentGateways\\PaymentRequests\\' . ucfirst($request->paymentMethod);
             $gateway   = new $className;
             $request->validate($gateway->rules());
             $payment = $this->paymentManagerService->gateway($request->paymentMethod)->payment($order, $request);
-
-
-            $orderDatetime = Carbon::now();
 
             $preparationTime = (int) Settings::group('order_setup')->get('order_setup_food_preparation_time');
 
@@ -86,7 +133,8 @@ class PaymentController extends Controller
 
             $order->update([
                 'is_advance_order' => Ask::NO,
-                'payment_method'   => EnumsPaymentGateway::E_WALLET,
+                // 'payment_method'   => EnumsPaymentGateway::E_WALLET,
+                'status'           => OrderStatus::PENDING,
                 'order_datetime'   => $orderDatetime->toDateTimeString(),
                 'delivery_time'    => $deliveryTimeString,
             ]);
@@ -97,7 +145,7 @@ class PaymentController extends Controller
             SendOrderGotMail::dispatch(['order_id' => $order->id]);
             SendOrderGotSms::dispatch(['order_id' => $order->id]);
             SendOrderGotPush::dispatch(['order_id' => $order->id]);
-            
+
             return $payment;
         } else {
             return redirect()->route('payment.index', ['order' => $order])->with(

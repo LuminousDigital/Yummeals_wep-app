@@ -4,6 +4,7 @@ namespace App\Enums;
 
 interface OrderStatus
 {
+    const DEFAULT          = 0;
     const PENDING          = 1;
     const ACCEPT           = 4;
     const PREPARING        = 7;
