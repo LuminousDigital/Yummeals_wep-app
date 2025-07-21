@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 
 use App\Libraries\AppLibrary;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Smartisan\Settings\Facades\Settings;
 
 class UserOrderResource extends JsonResource
 {
@@ -30,7 +31,8 @@ class UserOrderResource extends JsonResource
             "delivery_charge_currency_price" => AppLibrary::currencyAmountFormat($this->delivery_charge),
             'payment_method'                 => $this->payment_method,
             'payment_status'                 => $this->payment_status,
-            'preparation_time'               => $this->preparation_time,
+            // 'preparation_time'               => $this->preparation_time,
+            'preparation_time'               => Settings::group('order_setup')->get('order_setup_food_preparation_time'),
             'order_type'                     => $this->order_type,
             'order_datetime'                 => AppLibrary::datetime($this->order_datetime),
             'delivery_time'                  => AppLibrary::deliveryTime($this->delivery_time),

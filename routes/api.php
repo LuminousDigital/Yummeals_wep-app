@@ -182,6 +182,7 @@ Route::prefix('coupon')->middleware('auth:sanctum')->group(function () {
         ->name('coupon.check-bonus-eligibility');
 });
 
+// Referral routes
 Route::prefix('referral')->name('referral.')->middleware(['apiKey'])->group(function () {
     Route::get('/', [ReferralController::class, 'index']);
     Route::get('/leaderboard', [ReferralController::class, 'leaderboard']);
