@@ -1,43 +1,68 @@
 <template>
     <LoadingComponent :props="loading" />
 
-    <!--========TRACK PART START===========-->
+    <WaitlistModal
+        :key="waitlistKey"
+        :isOpen="showWaitlistModal"
+        @close="showWaitlistModal = false"
+        @go-to-delivery-modal="handleGoToDeliveryModal"
+    />
+
+    <DeliveryAddressModal
+        :isOpen="showDeliveryModal"
+        @close="showDeliveryModal = false"
+        @location-covered="handleLocationCovered"
+        @location-not-covered="handleNotCovered"
+    />
+
+    <VariationModal
+        v-if="showVariationModal"
+        :item="selectedItem"
+        @close="() => (showVariationModal = false)"
+    />
+
+    <!--======== TRACK PART START ===========-->
     <TrackOrderComponent />
-    <!--========TRACK PART END=============-->
+    <!--======== TRACK PART END =============-->
 
-
-    <!--========BANNER PART START===========-->
+    <!--======== BANNER PART START ==========-->
     <SliderComponent />
-    <!--========BANNER PART END=============-->
+    <!--======== BANNER PART END ============-->
 
-    <!--========Category PART START=========-->
+    <!--======== CATEGORY PART START ========-->
     <section v-if="categories.length > 0" class="mb-12">
         <div class="container">
             <div class="flex items-center justify-between gap-2 mb-6 mt-4">
-                <h2 class="text-2xl font-semibold capitalize">{{ $t("label.our_menu") }}</h2>
-                <router-link :to="{ name: 'frontend.menu', query: { s: categoryProps.slug } }"
-                    class="rounded-3xl capitalize text-sm leading-6 font-medium py-1 px-3 transition text-white bg-primary hover:text-primary hover:bg-white">
+                <h2 class="text-2xl font-semibold capitalize">
+                    {{ $t("label.our_menu") }}
+                </h2>
+                <router-link
+                    :to="{
+                        name: 'frontend.menu',
+                        query: { s: categoryProps.slug },
+                    }"
+                    class="rounded-3xl capitalize text-sm leading-6 font-medium py-1 px-3 transition text-white bg-primary hover:text-primary hover:bg-white"
+                >
                     {{ $t("button.view_all") }}
                 </router-link>
             </div>
+
             <div class="swiper menu-swiper">
-                <CategoryComponent :categories="categories" :design="categoryProps.design" />
+                <CategoryComponent
+                    :categories="categories"
+                    :design="categoryProps.design"
+                />
             </div>
         </div>
     </section>
-    <!--========Category PART END===========-->
+    <!--======== CATEGORY PART END =========-->
 
-    <!--========FEATURE PART START=========-->
+    <!--======== FEATURED ITEM PART =========-->
     <FeaturedItemComponent />
-    <!--========FEATURE PART END=========-->
-
-    <!--========OFFER PART START=========-->
+    <!--======== OFFER PART ================-->
     <OfferComponent :limit="limit" />
-    <!--========OFFER PART START=========-->
-
-    <!--========POPULAR PART START=========-->
+    <!--======== POPULAR ITEM PART =========-->
     <PopularItemComponent />
-    <!--========POPULAR PART START=========-->
 </template>
 
 <script>
@@ -50,6 +75,9 @@ import categoryDesignEnum from "../../../enums/modules/categoryDesignEnum";
 import statusEnum from "../../../enums/modules/statusEnum";
 import LoadingComponent from "../components/LoadingComponent";
 import TrackOrderComponent from "./TrackOrderComponent";
+import DeliveryAddressModal from "../components/DeliveryAddressModal.vue";
+import WaitlistModal from "../components/WaitlistModal.vue";
+import VariationModal from "../components/button/VariationButton.vue";
 
 export default {
     name: "HomeComponent",
@@ -60,7 +88,10 @@ export default {
         FeaturedItemComponent,
         PopularItemComponent,
         OfferComponent,
-        LoadingComponent
+        LoadingComponent,
+        DeliveryAddressModal,
+        WaitlistModal,
+        VariationModal,
     },
     data() {
         return {
@@ -69,37 +100,82 @@ export default {
             },
             categoryProps: {
                 design: categoryDesignEnum.FIRST,
-                slug: '',
+                slug: "",
             },
-            limit: 4,
+            showDeliveryModal: false,
+            showWaitlistModal: false,
+            waitlistKey: 0,
+            showVariationModal: false,
+            selectedItem: null,
+            limit: 10,
         };
     },
     computed: {
-        categories: function () {
+        categories() {
             return this.$store.getters["frontendItemCategory/lists"];
         },
     },
     mounted() {
         this.loading.isActive = true;
-        this.$store.dispatch("frontendItemCategory/lists", {
-            paginate: 0,
-            order_column: "sort",
-            order_type: "asc",
-            status: statusEnum.ACTIVE,
-        }).then(res => {
-            this.loading.isActive = false;
-        }).catch((err) => {
-            this.loading.isActive = false;
-        });
+
+        this.checkDeliveryModalStatus();
+
+        this.$store
+            .dispatch("frontendItemCategory/lists", {
+                paginate: 0,
+                order_column: "sort",
+                order_type: "asc",
+                status: statusEnum.ACTIVE,
+            })
+            .finally(() => {
+                this.loading.isActive = false;
+            });
     },
+
+    methods: {
+        checkDeliveryModalStatus() {
+            const isLocationCovered = localStorage.getItem("isLocationCovered");
+
+            if (isLocationCovered === null || isLocationCovered === undefined) {
+                this.showDeliveryModal = true;
+            }
+        },
+
+        closeDeliveryModal() {
+            this.showDeliveryModal = false;
+        },
+
+        handleGoToDeliveryModal() {
+            this.showWaitlistModal = false;
+            this.showDeliveryModal = true;
+        },
+
+        handleLocationCovered() {
+            this.showDeliveryModal = false;
+            this.showWaitlistModal = false;
+        },
+
+        handleNotCovered() {
+            this.showDeliveryModal = false;
+            this.showWaitlistModal = false;
+
+            setTimeout(() => {
+                this.waitlistKey += 1;
+                this.showWaitlistModal = true;
+            }, 100);
+        },
+
+        handleCloseWaitlist() {
+            this.showWaitlistModal = false;
+        },
+    },
+
     watch: {
         categories: {
             deep: true,
             handler(category) {
-                if (category.length > 0) {
-                    if (category[0].slug !== "undefined") {
-                        this.categoryProps.slug = category[0].slug;
-                    }
+                if (category.length > 0 && category[0].slug !== "undefined") {
+                    this.categoryProps.slug = category[0].slug;
                 }
             },
         },

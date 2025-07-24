@@ -102,6 +102,7 @@ use App\Http\Controllers\Table\ItemCategoryController as TableItemCategoryContro
 use App\Http\Controllers\Table\OrderController as TableOrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GooglePlacesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,16 +117,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::match(['get', 'post'], '/login', function () {
 
-    // $plainPassword = '123456';
-    // $hashedPassword = Hash::make($plainPassword);
+// $plainPassword = '123456';
+// $hashedPassword = Hash::make($plainPassword);
 
-    // Log::info("Password Hashing Demo", [
-    //     'plain' => $plainPassword,
-    //     'hashed' => $hashedPassword
-    // ]);
+// Log::info("Password Hashing Demo", [
+//     'plain' => $plainPassword,
+//     'hashed' => $hashedPassword
+// ]);
 
     return response()->json(['errors' => 'unauthenticated'], 401);
 })->name('login');
+Route::prefix('places')->group(function () {
+    Route::get('autocomplete', [GooglePlacesController::class, 'autocomplete']);
+    Route::get('details', [GooglePlacesController::class, 'details']);
+});
 
 Route::match(['get', 'post'], '/refresh-token', [RefreshTokenController::class, 'refreshToken'])->middleware(['installed']);
 
@@ -177,22 +182,17 @@ Route::prefix('profile')->name('profile.')->middleware(['installed', 'apiKey', '
 });
 
 // Protected coupon routes
-Route::prefix('coupon')->middleware('auth:sanctum')->group(function () {
+Route::prefix('coupon')->middleware('auth:sanctum')->group(function() {
     Route::get('/bonus/check-eligibility', [CouponController::class, 'checkBonusEligibility'])
-        ->name('coupon.check-bonus-eligibility');
+         ->name('coupon.check-bonus-eligibility');
 });
 
-// Referral routes
-Route::prefix('referral')->name('referral.')->middleware(['apiKey'])->group(function () {
+Route::prefix('referral')->group(function () {
     Route::get('/', [ReferralController::class, 'index']);
     Route::get('/leaderboard', [ReferralController::class, 'leaderboard']);
-
-    // Protected referral routes
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/bonuses', [ReferralController::class, 'bonuses']);
-        Route::post('/claim', [ReferralController::class, 'claimBonus']);
-        Route::put('/code', [ReferralController::class, 'updateReferralCode']);
-    });
+    Route::get('/bonuses', [ReferralController::class, 'bonuses']);
+    Route::post('/claim', [ReferralController::class, 'claimBonus']);
+    Route::put('/code', [ReferralController::class, 'updateReferralCode']);
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['installed', 'apiKey', 'localization'])->group(function () {
@@ -757,10 +757,6 @@ Route::prefix('frontend')->name('frontend.')->middleware(['installed', 'apiKey',
     Route::prefix('language')->name('language.')->group(function () {
         Route::get('/', [FrontendLanguageController::class, 'index']);
         Route::get('/show/{language}', [FrontendLanguageController::class, 'show']);
-    });
-
-    Route::prefix('cart')->name('cart.')->middleware(['auth:sanctum'])->group(function () {
-        Route::post('/checkout', [FrontendOrderController::class, 'store']);
     });
 
     Route::prefix('order')->name('order.')->middleware(['auth:sanctum'])->group(function () {

@@ -774,6 +774,7 @@
         "table_field_required": "Het eettafelveld is verplicht.",
         "address_field_required": "Het adresveld is verplicht.",
         "no_schedule_found": "Geen schema gevonden.",
+        "location_not_covered": "Sorry, we bezorgen momenteel niet op uw locatie.",   
         "kiosk_log_out": "Kiosk succesvol uitgelogd.",
         "no_orders_found": "Je hebt nog geen bestellingen! Laten we iets lekkers beginnen.",
         "no_items_found": "Er zijn geen items gevonden die aan uw zoekopdracht voldoen! Probeer andere zoekwoorden.",

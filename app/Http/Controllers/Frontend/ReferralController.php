@@ -15,8 +15,11 @@ class ReferralController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        
+
         return response()->json([
+            'user' => [
+                'name' => $user->name,
+            ],
             'referral_code' => $user->referral_code,
             'total_referrals' => $user->total_referrals,
             'referral_balance' => $user->referral_balance,
@@ -35,7 +38,7 @@ class ReferralController extends Controller
             ->orderBy('total_referrals', 'desc')
             ->take(20)
             ->get();
-            
+
         return response()->json([
             'leaderboard' => $leaderboard,
             'updated_at' => now()->toDateTimeString()
@@ -45,19 +48,19 @@ class ReferralController extends Controller
     public function bonuses(Request $request)
     {
         $user = $request->user();
-        
+
         $bonuses = $user->givenBonuses()
             ->with(['referee:id,name,email'])
             ->latest()
             ->paginate(10);
-            
+
         $stats = [
             'total_earned' => $user->givenBonuses()->sum('amount'),
             'available_balance' => $user->referral_balance,
             'pending_bonuses' => $user->givenBonuses()->where('status', 'pending')->sum('amount'),
             'paid_bonuses' => $user->givenBonuses()->where('status', 'completed')->sum('amount'),
         ];
-        
+
         return response()->json([
             'stats' => $stats,
             'bonuses' => $bonuses
@@ -67,18 +70,18 @@ class ReferralController extends Controller
     public function claimBonus(Request $request)
     {
         $user = $request->user();
-        
+
         $request->validate([
-            'amount' => 'required|numeric|min:10|max:'.$user->referral_balance
+            'amount' => 'required|numeric|min:10|max:' . $user->referral_balance
         ]);
-        
+
         DB::transaction(function () use ($user, $request) {
             // Deduct from referral balance
             $user->decrement('referral_balance', $request->amount);
-            
+
             // Add to wallet
             $user->wallet()->increment('balance', $request->amount);
-            
+
             // Record ReferralTransaction
             ReferralTransaction::create([
                 'user_id' => $user->id,
@@ -88,7 +91,7 @@ class ReferralController extends Controller
                 'meta' => ['description' => 'Referral bonus withdrawal']
             ]);
         });
-        
+
         return response()->json([
             'message' => 'Bonus claimed successfully',
             'new_balance' => $user->referral_balance
@@ -98,15 +101,15 @@ class ReferralController extends Controller
     public function updateReferralCode(Request $request)
     {
         $user = $request->user();
-        
+
         $request->validate([
-            'referral_code' => 'required|alpha_num|min:6|max:12|unique:users,referral_code,'.$user->id
+            'referral_code' => 'required|alpha_num|min:6|max:12|unique:users,referral_code,' . $user->id
         ]);
-        
+
         $user->update([
             'referral_code' => Str::upper($request->referral_code)
         ]);
-        
+
         return response()->json([
             'message' => 'Referral code updated successfully'
         ]);

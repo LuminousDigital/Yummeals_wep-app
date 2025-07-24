@@ -16,6 +16,7 @@ import VueNextSelect from 'vue-next-select';
 import 'vue-next-select/dist/index.css';
 import VueApexCharts from "vue3-apexcharts";
 import ENV from './config/env';
+import VariationButton from "../js/components/frontend/components/button/VariationButton.vue";
 
 
 /* Start tooltip alert code */
@@ -59,6 +60,7 @@ axios.interceptors.request.use(
 const app = createApp({});
 app.component('default-component', DefaultComponent);
 app.component('vue-select', VueNextSelect)
+app.component("VariationButton", VariationButton);
 app.use(router)
 app.use(store)
 app.use(VueSimpleAlert)
