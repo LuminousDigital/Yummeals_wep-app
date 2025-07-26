@@ -11,16 +11,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\PaginateRequest;
 use App\Services\FrontendOrderService;
+use App\Services\OtpManagerService;
 use App\Http\Requests\OrderStatusRequest;
 use App\Http\Resources\OrderDetailsResource;
+use App\Events\SendOrderOtp;
 
 class OrderController extends Controller
 {
     private FrontendOrderService $frontendOrderService;
+    private OtpManagerService $otpManagerService;
 
-    public function __construct(FrontendOrderService $frontendOrderService)
+    public function __construct(FrontendOrderService $frontendOrderService, OtpManagerService $otpManagerService)
     {
         $this->frontendOrderService = $frontendOrderService;
+        $this->otpManagerService = $otpManagerService;
     }
 
     public function index(PaginateRequest $request): \Illuminate\Http\Response | \Illuminate\Http\Resources\Json\AnonymousResourceCollection | \Illuminate\Contracts\Foundation\Application | \Illuminate\Contracts\Routing\ResponseFactory
@@ -58,5 +62,23 @@ class OrderController extends Controller
         } catch (Exception $exception) {
             return response(['status' => false, 'message' => $exception->getMessage()], 422);
         }
+    }
+
+    public function resendOtp(FrontendOrder $order)
+    {
+        $otpData = $this->otpManagerService->generateOrderOtp($order);
+
+        $order->update([
+            'otp_code' => $otpData['otp_code'],
+            'otp_expires_at' => $otpData['otp_expires_at'],
+        ]);
+
+        SendOrderOtp::dispatch([
+            'email' => $order->user->email,
+            'otp'   => $otpData['otp_code'],
+            'order_id' => $order->id
+        ]);
+
+        return response(['status' => true, 'message' => 'OTP resent successfully.']);
     }
 }

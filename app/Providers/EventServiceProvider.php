@@ -13,6 +13,7 @@ use App\Events\SendOrderPush;
 use App\Events\SendOrderSms;
 use App\Events\SendResetPassword;
 use App\Events\SendSmsCode;
+use App\Events\SendOrderOtp;
 use App\Listeners\SendOrderDeliveryBoyMailNotification;
 use App\Listeners\SendOrderDeliveryBoyPushNotification;
 use App\Listeners\SendOrderDeliveryBoySmsNotification;
@@ -23,6 +24,8 @@ use App\Listeners\SendOrderMailNotification;
 use App\Listeners\SendOrderPushNotification;
 use App\Listeners\SendOrderSmsNotification;
 use App\Listeners\SendResetPasswordNotification;
+use App\Listeners\SendCouponNotifications;
+use App\Listeners\SendOrderOtpNotification;
 use App\Listeners\SendSmsCodeNotification;
 use App\Models\User;
 use App\Observers\UserObserver;
@@ -30,7 +33,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Events\CouponWon;
-use App\Listeners\SendCouponNotifications;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -79,6 +82,11 @@ class EventServiceProvider extends ServiceProvider
         CouponWon::class => [
             SendCouponNotifications::class,
         ],
+        SendOrderOtp::class => [
+            SendOrderOtpNotification::class,
+        ],
+
+
     ];
 
     /**

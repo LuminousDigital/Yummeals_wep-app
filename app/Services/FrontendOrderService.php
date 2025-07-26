@@ -64,6 +64,7 @@ class FrontendOrderService
 
             return FrontendOrder::with('transaction', 'orderItems', 'branch', 'user')->where('order_type', "!=", OrderType::POS)->where(function ($query) use ($requests) {
                 $query->where('user_id', auth()->user()->id);
+                // $query->where('user_id', 16);
                 foreach ($requests as $key => $request) {
                     if (in_array($key, $this->frontendOrderFilter)) {
                         if ($key === "status") {

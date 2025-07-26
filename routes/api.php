@@ -503,7 +503,11 @@ Route::prefix('admin')->name('admin.')->middleware(['installed', 'apiKey', 'loca
         Route::post('/change-password/{deliveryBoy}', [DeliveryBoyController::class, 'changePassword']);
         Route::post('/change-image/{deliveryBoy}', [DeliveryBoyController::class, 'changeImage']);
 
+        // Route::get('/', [FrontendDeliveryBoyOrderController::class, 'index']);
+        // Route::get('/show/{order}', [FrontendDeliveryBoyOrderController::class, 'show']);
+
         Route::get('/my-order/{deliveryBoy}', [DeliveryBoyController::class, 'myOrder']);
+        // Route::get('/my-order/{deliveryBoy}', [FrontendDeliveryBoyOrderController::class, 'show']);
         Route::get('/delivered-order/{deliveryBoy}', [DeliveryBoyOrderController::class, 'deliveredOrder']);
         Route::get('/delivered-order/show/{deliveryBoy}/{order}', [DeliveryBoyOrderController::class, 'deliveredOrderDetails']);
 

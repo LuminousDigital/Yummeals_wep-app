@@ -26,7 +26,9 @@ class OrderStatusRequest extends FormRequest
     {
 
         return [
-            'status' => ['required', 'numeric'],
+            'status'          => ['required', 'numeric'],
+            'payment_method'  => ['nullable', 'string', Rule::in(['cash-on-delivery', 'online'])],
+            'otp'             => ['nullable', 'numeric'],
         ];
     }
 }

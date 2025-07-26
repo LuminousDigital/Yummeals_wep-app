@@ -41,9 +41,12 @@ use Smartisan\Settings\Facades\Settings;
 use App\Http\Requests\OrderStatusRequest;
 use App\Http\Requests\PaymentStatusRequest;
 use App\Http\Requests\TableOrderTokenRequest;
+use App\Services\OtpManagerService;
 
 class OrderService
 {
+    private OtpManagerService $otpManagerService;
+
     public object $order;
     protected array $orderFilter = [
         'order_serial_no',
@@ -62,6 +65,11 @@ class OrderService
     protected array $exceptFilter = [
         'excepts'
     ];
+
+    public function __construct(OtpManagerService $otpManagerService)
+    {
+        $this->otpManagerService = $otpManagerService;
+    }
 
     /**
      * @throws Exception
@@ -609,6 +617,19 @@ class OrderService
     public function deliveryBoyOrderChangeStatus(Order $order, OrderStatusRequest $request): Order
     {
         try {
+            if (!$request->payment_method) {
+
+                    throw new \Exception('Payment method is required.', 422);
+
+            }
+            if ($request->payment_method === 'cash-on-delivery') {
+                if (empty($request->otp)) {
+                    throw new \Exception('OTP is required for cash on delivery.', 422);
+                }
+
+                $this->otpManagerService->verifyOrderOtp($order, $request->otp);
+            }
+
             $transaction = Transaction::where('order_id', $order->id)->first();
 
             if (!$transaction && $order->payment_status == PaymentStatus::UNPAID) {
