@@ -14,7 +14,6 @@ use App\Services\FrontendOrderService;
 use App\Services\OtpManagerService;
 use App\Http\Requests\OrderStatusRequest;
 use App\Http\Resources\OrderDetailsResource;
-use App\Events\SendOrderOtp;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
@@ -67,19 +66,13 @@ class OrderController extends Controller
 
     public function resendOtp(FrontendOrder $frontendOrder)
     {
-        $otpData = $this->otpManagerService->generateOrderOtp($frontendOrder);
+        try {
+            $otpData = $this->otpManagerService->generateOrderOtp($frontendOrder);
+            $this->frontendOrderService->resendOtp($frontendOrder, $otpData);
 
-        $frontendOrder->update([
-            'otp_code' => $otpData['otp_code'],
-            'otp_expires_at' => $otpData['otp_expires_at'],
-        ]);
-
-        SendOrderOtp::dispatch([
-            'email' => $frontendOrder->user->email,
-            'otp'   => $otpData['otp_code'],
-            'order_id' => $frontendOrder->id
-        ]);
-
-        return response(['status' => true, 'message' => 'OTP resent successfully.']);
+            return response(['status' => true, 'message' => 'OTP resent successfully.']);
+        } catch (Exception $exception) {
+            return response(['status' => false, 'message' => $exception->getMessage()], 422);
+        }
     }
 }

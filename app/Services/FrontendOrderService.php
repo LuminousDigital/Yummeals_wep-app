@@ -28,6 +28,7 @@ use App\Http\Requests\PaginateRequest;
 use Smartisan\Settings\Facades\Settings;
 use App\Http\Requests\OrderStatusRequest;
 use App\Events\SendOrderGotPush;
+use App\Events\SendOrderOtp;
 
 class FrontendOrderService
 {
@@ -234,6 +235,29 @@ class FrontendOrderService
                 }
             }
             return $frontendOrder;
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+            throw new Exception($exception->getMessage(), 422);
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function resendOtp(FrontendOrder $frontendOrder, array $otpData)
+    {
+        try {
+            $frontendOrder->update([
+                'otp_code' => $otpData['otp_code'],
+                'otp_expires_at' => $otpData['otp_expires_at'],
+            ]);
+
+            SendOrderOtp::dispatch([
+                'email' => $frontendOrder->user->email,
+                'otp'   => $otpData['otp_code'],
+                'order_id' => $frontendOrder->id
+            ]);
+
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);
