@@ -503,7 +503,11 @@ Route::prefix('admin')->name('admin.')->middleware(['installed', 'apiKey', 'loca
         Route::post('/change-password/{deliveryBoy}', [DeliveryBoyController::class, 'changePassword']);
         Route::post('/change-image/{deliveryBoy}', [DeliveryBoyController::class, 'changeImage']);
 
+        // Route::get('/', [FrontendDeliveryBoyOrderController::class, 'index']);
+        // Route::get('/show/{order}', [FrontendDeliveryBoyOrderController::class, 'show']);
+
         Route::get('/my-order/{deliveryBoy}', [DeliveryBoyController::class, 'myOrder']);
+        // Route::get('/my-order/{deliveryBoy}', [FrontendDeliveryBoyOrderController::class, 'show']);
         Route::get('/delivered-order/{deliveryBoy}', [DeliveryBoyOrderController::class, 'deliveredOrder']);
         Route::get('/delivered-order/show/{deliveryBoy}/{order}', [DeliveryBoyOrderController::class, 'deliveredOrderDetails']);
 
@@ -768,6 +772,7 @@ Route::prefix('frontend')->name('frontend.')->middleware(['installed', 'apiKey',
         Route::get('/show/{frontendOrder}', [FrontendOrderController::class, 'show']);
         Route::post('/', [FrontendOrderController::class, 'store']);
         Route::post('/change-status/{frontendOrder}', [FrontendOrderController::class, 'changeStatus']);
+        Route::post('/resend-otp/{frontendOrder}', [FrontendOrderController::class, 'resendOtp']);
     });
 
     Route::prefix('offer')->name('offer.')->group(function () {

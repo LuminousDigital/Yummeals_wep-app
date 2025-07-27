@@ -31,6 +31,8 @@ class Order extends Model
         'payment_method',
         'payment_status',
         'status',
+        'otp_code',
+        'otp_expires_at',
         'dining_table_id',
         'source',
         'pos_payment_method',

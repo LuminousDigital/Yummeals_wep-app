@@ -5,6 +5,9 @@ namespace App\Services;
 use App\Events\SendSmsCode;
 use Exception;
 use App\Models\Otp;
+use App\Events\SendOrderOtp;
+use App\Models\Order;
+use App\Models\FrontendOrder;
 use App\Jobs\SendSmsJob;
 use App\Enums\OtpType;
 use Illuminate\Http\Request;
@@ -20,7 +23,7 @@ class OtpManagerService
     /**
      * @throws Exception
      */
-    public function otp(Request $request) : bool
+    public function otp(Request $request): bool
     {
         try {
             $otp = DB::table('otps')->where([
@@ -33,8 +36,8 @@ class OtpManagerService
             }
 
             if (OtpType::SMS == Settings::group('otp')->get('otp_type') || OtpType::BOTH == Settings::group('otp')->get(
-                    'otp_type'
-                )) {
+                'otp_type'
+            )) {
                 $token = rand(
                     pow(10, (int)Settings::group('otp')->get('otp_digit_limit') - 1),
                     pow(10, (int)Settings::group('otp')->get('otp_digit_limit')) - 1
@@ -71,10 +74,10 @@ class OtpManagerService
     /**
      * @throws Exception
      */
-    public function verify(VerifyPhoneRequest $request) : bool
+    public function verify(VerifyPhoneRequest $request): bool
     {
         try {
-            if(env('DEMO')) {
+            if (env('DEMO')) {
                 return true;
             }
 
@@ -97,5 +100,60 @@ class OtpManagerService
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);
         }
+    }
+
+    /**
+     * Generate and send OTP for an order.
+     */
+    public function generateOrderOtp(FrontendOrder|Order $order): array
+    {
+        try {
+            $length = (int)Settings::group('otp')->get('order_otp_digit_limit', 6);
+            $otp = $this->generateOtpToken($length);
+            $expiry = Carbon::now()->addMinutes((int)Settings::group('otp')->get('order_otp_expiry_time', 30));
+
+            // $order->update([
+            //     'otp_code'       => $otp,
+            //     'otp_expires_at' => $expiry,
+            // ]);
+
+            // SendOrderOtp::dispatch([
+            //     'email'    => $order->user->email,
+            //     'otp'      => $otp,
+            //     'order_id' => $order->id,
+            // ]);
+            return ['otp_code' => $otp, 'otp_expires_at' => $expiry];
+        } catch (Exception $e) {
+            Log::error("Order OTP generation failed: " . $e->getMessage());
+            throw new Exception("Failed to generate OTP for order", 500);
+        }
+    }
+
+    /**
+     * Verify the OTP for an order.
+     */
+    public function verifyOrderOtp(Order $order, int|string $otp): bool
+    {
+        if (!$order->otp_code || !$order->otp_expires_at) {
+            throw new Exception("No OTP assigned to this order", 400);
+        }
+
+        if ($order->otp_code != $otp) {
+            throw new Exception("Invalid OTP", 422);
+        }
+
+        if (Carbon::parse($order->otp_expires_at)->isPast()) {
+            throw new Exception("OTP has expired", 422);
+        }
+
+        return true;
+    }
+
+    /**
+     * Generate an OTP token based on settings.
+     */
+    protected function generateOtpToken(int $length): int
+    {
+        return rand(pow(10, $length - 1), pow(10, $length) - 1);
     }
 }

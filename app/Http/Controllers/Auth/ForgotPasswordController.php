@@ -16,6 +16,7 @@ use Smartisan\Settings\Facades\Settings;
 class ForgotPasswordController extends Controller
 {
 
+    private string $token;
     public int $pin;
 
     public function forgotPassword(Request $request) : JsonResponse
