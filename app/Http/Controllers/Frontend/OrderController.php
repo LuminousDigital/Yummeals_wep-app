@@ -11,16 +11,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\PaginateRequest;
 use App\Services\FrontendOrderService;
+use App\Services\OtpManagerService;
 use App\Http\Requests\OrderStatusRequest;
 use App\Http\Resources\OrderDetailsResource;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
     private FrontendOrderService $frontendOrderService;
+    private OtpManagerService $otpManagerService;
 
-    public function __construct(FrontendOrderService $frontendOrderService)
+    public function __construct(FrontendOrderService $frontendOrderService, OtpManagerService $otpManagerService)
     {
         $this->frontendOrderService = $frontendOrderService;
+        $this->otpManagerService = $otpManagerService;
     }
 
     public function index(PaginateRequest $request): \Illuminate\Http\Response | \Illuminate\Http\Resources\Json\AnonymousResourceCollection | \Illuminate\Contracts\Foundation\Application | \Illuminate\Contracts\Routing\ResponseFactory
@@ -55,6 +59,18 @@ class OrderController extends Controller
     {
         try {
             return new OrderDetailsResource($this->frontendOrderService->changeStatus($frontendOrder, $request));
+        } catch (Exception $exception) {
+            return response(['status' => false, 'message' => $exception->getMessage()], 422);
+        }
+    }
+
+    public function resendOtp(FrontendOrder $frontendOrder)
+    {
+        try {
+            $otpData = $this->otpManagerService->generateOrderOtp($frontendOrder);
+            $this->frontendOrderService->resendOtp($frontendOrder, $otpData);
+
+            return response(['status' => true, 'message' => 'OTP resent successfully.']);
         } catch (Exception $exception) {
             return response(['status' => false, 'message' => $exception->getMessage()], 422);
         }

@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\PaymentGateway;
 use App\Models\ThemeSetting;
 use App\Services\PaymentManagerService;
+use App\Services\OtpManagerService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,14 +28,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\SendOrderGotPush;
 use App\Events\SendOrderGotMail;
 use App\Events\SendOrderGotSms;
+use App\Events\SendOrderOtp;
+use App\Enums\OrderType;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
     private PaymentManagerService $paymentManagerService;
+    private OtpManagerService $otpManagerService;
 
-    public function __construct(PaymentManagerService $paymentManagerService)
+    public function __construct(PaymentManagerService $paymentManagerService, OtpManagerService $otpManagerService)
     {
         $this->paymentManagerService = $paymentManagerService;
+        $this->otpManagerService = $otpManagerService;
     }
 
     // public function index(
@@ -74,7 +80,11 @@ class PaymentController extends Controller
             ->where('status', Activity::ENABLE);
 
         if ($order->status === OrderStatus::PENDING) {
-            $paymentGatewaysQuery->whereNotIn('id', [1]);
+
+            $paymentGatewaysQuery->whereNotIn('slug', ['cash-on-delivery']);
+        } else {
+
+            $paymentGatewaysQuery->whereNotIn('slug', ['cash']);
         }
 
         $paymentGateways = $paymentGatewaysQuery->get();
@@ -109,14 +119,30 @@ class PaymentController extends Controller
     {
         $orderDatetime = Carbon::now();
 
+        if ($order->order_type === OrderType::DELIVERY) {
+            $otpData = $this->otpManagerService->generateOrderOtp($order);
+
+            $order->update([
+                'otp_code'         => $otpData['otp_code'],
+                'otp_expires_at'   => $otpData['otp_expires_at'],
+            ]);
+
+            event(new SendOrderOtp([
+                'email'     => $order->user->email,
+                'otp'       => $otpData['otp_code'],
+                'order_id'  => $order->id
+            ]));
+        }
+
         if ($request->paymentMethod === "cash-on-delivery") {
             $order->update([
                 'status'           => OrderStatus::PENDING,
                 'order_datetime'   => $orderDatetime->toDateTimeString(),
             ]);
 
-            return redirect()->route('payment.successful', ['order' => $order->id]);
+            return redirect()->route('payment.successful', ['order' => $order->id, 'paymentMethod' => 'cash-on-delivery']);
         }
+
 
         if ($this->paymentManagerService->gateway($request->paymentMethod)->status()) {
             $className = 'App\\Http\\PaymentGateways\\PaymentRequests\\' . ucfirst($request->paymentMethod);
@@ -132,7 +158,7 @@ class PaymentController extends Controller
             $deliveryTimeString = $deliveryStart->format('H:i') . ' - ' . $deliveryEnd->format('H:i');
 
             $order->update([
-                'is_advance_order' => Ask::NO,
+                // 'is_advance_order' => Ask::NO,
                 // 'payment_method'   => EnumsPaymentGateway::E_WALLET,
                 'status'           => OrderStatus::PENDING,
                 'order_datetime'   => $orderDatetime->toDateTimeString(),
