@@ -1333,115 +1333,112 @@ export default {
                 this.checkoutProps.form.coupon_id = null;
             }
         },
-        orderSubmit: function () {
-            this.loading.isActive = true;
-            this.checkoutProps.form.subtotal = this.subtotal;
-            this.checkoutProps.form.total = parseFloat(
-                this.subtotal +
-                    this.checkoutProps.form.delivery_charge -
-                    this.checkoutProps.form.discount
-            ).toFixed(this.setting.site_digit_after_decimal_point);
-            this.checkoutProps.form.items = [];
-            _.forEach(this.carts, (item, index) => {
-                let item_variations = [];
-                if (Object.keys(item.item_variations.variations).length > 0) {
-                    _.forEach(
-                        item.item_variations.variations,
-                        (value, index) => {
-                            item_variations.push({
-                                id: value,
-                                item_id: item.item_id,
-                                item_attribute_id: index,
-                            });
-                        }
-                    );
-                }
-
-                if (Object.keys(item.item_variations.names).length > 0) {
-                    let i = 0;
-                    _.forEach(item.item_variations.names, (value, index) => {
-                        item_variations[i].variation_name = index;
-                        item_variations[i].name = value;
-                        i++;
-                    });
-                }
-
-                let item_extras = [];
-                if (item.item_extras.extras.length) {
-                    _.forEach(item.item_extras.extras, (value) => {
-                        item_extras.push({
-                            id: value,
-                            item_id: item.item_id,
-                        });
-                    });
-                }
-
-                if (item.item_extras.names.length) {
-                    let i = 0;
-                    _.forEach(item.item_extras.names, (value) => {
-                        item_extras[i].name = value;
-                        i++;
-                    });
-                }
-
-                this.checkoutProps.form.items.push({
+orderSubmit: function () {
+    this.loading.isActive = true;
+    if (!this.checkoutProps.form.branch_id) {
+        if (this.checkoutProps.form.order_type === 5) {
+            this.checkoutProps.form.branch_id = 1;
+        } else {
+            this.checkoutProps.form.branch_id = this.table?.branch_id || 1;
+        }
+    }
+    this.checkoutProps.form.subtotal = this.subtotal;
+    this.checkoutProps.form.total = parseFloat(
+        this.subtotal +
+        this.checkoutProps.form.delivery_charge -
+        this.checkoutProps.form.discount
+    ).toFixed(this.setting.site_digit_after_decimal_point);
+    this.checkoutProps.form.items = [];
+    _.forEach(this.carts, (item) => {
+        let item_variations = [];
+        if (Object.keys(item.item_variations.variations).length > 0) {
+            _.forEach(item.item_variations.variations, (value, index) => {
+                item_variations.push({
+                    id: value,
                     item_id: item.item_id,
-                    item_price: item.convert_price,
-                    branch_id: this.checkoutProps.form.branch_id,
-                    instruction: item.instruction,
-                    quantity: item.quantity,
-                    discount: item.discount,
-                    total_price: item.total,
-                    item_variation_total: item.item_variation_total,
-                    item_extra_total: item.item_extra_total,
-                    item_variations: item_variations,
-                    item_extras: item_extras,
+                    item_attribute_id: index,
                 });
             });
-            this.checkoutProps.form.items = JSON.stringify(
-                this.checkoutProps.form.items
-            );
-            this.$store
-                .dispatch("frontendOrder/save", this.checkoutProps.form)
-                .then((orderResponse) => {
-                    this.mapShow = false;
-                    this.location.lat = null;
-                    this.location.lng = null;
-                    this.branchAddress = null;
-                    this.localAddress = {};
-
-                    this.checkoutProps.form.branch_id = null;
-                    this.checkoutProps.form.subtotal = null;
-                    this.checkoutProps.form.discount = 0;
-                    this.checkoutProps.form.delivery_charge = 0;
-                    this.checkoutProps.form.delivery_time = null;
-                    this.checkoutProps.form.total = 0;
-                    this.checkoutProps.form.order_type = null;
-                    this.checkoutProps.form.is_advance_order = null;
-                    this.checkoutProps.form.address_id = null;
-                    this.checkoutProps.form.coupon_id = null;
-                    this.checkoutProps.form.items = [];
-
-                    this.$store
-                        .dispatch("frontendCart/resetCart")
-                        .then((res) => {
-                            this.loading.isActive = false;
-                            router.push({
-                                name: "frontend.myOrder",
-                                query: { id: orderResponse.data.data.id },
-                            });
-                        })
-                        .catch();
-                })
-                .catch((err) => {
-                    this.loading.isActive = false;
-                    if (typeof err.response.data.errors === "object") {
-                        _.forEach(err.response.data.errors, (error) => {
-                            alertService.error(error[0]);
-                        });
-                    }
+        }
+        if (Object.keys(item.item_variations.names).length > 0) {
+            let i = 0;
+            _.forEach(item.item_variations.names, (value, index) => {
+                item_variations[i].variation_name = index;
+                item_variations[i].name = value;
+                i++;
+            });
+        }
+        let item_extras = [];
+        if (item.item_extras.extras.length) {
+            _.forEach(item.item_extras.extras, (value) => {
+                item_extras.push({
+                    id: value,
+                    item_id: item.item_id,
                 });
-        },
+            });
+        }
+        if (item.item_extras.names.length) {
+            let i = 0;
+            _.forEach(item.item_extras.names, (value) => {
+                item_extras[i].name = value;
+                i++;
+            });
+        }
+        this.checkoutProps.form.items.push({
+            item_id: item.item_id,
+            item_price: item.convert_price,
+            branch_id: this.checkoutProps.form.branch_id,
+            instruction: item.instruction,
+            quantity: item.quantity,
+            discount: item.discount,
+            total_price: item.total,
+            item_variation_total: item.item_variation_total,
+            item_extra_total: item.item_extra_total,
+            item_variations: item_variations,
+            item_extras: item_extras,
+        });
+    });
+    this.checkoutProps.form.items = JSON.stringify(this.checkoutProps.form.items);
+    this.$store
+        .dispatch("frontendOrder/save", this.checkoutProps.form)
+        .then((orderResponse) => {
+            this.mapShow = false;
+            this.location.lat = null;
+            this.location.lng = null;
+            this.branchAddress = null;
+            this.localAddress = {};
+            this.checkoutProps.form.branch_id = null;
+            this.checkoutProps.form.subtotal = null;
+            this.checkoutProps.form.discount = 0;
+            this.checkoutProps.form.delivery_charge = 0;
+            this.checkoutProps.form.delivery_time = null;
+            this.checkoutProps.form.total = 0;
+            this.checkoutProps.form.order_type = null;
+            this.checkoutProps.form.is_advance_order = null;
+            this.checkoutProps.form.address_id = null;
+            this.checkoutProps.form.coupon_id = null;
+            this.checkoutProps.form.items = [];
+            this.$store
+                .dispatch("frontendCart/resetCart")
+                .then(() => {
+                    this.loading.isActive = false;
+                    router.push({
+                        name: "frontend.myOrder",
+                        query: { id: orderResponse.data.data.id },
+                    });
+                })
+                .catch();
+        })
+        .catch((err) => {
+            this.loading.isActive = false;
+            if (typeof err.response.data.errors === "object") {
+                _.forEach(err.response.data.errors, (error) => {
+                    alertService.error(error[0]);
+                });
+            }
+        });
+},
+
         changeOrderType: function (e) {
             this.checkoutProps.form.order_type = e;
             this.$store
