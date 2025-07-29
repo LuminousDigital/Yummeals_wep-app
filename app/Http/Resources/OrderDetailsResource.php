@@ -54,6 +54,9 @@ class OrderDetailsResource extends JsonResource
             'pos_received_currency_amount'        => AppLibrary::currencyAmountFormat($this->pos_received_amount),
             'cash_back_amount'                    => $this->pos_received_amount - $this->total,
             'cash_back_currency_amount'           => AppLibrary::currencyAmountFormat($this->pos_received_amount - $this->total),
+            'otp'                                 => $this->otp_code,
+            'otp_expiry'                          => $this->otp_expires_at,
+            'is_advance_order'                    => $this->is_advance_order,
             'payment_link'                        => route('payment.index', ['order' => $this->id,]),
         ];
     }
