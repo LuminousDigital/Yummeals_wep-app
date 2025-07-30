@@ -153,7 +153,6 @@ export default {
         async fetchReferralData() {
             try {
                 const response = await axios.get("/referral");
-                console.log("Referral API response:", response.data);
                 const data = response.data;
                 this.referralLink = `${window.location.origin}/signup/register?ref=${data.referral_code}`;
                 this.referralBalance = `₦${parseFloat(
@@ -173,11 +172,16 @@ export default {
                     })
                 );
 
+                const referralName = data.user?.name ?? "A friend";
+                const message = encodeURIComponent(
+                    `Hey! ${referralName} picked you for a special surprise… Win FREE meals worth ₦1.5M for a whole year with YUMMEALS! Download the app and Sign Up Now to get started: ${this.referralLink}`
+                );
+
                 this.socialIcons = [
                     {
                         src: "/images/social-icon/whatsapp.png",
                         alt: "whatsapp",
-                        link: `https://wa.me/?text=Join%20me%20on%20Yummeals!%20${this.referralLink}`,
+                        link: `https://wa.me/?text=${message}`,
                     },
                     {
                         src: "/images/social-icon/instagram.png",
@@ -187,12 +191,12 @@ export default {
                     {
                         src: "/images/social-icon/twitter.png",
                         alt: "twitter",
-                        link: `https://twitter.com/intent/tweet?text=Join%20me%20on%20Yummeals!%20${this.referralLink}`,
+                        link: `https://twitter.com/intent/tweet?text=${message}`,
                     },
                     {
                         src: "/images/social-icon/facebook.png",
                         alt: "facebook",
-                        link: `https://www.facebook.com/sharer/sharer.php?u=${this.referralLink}`,
+                        link: `https://www.facebook.com/sharer/sharer.php?u=${this.referralLink}&quote=${message}`,
                     },
                     {
                         src: "/images/social-icon/snapchat.png",
@@ -206,28 +210,5 @@ export default {
             }
         },
     },
-//   <section class="mt-12 mb-16">
-//     <div class="container">
-//       <h2 class="capitalize text-[26px] leading-[40px] font-semibold mb-6 text-primary">
-//         {{ $t("label.all_referrals") }}
-//       </h2>
-//       <OfferComponent :limit="limit" />
-//     </div>
-//   </section>
-// </template>
-
-// <script>
-// import OfferComponent from "../components/OfferComponent";
-
-// export default {
-//     name: "OffersComponent",
-//     components: {
-//         OfferComponent,
-//     },
-//     data() {
-//         return {
-//             limit: null,
-//         };
-//     },
 };
 </script>

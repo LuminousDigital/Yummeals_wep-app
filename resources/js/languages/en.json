@@ -775,6 +775,7 @@
         "table_field_required": "The dining table field is required.",
         "address_field_required": "The address field is required.",
         "no_schedule_found": "No schedule found.",
+        "location_not_covered": "Sorry, we currently do not deliver to your location.",
         "kiosk_log_out": "Kiosk Logged Out Successfully.",
         "no_orders_found": "You don't have any orders yet! Let's get something delicious started.",
         "no_items_found": "No items matched your search! Try different keywords.",
