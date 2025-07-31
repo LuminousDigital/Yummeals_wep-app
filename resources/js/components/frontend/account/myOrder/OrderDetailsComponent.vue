@@ -27,7 +27,19 @@
                                 {{ order.delivery_date }} {{ order.delivery_time }}
                             </span>
                         </div>
-
+                          <div v-if="order.otp && order.otp_expiry" class="flex flex-wrap items-center gap-2 sm:gap-1 mb-5">
+                            <div class="flex items-center space-x-2 border border-gray-300 rounded-xl px-3 py-1 bg-white shadow-sm">
+                              <span class="text-sm font-semibold text-gray-600">
+                                {{ $t("label.otp") }}:
+                              </span>
+                              <span class="text-lg font-bold text-orange-500 tracking-widest">
+                                {{ order.otp }}
+                              </span>
+                              <span class="text-xs text-gray-500">
+                                ({{ $t("label.expires") }}: {{ formatOtpExpiry(order.otp_expiry) }})
+                              </span>
+                            </div>
+                          </div>
                         <OrderStatusComponent :props="order" />
 
                         <div>
@@ -311,6 +323,14 @@ export default {
     methods: {
         orderStatusClass: function (status) {
             return appService.orderStatusClass(status);
+        },
+        formatOtpExpiry: function (expiry) {
+            try {
+                const date = new Date(expiry);
+                return date.toLocaleString();
+            } catch (e) {
+                return expiry;
+            }
         },
         changeStatus: function (status) {
             appService.cancelOrder().then((res) => {
