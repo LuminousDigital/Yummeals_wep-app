@@ -23,7 +23,7 @@
                 </h2>
 
                 <p
-                    class="text-center text-black font-semibold text-[14px] sm:text-sm mb-4 leading-relaxed py-[6px] sm:py-[20px]"
+                    class="text-center text-black font-semibold text-[13px] sm:text-sm mb-4 leading-relaxed py-[8px] sm:py-[30px]"
                 >
                     We Are Not Delivering To Your Location Yet,
                     Join Our Waitlist To Be Notified When We Are Here.
