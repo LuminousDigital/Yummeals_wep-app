@@ -614,7 +614,9 @@
         "select_time_schedule": "Select Time Schedule",
         "machine_id": "Machine ID",
         "chef_kitchen": "Chef/Kitchen",
-        "delivery_zone": "Delivery Zone"
+        "delivery_zone": "Delivery Zone",
+        "otp": "OTP",
+        "expires": "Expires"
     },
     "button": {
         "add": "Add",

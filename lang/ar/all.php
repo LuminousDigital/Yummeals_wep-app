@@ -46,7 +46,10 @@ return [
         'description'       => 'الوصف',
         'online_orders'     => 'الطلبات عبر الإنترنت',
         'sales_report'      => 'تقرير المبيعات',
-        'items_report'      => 'تقرير العناصر'
+        'items_report'      => 'تقرير العناصر',
+        'otp'               => 'رمز التحقق',
+        'expires'           => 'ينتهي في',
+
     ],
     'message' => [
         'validation_error'            => 'خطأ في التحقق.',

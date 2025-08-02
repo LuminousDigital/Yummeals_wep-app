@@ -1,26 +1,26 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="mt-12 mb-16">
+    <section class="mt-6 ms:mt-10 mb-16">
         <div class="container">
             <div
                 class="grid grid-cols-1 gap-6 pt-4 mb-12 md:grid-cols-2 md:gap-10 lg:gap-12"
             >
-                <div class="space-y-8">
+                <div class="space-y-4 sm:space-y-8">
                     <div>
                         <h1
-                            class="text-[18px] md:text-2xl lg:text-3xl font-bold text-[rgb(242,91,10)] mb-4"
+                            class="text-[19px] md:text-2xl lg:text-3xl font-bold text-[rgb(242,91,10)] mb-4"
                         >
                             Refer Your Friends and Win
                         </h1>
                         <p
-                            class="text-[12px] md:text-[15px] lg:text-[17px] text-black font-medium leading-snug"
+                            class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium leading-snug"
                         >
                             Refer your friends and get amazing rewards <br />
                             when they join us using your referral code.
                         </p>
                     </div>
                     <p
-                        class="text-[13px] md:text-sm lg:text-base text-gray-700 font-medium mb-2"
+                        class="text-[15px] md:text-sm lg:text-base text-gray-700 font-medium"
                     >
                         Referral Balance:
                         <span class="font-semibold text-green-600">{{
@@ -29,13 +29,13 @@
                     </p>
                     <div>
                         <h2
-                            class="text-[12px] md:text-[15px] lg:text-[17px] text-black font-medium pb-2"
+                            class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium pb-2"
                         >
                             Referral Link
                         </h2>
                         <div class="p-3 md:p-4">
                             <p
-                                class="text-[14px] md:text-base text-[rgb(242,91,10)] font-medium break-all"
+                                class="text-[15px] md:text-base text-[rgb(242,91,10)] font-medium break-all"
                             >
                                 {{ referralLink }}
                             </p>
