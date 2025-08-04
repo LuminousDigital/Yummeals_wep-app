@@ -47,6 +47,8 @@ return [
         'online_orders'    => 'Online-Bestellungen',
         'sales_report'     => 'Verkaufsbericht',
         'items_report'     => 'Güter bericht',
+        'otp'              => 'OTP',
+        'expires'          => 'Läuft ab',
     ],
     'message' => [
         'validation_error'            => 'Validierungsfehler.',

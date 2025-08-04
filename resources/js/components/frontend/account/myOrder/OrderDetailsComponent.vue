@@ -27,7 +27,23 @@
                                 {{ order.delivery_date }} {{ order.delivery_time }}
                             </span>
                         </div>
-
+                       <div v-if="order.otp && order.otp_expiry" class="lex flex-wrap items-center gap-2 mb-5">
+                         <div
+                           class="inline-flex flex-col max-[320px]:items-start max-[320px]:gap-1 sm:flex-row sm:items-center sm:space-x-2 border border-gray-300 rounded-xl px-3 py-2 bg-white shadow-sm w-auto"
+                         >
+                           <div class="flex items-center gap-2">
+                             <span class="text-sm font-semibold text-gray-600">
+                               {{ $t("label.otp") }}:
+                             </span>
+                             <span class="text-lg font-bold text-orange-500 tracking-widest">
+                               {{ order.otp }}
+                             </span>
+                           </div>
+                           <span class="text-xs text-gray-500 max-[320px]:mt-1 pr-2">
+                             {{ $t("label.expires") }}: {{ formatOtpExpiry(order.otp_expiry) }}
+                           </span>
+                         </div>
+                       </div>
                         <OrderStatusComponent :props="order" />
 
                         <div>
@@ -112,7 +128,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-full rounded-2xl shadow-xs bg-white">
+                <!-- <div class="w-full rounded-2xl shadow-xs bg-white">
                     <div class="p-4 border-b">
                         <h3 class="font-medium text-sm leading-6 capitalize mb-4">{{ $t('label.order_details') }}</h3>
                         <div class="pl-3">
@@ -205,7 +221,7 @@
                     </div>
 
 
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -311,6 +327,14 @@ export default {
     methods: {
         orderStatusClass: function (status) {
             return appService.orderStatusClass(status);
+        },
+        formatOtpExpiry: function (expiry) {
+            try {
+                const date = new Date(expiry);
+                return date.toLocaleString();
+            } catch (e) {
+                return expiry;
+            }
         },
         changeStatus: function (status) {
             appService.cancelOrder().then((res) => {
