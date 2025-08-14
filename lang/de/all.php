@@ -48,7 +48,7 @@ return [
         'sales_report'     => 'Verkaufsbericht',
         'items_report'     => 'Güter bericht',
         'otp'              => 'OTP',
-        'expires'          => 'Läuft ab',
+        
     ],
     'message' => [
         'validation_error'            => 'Validierungsfehler.',

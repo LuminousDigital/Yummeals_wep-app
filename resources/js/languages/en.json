@@ -615,8 +615,7 @@
         "machine_id": "Machine ID",
         "chef_kitchen": "Chef/Kitchen",
         "delivery_zone": "Delivery Zone",
-        "otp": "OTP",
-        "expires": "Expires"
+        "otp": "OTP"
     },
     "button": {
         "add": "Add",

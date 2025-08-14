@@ -48,8 +48,7 @@ return [
         'sales_report'      => 'تقرير المبيعات',
         'items_report'      => 'تقرير العناصر',
         'otp'               => 'رمز التحقق',
-        'expires'           => 'ينتهي في',
-
+        
     ],
     'message' => [
         'validation_error'            => 'خطأ في التحقق.',

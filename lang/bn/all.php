@@ -48,8 +48,7 @@ return [
         'sales_report'     => 'বিক্রয় প্রতিবেদন',
         'items_report'     => 'পন্যের রিপোর্ট',
         'otp'              => 'OTP',
-        'expires'          => 'মেয়াদ শেষ হবে',
-
+        
     ],
     'message' => [
         'validation_error'            => 'বৈধকরণ ত্রুটি।',
