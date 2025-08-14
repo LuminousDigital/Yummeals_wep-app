@@ -38,7 +38,7 @@ class UserOrderResource extends JsonResource
             'delivery_time'                  => AppLibrary::deliveryTime($this->delivery_time),
             'status'                         => $this->status,
             'otp'                            => $this->otp_code,
-            'otp_expiry'                     => $this->otp_expires_at,
+            // 'otp_expiry'                     => $this->otp_expires_at,
             'is_advance_order'               => $this->is_advance_order,
             'status_name'                    => trans('orderStatus.' . $this->status)
         ];

@@ -108,7 +108,7 @@ class OtpManagerService
     public function generateOrderOtp(FrontendOrder|Order $order): array
     {
         try {
-            $length = (int)Settings::group('otp')->get('order_otp_digit_limit', 6);
+            $length = (int)Settings::group('otp')->get('order_otp_digit_limit', 8);
             $otp = $this->generateOtpToken($length);
             $expiry = Carbon::now()->addMinutes((int)Settings::group('otp')->get('order_otp_expiry_time', 30));
 
@@ -142,9 +142,9 @@ class OtpManagerService
             throw new Exception("Invalid OTP", 422);
         }
 
-        if (Carbon::parse($order->otp_expires_at)->isPast()) {
-            throw new Exception("OTP has expired", 422);
-        }
+        // if (Carbon::parse($order->otp_expires_at)->isPast()) {
+        //     throw new Exception("OTP has expired", 422);
+        // }
 
         return true;
     }
@@ -152,8 +152,19 @@ class OtpManagerService
     /**
      * Generate an OTP token based on settings.
      */
-    protected function generateOtpToken(int $length): int
+    protected function generateOtpToken(int $length = 8): string
     {
-        return rand(pow(10, $length - 1), pow(10, $length) - 1);
+        $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $digits = '0123456789';
+        $all = $letters . $digits;
+
+        $otp = $letters[rand(0, strlen($letters) - 1)] .
+            $digits[rand(0, strlen($digits) - 1)];
+
+        for ($i = 2; $i < $length; $i++) {
+            $otp .= $all[rand(0, strlen($all) - 1)];
+        }
+
+        return str_shuffle($otp);
     }
 }
