@@ -631,6 +631,7 @@
         "export": "Export",
         "print": "Print",
         "print_invoice": "Print Invoice",
+        "print_order_details": "Print Order Details",
         "excel": "XLS",
         "reset": "Reset",
         "accept": "Accept",
