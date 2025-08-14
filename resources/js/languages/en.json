@@ -615,8 +615,7 @@
         "machine_id": "Machine ID",
         "chef_kitchen": "Chef/Kitchen",
         "delivery_zone": "Delivery Zone",
-        "otp": "OTP",
-        "expires": "Expires"
+        "otp": "OTP"
     },
     "button": {
         "add": "Add",
@@ -632,6 +631,7 @@
         "export": "Export",
         "print": "Print",
         "print_invoice": "Print Invoice",
+        "print_order_details": "Print Order Details",
         "excel": "XLS",
         "reset": "Reset",
         "accept": "Accept",
