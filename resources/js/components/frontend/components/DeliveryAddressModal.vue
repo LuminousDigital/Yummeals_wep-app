@@ -2,7 +2,7 @@
     <transition name="fade">
         <div
             v-if="isOpen"
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000] p-5 disabled:cursor-not-allowed"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-5 disabled:cursor-not-allowed"
             @click="closeModal"
         >
             <div
@@ -10,7 +10,7 @@
                 @click.stop
             >
                 <button
-                    class="absolute top-2 right-4 p-1 text-gray-400 hover:text-gray-700 transition-colors disabled:cursor-not-allowed"
+                    class="absolute p-1 text-gray-400 transition-colors top-2 right-4 hover:text-gray-700 disabled:cursor-not-allowed"
                     @click="closeModal"
                 >
                     <img
@@ -20,18 +20,18 @@
                     />
                 </button>
 
-                <h2 class="text-orange-600 text-lg font-semibold">
+                <h2 class="text-lg font-semibold text-orange-600">
                     Delivery Address
                 </h2>
                 <img :src="imageSrc" alt="Delivery" class="w-40 mx-auto" />
 
                 <div class="mb-3">
-                    <label class="block text-sm font-medium text-gray-700 mb-3"
+                    <label class="block mb-3 text-sm font-medium text-gray-700"
                         >Enter Delivery Address</label
                     >
                     <div class="relative">
                         <div class="relative flex items-center">
-                            <div class="absolute left-3 z-10 text-gray-400">
+                            <div class="absolute z-10 text-gray-400 left-3">
                                 <img
                                     src="/images/delivery/LocatioIcon.png"
                                     alt="Location Icon"
@@ -44,7 +44,7 @@
                                 v-model="addressInput"
                                 type="text"
                                 placeholder="Delivery Address"
-                                class="w-full py-3 px-4 pl-10 border border-gray-200 rounded-lg text-base outline-none transition-colors duration-200 focus:border-orange-500"
+                                class="w-full px-4 py-3 pl-10 text-base transition-colors duration-200 border border-gray-200 rounded-lg outline-none focus:border-orange-500"
                                 @input="onAddressInput"
                                 @focus="showPredictions = true"
                                 @blur="handleBlur"
@@ -53,11 +53,11 @@
                             <button
                                 v-if="addressInput"
                                 @click="clearAddress"
-                                class="absolute right-3 bg-none border-none cursor-pointer text-gray-400 p-1 rounded transition-colors duration-200 hover:text-gray-700"
+                                class="absolute p-1 text-gray-400 transition-colors duration-200 border-none rounded cursor-pointer right-3 bg-none hover:text-gray-700"
                             >
                                 <div
                                     v-if="isLoadingPredictions"
-                                    class="border-2 border-gray-300 border-t-orange-500 rounded-full animate-spin w-4 h-4"
+                                    class="w-4 h-4 border-2 border-gray-300 rounded-full border-t-orange-500 animate-spin"
                                 ></div>
                                 <svg
                                     v-else
@@ -82,10 +82,10 @@
                                 v-for="prediction in predictions"
                                 :key="prediction.place_id"
                                 @click="selectPrediction(prediction)"
-                                class="flex items-center px-4 py-3 cursor-pointer transition-all duration-200 border-b border-gray-100 hover:bg-orange-50 last:border-b-0 group"
+                                class="flex items-center px-4 py-3 transition-all duration-200 border-b border-gray-100 cursor-pointer hover:bg-orange-50 last:border-b-0 group"
                             >
                                 <div
-                                    class="text-orange-500 mr-3 flex-shrink-0 group-hover:scale-110 transition-transform duration-200"
+                                    class="flex-shrink-0 mr-3 text-orange-500 transition-transform duration-200 group-hover:scale-110"
                                 >
                                     <svg
                                         width="20"
@@ -102,7 +102,7 @@
 
                                 <div class="flex-1 min-w-0">
                                     <div
-                                        class="font-medium text-gray-800 text-sm truncate leading-tight"
+                                        class="text-sm font-medium leading-tight text-gray-800 truncate"
                                     >
                                         {{
                                             prediction.structured_formatting
@@ -110,7 +110,7 @@
                                         }}
                                     </div>
                                     <div
-                                        class="text-gray-500 text-xs mt-1 truncate leading-tight"
+                                        class="mt-1 text-xs leading-tight text-gray-500 truncate"
                                     >
                                         {{
                                             prediction.structured_formatting
@@ -120,7 +120,7 @@
                                 </div>
 
                                 <div
-                                    class="text-gray-300 group-hover:text-orange-400 transition-colors duration-200"
+                                    class="text-gray-300 transition-colors duration-200 group-hover:text-orange-400"
                                 >
                                     <svg
                                         width="16"
@@ -141,7 +141,7 @@
                 <button
                     @click="getCurrentLocation"
                     :disabled="isLoadingLocation"
-                    class="w-full py-3 px-4 bg-gray-50 border border-gray-200 rounded-lg flex items-center gap-2 cursor-pointer transition-colors duration-200 mb-3 text-sm text-gray-700 hover:bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
+                    class="flex items-center w-full gap-2 px-4 py-3 mb-3 text-sm text-gray-700 transition-colors duration-200 border border-gray-200 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                     <svg
                         v-if="!isLoadingLocation"
@@ -157,7 +157,7 @@
                     </svg>
                     <div
                         v-else
-                        class="border-2 border-gray-100 border-t-orange-600 rounded-full animate-spin w-4 h-4"
+                        class="w-4 h-4 border-2 border-gray-100 rounded-full border-t-orange-600 animate-spin"
                     ></div>
                     <span>{{
                         isLoadingLocation
@@ -169,11 +169,11 @@
                 <button
                     @click="checkAddressCoverage"
                     :disabled="!canProceed || isCheckingCoverage"
-                    class="w-full py-3 bg-orange-600 text-white border-none rounded-lg text-base font-semibold cursor-pointer transition-colors duration-200 flex items-center justify-center gap-2 hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    class="flex items-center justify-center w-full gap-2 py-3 text-base font-semibold text-white transition-colors duration-200 bg-orange-600 border-none rounded-lg cursor-pointer hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                     <div
                         v-if="isCheckingCoverage"
-                        class="border-2 border-gray-300 border-t-orange-500 rounded-full animate-spin w-4 h-4"
+                        class="w-4 h-4 border-2 border-gray-300 rounded-full border-t-orange-500 animate-spin"
                     ></div>
                     <span>{{
                         isCheckingCoverage ? "Checking coverage..." : "Continue"
