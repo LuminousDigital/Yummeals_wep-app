@@ -3507,11 +3507,11 @@ input:checked + div svg {
 .z-60 {
   z-index: 60;
 }
-.z-\[1000\] {
-  z-index: 1000;
-}
 .z-\[60\] {
   z-index: 60;
+}
+.z-\[9999\] {
+  z-index: 9999;
 }
 .col-span-1 {
   grid-column: span 1 / span 1;
@@ -3951,6 +3951,9 @@ input:checked + div svg {
 .w-\[98px\] {
   width: 98px;
 }
+.w-auto {
+  width: auto;
+}
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
@@ -4235,10 +4238,10 @@ input:checked + div svg {
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
-.space-y-8 > :not([hidden]) ~ :not([hidden]) {
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 .overflow-auto {
   overflow: auto;
@@ -4916,9 +4919,9 @@ input:checked + div svg {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-.py-\[6px\] {
-  padding-top: 6px;
-  padding-bottom: 6px;
+.py-\[8px\] {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .pb-0 {
   padding-bottom: 0px;
@@ -4970,6 +4973,9 @@ input:checked + div svg {
 }
 .pr-1 {
   padding-right: 0.25rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
 }
 .pr-2\.5 {
   padding-right: 0.625rem;
@@ -5045,9 +5051,6 @@ input:checked + div svg {
 .text-\[11px\] {
   font-size: 11px;
 }
-.text-\[12px\] {
-  font-size: 12px;
-}
 .text-\[13px\] {
   font-size: 13px;
 }
@@ -5059,6 +5062,9 @@ input:checked + div svg {
 }
 .text-\[18px\] {
   font-size: 18px;
+}
+.text-\[19px\] {
+  font-size: 19px;
 }
 .text-\[22px\] {
   font-size: 22px;
@@ -5191,6 +5197,9 @@ input:checked + div svg {
 .tracking-wide {
   letter-spacing: 0.025em;
 }
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
 .\!text-\[\#008BBA\] {
   --tw-text-opacity: 1 !important;
   color: rgb(0 139 186 / var(--tw-text-opacity, 1)) !important;
@@ -5294,6 +5303,10 @@ input:checked + div svg {
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+}
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
 }
 .text-gray-700 {
   --tw-text-opacity: 1;
@@ -6475,6 +6488,18 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .sm\:gap-\[18px\] {
     gap: 18px;
+  }
+
+  .sm\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .sm\:space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse));
   }
 
   .sm\:rounded-xl {
