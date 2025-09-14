@@ -68,7 +68,6 @@ export default {
     if (this.$route.query.s !== "undefined") {
       this.currentCategory = this.$route.query.s;
     }
-    // Add window resize event listener to update swiper
     this.resizeHandler = () => {
       if (this.swiperInstance && !this.swiperInstance.destroyed) {
         this.swiperInstance.update();
@@ -77,7 +76,6 @@ export default {
     window.addEventListener('resize', this.resizeHandler);
   },
   beforeUnmount() {
-    // Remove window resize event listener
     if (this.resizeHandler) {
       window.removeEventListener('resize', this.resizeHandler);
     }
@@ -85,7 +83,6 @@ export default {
   methods: {
     onSwiper(swiper) {
       this.swiperInstance = swiper;
-      // Update swiper after initialization to fix display issue
       this.swiperInstance.update();
       setTimeout(() => {
         if (!swiper.destroyed) {
