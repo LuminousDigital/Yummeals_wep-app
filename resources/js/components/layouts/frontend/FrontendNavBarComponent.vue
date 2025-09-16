@@ -23,7 +23,7 @@
                     class="capitalize text-sm font-medium text-heading">
                     {{ $t('label.offers') }}
                 </router-link> -->
-                <router-link :to="{ name: 'frontend.offers' }"
+                <router-link v-if="logged" :to="{ name: 'frontend.offers' }"
                     :class="checkIsPathAndRoutePathSame('/referrals') ? 'text-primary' : ''"
                     class="capitalize text-sm font-medium text-heading">
                     Referrals

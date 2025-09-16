@@ -17,7 +17,7 @@
         relative after:absolute after:top-3 ltr:after:right-2.5 rtl:after:left-2.5 after:w-2 after:h-2 after:rounded-full
         after:shadow " :class="subtotal > 0 ? ' after:bg-[#FFDB1F]' : ''"></button>
 
-        <router-link :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
+        <router-link v-if="logged" :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
             class="flex flex-col items-center gap-1" :to="{ name: 'frontend.offers' }">
             <i class="fa-solid fa-tags text-base leading-none"></i>
             <span class="text-xs capitalize">{{ $t('label.offers') }}</span>
