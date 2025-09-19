@@ -51,7 +51,7 @@ return [
         'expires'          =>  'Expires',
         'referral_code'    => 'Referral Code',
         'referrals'        => 'Referrals',
-        'loading'          => 'Loading...',
+        'loading'          => 'Loading',
     ],
     'message' => [
         'validation_error'             => 'Validation Error.',

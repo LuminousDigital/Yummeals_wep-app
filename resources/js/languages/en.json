@@ -620,7 +620,7 @@
         "referral_code": "Referral Code",
         "user_referral_code": "User Referral Code",
         "referrals": "Referrals",
-        "loading": "Loading..."
+        "loading": "Loading"
     },
     "button": {
         "add": "Add",
@@ -715,7 +715,7 @@
         "add_waiter": "Add Waiter",
         "add_chef": "Add Chef",
         "add_kiosk_machine": "Add Kiosk Machine",
-        "show_referrals": "Referrals"
+        "show_referrals": "View Referrals"
     },
     "number": {
         "10": "10",

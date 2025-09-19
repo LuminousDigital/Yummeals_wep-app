@@ -31,10 +31,7 @@
 
         <div class="p-6">
           <div v-if="loading" class="text-center py-12">
-            <div class="inline-flex items-center space-x-3">
-              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500" style="border-bottom-color: rgb(242, 91, 10)"></div>
-              <p class="text-gray-600 font-medium">{{ $t("message.loading") }}...</p>
-            </div>
+            <LoadingContentComponent :props="{ isActive: loading }" />
           </div>
 
           <div v-else-if="referrals && referrals.length > 0" class="space-y-4">
@@ -112,8 +109,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
-            <h4 class="text-lg font-semibold text-gray-900 mb-2">No referrals yet</h4>
-            <p class="text-gray-500">{{ $t("message.no_data_available") }}</p>
+            <h4 class="text-sm font-semibold text-gray-900 mb-2">No referrals yet</h4>
+            <!-- <p class="text-gray-500">{{ $t("message.no_data_available") }}</p> -->
           </div>
         </div>
       </div>
@@ -122,8 +119,13 @@
 </template>
 
 <script>
+import LoadingContentComponent from "../LoadingContentComponent.vue";
+
 export default {
   name: "SmReferralsModalComponent",
+  components: {
+    LoadingContentComponent, // Register the component
+  },
   props: {
     visible: {
       type: Boolean,
@@ -146,8 +148,8 @@ export default {
       } catch (err) {
         console.error('Failed to copy:', err);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -509,8 +509,10 @@ export default {
         },
         referralCode: function () {
             return (
+                // this.administrator.referral_code ||
+                // "REF-" + this.administrator.id
                 this.administrator.referral_code ||
-                "REF-" + this.administrator.id
+                "N/A"
             );
         },
     },
