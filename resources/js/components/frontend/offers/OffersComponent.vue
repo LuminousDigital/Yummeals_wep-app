@@ -13,7 +13,7 @@
                             Refer Your Friends and Win
                         </h1>
                         <p
-                            class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium leading-snug"
+                            class="text-[14px] md:text-[15px] lg:text-[17px] text-gray-700 font-medium leading-snug"
                         >
                             Refer your friends and get amazing rewards <br />
                             when they join us using your referral code.
@@ -28,6 +28,19 @@
                         }}</span>
                     </p>
                     <div>
+                        <div class="flex items-center gap-3 pb-5">
+                            <h2
+                                class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium"
+                            >
+                                Referral Code:
+                            </h2>
+                            <p
+                                class="text-[15px] md:text-base text-[rgb(242,91,10)] font-medium break-all"
+                            >
+                                {{ referralCode }}
+                            </p>
+                        </div>
+
                         <h2
                             class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium pb-2"
                         >
@@ -134,6 +147,7 @@ export default {
     data() {
         return {
             limit: null,
+            referralCode: "",
             referralLink: "",
             referralBalance: "₦0.00",
             copied: false,
@@ -154,7 +168,8 @@ export default {
             try {
                 const response = await axios.get("/referral");
                 const data = response.data;
-                this.referralLink = `${window.location.origin}/signup/register?ref=${data.referral_code}`;
+                this.referralCode = data.referral_code || "";
+                this.referralLink = `${window.location.origin}/signup?ref=${data.referral_code}`;
                 this.referralBalance = `₦${parseFloat(
                     data.referral_balance || 0
                 ).toFixed(2)}`;

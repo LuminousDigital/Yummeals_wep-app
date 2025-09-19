@@ -49,6 +49,9 @@ return [
         'items_report'     =>  'Items Report',
         'otp'              =>  'OTP',
         'expires'          =>  'Expires',
+        'referral_code'    => 'Referral Code',
+        'referrals'        => 'Referrals',
+        'loading'          => 'Loading...',
     ],
     'message' => [
         'validation_error'             => 'Validation Error.',
@@ -96,5 +99,9 @@ return [
         'out_of_service_area'         => 'Sorry, this address is outside of our service area.',
         'kiosk_machine_not_found'     => 'The Kiosk machine not found.',
         'already_logged_in'           => 'Already logged in on another device. Please logout first.',
+        'no_data_available'           => 'No data available',
+    ],
+    'button' => [
+        'show_referrals' => 'Show Referrals',
     ]
 ];

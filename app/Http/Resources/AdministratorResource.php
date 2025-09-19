@@ -27,6 +27,7 @@ class AdministratorResource extends JsonResource
             "role"         => optional($this->roles[0])->name,
             "image"        => $this->image,
             "country_code" => $this->country_code,
+            "referral_code" => $this->referral_code,
         ];
     }
 }

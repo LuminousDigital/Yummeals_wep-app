@@ -612,7 +612,9 @@
         "select_time_schedule": "حدد جدول الوقت",
         "machine_id": "معرّف الآلة",
         "chef_kitchen": "الشيف/المطبخ",
-        "delivery_zone": "منطقة التسليم"
+        "delivery_zone": "منطقة التسليم",
+        "user_referral_code": "رمز إحالة المستخدم",
+        "loading": "جارٍ التحميل..."
     },
     "button": {
         "add": "إضافة",
@@ -778,6 +780,7 @@
         "no_orders_found": "ليس لديك أي طلبات حتى الآن! لنبدأ بشيء لذيذ",
         "no_items_found": "لا توجد عناصر مطابقة لبحثك! جرّب كلمات رئيسية أخرى",
         "no_data_available": "لا توجد بيانات متاحة.",
-        "payment_method": "طريقة الدفع مطلوبة."
+        "payment_method": "طريقة الدفع مطلوبة.",
+        "loading": "جارٍ التحميل..."
     }
 }

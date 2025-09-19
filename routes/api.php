@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdministratorAddressController;
 use App\Http\Controllers\Admin\AdministratorController;
+use App\Http\Controllers\Admin\ReferralController as AdminReferralController;
 use App\Http\Controllers\Admin\AnalyticController;
 use App\Http\Controllers\Admin\AnalyticSectionController;
 use App\Http\Controllers\Admin\BranchController;
@@ -91,7 +92,7 @@ use App\Http\Controllers\Frontend\OfferController as FrontendOfferController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use App\Http\Controllers\Frontend\PageController as FrontendPageController;
 use App\Http\Controllers\Frontend\ProfileController;
-use App\Http\Controllers\Frontend\ReferralController;
+use App\Http\Controllers\Frontend\ReferralController as FrontendReferralController;
 use App\Http\Controllers\Frontend\SettingController;
 use App\Http\Controllers\Frontend\SliderController as FrontendSliderController;
 use App\Http\Controllers\Frontend\SubscriberController as FrontendSubscriberController;
@@ -188,11 +189,11 @@ Route::prefix('coupon')->middleware('auth:sanctum')->group(function() {
 });
 
 Route::prefix('referral')->group(function () {
-    Route::get('/', [ReferralController::class, 'index']);
-    Route::get('/leaderboard', [ReferralController::class, 'leaderboard']);
-    Route::get('/bonuses', [ReferralController::class, 'bonuses']);
-    Route::post('/claim', [ReferralController::class, 'claimBonus']);
-    Route::put('/code', [ReferralController::class, 'updateReferralCode']);
+    Route::get('/', [FrontendReferralController::class, 'index']);
+    Route::get('/leaderboard', [FrontendReferralController::class, 'leaderboard']);
+    Route::get('/bonuses', [FrontendReferralController::class, 'bonuses']);
+    Route::post('/claim', [FrontendReferralController::class, 'claimBonus']);
+    Route::put('/code', [FrontendReferralController::class, 'updateReferralCode']);
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['installed', 'apiKey', 'localization'])->group(function () {
@@ -641,6 +642,14 @@ Route::prefix('admin')->name('admin.')->middleware(['installed', 'apiKey', 'loca
             [AdministratorAddressController::class, 'update']
         );
         Route::delete('/address/{administrator}/{address}', [AdministratorAddressController::class, 'destroy']);
+    });
+
+    Route::prefix('administrators')->name('administrators.')->group(function () {
+        Route::get('/{administratorId}/referrals', [AdminReferralController::class, 'administratorReferrals']);
+    });
+
+    Route::prefix('customers')->name('customers.')->group(function () {
+        Route::get('/{customerId}/referrals', [AdminReferralController::class, 'customerReferrals']);
     });
 
     Route::prefix('timezone')->name('timezone.')->group(function () {

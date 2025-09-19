@@ -616,7 +616,11 @@
         "chef_kitchen": "Chef/Kitchen",
         "delivery_zone": "Delivery Zone",
         "otp": "OTP",
-        "expires": "Expires"
+        "expires": "Expires",
+        "referral_code": "Referral Code",
+        "user_referral_code": "User Referral Code",
+        "referrals": "Referrals",
+        "loading": "Loading..."
     },
     "button": {
         "add": "Add",
@@ -710,7 +714,8 @@
         "pdf": "PDF",
         "add_waiter": "Add Waiter",
         "add_chef": "Add Chef",
-        "add_kiosk_machine": "Add Kiosk Machine"
+        "add_kiosk_machine": "Add Kiosk Machine",
+        "show_referrals": "Referrals"
     },
     "number": {
         "10": "10",
@@ -782,6 +787,7 @@
         "no_orders_found": "You don't have any orders yet! Let's get something delicious started.",
         "no_items_found": "No items matched your search! Try different keywords.",
         "no_data_available": "No data available.",
-        "payment_method": "The payment method is required."
+        "payment_method": "The payment method is required.",
+        "loading": "Loading.."
     }
 }

@@ -86,6 +86,10 @@ export default {
         }).catch((err) => {
             this.loading.isActive = false;
         });
+        const referral = this.$route.query.ref;
+        if (referral) {
+            this.$store.dispatch('frontendSignup/setReferralCode', referral);
+        }
     },
     computed: {
         countryCode: function () {
@@ -110,6 +114,12 @@ export default {
                     } else {
                         alertService.success(res.data.message);
                         this.$router.push({ name: "auth.signupVerify" });
+                    }
+                    const referralCode = this.$store.getters['frontendSignup/referralCode'];
+                    if (referralCode) {
+                        this.$router.push({ name: "auth.signupRegister", query: { ref: referralCode } });
+                    } else {
+                        this.$router.push({ name: "auth.signupRegister" });
                     }
 
                     this.props.form = {
