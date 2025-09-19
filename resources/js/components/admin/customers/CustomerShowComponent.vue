@@ -4,142 +4,106 @@
     <div class="col-12" v-if="Object.entries(customer).length > 0">
         <div class="p-6 rounded-xl mb-8 shadow-xs bg-white">
             <div class="flex flex-wrap gap-4 sm:gap-6">
-                <img
-                    class="w-[120px] h-[120px] object-cover rounded-lg"
-                    :src="previewImage"
-                    alt="avatar"
-                />
+                <img class="w-[120px] h-[120px] object-cover rounded-lg" :src="previewImage" alt="avatar" />
                 <div>
-                    <h3
-                        class="text-[26px] font-semibold font-rubik leading-[40px] capitalize"
-                    >
+                    <h3 class="text-[26px] font-semibold font-rubik leading-[40px] capitalize">
                         {{ textShortener(customer.name, 20) }}
                     </h3>
                     <label
-                        class="p-0.5 px-2 rounded text-[10px] leading-4 font-medium font-rubik uppercase mb-[22px] text-[#E89806] bg-[#FFF5DE]"
-                    >
+                        class="p-0.5 px-2 rounded text-[10px] leading-4 font-medium font-rubik uppercase mb-[22px] text-[#E89806] bg-[#FFF5DE]">
                         {{ $t("label.customer") }}
                     </label>
                     <form @submit.prevent="saveImage">
                         <div class="flex gap-3 md:gap-4">
-                            <label
-                                for="photo"
-                                class="db-btn relative cursor-pointer h-[38px] shadow-[0px_6px_10px_rgba(255,_0,_107,_0.24)] bg-primary text-white"
-                            >
+                            <label for="photo"
+                                class="db-btn relative cursor-pointer h-[38px] shadow-[0px_6px_10px_rgba(255,_0,_107,_0.24)] bg-primary text-white">
                                 <i class="lab lab-upload-image"></i>
                                 <span class="hidden sm:inline-block">{{
                                     $t("button.upload_new_photo")
-                                }}</span>
-                                <input
-                                    v-if="uploadButton"
-                                    @change="changePreviewImage"
-                                    ref="imageProperty"
-                                    accept="image/png, image/jpeg, image/jpg"
-                                    type="file"
-                                    id="photo"
-                                    class="absolute top-0 left-0 w-full h-full -z-10 opacity-0"
-                                />
+                                    }}</span>
+                                <input v-if="uploadButton" @change="changePreviewImage" ref="imageProperty"
+                                    accept="image/png, image/jpeg, image/jpg" type="file" id="photo"
+                                    class="absolute top-0 left-0 w-full h-full -z-10 opacity-0" />
                             </label>
-                            <button
-                                v-if="saveButton"
-                                type="submit"
-                                class="db-btn h-[38px] shadow-[0px_6px_10px_rgba(26,_183,_89,_0.24)] text-white bg-[#1AB759]"
-                            >
+                            <button v-if="saveButton" type="submit"
+                                class="db-btn h-[38px] shadow-[0px_6px_10px_rgba(26,_183,_89,_0.24)] text-white bg-[#1AB759]">
                                 <i class="lab lab-tick-circle-2"></i>
                                 <span class="hidden sm:inline-block">{{
                                     $t("button.save")
-                                }}</span>
+                                    }}</span>
                             </button>
-                            <button
-                                v-if="resetButton"
-                                @click="resetPreviewImage"
-                                type="button"
-                                class="db-btn-outline h-[38px] shadow-[0px_6px_10px_rgba(251,_78,_78,_0.24)] !text-[#FB4E4E] !bg-white !border-[#FB4E4E]"
-                            >
+                            <button v-if="resetButton" @click="resetPreviewImage" type="button"
+                                class="db-btn-outline h-[38px] shadow-[0px_6px_10px_rgba(251,_78,_78,_0.24)] !text-[#FB4E4E] !bg-white !border-[#FB4E4E]">
                                 <i class="lab lab-reset"></i>
                                 <span class="hidden sm:inline-block">{{
                                     $t("button.reset")
-                                }}</span>
+                                    }}</span>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div
-            class="flex flex-col items-start sm:flex-row sm:items-center gap-1.5 mb-6"
-        >
-            <button
-                type="button"
-                @click="
-                    handleTab(
-                        $event,
-                        '#profile',
-                        '.profile-tabBtn',
-                        '.profile-tabDiv',
-                        'active'
-                    )
+        <div class="flex flex-col items-start sm:flex-row sm:items-center gap-1.5 mb-6">
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#profile',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
                 "
-                class="profile-tabBtn active w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]"
-            >
+                class="profile-tabBtn active w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-user-line"></i>
                 <span class="capitalize text-sm">{{
                     $t("button.profile")
-                }}</span>
+                    }}</span>
             </button>
-            <button
-                type="button"
-                @click="
-                    handleTab(
-                        $event,
-                        '#security',
-                        '.profile-tabBtn',
-                        '.profile-tabDiv',
-                        'active'
-                    )
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#security',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
                 "
-                class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]"
-            >
+                class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-unlock"></i>
                 <span class="capitalize text-sm">{{
                     $t("button.security")
-                }}</span>
+                    }}</span>
             </button>
-            <button
-                type="button"
-                @click="
-                    handleTab(
-                        $event,
-                        '#address',
-                        '.profile-tabBtn',
-                        '.profile-tabDiv',
-                        'active'
-                    )
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#address',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
                 "
-                class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]"
-            >
+                class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-location-line"></i>
                 <span class="capitalize text-sm">{{
                     $t("button.address")
-                }}</span>
+                    }}</span>
             </button>
-            <button
-                type="button"
-                @click="
-                    handleTab(
-                        $event,
-                        '#orders',
-                        '.profile-tabBtn',
-                        '.profile-tabDiv',
-                        'active'
-                    )
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#orders',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
                 "
-                class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]"
-            >
+                class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-reserve-line"></i>
                 <span class="capitalize text-sm">{{
                     $t("button.my_orders")
-                }}</span>
+                    }}</span>
             </button>
         </div>
         <div id="profile" class="profile-tabDiv active">
@@ -151,9 +115,7 @@
                     <div class="row py-2">
                         <div class="col-12 sm:col-6 !py-1.5">
                             <div class="db-list-item p-0">
-                                <span
-                                    class="db-list-item-title w-full sm:w-1/2"
-                                >
+                                <span class="db-list-item-title w-full sm:w-1/2">
                                     {{ $t("label.email") }}
                                 </span>
                                 <span class="db-list-item-text w-full sm:w-1/2">
@@ -163,17 +125,15 @@
                         </div>
                         <div class="col-12 sm:col-6 !py-1.5">
                             <div class="db-list-item p-0">
-                                <span
-                                    class="db-list-item-title w-full sm:w-1/2"
-                                >
+                                <span class="db-list-item-title w-full sm:w-1/2">
                                     {{ $t("label.phone") }}
                                 </span>
                                 <span class="db-list-item-text w-full sm:w-1/2">
                                     {{
                                         customer.phone
                                             ? customer.country_code +
-                                              "" +
-                                              customer.phone
+                                            "" +
+                                            customer.phone
                                             : ""
                                     }}
                                 </span>
@@ -181,16 +141,14 @@
                         </div>
                         <div class="col-12 sm:col-6 !py-1.5">
                             <div class="db-list-item p-0">
-                                <span
-                                    class="db-list-item-title w-full sm:w-1/2"
-                                >
+                                <span class="db-list-item-title w-full sm:w-1/2">
                                     {{ $t("label.status") }}
                                 </span>
                                 <span class="db-list-item-text w-full sm:w-1/2">
                                     <span :class="statusClass(customer.status)">
                                         {{
                                             enums.statusEnumArray[
-                                                customer.status
+                                            customer.status
                                             ]
                                         }}
                                     </span>
@@ -199,23 +157,15 @@
                         </div>
                         <div class="col-12 sm:col-6 !py-1.5">
                             <div class="db-list-item p-0 flex items-center">
-                                <span
-                                    class="db-list-item-title w-full sm:w-1/2"
-                                    >{{ $t("label.referral_code") }}</span
-                                >
-                                <span
-                                    class="db-list-item-text w-full sm:w-1/2"
-                                    >{{ referralCode }}
-                                  <button
-                                    @click="openModal"
-                                    class="db-btn flex items-center justify-center gap-2 px-2 py-1 rounded-md bg-primary text-white text-sm font-medium whitespace-nowrap transition hover:bg-primary/90"
-                                >
-                                    <i class="lab lab-eye text-base"></i>
-                                    <span>{{
-                                        $t("button.show_referrals")
-                                    }}</span>
-                                </button></span
-                                >
+                                <span class="db-list-item-title w-full sm:w-1/2">{{ $t("label.referral_code") }}</span>
+                                <span class="db-list-item-text w-full sm:w-1/2">
+                                    {{ referralCode }}
+                                    <a href="javascript:void(0)" @click="openModal"
+                                        class="text-primary text-xs">
+                                        <span class="underline">({{ $t("button.show_referrals") }})</span>
+                                        
+                                    </a>
+                                </span>
 
                             </div>
                         </div>
@@ -234,66 +184,33 @@
                     <form @submit.prevent="changePassword">
                         <div class="form-row">
                             <div class="form-col-12 sm:form-col-6">
-                                <label
-                                    for="password"
-                                    class="db-field-title required"
-                                    >{{ $t("label.password") }}</label
-                                >
-                                <input
-                                    v-model="password.props.form.password"
-                                    v-bind:class="
-                                        password.errors.password
-                                            ? 'invalid'
-                                            : ''
-                                    "
-                                    type="password"
-                                    id="password"
-                                    class="db-field-control"
-                                    autocomplete="off"
-                                />
-                                <small
-                                    class="db-field-alert"
-                                    v-if="password.errors.password"
-                                    >{{ password.errors.password[0] }}</small
-                                >
+                                <label for="password" class="db-field-title required">{{ $t("label.password") }}</label>
+                                <input v-model="password.props.form.password" v-bind:class="password.errors.password
+                                        ? 'invalid'
+                                        : ''
+                                    " type="password" id="password" class="db-field-control" autocomplete="off" />
+                                <small class="db-field-alert" v-if="password.errors.password">{{
+                                    password.errors.password[0] }}</small>
                             </div>
 
                             <div class="form-col-12 sm:form-col-6">
-                                <label
-                                    for="password"
-                                    class="db-field-title required"
-                                    >{{ $t("label.confirm_password") }}</label
-                                >
-                                <input
-                                    v-model="
-                                        password.props.form
-                                            .password_confirmation
-                                    "
-                                    v-bind:class="
-                                        password.errors.password_confirmation
+                                <label for="password" class="db-field-title required">{{ $t("label.confirm_password")
+                                    }}</label>
+                                <input v-model="password.props.form
+                                        .password_confirmation
+                                    " v-bind:class="password.errors.password_confirmation
                                             ? 'invalid'
                                             : ''
-                                    "
-                                    type="password"
-                                    id="confirm_password"
-                                    class="db-field-control"
-                                    autocomplete="off"
-                                />
-                                <small
-                                    class="db-field-alert"
-                                    v-if="password.errors.password_confirmation"
-                                    >{{
-                                        password.errors.password_confirmation[0]
-                                    }}</small
-                                >
+                                        " type="password" id="confirm_password" class="db-field-control"
+                                    autocomplete="off" />
+                                <small class="db-field-alert" v-if="password.errors.password_confirmation">{{
+                                    password.errors.password_confirmation[0]
+                                }}</small>
                             </div>
 
                             <div class="form-col-12">
                                 <div class="flex flex-wrap gap-3">
-                                    <button
-                                        type="submit"
-                                        class="db-btn py-2 text-white bg-primary"
-                                    >
+                                    <button type="submit" class="db-btn py-2 text-white bg-primary">
                                         <i class="lab lab-save"></i>
                                         <span>{{ $t("label.save") }}</span>
                                     </button>
@@ -315,73 +232,49 @@
                 </div>
                 <div class="db-card-body">
                     <div class="row">
-                        <div
-                            class="col-12 md:col-6 lg:col-6 xl:col-4"
-                            v-if="myOrders.length > 0"
-                            v-for="order in myOrders"
-                            :key="order"
-                        >
-                            <div
-                                class="w-full rounded-lg py-2 px-3 flex items-center gap-5 border border-[#EFF0F6]"
-                            >
-                                <i
-                                    class="lab lab-reserve lab-font-size-24 lab-font-color-2"
-                                ></i>
+                        <div class="col-12 md:col-6 lg:col-6 xl:col-4" v-if="myOrders.length > 0"
+                            v-for="order in myOrders" :key="order">
+                            <div class="w-full rounded-lg py-2 px-3 flex items-center gap-5 border border-[#EFF0F6]">
+                                <i class="lab lab-reserve lab-font-size-24 lab-font-color-2"></i>
                                 <div class="w-full">
                                     <div class="flex items-center gap-4 mb-1">
                                         <p class="text-sm leading-6 font-rubik">
                                             {{ $t("label.order_id") }}:
-                                            <span class="text-heading"
-                                                >#{{
-                                                    order.order_serial_no
-                                                }}</span
-                                            >
+                                            <span class="text-heading">#{{
+                                                order.order_serial_no
+                                            }}</span>
                                         </p>
                                         <span
                                             class="py-0.5 px-2 rounded-full text-[10px] font-rubik leading-4 capitalize text-heading bg-[#BDEFFF]"
-                                            :class="
-                                                orderStatusClass(order.status)
-                                            "
-                                        >
+                                            :class="orderStatusClass(order.status)
+                                                ">
                                             {{ order.status_name }}
                                         </span>
                                     </div>
-                                    <p
-                                        class="text-xs font-light font-rubik mb-0.5"
-                                    >
+                                    <p class="text-xs font-light font-rubik mb-0.5">
                                         {{ order.order_items }}
                                         {{ $t("label.items") }}
                                     </p>
-                                    <p
-                                        class="text-xs font-light font-rubik mb-1"
-                                    >
+                                    <p class="text-xs font-light font-rubik mb-1">
                                         {{ order.order_datetime }}
                                     </p>
-                                    <div
-                                        class="flex items-center justify-between"
-                                    >
-                                        <p
-                                            class="text-sm leading-6 font-rubik capitalize text-heading"
-                                        >
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-sm leading-6 font-rubik capitalize text-heading">
                                             {{ $t("label.total") }}:
                                             <span class="font-medium">{{
                                                 order.total_currency_price
-                                            }}</span>
+                                                }}</span>
                                         </p>
-                                        <router-link
-                                            :to="{
-                                                name: 'admin.customers.order.details',
-                                                params: {
-                                                    id: $route.params.id,
-                                                    orderId: order.id,
-                                                },
-                                            }"
-                                            class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary"
-                                        >
+                                        <router-link :to="{
+                                            name: 'admin.customers.order.details',
+                                            params: {
+                                                id: $route.params.id,
+                                                orderId: order.id,
+                                            },
+                                        }"
+                                            class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary">
                                             {{ $t("label.see_order_details") }}
-                                            <i
-                                                class="lab lab-arrow-right lab-font-size-13"
-                                            ></i>
+                                            <i class="lab lab-arrow-right lab-font-size-13"></i>
                                         </router-link>
                                     </div>
                                 </div>
@@ -389,49 +282,30 @@
                         </div>
                         <div class="w-full p-4 text-center" v-else>
                             <div class="max-w-[300px] mx-auto mt-2">
-                                <img
-                                    class="w-full h-full"
-                                    :src="
-                                        ENV.API_URL +
-                                        '/images/default/not-found.png'
-                                    "
-                                    alt="Not Found"
-                                />
+                                <img class="w-full h-full" :src="ENV.API_URL +
+                                    '/images/default/not-found.png'
+                                    " alt="Not Found" />
                             </div>
                             <span class="d-block mt-3 text-lg">{{
                                 $t("message.no_data_available")
-                            }}</span>
+                                }}</span>
                         </div>
                     </div>
                 </div>
-                <div
-                    class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-6"
-                    v-if="myOrders.length > 0"
-                >
-                    <PaginationSMBox
-                        :pagination="orderPagination"
-                        :method="orderLists"
-                    />
-                    <div
-                        class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between"
-                    >
+                <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-6"
+                    v-if="myOrders.length > 0">
+                    <PaginationSMBox :pagination="orderPagination" :method="orderLists" />
+                    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                         <PaginationTextComponent :props="{ page: orderPage }" />
-                        <PaginationBox
-                            :pagination="orderPagination"
-                            :method="orderLists"
-                        />
+                        <PaginationBox :pagination="orderPagination" :method="orderLists" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <SmReferralsModalComponent
-        :visible="showModal"
-        :referrals="referrals"
-        :loading="loadingReferrals"
-        @close="closeModal"
-    />
+    <SmReferralsModalComponent :visible="showModal" :referrals="referrals" :loading="loadingReferrals"
+        @close="closeModal" />
 </template>
 
 <script>
@@ -510,7 +384,8 @@ export default {
             return this.$store.getters["customer/orderPage"];
         },
         referralCode: function () {
-            return this.customer.referral_code || "REF-" + this.customer.id;
+            // return this.customer.referral_code || "REF-" + this.customer.id;
+            return this.customer.referral_code || "N/A";
         },
     },
     mounted() {
