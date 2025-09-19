@@ -28,6 +28,7 @@ class CustomerResource extends JsonResource
             "image"        => $this->image,
             "country_code" => $this->country_code,
             "messages"     => $this->messages->count(),
+            "referral_code" => $this->referral_code,
         ];
     }
 }

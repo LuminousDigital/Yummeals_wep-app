@@ -114,6 +114,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    if (to.name === "frontend.offers" && store.getters.authStatus && store.getters.authInfo.role_id === 1) {
+        next({ name: "route.exception" });
+        return;
+    }
+    if (to.name === "frontend.offers" && !store.getters.authStatus) {
+        next();
+        return;
+    }
+
     if (to.meta.auth === true) {
         if (!store.getters.authStatus) {
             next({ name: "auth.login" });
