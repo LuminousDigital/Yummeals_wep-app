@@ -64,72 +64,19 @@ export const frontendBranch = {
                     return reject(new Error("Invalid destination coordinates"));
                 }
 
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        const originLat = position.coords.latitude;
-                        const originLng = position.coords.longitude;
+                const url = `/frontend/branch/lat-long?latitude=${payload.latitude}&longitude=${payload.longitude}`;
 
-                        const requestPayload = {
-                            origin: "",
-                            destinations: [
-                                `${payload.latitude},${payload.longitude}`,
-                            ],
-                        };
-
-                        try {
-                            const response = await fetch(
-                                "https://api.yummealsapp.com/api/v1/calculate-distance",
-                                {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        "X-API-KEY":
-                                            "z8p53xn6-n2f5-29w7-7193-s500c15553h171620",
-                                    },
-                                    body: JSON.stringify(requestPayload),
-                                }
-                            );
-
-                            const result = await response.json();
-
-                            if (!response.ok || !result?.data) {
-                                return reject(
-                                    new Error(
-                                        result?.message ||
-                                            "API returned an error"
-                                    )
-                                );
-                            }
-
-                            const isLocationCovered =
-                                result.data.distances?.[0]?.isLocationCovered;
-
-                            if (!isLocationCovered) {
-                                return reject(
-                                    new Error("Location not covered")
-                                );
-                            }
-
-                            resolve(result.data);
-                        } catch (err) {
-                            reject(err);
-                        }
-                    },
-                    (error) => {
-                        reject(
-                            new Error(
-                                "Location permission denied or unavailable"
-                            )
-                        );
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 0,
+                axios.get(url).then((res) => {
+                    if (res.data.data) {
+                        resolve(res.data.data);
+                    } else {
+                        reject(new Error("Location not covered"));
                     }
-                );
+                }).catch((err) => {
+                    reject(new Error(err.response?.data?.message || "Unable to check location coverage"));
+                });
             });
-    },
+        },
     },
     mutations: {
         lists: function (state, payload) {
