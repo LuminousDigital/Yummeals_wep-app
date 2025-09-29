@@ -131,6 +131,7 @@ Route::match(['get', 'post'], '/login', function () {
 Route::prefix('places')->group(function () {
     Route::get('autocomplete', [GooglePlacesController::class, 'autocomplete']);
     Route::get('details', [GooglePlacesController::class, 'details']);
+    Route::get('reverse-geocode', [GooglePlacesController::class, 'reverseGeocode']);
 });
 
 Route::match(['get', 'post'], '/refresh-token', [RefreshTokenController::class, 'refreshToken'])->middleware(['installed']);
