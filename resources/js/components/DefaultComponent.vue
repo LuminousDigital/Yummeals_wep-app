@@ -88,7 +88,7 @@ export default {
 
     if (env.DEMO === "true" || env.DEMO === 'TRUE' || env.DEMO === true || env.DEMO === "1" || env.DEMO === 1) {
       this.$store.dispatch("authcheck").then(res => {
-        if (res.data.status === false && (this.theme == "frontend" || this.theme == "backend")) {
+        if (res.data.status === false && (this.theme == "frontend" || this.theme == "backend") && !this.$route.name.includes('auth.')) {
           this.$router.push({ name: "frontend.home" });
         };
       }).catch();

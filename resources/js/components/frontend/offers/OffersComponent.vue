@@ -3,32 +3,33 @@
     <section class="mt-6 ms:mt-10 mb-16">
         <div class="container">
             <div
-                class="grid grid-cols-1 gap-6 pt-4 mb-12 md:grid-cols-2 md:gap-10 lg:gap-12"
+                class="grid grid-cols-1 gap-8 pt-4 mb-12 md:grid-cols-2 md:gap-20 lg:gap-24"
             >
                 <div class="space-y-4 sm:space-y-8">
-                    <div>
+                    <div class="pb-4">
                         <h1
-                            class="text-[19px] md:text-2xl lg:text-3xl font-bold text-[rgb(242,91,10)] mb-4"
+                            class="text-[20px] md:text-2xl lg:text-3xl font-bold text-[rgb(242,91,10)] mb-6"
                         >
                             Refer Your Friends and Win
                         </h1>
                         <p
-                            class="text-[14px] md:text-[15px] lg:text-[17px] text-gray-700 font-medium leading-snug"
+                            class="text-[13px] md:text-[14px] lg:text-[16px] text-black leading-snug"
                         >
-                            Refer your friends and get amazing rewards <br />
-                            when they join us using your referral code.
+                            Invite your friends to order with the Yummeals app
+                            <br />
+                            and get rewarded for every successful referral.
                         </p>
                     </div>
-                    <p
+                    <!-- <p
                         class="text-[15px] md:text-sm lg:text-base text-gray-700 font-medium"
                     >
                         Referral Balance:
                         <span class="font-semibold text-green-600">{{
                             referralBalance
                         }}</span>
-                    </p>
+                    </p> -->
                     <div>
-                        <div class="flex items-center gap-3 pb-5">
+                        <!-- <div class="flex items-center gap-3 pb-5">
                             <h2
                                 class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium"
                             >
@@ -39,95 +40,302 @@
                             >
                                 {{ referralCode }}
                             </p>
-                        </div>
-
-                        <h2
-                            class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium pb-2"
-                        >
+                        </div> -->
+                        <h2 class="text-[16px] text-[#212121] font-medium pb-4">
                             Referral Link
                         </h2>
-                        <div class="p-3 md:p-4">
-                            <p
-                                class="text-[15px] md:text-base text-[rgb(242,91,10)] font-medium break-all"
-                            >
-                                {{ referralLink }}
-                            </p>
-                        </div>
                         <div
-                            class="flex flex-wrap items-center justify-center w-full gap-5 mt-10 mb-12 transition-all md:gap-6 lg:gap-8"
+                            class="flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-sm"
                         >
-                            <a
-                                v-for="icon in socialIcons"
-                                :key="icon.alt"
-                                :href="icon.link"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="flex items-center justify-center cursor-pointer"
+                            <div class="p-3 md:p-4 bg-[#F6F6F6] flex-1 min-w-0">
+                                <p
+                                    class="text-[13px] sm:text-[14px] md:text-[15px] text-[#000000] font-medium truncate"
+                                >
+                                    {{ referralLink }}
+                                </p>
+                            </div>
+                            <button
+                                @click="copyLink"
+                                class="shrink-0 bg-[#F25B0A] hover:bg-orange-600 text-white font-medium py-2 md:py-3 px-4 md:px-6 flex items-center justify-center transition-all min-w-[100px]"
+                            >
+                                <span>{{
+                                    copied ? "Copied!" : "Copy Link"
+                                }}</span>
+                            </button>
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center w-full mt-10 mb-12"
+                        >
+                            <div class="flex items-center w-full max-w-xs mb-6">
+                                <div
+                                    class="flex-grow border-t border-gray-300"
+                                ></div>
+                                <span class="mx-3 text-sm text-gray-500"
+                                    >Share via</span
+                                >
+                                <div
+                                    class="flex-grow border-t border-gray-300"
+                                ></div>
+                            </div>
+                            <div
+                                class="flex flex-wrap items-center justify-center w-full gap-5 transition-all md:gap-6 lg:gap-5"
+                            >
+                                <a
+                                    v-for="icon in socialIcons"
+                                    :key="icon.alt"
+                                    :href="icon.link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center justify-center cursor-pointer"
+                                >
+                                    <img
+                                        :src="icon.src"
+                                        :alt="icon.alt"
+                                        class="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2
+                            class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
+                        >
+                            Referral History ({{ referralHistory.length }})
+                        </h2>
+                        <div
+                            class="bg-white rounded-lg shadow-sm px-2 sm:px-4 md:px-6 h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
+                        >
+                            <div
+                                v-if="referralHistory.length === 0"
+                                class="flex flex-col items-center justify-center w-full py-10 text-center"
                             >
                                 <img
-                                    :src="icon.src"
-                                    :alt="icon.alt"
-                                    class="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12"
+                                    src="/images/social-icon/empty-referrals.png"
+                                    alt="No referrals"
+                                    class="object-contain w-40 h-40 mb-4"
                                 />
-                            </a>
-                        </div>
-                        <button
-                            @click="copyLink"
-                            class="w-full bg-[rgb(242,91,10)] hover:bg-orange-600 text-white font-medium py-2 md:py-3 px-4 md:px-6 rounded-3xl flex items-center justify-center space-x-2 transition-all"
-                        >
-                            <span>{{ copied ? "Copied!" : "Copy Link" }}</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="px-4 bg-white rounded-lg shadow-sm sm:px-6">
-                    <h2
-                        class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
-                    >
-                        Referral History ({{ referralHistory.length }})
-                    </h2>
-                    <div
-                        class="bg-white rounded-lg shadow-sm px-2 sm:px-4 md:px-6 h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
-                    >
-                        <div
-                            v-if="referralHistory.length === 0"
-                            class="flex flex-col items-center justify-center w-full py-10 text-center"
-                        >
-                            <img
-                                src="/images/social-icon/empty-referrals.png"
-                                alt="No referrals"
-                                class="object-contain w-40 h-40 mb-4"
-                            />
-                            <p
-                                class="text-sm font-semibold text-orange-600 md:text-base"
+                                <p
+                                    class="text-sm font-semibold text-orange-600 md:text-base"
+                                >
+                                    You have not referred anybody
+                                </p>
+                            </div>
+                            <div
+                                v-else
+                                v-for="referral in referralHistory"
+                                :key="referral.id"
+                                class="flex items-center justify-between bg-gray-50 rounded-lg p-4 mb-3"
                             >
-                                You have not referred anybody
-                            </p>
-                        </div>
-                        <div
-                            v-else
-                            v-for="referral in referralHistory"
-                            :key="referral.id"
-                            class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0"
-                        >
-                            <div>
                                 <h3
-                                    class="text-sm font-medium text-orange-500 md:text-base lg:text-lg"
+                                    class="text-sm font-medium text-orange-500 md:text-base"
                                 >
                                     {{ referral.name }}
                                 </h3>
+                                <p class="font-semibold text-gray-900">
+                                    {{ referral.reward }}
+                                </p>
                                 <p class="text-xs text-gray-500 md:text-sm">
                                     {{ referral.date }}
                                 </p>
                             </div>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">
-                                    {{ referral.reward }}
-                                </p>
+                            <div
+                                class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
+                            ></div>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <a
+                                href="#"
+                                class="text-sm font-medium text-gray-700 underline"
+                            >
+                                See all
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div className="space-y-4 sm:space-y-8 pt-2">
+                    <h2
+                        class="flex items-center justify-center gap-3 text-center mb-6"
+                    >
+                        <span>
+                            <img
+                                src="/images/LeaderBoard/trophy.png"
+                                alt="Trophy"
+                                class="object-contain h-7"
+                            />
+                        </span>
+                        <span
+                            class="text-[20px] md:text-xl lg:text-xl font-bold text-black"
+                        >
+                            Leader Board
+                        </span>
+                        <span>
+                            <img
+                                src="/images/LeaderBoard/trophy.png"
+                                alt="Trophy"
+                                class="object-contain h-7"
+                            />
+                        </span>
+                    </h2>
+
+                    <div className="flex justify-center items-end gap-3 mb-8">
+                        <div
+                            className="flex flex-col items-center bg-gradient-to-b from-yellow-500 to-orange-400 rounded-lg p-3 w-24 pt-4"
+                        >
+                            <div
+                                className="w-8 h-8 flex items-center justify-center text-white font-bold text-sm mb-2"
+                            >
+                                <span>
+                                    <img
+                                        src="/images/LeaderBoard/2nd.png"
+                                        alt="Trophy"
+                                        class="object-contain h-7"
+                                    />
+                                </span>
                             </div>
+                            <div
+                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2"
+                            >
+                                <span>
+                                    <img
+                                        src="/images/LeaderBoard/2ndhead.png"
+                                        alt="Trophy"
+                                        class="object-contain h-7"
+                                    />
+                                </span>
+                            </div>
+                            <p className="text-xs font-medium text-white">
+                                Ada Blessing
+                            </p>
                         </div>
                         <div
-                            class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
-                        ></div>
+                            className="flex flex-col items-center bg-gradient-to-b from-yellow-400 to-orange-400 rounded-lg p-3 w-24 pt-2 shadow-lg"
+                        >
+                            <div
+                                className="w-8 h-8 flex items-center justify-center text-white font-bold text-sm mb-2"
+                            >
+                                <span>
+                                    <img
+                                        src="/images/LeaderBoard/1st.png"
+                                        alt="Trophy"
+                                        class="object-contain h-7"
+                                    />
+                                </span>
+                            </div>
+                            <div
+                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2"
+                            >
+                                <span>
+                                    <img
+                                        src="/images/LeaderBoard/1sthead.png"
+                                        alt="Trophy"
+                                        class="object-contain h-7"
+                                    />
+                                </span>
+                            </div>
+                            <p className="text-xs font-medium text-white">
+                                Ada Blessing
+                            </p>
+                        </div>
+                        <div
+                            className="flex flex-col items-center bg-gradient-to-b from-yellow-500 to-orange-400 rounded-lg p-3 w-24 pt-4"
+                        >
+                            <div
+                                className="w-8 h-8 flex items-center justify-center text-white font-bold text-sm mb-2"
+                            >
+                                <span>
+                                    <img
+                                        src="/images/LeaderBoard/3rd.png"
+                                        alt="Trophy"
+                                        class="object-contain h-7"
+                                    />
+                                </span>
+                            </div>
+                            <div
+                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2"
+                            >
+                                <span>
+                                    <img
+                                        src="/images/LeaderBoard/3rdhead.png"
+                                        alt="Trophy"
+                                        class="object-contain h-12"
+                                    />
+                                </span>
+                            </div>
+                            <p className="text-xs font-medium text-white">
+                                Ada Blessing
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        className="flex justify-between text-xs text-gray-500 mb-3 px-2"
+                    >
+                        <span>Highest referrals</span>
+                        <div className="flex gap-12">
+                            <span>Referrals</span>
+                            <span>Rewards</span>
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <div
+                            key="{rank}"
+                            className="flex items-center justify-between bg-orange-50 rounded-lg p-3"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div
+                                    className="bg-orange-400 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm"
+                                >
+                                    {rank}
+                                </div>
+                                <div
+                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center text-xl"
+                                >
+                                    👤
+                                </div>
+                                <p
+                                    className="text-sm font-medium text-gray-900"
+                                >
+                                    Lotus Bliss
+                                </p>
+                            </div>
+                            <div
+                                className="flex gap-12 text-sm font-semibold text-gray-900"
+                            >
+                                <span>20</span>
+                                <span>₦5000</span>
+                            </div>
+                        </div>
+                        <p
+                            className="text-center text-xs text-gray-500 mt-4 mb-2"
+                        >
+                            Your Level
+                        </p>
+                        <div
+                            className="flex items-center justify-between bg-green-600 rounded-lg p-3"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div
+                                    className="bg-green-700 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm"
+                                >
+                                    9
+                                </div>
+                                <div
+                                    className="bg-white rounded-full w-8 h-8 flex items-center justify-center text-xl"
+                                >
+                                    👤
+                                </div>
+                                <p className="text-sm font-medium text-white">
+                                    Lotus Bliss
+                                </p>
+                            </div>
+                            <div
+                                className="flex gap-12 text-sm font-semibold text-white"
+                            >
+                                <span>20</span>
+                                <span>₦5000</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
