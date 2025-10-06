@@ -45,7 +45,7 @@
                             Referral Link
                         </h2>
                         <div
-                            class="flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-sm"
+                            class="flex flex-col md:flex-row rounded-xl overflow-hidden shadow-sm"
                         >
                             <div class="p-3 md:p-4 bg-[#F6F6F6] flex-1 min-w-0">
                                 <p
@@ -56,7 +56,7 @@
                             </div>
                             <button
                                 @click="copyLink"
-                                class="shrink-0 bg-[#F25B0A] hover:bg-orange-600 text-white font-medium py-2 md:py-3 px-4 md:px-6 flex items-center justify-center transition-all min-w-[100px]"
+                                class="w-auto md:w-[130px] bg-[#F25B0A] hover:bg-orange-600 text-white font-medium py-2 md:py-3 px-4 md:px-6 flex items-center justify-center transition-all"
                             >
                                 <span>{{
                                     copied ? "Copied!" : "Copy Link"
@@ -105,7 +105,7 @@
                             Referral History ({{ referralHistory.length }})
                         </h2>
                         <div
-                            class="bg-white rounded-lg shadow-sm px-2 sm:px-4 md:px-6 h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
+                            class="bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
                         >
                             <div
                                 v-if="referralHistory.length === 0"
@@ -179,97 +179,95 @@
                         </span>
                     </h2>
 
-                    <div className="flex justify-center items-end gap-3 mb-8">
+                    <div className="flex justify-center items-end gap-[12px] sm:gap-[21px] mb-8 scale-100 sm:scale-100">
                         <div
-                            className="flex flex-col items-center bg-gradient-to-b from-yellow-500 to-orange-400 rounded-lg p-3 w-24 pt-4"
+                            className="flex flex-col items-center rounded-[8px] p-[12px] sm:p-[16px] w-[100px] sm:w-[154.67px] h-[140px] sm:h-[189px] bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-[0px_7px_18.8px_0px_#4F850040]"
                         >
                             <div
-                                className="w-8 h-8 flex items-center justify-center text-white font-bold text-sm mb-2"
+                                className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2 sm:mb-3"
                             >
-                                <span>
-                                    <img
-                                        src="/images/LeaderBoard/2nd.png"
-                                        alt="Trophy"
-                                        class="object-contain h-7"
-                                    />
-                                </span>
+                                <img
+                                    src="/images/LeaderBoard/2nd.png"
+                                    alt="2nd Trophy"
+                                    className="object-contain h-8 sm:h-12"
+                                />
                             </div>
                             <div
-                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2"
+                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
                             >
-                                <span>
-                                    <img
-                                        src="/images/LeaderBoard/2ndhead.png"
-                                        alt="Trophy"
-                                        class="object-contain h-7"
-                                    />
-                                </span>
+                                <img
+                                    src="/images/LeaderBoard/2ndhead.png"
+                                    alt="2nd Avatar"
+                                    className="object-contain h-8 sm:h-12"
+                                />
                             </div>
-                            <p className="text-xs font-medium text-white">
+                            <p
+                                className="text-[14px] sm:text-[18px] font-medium text-center text-white whitespace-nowrap"
+                            >
                                 Ada Blessing
                             </p>
                         </div>
+
                         <div
-                            className="flex flex-col items-center bg-gradient-to-b from-yellow-400 to-orange-400 rounded-lg p-3 w-24 pt-2 shadow-lg"
+                            className="flex flex-col items-center rounded-[8px] p-[12px] sm:p-[16px] w-[110px] sm:w-[154.67px] h-[160px] sm:h-[215px]
+                            bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-[0px_7px_18.8px_0px_#4F850040]"
                         >
                             <div
-                                className="w-8 h-8 flex items-center justify-center text-white font-bold text-sm mb-2"
+                                className="w-9 h-9 sm:w-14 sm:h-14 flex items-center justify-center mb-3 sm:mb-4"
                             >
-                                <span>
-                                    <img
-                                        src="/images/LeaderBoard/1st.png"
-                                        alt="Trophy"
-                                        class="object-contain h-7"
-                                    />
-                                </span>
+                                <img
+                                    src="/images/LeaderBoard/1st.png"
+                                    alt="1st Trophy"
+                                    className="object-contain h-9 sm:h-12"
+                                />
                             </div>
                             <div
-                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2"
+                                className="bg-orange-100 rounded-full flex items-center justify-center mb-3 sm:mb-4"
                             >
-                                <span>
-                                    <img
-                                        src="/images/LeaderBoard/1sthead.png"
-                                        alt="Trophy"
-                                        class="object-contain h-7"
-                                    />
-                                </span>
+                                <img
+                                    src="/images/LeaderBoard/1sthead.png"
+                                    alt="1st Avatar"
+                                    className="object-contain h-12 sm:h-16"
+                                />
                             </div>
-                            <p className="text-xs font-medium text-white">
+                            <p
+                                className="text-[14px] sm:text-[18px] font-medium text-center text-white whitespace-nowrap"
+                            >
                                 Ada Blessing
                             </p>
                         </div>
+
                         <div
-                            className="flex flex-col items-center bg-gradient-to-b from-yellow-500 to-orange-400 rounded-lg p-3 w-24 pt-4"
+                            className="flex flex-col items-center rounded-[8px] p-[12px] sm:p-[16px] w-[100px] sm:w-[154.67px] h-[140px] sm:h-[189px] bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-[0px_7px_18.8px_0px_#4F850040]"
                         >
                             <div
-                                className="w-8 h-8 flex items-center justify-center text-white font-bold text-sm mb-2"
+                                className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2 sm:mb-3"
                             >
-                                <span>
-                                    <img
-                                        src="/images/LeaderBoard/3rd.png"
-                                        alt="Trophy"
-                                        class="object-contain h-7"
-                                    />
-                                </span>
+                                <img
+                                    src="/images/LeaderBoard/3rd.png"
+                                    alt="3rd Trophy"
+                                    className="object-contain h-8 sm:h-12"
+                                />
                             </div>
                             <div
-                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2"
+                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
                             >
-                                <span>
-                                    <img
-                                        src="/images/LeaderBoard/3rdhead.png"
-                                        alt="Trophy"
-                                        class="object-contain h-12"
-                                    />
-                                </span>
+                                <img
+                                    src="/images/LeaderBoard/3rdhead.png"
+                                    alt="3rd Avatar"
+                                    className="object-contain h-8 sm:h-12"
+                                />
                             </div>
-                            <p className="text-xs font-medium text-white">
+                            <p
+                                className="text-[14px] sm:text-[18px] font-medium text-center text-white whitespace-nowrap"
+                            >
                                 Ada Blessing
                             </p>
                         </div>
                     </div>
+
                     <div
-                        className="flex justify-between text-xs text-gray-500 mb-3 px-2"
+                        className="flex justify-between text-xs text-gray-500 mb-1 px-2"
                     >
                         <span>Highest referrals</span>
                         <div className="flex gap-12">
@@ -280,18 +278,26 @@
                     <div className="space-y-2">
                         <div
                             key="{rank}"
-                            className="flex items-center justify-between bg-orange-50 rounded-lg p-3"
+                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
                         >
                             <div className="flex items-center gap-3">
                                 <div
-                                    className="bg-orange-400 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm"
+                                    className="w-8 h-8 flex items-center justify-center"
                                 >
-                                    {rank}
+                                    <img
+                                        src="/images/LeaderBoard/4th.png"
+                                        alt="4th Trophy"
+                                        className="object-contain h-12"
+                                    />
                                 </div>
                                 <div
-                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center text-xl"
+                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
                                 >
-                                    👤
+                                    <img
+                                        src="/images/LeaderBoard/2ndhead.png"
+                                        alt="User Avatar"
+                                        className="object-contain h-12"
+                                    />
                                 </div>
                                 <p
                                     className="text-sm font-medium text-gray-900"
@@ -299,6 +305,121 @@
                                     Lotus Bliss
                                 </p>
                             </div>
+
+                            <div
+                                className="flex gap-12 text-sm font-semibold text-gray-900"
+                            >
+                                <span>20</span>
+                                <span>₦5000</span>
+                            </div>
+                        </div>
+
+                        <div
+                            key="{rank}"
+                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div
+                                    className="w-8 h-8 flex items-center justify-center"
+                                >
+                                    <img
+                                        src="/images/LeaderBoard/5th.png"
+                                        alt="4th Trophy"
+                                        className="object-contain h-12"
+                                    />
+                                </div>
+                                <div
+                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+                                >
+                                    <img
+                                        src="/images/LeaderBoard/2ndhead.png"
+                                        alt="User Avatar"
+                                        className="object-contain h-12"
+                                    />
+                                </div>
+                                <p
+                                    className="text-sm font-medium text-gray-900"
+                                >
+                                    Lotus Bliss
+                                </p>
+                            </div>
+
+                            <div
+                                className="flex gap-12 text-sm font-semibold text-gray-900"
+                            >
+                                <span>20</span>
+                                <span>₦5000</span>
+                            </div>
+                        </div>
+
+                        <div
+                            key="{rank}"
+                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div
+                                    className="w-8 h-8 flex items-center justify-center"
+                                >
+                                    <img
+                                        src="/images/LeaderBoard/6th.png"
+                                        alt="4th Trophy"
+                                        className="object-contain h-12"
+                                    />
+                                </div>
+                                <div
+                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+                                >
+                                    <img
+                                        src="/images/LeaderBoard/2ndhead.png"
+                                        alt="User Avatar"
+                                        className="object-contain h-12"
+                                    />
+                                </div>
+                                <p
+                                    className="text-sm font-medium text-gray-900"
+                                >
+                                    Lotus Bliss
+                                </p>
+                            </div>
+
+                            <div
+                                className="flex gap-12 text-sm font-semibold text-gray-900"
+                            >
+                                <span>20</span>
+                                <span>₦5000</span>
+                            </div>
+                        </div>
+
+                        <div
+                            key="{rank}"
+                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div
+                                    className="w-8 h-8 flex items-center justify-center"
+                                >
+                                    <img
+                                        src="/images/LeaderBoard/7th.png"
+                                        alt="4th Trophy"
+                                        className="object-contain h-12"
+                                    />
+                                </div>
+                                <div
+                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+                                >
+                                    <img
+                                        src="/images/LeaderBoard/2ndhead.png"
+                                        alt="User Avatar"
+                                        className="object-contain h-12"
+                                    />
+                                </div>
+                                <p
+                                    className="text-sm font-medium text-gray-900"
+                                >
+                                    Lotus Bliss
+                                </p>
+                            </div>
+
                             <div
                                 className="flex gap-12 text-sm font-semibold text-gray-900"
                             >
@@ -312,18 +433,26 @@
                             Your Level
                         </p>
                         <div
-                            className="flex items-center justify-between bg-green-600 rounded-lg p-3"
+                            className="flex items-center justify-between bg-green-600 rounded-lg p-3 h-[64px]"
                         >
                             <div className="flex items-center gap-3">
                                 <div
-                                    className="bg-green-700 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm"
+                                    className=" rounded-full w-8 h-8 flex items-center justify-center"
                                 >
-                                    9
+                                    <img
+                                        src="/images/LeaderBoard/9th.png"
+                                        alt="9th Trophy"
+                                        className="object-contain h-12"
+                                    />
                                 </div>
                                 <div
                                     className="bg-white rounded-full w-8 h-8 flex items-center justify-center text-xl"
                                 >
-                                    👤
+                                    <img
+                                        src="/images/LeaderBoard/2ndhead.png"
+                                        alt="User Avatar"
+                                        className="object-contain h-12"
+                                    />
                                 </div>
                                 <p className="text-sm font-medium text-white">
                                     Lotus Bliss
