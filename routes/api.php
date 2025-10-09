@@ -118,14 +118,6 @@ use App\Http\Controllers\GooglePlacesController;
 
 Route::match(['get', 'post'], '/login', function () {
 
-// $plainPassword = '123456';
-// $hashedPassword = Hash::make($plainPassword);
-
-// Log::info("Password Hashing Demo", [
-//     'plain' => $plainPassword,
-//     'hashed' => $hashedPassword
-// ]);
-
     return response()->json(['errors' => 'unauthenticated'], 401);
 })->name('login');
 Route::prefix('places')->group(function () {

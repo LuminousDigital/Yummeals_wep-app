@@ -52,7 +52,6 @@ class User extends Authenticatable implements HasMedia
         'is_guest',
         'status',
         'email_verified_at',
-
         'referral_code',
         'referred_by',
         'referral_balance',
