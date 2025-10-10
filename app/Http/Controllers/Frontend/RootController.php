@@ -7,6 +7,7 @@ use App\Enums\Status;
 use App\Models\Analytic;
 use App\Models\ThemeSetting;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class RootController extends Controller
 {
