@@ -83,7 +83,8 @@
         "o_s_s": "س.د.س",
         "chefs": "طهاة",
         "waiters": "نُدُل",
-        "kiosk_machines": "آلات الكشك"
+        "kiosk_machines": "آلات الكشك",
+        "leaderboard": "لوحة الصدارة"
     },
     "label": {
         "previous": "السابق",
@@ -614,7 +615,18 @@
         "chef_kitchen": "الشيف/المطبخ",
         "delivery_zone": "منطقة التسليم",
         "user_referral_code": "رمز إحالة المستخدم",
-        "loading": "جارٍ التحميل..."
+        "loading": "جارٍ التحميل...",
+        "search": "بحث",
+        "sort_by": "ترتيب حسب",
+        "sort_order": "ترتيب",
+        "ascending": "تصاعدي",
+        "descending": "تنازلي",
+        "apply_filters": "تطبيق المرشحات",
+        "referral_count": "عدد الإحالات",
+        "join_date": "تاريخ الانضمام",
+        "rank": "الترتيب",
+        "referrals": "الإحالات",
+        "user": "المستخدم"
     },
     "button": {
         "add": "إضافة",
@@ -708,7 +720,9 @@
         "pdf": "بي دي اف",
         "add_waiter": "إضافة نادل",
         "add_chef": "أضف شيف",
-        "add_kiosk_machine": "إضافة آلة كشك"
+        "add_kiosk_machine": "إضافة آلة كشك",
+        "apply_filters": "تطبيق المرشحات",
+        "clear": "مسح"
     },
     "number": {
         "10": "10",

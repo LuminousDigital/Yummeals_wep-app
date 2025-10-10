@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="hidden md:block">
                         <h2
                             class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
                         >
@@ -153,10 +153,11 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
-                <div className="space-y-4 sm:space-y-8 pt-2">
+                <div class="space-y-4 sm:space-y-8 pt-2">
                     <h2
-                        class="flex items-center justify-center gap-3 text-center mb-6"
+                        class="flex items-center justify-center gap-3 text-center mb-8"
                     >
                         <span>
                             <img
@@ -179,138 +180,80 @@
                         </span>
                     </h2>
 
-                    <div className="flex justify-center items-end gap-[12px] sm:gap-[21px] mb-8 scale-100 sm:scale-100">
+                    <div
+                        class="flex justify-center items-end gap-3 sm:gap-5 mb-8"
+                    >
                         <div
-                            className="flex flex-col items-center rounded-[8px] p-[12px] sm:p-[16px] w-[100px] sm:w-[154.67px] h-[140px] sm:h-[189px] bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-[0px_7px_18.8px_0px_#4F850040]"
+                            v-for="user in topThree"
+                            :key="user.rank"
+                            class="flex flex-col items-center rounded-lg p-3 sm:p-4 flex-1 max-w-[120px] sm:max-w-[155px] bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-lg"
+                            :class="user.rank === 1 ? 'h-40 sm:h-52' : 'h-32 sm:h-44'"
                         >
                             <div
-                                className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2 sm:mb-3"
+                                class="flex items-center justify-center mb-2 sm:mb-3"
+                                :class="user.rank === 1 ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-8 h-8 sm:w-12 sm:h-12'"
                             >
                                 <img
-                                    src="/images/LeaderBoard/2nd.png"
-                                    alt="2nd Trophy"
-                                    className="object-contain h-8 sm:h-12"
+                                    :src="user.trophy"
+                                    :alt="`${user.rank} Trophy`"
+                                    class="object-contain"
+                                    :class="user.rank === 1 ? 'h-10 sm:h-12' : 'h-8 sm:h-10'"
                                 />
                             </div>
                             <div
-                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
+                                class="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
                             >
                                 <img
-                                    src="/images/LeaderBoard/2ndhead.png"
-                                    alt="2nd Avatar"
-                                    className="object-contain h-8 sm:h-12"
+                                    :src="user.avatar"
+                                    alt="Avatar"
+                                    class="object-contain"
+                                    :class="user.rank === 1 ? 'h-12 sm:h-16' : 'h-8 sm:h-12'"
                                 />
                             </div>
                             <p
-                                className="text-[14px] sm:text-[18px] font-medium text-center text-white whitespace-nowrap"
+                                class="text-sm sm:text-base font-medium text-center text-white leading-tight"
                             >
-                                Ada Blessing
-                            </p>
-                        </div>
-
-                        <div
-                            className="flex flex-col items-center rounded-[8px] p-[12px] sm:p-[16px] w-[110px] sm:w-[154.67px] h-[160px] sm:h-[215px]
-                            bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-[0px_7px_18.8px_0px_#4F850040]"
-                        >
-                            <div
-                                className="w-9 h-9 sm:w-14 sm:h-14 flex items-center justify-center mb-3 sm:mb-4"
-                            >
-                                <img
-                                    src="/images/LeaderBoard/1st.png"
-                                    alt="1st Trophy"
-                                    className="object-contain h-9 sm:h-12"
-                                />
-                            </div>
-                            <div
-                                className="bg-orange-100 rounded-full flex items-center justify-center mb-3 sm:mb-4"
-                            >
-                                <img
-                                    src="/images/LeaderBoard/1sthead.png"
-                                    alt="1st Avatar"
-                                    className="object-contain h-12 sm:h-16"
-                                />
-                            </div>
-                            <p
-                                className="text-[14px] sm:text-[18px] font-medium text-center text-white whitespace-nowrap"
-                            >
-                                Ada Blessing
-                            </p>
-                        </div>
-
-                        <div
-                            className="flex flex-col items-center rounded-[8px] p-[12px] sm:p-[16px] w-[100px] sm:w-[154.67px] h-[140px] sm:h-[189px] bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-[0px_7px_18.8px_0px_#4F850040]"
-                        >
-                            <div
-                                className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2 sm:mb-3"
-                            >
-                                <img
-                                    src="/images/LeaderBoard/3rd.png"
-                                    alt="3rd Trophy"
-                                    className="object-contain h-8 sm:h-12"
-                                />
-                            </div>
-                            <div
-                                className="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
-                            >
-                                <img
-                                    src="/images/LeaderBoard/3rdhead.png"
-                                    alt="3rd Avatar"
-                                    className="object-contain h-8 sm:h-12"
-                                />
-                            </div>
-                            <p
-                                className="text-[14px] sm:text-[18px] font-medium text-center text-white whitespace-nowrap"
-                            >
-                                Ada Blessing
+                                {{ user.name }}
                             </p>
                         </div>
                     </div>
 
                     <div
-                        className="flex justify-between text-xs text-gray-500 mb-1 px-2"
+                        class="flex justify-between text-xs text-gray-500 mb-2 px-3"
                     >
                         <span>Highest referrals</span>
-                        <div className="flex gap-12">
+                        <div class="flex gap-8 sm:gap-12">
                             <span>Referrals</span>
                             <span>Rewards</span>
                         </div>
                     </div>
-                    <div className="space-y-2">
+                    <div class="space-y-2">
                         <div
-                            key="{rank}"
-                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
+                            v-for="user in otherRanks"
+                            :key="user.rank"
+                            class="flex items-center justify-between bg-[#FFEBE1] rounded-lg py-2 px-3 h-16"
                         >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className="w-8 h-8 flex items-center justify-center"
-                                >
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
                                     <img
-                                        src="/images/LeaderBoard/4th.png"
-                                        alt="4th Trophy"
-                                        className="object-contain h-12"
+                                        :src="user.trophy"
+                                        :alt="`${user.rank} Trophy`"
+                                        class="object-contain h-8"
                                     />
                                 </div>
-                                <div
-                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
-                                >
+                                <div class="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
                                     <img
                                         src="/images/LeaderBoard/2ndhead.png"
-                                        alt="User Avatar"
-                                        className="object-contain h-12"
+                                        alt="Avatar"
+                                        class="object-contain h-8"
                                     />
                                 </div>
-                                <p
-                                    className="text-sm font-medium text-gray-900"
-                                >
-                                    Lotus Bliss
-                                </p>
+                                <p class="text-sm font-medium text-gray-900 truncate">{{ user.name }}</p>
                             </div>
 
-                            <div
-                                className="flex gap-12 text-sm font-semibold text-gray-900"
-                            >
-                                <span>20</span>
-                                <span>₦5000</span>
+                            <div class="flex gap-8 sm:gap-12 text-sm font-semibold text-gray-900 flex-shrink-0">
+                                <span class="w-8 text-center">{{ user.referrals }}</span>
+                                <span class="w-16 text-right">{{ user.reward }}</span>
                             </div>
                         </div>
 
@@ -427,43 +370,86 @@
                                 <span>₦5000</span>
                             </div>
                         </div>
-                        <p
-                            className="text-center text-xs text-gray-500 mt-4 mb-2"
-                        >
+                        <p class="text-center text-xs text-gray-500 mt-4 mb-2">
                             Your Level
                         </p>
-                        <div
-                            className="flex items-center justify-between bg-green-600 rounded-lg p-3 h-[64px]"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className=" rounded-full w-8 h-8 flex items-center justify-center"
-                                >
+                        <div class="flex items-center justify-between bg-green-600 rounded-lg py-2 px-3 h-16">
+                            <div class="flex items-center gap-3">
+                                <div class="rounded-full w-8 h-8 flex items-center justify-center">
                                     <img
                                         src="/images/LeaderBoard/9th.png"
                                         alt="9th Trophy"
-                                        className="object-contain h-12"
+                                        class="object-contain h-8"
                                     />
                                 </div>
-                                <div
-                                    className="bg-white rounded-full w-8 h-8 flex items-center justify-center text-xl"
-                                >
+                                <div class="bg-white rounded-full w-8 h-8 flex items-center justify-center">
                                     <img
                                         src="/images/LeaderBoard/2ndhead.png"
-                                        alt="User Avatar"
-                                        className="object-contain h-12"
+                                        alt="Avatar"
+                                        class="object-contain h-8"
                                     />
                                 </div>
-                                <p className="text-sm font-medium text-white">
-                                    Lotus Bliss
+                                <p class="text-sm font-medium text-white truncate">Lotus Bliss</p>
+                            </div>
+                            <div class="flex gap-8 sm:gap-12 text-sm font-semibold text-white">
+                                <span class="w-8 text-center">20</span>
+                                <span class="w-16 text-right">₦5000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block md:hidden">
+                        <h2
+                            class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
+                        >
+                            Referral History ({{ referralHistory.length }})
+                        </h2>
+                        <div
+                            class="bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
+                        >
+                            <div
+                                v-if="referralHistory.length === 0"
+                                class="flex flex-col items-center justify-center w-full py-10 text-center"
+                            >
+                                <img
+                                    src="/images/social-icon/empty-referrals.png"
+                                    alt="No referrals"
+                                    class="object-contain w-40 h-40 mb-4"
+                                />
+                                <p
+                                    class="text-sm font-semibold text-orange-600 md:text-base"
+                                >
+                                    You have not referred anybody
                                 </p>
                             </div>
                             <div
-                                className="flex gap-12 text-sm font-semibold text-white"
+                                v-else
+                                v-for="referral in referralHistory"
+                                :key="referral.id"
+                                class="flex items-center justify-between bg-gray-50 rounded-lg p-4 mb-3"
                             >
-                                <span>20</span>
-                                <span>₦5000</span>
+                                <h3
+                                    class="text-sm font-medium text-orange-500 md:text-base"
+                                >
+                                    {{ referral.name }}
+                                </h3>
+                                <p class="font-semibold text-gray-900">
+                                    {{ referral.reward }}
+                                </p>
+                                <p class="text-xs text-gray-500 md:text-sm">
+                                    {{ referral.date }}
+                                </p>
                             </div>
+                            <div
+                                class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
+                            ></div>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <a
+                                href="#"
+                                class="text-sm font-medium text-gray-700 underline"
+                            >
+                                See all
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -490,6 +476,17 @@ export default {
             copied: false,
             referralHistory: [],
             socialIcons: [],
+            topThree: [
+                { rank: 2, name: 'Ada Blessing', trophy: '/images/LeaderBoard/2nd.png', avatar: '/images/LeaderBoard/2ndhead.png' },
+                { rank: 1, name: 'Ada Blessing', trophy: '/images/LeaderBoard/1st.png', avatar: '/images/LeaderBoard/1sthead.png' },
+                { rank: 3, name: 'Ada Blessing', trophy: '/images/LeaderBoard/3rd.png', avatar: '/images/LeaderBoard/3rdhead.png' }
+            ],
+            otherRanks: [
+                { rank: 4, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/4th.png', referrals: 20, reward: '₦5000' },
+                { rank: 5, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/5th.png', referrals: 20, reward: '₦5000' },
+                { rank: 6, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/6th.png', referrals: 20, reward: '₦5000' },
+                { rank: 7, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/7th.png', referrals: 20, reward: '₦5000' }
+            ]
         };
     },
     mounted() {

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdministratorAddressController;
 use App\Http\Controllers\Admin\AdministratorController;
 use App\Http\Controllers\Admin\ReferralController as AdminReferralController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\Admin\AnalyticController;
 use App\Http\Controllers\Admin\AnalyticSectionController;
 use App\Http\Controllers\Admin\BranchController;
@@ -651,6 +652,13 @@ Route::prefix('admin')->name('admin.')->middleware(['installed', 'apiKey', 'loca
 
     Route::prefix('customers')->name('customers.')->group(function () {
         Route::get('/{customerId}/referrals', [AdminReferralController::class, 'customerReferrals']);
+    });
+
+    Route::prefix('referrals')->name('referrals.')->group(function () {
+        Route::get('/leaderboard', [LeaderboardController::class, 'index']);
+        Route::get('/top-three', [LeaderboardController::class, 'topThree']);
+        Route::get('/user/{userId}', [LeaderboardController::class, 'userReferrals']);
+        Route::get('/statistics', [LeaderboardController::class, 'statistics']);
     });
 
     Route::prefix('timezone')->name('timezone.')->group(function () {
