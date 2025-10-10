@@ -92,9 +92,17 @@ export default {
                         phone: "",
                     };
                     this.errors = '';
-                    this.$router.push({
-                        name: "auth.signupRegister",
-                    });
+                    const referralCode = this.$store.getters['frontendSignup/referralCode'];
+                    if (referralCode) {
+                        this.$router.push({
+                            name: "auth.signupRegister",
+                            query: { ref: referralCode }
+                        });
+                    } else {
+                        this.$router.push({
+                            name: "auth.signupRegister",
+                        });
+                    }
                 }).catch((err) => {
                     this.loading.isActive = false;
                     this.errors = err.response.data.message;

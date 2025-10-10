@@ -267,7 +267,7 @@
         "welcome_back": "Welcome Back",
         "remember_me": "Remember Me",
         "or": "Or",
-        "our_menu": "Our Menu",
+        "our_menu": "Categories",
         "total_sales": "Total Sales",
         "total_orders": "Total Orders",
         "total_customers": "Total Customers",
@@ -377,7 +377,7 @@
         "your_order": "Your order is {order}",
         "estimated_delivery_time": "Estimated delivery time",
         "your_order_has_been_delivered": "Your order has been delivered",
-        "forget_password": "Forgot Password",
+        "forgot_password": "Forgot Password",
         "verify_email": "Verify Email",
         "create_new_password": "Create New Password",
         "mobile_number": "Mobile Number",
@@ -616,7 +616,11 @@
         "chef_kitchen": "Chef/Kitchen",
         "delivery_zone": "Delivery Zone",
         "otp": "OTP",
-        "expires": "Expires"
+        "expires": "Expires",
+        "referral_code": "Referral Code",
+        "user_referral_code": "User Referral Code",
+        "referrals": "Referrals",
+        "loading": "Loading"
     },
     "button": {
         "add": "Add",
@@ -674,7 +678,7 @@
         "chat": "Chat",
         "logout": "Logout",
         "add_language": "Add Language",
-        "forget_password": "Forget Password",
+        "forgot_password": "Forgot Password?",
         "login": "Login",
         "signup": "Signup",
         "login_as_guest": "Login As Guest",
@@ -710,7 +714,8 @@
         "pdf": "PDF",
         "add_waiter": "Add Waiter",
         "add_chef": "Add Chef",
-        "add_kiosk_machine": "Add Kiosk Machine"
+        "add_kiosk_machine": "Add Kiosk Machine",
+        "show_referrals": "View Referrals"
     },
     "number": {
         "10": "10",
@@ -782,6 +787,7 @@
         "no_orders_found": "You don't have any orders yet! Let's get something delicious started.",
         "no_items_found": "No items matched your search! Try different keywords.",
         "no_data_available": "No data available.",
-        "payment_method": "The payment method is required."
+        "payment_method": "The payment method is required.",
+        "loading": "Loading.."
     }
 }

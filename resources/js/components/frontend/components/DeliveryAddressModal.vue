@@ -187,6 +187,7 @@
 <script>
 import { ref, reactive, onMounted } from "vue";
 import { v4 as uuidv4 } from "uuid";
+import ENV from "../../../config/env";
 
 export default {
     name: "DeliveryAddressModal",
@@ -383,34 +384,18 @@ export default {
             isCheckingCoverage.value = true;
 
             try {
-                const res = await fetch(
-                    "https://api.yummealsapp.com/api/v1/calculate-distance",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-API-KEY":
-                                "z8p53xn6-n2f5-29w7-7193-s500c15553h171620",
-                        },
-                        body: JSON.stringify({
-                            destinations: [
-                                `${selectedAddress.coordinates.lat},${selectedAddress.coordinates.lng}`,
-                            ],
-                        }),
+                const { lat, lng } = selectedAddress.coordinates;
+                const res = await fetch(`/api/frontend/branch/lat-long?latitude=${lat}&longitude=${lng}`, {
+                    headers: {
+                        'x-api-key': ENV.API_KEY
                     }
-                );
-
+                });
                 const data = await res.json();
-                const coverage = data?.data?.distances?.[0];
 
-                localStorage.setItem(
-                    "isLocationCovered",
-                    coverage?.isLocationCovered ? "true" : "false"
-                );
-
-                if (data.success && coverage?.isLocationCovered) {
+                if (data.data) {
                     localStorage.setItem("userAddress", addressInput.value);
                     localStorage.setItem("hasEnteredAddress", "true");
+                    localStorage.setItem("isLocationCovered", "true");
                     showNotification(
                         "Success",
                         "We deliver to your area!",
@@ -418,6 +403,7 @@ export default {
                     );
                     emit("location-covered");
                 } else {
+                    localStorage.setItem("isLocationCovered", "false");
                     showNotification(
                         "Notice",
                         "We currently do not deliver to this area.",
@@ -427,6 +413,7 @@ export default {
                 }
             } catch (err) {
                 console.error("Coverage error:", err);
+                localStorage.setItem("isLocationCovered", "false");
                 emit("location-not-covered", selectedAddress);
             } finally {
                 isCheckingCoverage.value = false;

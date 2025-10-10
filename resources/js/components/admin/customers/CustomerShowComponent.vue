@@ -28,12 +28,16 @@
                             <button v-if="saveButton" type="submit"
                                 class="db-btn h-[38px] shadow-[0px_6px_10px_rgba(26,_183,_89,_0.24)] text-white bg-[#1AB759]">
                                 <i class="lab lab-tick-circle-2"></i>
-                                <span class="hidden sm:inline-block">{{ $t("button.save") }}</span>
+                                <span class="hidden sm:inline-block">{{
+                                    $t("button.save")
+                                    }}</span>
                             </button>
                             <button v-if="resetButton" @click="resetPreviewImage" type="button"
                                 class="db-btn-outline h-[38px] shadow-[0px_6px_10px_rgba(251,_78,_78,_0.24)] !text-[#FB4E4E] !bg-white !border-[#FB4E4E]">
                                 <i class="lab lab-reset"></i>
-                                <span class="hidden sm:inline-block">{{ $t("button.reset") }}</span>
+                                <span class="hidden sm:inline-block">{{
+                                    $t("button.reset")
+                                    }}</span>
                             </button>
                         </div>
                     </form>
@@ -41,26 +45,65 @@
             </div>
         </div>
         <div class="flex flex-col items-start sm:flex-row sm:items-center gap-1.5 mb-6">
-            <button type="button" @click="handleTab($event, '#profile', '.profile-tabBtn', '.profile-tabDiv', 'active')"
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#profile',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
+                "
                 class="profile-tabBtn active w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-user-line"></i>
-                <span class="capitalize text-sm">{{ $t("button.profile") }}</span>
+                <span class="capitalize text-sm">{{
+                    $t("button.profile")
+                    }}</span>
             </button>
-            <button type="button"
-                @click="handleTab($event, '#security', '.profile-tabBtn', '.profile-tabDiv', 'active')"
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#security',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
+                "
                 class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-unlock"></i>
-                <span class="capitalize text-sm">{{ $t("button.security") }}</span>
+                <span class="capitalize text-sm">{{
+                    $t("button.security")
+                    }}</span>
             </button>
-            <button type="button" @click="handleTab($event, '#address', '.profile-tabBtn', '.profile-tabDiv', 'active')"
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#address',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
+                "
                 class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-location-line"></i>
-                <span class="capitalize text-sm">{{ $t("button.address") }}</span>
+                <span class="capitalize text-sm">{{
+                    $t("button.address")
+                    }}</span>
             </button>
-            <button type="button" @click="handleTab($event, '#orders', '.profile-tabBtn', '.profile-tabDiv', 'active')"
+            <button type="button" @click="
+                handleTab(
+                    $event,
+                    '#orders',
+                    '.profile-tabBtn',
+                    '.profile-tabDiv',
+                    'active'
+                )
+                "
                 class="profile-tabBtn w-full justify-start sm:w-fit inline-flex items-center sm:justify-center gap-2 h-[38px] py-2 px-4 rounded-md text-[#6E7191] stroke-[#6E7191]">
                 <i class="lab lab-reserve-line"></i>
-                <span class="capitalize text-sm">{{ $t("button.my_orders") }}</span>
+                <span class="capitalize text-sm">{{
+                    $t("button.my_orders")
+                    }}</span>
             </button>
         </div>
         <div id="profile" class="profile-tabDiv active">
@@ -86,7 +129,13 @@
                                     {{ $t("label.phone") }}
                                 </span>
                                 <span class="db-list-item-text w-full sm:w-1/2">
-                                    {{ customer.phone ? customer.country_code + '' + customer.phone : '' }}
+                                    {{
+                                        customer.phone
+                                            ? customer.country_code +
+                                            "" +
+                                            customer.phone
+                                            : ""
+                                    }}
                                 </span>
                             </div>
                         </div>
@@ -97,9 +146,27 @@
                                 </span>
                                 <span class="db-list-item-text w-full sm:w-1/2">
                                     <span :class="statusClass(customer.status)">
-                                        {{ enums.statusEnumArray[customer.status] }}
+                                        {{
+                                            enums.statusEnumArray[
+                                            customer.status
+                                            ]
+                                        }}
                                     </span>
                                 </span>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 !py-1.5">
+                            <div class="db-list-item p-0 flex items-center">
+                                <span class="db-list-item-title w-full sm:w-1/2">{{ $t("label.referral_code") }}</span>
+                                <span class="db-list-item-text w-full sm:w-1/2">
+                                    {{ referralCode }}
+                                    <a href="javascript:void(0)" @click="openModal"
+                                        class="text-primary text-xs">
+                                        <span class="underline">({{ $t("button.show_referrals") }})</span>
+                                        
+                                    </a>
+                                </span>
+
                             </div>
                         </div>
                     </div>
@@ -109,33 +176,36 @@
         <div id="security" class="profile-tabDiv">
             <div class="db-card">
                 <div class="db-card-header">
-                    <h3 class="db-card-title">{{ $t("label.change_password") }}</h3>
+                    <h3 class="db-card-title">
+                        {{ $t("label.change_password") }}
+                    </h3>
                 </div>
                 <div class="db-card-body">
                     <form @submit.prevent="changePassword">
                         <div class="form-row">
                             <div class="form-col-12 sm:form-col-6">
-                                <label for="password" class="db-field-title required">{{
-                                    $t("label.password")
-                                    }}</label>
-                                <input v-model="password.props.form.password"
-                                    v-bind:class="password.errors.password ? 'invalid' : ''" type="password"
-                                    id="password" class="db-field-control" autocomplete="off" />
+                                <label for="password" class="db-field-title required">{{ $t("label.password") }}</label>
+                                <input v-model="password.props.form.password" v-bind:class="password.errors.password
+                                        ? 'invalid'
+                                        : ''
+                                    " type="password" id="password" class="db-field-control" autocomplete="off" />
                                 <small class="db-field-alert" v-if="password.errors.password">{{
-                                    password.errors.password[0]
-                                    }}</small>
+                                    password.errors.password[0] }}</small>
                             </div>
 
                             <div class="form-col-12 sm:form-col-6">
-                                <label for="password" class="db-field-title required">{{
-                                    $t("label.confirm_password")
+                                <label for="password" class="db-field-title required">{{ $t("label.confirm_password")
                                     }}</label>
-                                <input v-model="password.props.form.password_confirmation"
-                                    v-bind:class="password.errors.password_confirmation ? 'invalid' : ''"
-                                    type="password" id="confirm_password" class="db-field-control" autocomplete="off" />
+                                <input v-model="password.props.form
+                                        .password_confirmation
+                                    " v-bind:class="password.errors.password_confirmation
+                                            ? 'invalid'
+                                            : ''
+                                        " type="password" id="confirm_password" class="db-field-control"
+                                    autocomplete="off" />
                                 <small class="db-field-alert" v-if="password.errors.password_confirmation">{{
                                     password.errors.password_confirmation[0]
-                                    }}</small>
+                                }}</small>
                             </div>
 
                             <div class="form-col-12">
@@ -158,7 +228,7 @@
         <div id="orders" class="profile-tabDiv">
             <div class="db-card">
                 <div class="db-card-header">
-                    <h3 class="db-card-title">{{ $t('label.orders') }}</h3>
+                    <h3 class="db-card-title">{{ $t("label.orders") }}</h3>
                 </div>
                 <div class="db-card-body">
                     <div class="row">
@@ -168,27 +238,40 @@
                                 <i class="lab lab-reserve lab-font-size-24 lab-font-color-2"></i>
                                 <div class="w-full">
                                     <div class="flex items-center gap-4 mb-1">
-                                        <p class="text-sm leading-6 font-rubik">{{ $t('label.order_id') }}: <span
-                                                class="text-heading">#{{
-                                                    order.order_serial_no
-                                                }}</span>
+                                        <p class="text-sm leading-6 font-rubik">
+                                            {{ $t("label.order_id") }}:
+                                            <span class="text-heading">#{{
+                                                order.order_serial_no
+                                            }}</span>
                                         </p>
                                         <span
                                             class="py-0.5 px-2 rounded-full text-[10px] font-rubik leading-4 capitalize text-heading bg-[#BDEFFF]"
-                                            :class="orderStatusClass(order.status)">
+                                            :class="orderStatusClass(order.status)
+                                                ">
                                             {{ order.status_name }}
                                         </span>
                                     </div>
-                                    <p class="text-xs font-light font-rubik mb-0.5">{{ order.order_items }}
-                                        {{ $t("label.items") }}</p>
-                                    <p class="text-xs font-light font-rubik mb-1">{{ order.order_datetime }}</p>
+                                    <p class="text-xs font-light font-rubik mb-0.5">
+                                        {{ order.order_items }}
+                                        {{ $t("label.items") }}
+                                    </p>
+                                    <p class="text-xs font-light font-rubik mb-1">
+                                        {{ order.order_datetime }}
+                                    </p>
                                     <div class="flex items-center justify-between">
                                         <p class="text-sm leading-6 font-rubik capitalize text-heading">
-                                            {{ $t("label.total") }}: <span class="font-medium">{{
+                                            {{ $t("label.total") }}:
+                                            <span class="font-medium">{{
                                                 order.total_currency_price
-                                                }}</span></p>
-                                        <router-link
-                                            :to="{ name: 'admin.customers.order.details', params: { id: $route.params.id, orderId: order.id } }"
+                                                }}</span>
+                                        </p>
+                                        <router-link :to="{
+                                            name: 'admin.customers.order.details',
+                                            params: {
+                                                id: $route.params.id,
+                                                orderId: order.id,
+                                            },
+                                        }"
                                             class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary">
                                             {{ $t("label.see_order_details") }}
                                             <i class="lab lab-arrow-right lab-font-size-13"></i>
@@ -199,10 +282,13 @@
                         </div>
                         <div class="w-full p-4 text-center" v-else>
                             <div class="max-w-[300px] mx-auto mt-2">
-                                <img class="w-full h-full" :src="ENV.API_URL + '/images/default/not-found.png'"
-                                    alt="Not Found">
+                                <img class="w-full h-full" :src="ENV.API_URL +
+                                    '/images/default/not-found.png'
+                                    " alt="Not Found" />
                             </div>
-                            <span class="d-block mt-3 text-lg">{{ $t('message.no_data_available') }}</span>
+                            <span class="d-block mt-3 text-lg">{{
+                                $t("message.no_data_available")
+                                }}</span>
                         </div>
                     </div>
                 </div>
@@ -217,6 +303,9 @@
             </div>
         </div>
     </div>
+
+    <SmReferralsModalComponent :visible="showModal" :referrals="referrals" :loading="loadingReferrals"
+        @close="closeModal" />
 </template>
 
 <script>
@@ -229,7 +318,8 @@ import CustomerAddressList from "./address/CustomerAddressList";
 import PaginationTextComponent from "../components/pagination/PaginationTextComponent";
 import PaginationBox from "../components/pagination/PaginationBox";
 import PaginationSMBox from "../components/pagination/PaginationSMBox";
-import ENV from '../../../config/env';
+import ENV from "../../../config/env";
+import SmReferralsModalComponent from "../components/buttons/SmReferralsModalComponent";
 
 export default {
     name: "CustomerShowComponent",
@@ -239,6 +329,7 @@ export default {
         PaginationSMBox,
         PaginationBox,
         PaginationTextComponent,
+        SmReferralsModalComponent,
     },
     data() {
         return {
@@ -271,9 +362,12 @@ export default {
                 paginate: 1,
                 page: 1,
                 per_page: 9,
-                order_column: 'id',
+                order_column: "id",
             },
-            ENV: ENV
+            referrals: [],
+            showModal: false,
+            loadingReferrals: false,
+            ENV: ENV,
         };
     },
     computed: {
@@ -281,13 +375,17 @@ export default {
             return this.$store.getters["customer/show"];
         },
         myOrders: function () {
-            return this.$store.getters['customer/myOrders'];
+            return this.$store.getters["customer/myOrders"];
         },
         orderPagination: function () {
             return this.$store.getters["customer/orderPagination"];
         },
         orderPage: function () {
             return this.$store.getters["customer/orderPage"];
+        },
+        referralCode: function () {
+            // return this.customer.referral_code || "REF-" + this.customer.id;
+            return this.customer.referral_code || "N/A";
         },
     },
     mounted() {
@@ -314,8 +412,20 @@ export default {
         orderStatusClass: function (status) {
             return appService.orderStatusClass(status);
         },
-        handleTab: function (event, targetID, targetButton, targetDiv, activeClass) {
-            return appService.handleTab(event, targetID, targetButton, targetDiv, activeClass);
+        handleTab: function (
+            event,
+            targetID,
+            targetButton,
+            targetDiv,
+            activeClass
+        ) {
+            return appService.handleTab(
+                event,
+                targetID,
+                targetButton,
+                targetDiv,
+                activeClass
+            );
         },
         changePreviewImage: function (e) {
             if (e.target.files[0]) {
@@ -333,14 +443,17 @@ export default {
         orderLists: function (page = 1) {
             this.loading.isActive = true;
             this.search.page = page;
-            this.$store.dispatch('customer/myOrders', {
-                id: this.$route.params.id,
-                search: this.search
-            }).then(res => {
-                this.loading.isActive = false;
-            }).catch((err) => {
-                this.loading.isActive = false;
-            });
+            this.$store
+                .dispatch("customer/myOrders", {
+                    id: this.$route.params.id,
+                    search: this.search,
+                })
+                .then((res) => {
+                    this.loading.isActive = false;
+                })
+                .catch((err) => {
+                    this.loading.isActive = false;
+                });
         },
         saveImage: function () {
             if (this.$refs.imageProperty.files[0]) {
@@ -354,7 +467,9 @@ export default {
                             form: formData,
                         })
                         .then((res) => {
-                            alertService.success(this.$t("message.photo_update"));
+                            alertService.success(
+                                this.$t("message.photo_update")
+                            );
                             this.defaultImage = res.data.data.image;
                             this.previewImage = res.data.data.image;
                             this.$refs.imageProperty.value = null;
@@ -401,6 +516,32 @@ export default {
                 this.loading.isActive = false;
                 alertService.error(err);
             }
+        },
+        openModal: function () {
+            this.showModal = true;
+            if (!this.referrals || this.referrals.length === 0) {
+                this.fetchReferrals();
+            }
+        },
+        closeModal: function () {
+            this.showModal = false;
+        },
+        fetchReferrals: function () {
+            this.loadingReferrals = true;
+            this.$store
+                .dispatch(
+                    "referrals/fetchCustomerReferrals",
+                    this.$route.params.id
+                )
+                .then((res) => {
+                    this.referrals = res.data.data || [];
+                    this.loadingReferrals = false;
+                })
+                .catch((err) => {
+                    this.referrals = [];
+                    this.loadingReferrals = false;
+                    alertService.error(err.response.data.message);
+                });
         },
     },
 };

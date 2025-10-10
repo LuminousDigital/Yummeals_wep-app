@@ -267,7 +267,7 @@
         "welcome_back": "مرحبًا مرة أخرى",
         "remember_me": "تذكرني",
         "or": "أو",
-        "our_menu": "قائمتنا",
+        "our_menu": "الفئات",
         "total_sales": "إجمالي المبيعات",
         "total_orders": "إجمالي الطلبات",
         "total_customers": "إجمالي العملاء",
@@ -376,7 +376,7 @@
         "your_order": "طلبك هو {order}",
         "estimated_delivery_time": "الوقت المتوقع للتسليم",
         "your_order_has_been_delivered": "تم توصيل طلبك",
-        "forget_password": "نسيت كلمة المرور",
+        "forgot_password": "نسيت كلمة المرور",
         "verify_email": "التحقق من البريد الإلكتروني",
         "create_new_password": "إنشاء كلمة مرور جديدة",
         "mobile_number": "رقم الجوال",
@@ -612,7 +612,9 @@
         "select_time_schedule": "حدد جدول الوقت",
         "machine_id": "معرّف الآلة",
         "chef_kitchen": "الشيف/المطبخ",
-        "delivery_zone": "منطقة التسليم"
+        "delivery_zone": "منطقة التسليم",
+        "user_referral_code": "رمز إحالة المستخدم",
+        "loading": "جارٍ التحميل..."
     },
     "button": {
         "add": "إضافة",
@@ -670,7 +672,7 @@
         "chat": "الدردشة",
         "logout": "تسجيل الخروج",
         "add_language": "إضافة لغة",
-        "forget_password": "نسيت كلمة المرور",
+        "forgot_password": "نسيت كلمة المرور",
         "login": "تسجيل الدخول",
         "signup": "التسجيل",
         "login_as_guest": "تسجيل الدخول كضيف",
@@ -773,11 +775,12 @@
         "table_field_required": "حقل طاولة الطعام مطلوب.",
         "address_field_required": "حقل العنوان مطلوب.",
         "no_schedule_found": "لم يتم العثور على جدول زمني.",
-        "location_not_covered": "عذرًا، لا نقدم خدمة التوصيل إلى موقعك الحالي.", 
+        "location_not_covered": "عذرًا، لا نقدم خدمة التوصيل إلى موقعك الحالي.",
         "kiosk_log_out": "تم تسجيل خروج الكشك بنجاح.",
         "no_orders_found": "ليس لديك أي طلبات حتى الآن! لنبدأ بشيء لذيذ",
         "no_items_found": "لا توجد عناصر مطابقة لبحثك! جرّب كلمات رئيسية أخرى",
         "no_data_available": "لا توجد بيانات متاحة.",
-        "payment_method": "طريقة الدفع مطلوبة."
+        "payment_method": "طريقة الدفع مطلوبة.",
+        "loading": "جارٍ التحميل..."
     }
 }

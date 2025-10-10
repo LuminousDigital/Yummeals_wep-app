@@ -42,7 +42,7 @@
                     </div>
                     <router-link :to="{ name: 'auth.forgetPassword' }"
                         class="capitalize text-xs font-medium transition text-primary">
-                        {{ $t('button.forget_password') }}
+                        {{ $t('button.forgot_password') }}
                     </router-link>
                 </div>
                 <button type="submit"

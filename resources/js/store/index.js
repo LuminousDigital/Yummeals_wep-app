@@ -96,6 +96,7 @@ import { subscriber } from './modules/subscriber';
 import { kitchenDisplaySystemOrder } from './modules/kitchenDisplaySystemOrder';
 import { orderStatusScreenOrder } from './modules/orderStatusScreenOrder';
 import { kioskMachine } from './modules/kioskMachine';
+import referrals from './modules/referrals';
 
 
 
@@ -198,7 +199,8 @@ export default new createStore({
         subscriber,
         kitchenDisplaySystemOrder,
         orderStatusScreenOrder,
-        kioskMachine
+        kioskMachine,
+        referrals
     },
     plugins: [
         createPersistedState({
