@@ -3,7 +3,7 @@
     <section class="pt-8 pb-16">
         <div class="container max-w-[360px] py-6 p-4 sm:px-6 shadow-xs rounded-2xl bg-white">
             <h2 class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading">{{
-                $t('label.forget_password') }}</h2>
+                $t('label.forgot_password') }}</h2>
             <form @submit.prevent="forgetPassword">
                 <label class="text-sm capitalize mb-1 text-heading">{{ $t('label.email') }}</label>
                 <input :class="errors.email ? 'invalid' : ''" v-model="form.email" type="email"

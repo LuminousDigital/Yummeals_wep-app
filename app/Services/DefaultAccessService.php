@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\DefaultAccess;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class DefaultAccessService
 {
