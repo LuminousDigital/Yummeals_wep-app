@@ -28,7 +28,7 @@
                             <label for="sort_order" class="db-field-title after:hidden">{{ $t("label.sort_order") }}</label>
                             <vue-select class="db-field-control f-b-custom-select" id="sort_order"
                                 v-model="filters.sort_order"
-                                :options="[{ id: 'asc', name: $t('label.ascending') }, { id: 'desc', name: $t('label.descending') }]"
+                                :options="[{ id: 'asc', name: $t('label') }, { id: 'desc', name: $t('label.descending') }]"
                                 label-by="name" value-by="id" :closeOnSelect="true" :searchable="true"
                                 :clearOnClose="true" placeholder="--" search-placeholder="--" />
                         </div>
@@ -36,7 +36,7 @@
                             <div class="flex flex-wrap gap-3 mt-4">
                                 <button class="db-btn py-2 text-white bg-primary">
                                     <i class="lab lab-search-line lab-font-size-16"></i>
-                                    <span>{{ $t("button.apply_filters") }}</span>
+                                    <span>{{ $t("button") }}</span>
                                 </button>
                                 <button class="db-btn py-2 text-white bg-gray-600" @click="clearFilters">
                                     <i class="lab lab-cross-line-2 lab-font-size-22"></i>

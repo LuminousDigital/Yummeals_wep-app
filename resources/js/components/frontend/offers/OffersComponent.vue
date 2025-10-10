@@ -105,7 +105,7 @@
                             Referral History ({{ referralHistory.length }})
                         </h2>
                         <div
-                            class="bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
+                            :class="showAllReferrals ? 'bg-white rounded-lg shadow-sm h-auto' : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'"
                         >
                             <div
                                 v-if="referralHistory.length === 0"
@@ -141,13 +141,15 @@
                                 </p>
                             </div>
                             <div
+                                v-if="!showAllReferrals"
                                 class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
                             ></div>
                         </div>
                         <div class="mt-3 text-center">
                             <a
-                                href="#"
-                                class="text-sm font-medium text-gray-700 underline"
+                                v-if="totalReferrals > 5 && !showAllReferrals"
+                                @click="fetchAllReferrals"
+                                class="text-sm font-medium text-gray-700 underline cursor-pointer"
                             >
                                 See all
                             </a>
@@ -202,13 +204,14 @@
                             </div>
                             <div
                                 class="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
+                                :class="user.rank === 1 ? 'w-12 h-12 sm:w-16 sm:h-16' : 'w-8 h-8 sm:w-12 sm:h-12'"
                             >
-                                <img
-                                    :src="user.avatar"
-                                    alt="Avatar"
-                                    class="object-contain"
-                                    :class="user.rank === 1 ? 'h-12 sm:h-16' : 'h-8 sm:h-12'"
-                                />
+                                <span
+                                    class="text-orange-600 font-bold"
+                                    :class="user.rank === 1 ? 'text-lg sm:text-xl' : 'text-sm sm:text-base'"
+                                >
+                                    {{ user.name.charAt(0).toUpperCase() }}
+                                </span>
                             </div>
                             <p
                                 class="text-sm sm:text-base font-medium text-center text-white leading-tight"
@@ -229,171 +232,53 @@
                     </div>
                     <div class="space-y-2">
                         <div
-                            v-for="user in otherRanks"
+                            v-for="user in relativeUsers"
                             :key="user.rank"
-                            class="flex items-center justify-between bg-[#FFEBE1] rounded-lg py-2 px-3 h-16"
+                            :class="['flex items-center justify-between rounded-lg py-2 px-3 h-16', user.is_current_user ? 'bg-[#64961A]' : 'bg-[#FFEBE1]']"
                         >
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
                                     <img
-                                        :src="user.trophy"
+                                        :src="`/images/LeaderBoard/${user.rank}th.png`"
                                         :alt="`${user.rank} Trophy`"
                                         class="object-contain h-8"
                                     />
                                 </div>
-                                <div class="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
-                                    <img
-                                        src="/images/LeaderBoard/2ndhead.png"
-                                        alt="Avatar"
-                                        class="object-contain h-8"
-                                    />
+                                <div :class="['rounded-full flex items-center justify-center flex-shrink-0', user.is_current_user ? 'bg-orange-100 w-8 h-8' : 'bg-gray-800 w-8 h-8']">
+                                    <span :class="['font-bold', user.is_current_user ? 'text-orange-600 text-sm sm:text-base' : 'text-white text-sm']">
+                                        {{ user.name.charAt(0).toUpperCase() }}
+                                    </span>
                                 </div>
-                                <p class="text-sm font-medium text-gray-900 truncate">{{ user.name }}</p>
+                                <p :class="['text-sm font-medium truncate', user.is_current_user ? 'text-white' : 'text-gray-900']">{{ user.name }}</p>
                             </div>
 
-                            <div class="flex gap-8 sm:gap-12 text-sm font-semibold text-gray-900 flex-shrink-0">
-                                <span class="w-8 text-center">{{ user.referrals }}</span>
-                                <span class="w-16 text-right">{{ user.reward }}</span>
+                            <div :class="['flex gap-8 sm:gap-12 text-sm font-semibold flex-shrink-0', user.is_current_user ? 'text-white' : 'text-gray-900']">
+                                <span class="w-8 text-center">{{ user.total_referrals }}</span>
+                                <span class="w-16 text-right">₦{{ user.referral_balance }}</span>
                             </div>
                         </div>
-
-                        <div
-                            key="{rank}"
-                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className="w-8 h-8 flex items-center justify-center"
-                                >
-                                    <img
-                                        src="/images/LeaderBoard/5th.png"
-                                        alt="4th Trophy"
-                                        className="object-contain h-12"
-                                    />
-                                </div>
-                                <div
-                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
-                                >
-                                    <img
-                                        src="/images/LeaderBoard/2ndhead.png"
-                                        alt="User Avatar"
-                                        className="object-contain h-12"
-                                    />
-                                </div>
-                                <p
-                                    className="text-sm font-medium text-gray-900"
-                                >
-                                    Lotus Bliss
-                                </p>
-                            </div>
-
-                            <div
-                                className="flex gap-12 text-sm font-semibold text-gray-900"
-                            >
-                                <span>20</span>
-                                <span>₦5000</span>
-                            </div>
-                        </div>
-
-                        <div
-                            key="{rank}"
-                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className="w-8 h-8 flex items-center justify-center"
-                                >
-                                    <img
-                                        src="/images/LeaderBoard/6th.png"
-                                        alt="4th Trophy"
-                                        className="object-contain h-12"
-                                    />
-                                </div>
-                                <div
-                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
-                                >
-                                    <img
-                                        src="/images/LeaderBoard/2ndhead.png"
-                                        alt="User Avatar"
-                                        className="object-contain h-12"
-                                    />
-                                </div>
-                                <p
-                                    className="text-sm font-medium text-gray-900"
-                                >
-                                    Lotus Bliss
-                                </p>
-                            </div>
-
-                            <div
-                                className="flex gap-12 text-sm font-semibold text-gray-900"
-                            >
-                                <span>20</span>
-                                <span>₦5000</span>
-                            </div>
-                        </div>
-
-                        <div
-                            key="{rank}"
-                            className="flex items-center justify-between h-[64px] bg-[#FFEBE1] rounded-[8px] py-[8px] px-[12px] opacity-100"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className="w-8 h-8 flex items-center justify-center"
-                                >
-                                    <img
-                                        src="/images/LeaderBoard/7th.png"
-                                        alt="4th Trophy"
-                                        className="object-contain h-12"
-                                    />
-                                </div>
-                                <div
-                                    className="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
-                                >
-                                    <img
-                                        src="/images/LeaderBoard/2ndhead.png"
-                                        alt="User Avatar"
-                                        className="object-contain h-12"
-                                    />
-                                </div>
-                                <p
-                                    className="text-sm font-medium text-gray-900"
-                                >
-                                    Lotus Bliss
-                                </p>
-                            </div>
-
-                            <div
-                                className="flex gap-12 text-sm font-semibold text-gray-900"
-                            >
-                                <span>20</span>
-                                <span>₦5000</span>
-                            </div>
-                        </div>
-                        <p class="text-center text-xs text-gray-500 mt-4 mb-2">
+                        <p class="text-center text-xs text-gray-500 mt-4 mb-2" v-if="currentUser && currentUser.rank > 9">
                             Your Level
                         </p>
-                        <div class="flex items-center justify-between bg-green-600 rounded-lg py-2 px-3 h-16">
+                        <div v-if="currentUser && currentUser.rank > 9" :class="['flex items-center justify-between rounded-lg py-2 px-3 h-16', currentUser.rank <= 3 ? 'bg-gradient-to-b from-[#64961A] to-[#FF823F]' : 'bg-[#FFEBE1]']">
                             <div class="flex items-center gap-3">
                                 <div class="rounded-full w-8 h-8 flex items-center justify-center">
                                     <img
-                                        src="/images/LeaderBoard/9th.png"
-                                        alt="9th Trophy"
+                                        :src="`/images/LeaderBoard/${currentUser.rank}th.png`"
+                                        :alt="`${currentUser.rank} Trophy`"
                                         class="object-contain h-8"
                                     />
                                 </div>
-                                <div class="bg-white rounded-full w-8 h-8 flex items-center justify-center">
-                                    <img
-                                        src="/images/LeaderBoard/2ndhead.png"
-                                        alt="Avatar"
-                                        class="object-contain h-8"
-                                    />
+                                <div class="bg-orange-100 rounded-full w-8 h-8 flex items-center justify-center">
+                                    <span class="text-gray-800 font-bold text-sm">
+                                        {{ currentUser.name.charAt(0).toUpperCase() }}
+                                    </span>
                                 </div>
-                                <p class="text-sm font-medium text-white truncate">Lotus Bliss</p>
+                                <p :class="['text-sm font-medium truncate', currentUser.rank <= 3 ? 'text-white' : 'text-gray-900']">{{ currentUser.name }}</p>
                             </div>
-                            <div class="flex gap-8 sm:gap-12 text-sm font-semibold text-white">
-                                <span class="w-8 text-center">20</span>
-                                <span class="w-16 text-right">₦5000</span>
+                            <div class="flex gap-8 sm:gap-12 text-sm font-semibold" :class="currentUser.rank <= 3 ? 'text-white' : 'text-gray-900'">
+                                <span class="w-8 text-center">{{ currentUser.total_referrals }}</span>
+                                <span class="w-16 text-right">₦{{ currentUser.referral_balance }}</span>
                             </div>
                         </div>
                     </div>
@@ -404,7 +289,7 @@
                             Referral History ({{ referralHistory.length }})
                         </h2>
                         <div
-                            class="bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative"
+                            :class="showAllReferrals ? 'bg-white rounded-lg shadow-sm h-auto' : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'"
                         >
                             <div
                                 v-if="referralHistory.length === 0"
@@ -440,13 +325,15 @@
                                 </p>
                             </div>
                             <div
+                                v-if="!showAllReferrals"
                                 class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
                             ></div>
                         </div>
                         <div class="mt-3 text-center">
                             <a
-                                href="#"
-                                class="text-sm font-medium text-gray-700 underline"
+                                v-if="totalReferrals > 5 && !showAllReferrals"
+                                @click="fetchAllReferrals"
+                                class="text-sm font-medium text-gray-700 underline cursor-pointer"
                             >
                                 See all
                             </a>
@@ -474,19 +361,13 @@ export default {
             referralLink: "",
             referralBalance: "₦0.00",
             copied: false,
-            referralHistory: [],
-            socialIcons: [],
-            topThree: [
-                { rank: 2, name: 'Ada Blessing', trophy: '/images/LeaderBoard/2nd.png', avatar: '/images/LeaderBoard/2ndhead.png' },
-                { rank: 1, name: 'Ada Blessing', trophy: '/images/LeaderBoard/1st.png', avatar: '/images/LeaderBoard/1sthead.png' },
-                { rank: 3, name: 'Ada Blessing', trophy: '/images/LeaderBoard/3rd.png', avatar: '/images/LeaderBoard/3rdhead.png' }
-            ],
-            otherRanks: [
-                { rank: 4, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/4th.png', referrals: 20, reward: '₦5000' },
-                { rank: 5, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/5th.png', referrals: 20, reward: '₦5000' },
-                { rank: 6, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/6th.png', referrals: 20, reward: '₦5000' },
-                { rank: 7, name: 'Lotus Bliss', trophy: '/images/LeaderBoard/7th.png', referrals: 20, reward: '₦5000' }
-            ]
+                referralHistory: [],
+                totalReferrals: 0,
+                showAllReferrals: false,
+                socialIcons: [],
+            topThree: [],
+            relativeUsers: [],
+            currentUser: null
         };
     },
     mounted() {
@@ -497,6 +378,26 @@ export default {
             navigator.clipboard.writeText(this.referralLink);
             this.copied = true;
             setTimeout(() => (this.copied = false), 2000);
+        },
+        async fetchAllReferrals() {
+            try {
+                const response = await axios.get("/referral?per_page=100");
+                this.referralHistory = response.data.referrals.data.map(
+                    (item, index) => ({
+                        id: index + 1,
+                        name: item.name ?? item.email ?? "Unknown",
+                        date: new Date(item.created_at).toLocaleDateString(
+                            "en-NG"
+                        ),
+                        reward: `₦${parseFloat(
+                            item.referral_balance || 0
+                        ).toFixed(2)}`,
+                    })
+                );
+                this.showAllReferrals = true;
+            } catch (error) {
+                console.error("Fetch all referrals error:", error);
+            }
         },
         async fetchReferralData() {
             try {
@@ -520,11 +421,30 @@ export default {
                         ).toFixed(2)}`,
                     })
                 );
+                this.totalReferrals = data.referrals.total;
 
                 const referralName = data.user?.name ?? "A friend";
                 const message = encodeURIComponent(
                     `Hey! ${referralName} picked you for a special surprise… Win FREE meals worth ₦1.5M for a whole year with YUMMEALS! Download the app and Sign Up Now to get started: ${this.referralLink}`
                 );
+
+                const reorderedTopThree = [
+                    data.leaderboard.top_three[1], // 2nd place (left)
+                    data.leaderboard.top_three[0], // 1st place (middle)
+                    data.leaderboard.top_three[2]  // 3rd place (right)
+                ];
+                this.topThree = reorderedTopThree.map((user, index) => ({
+                    id: user.id,
+                    rank: index === 1 ? 1 : index === 0 ? 2 : 3,
+                    name: user.name,
+                    trophy: `/images/LeaderBoard/${index === 1 ? '1st' : index === 0 ? '2nd' : '3rd'}.png`,
+                    referrals: user.total_referrals,
+                    reward: `₦${user.referral_balance}`
+                }));
+
+                const relativeUsersArray = Object.values(data.leaderboard.relative_leaderboard.users);
+                this.currentUser = relativeUsersArray.find(user => user.is_current_user);
+                this.relativeUsers = relativeUsersArray.filter(user => user.rank > 3);
 
                 this.socialIcons = [
                     {
