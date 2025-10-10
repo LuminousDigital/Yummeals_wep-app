@@ -25,20 +25,19 @@
                 <p
                     class="text-center text-black font-semibold text-[13px] sm:text-sm mb-4 leading-relaxed py-[8px] sm:py-[30px]"
                 >
-                    We Are Not Delivering To Your Location Yet,
-                    Join Our Waitlist To Be Notified When We Are Here.
+                    We Are Not Delivering To Your Location Yet, Join Our
+                    Waitlist To Be Notified When We Are Here.
                 </p>
-
                 <button
                     @click="goToWaitlistPage"
-                    class="w-full bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium py-2 rounded-lg transition mb-4"
+                    class="w-full py-2 bg-orange-600 text-white border-none rounded-lg text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-orange-700 mb-4"
                 >
                     Join Waitlist
                 </button>
 
                 <button
                     @click="goToDeliveryAddressModal"
-                    class="w-full py-3 bg-orange-600 text-white border-none rounded-lg text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-orange-700"
+                    class="w-full py-2 bg-orange-600 text-white border-none rounded-lg text-base font-semibold cursor-pointer transition-colors duration-200 hover:bg-orange-700"
                 >
                     Try Different Address
                 </button>

@@ -44,4 +44,19 @@ public function details(Request $request)
 
     return response()->json($result);
 }
+
+public function reverseGeocode(Request $request)
+{
+    $request->validate([
+        'latitude' => 'required|numeric',
+        'longitude' => 'required|numeric',
+    ]);
+
+    $result = $this->googlePlacesService->reverseGeocode(
+        $request->input('latitude'),
+        $request->input('longitude')
+    );
+
+    return response()->json($result);
+}
 }

@@ -425,6 +425,14 @@ class PermissionTableSeeder extends Seeder
                 ]
             ],
             [
+                'title'      => 'Referral Leaderboard',
+                'name'       => 'referral-leaderboard',
+                'guard_name' => 'sanctum',
+                'url'        => 'referral-leaderboard',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'title'      => 'Employees',
                 'name'       => 'employees',
                 'guard_name' => 'sanctum',

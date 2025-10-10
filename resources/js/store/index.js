@@ -97,6 +97,7 @@ import { kitchenDisplaySystemOrder } from './modules/kitchenDisplaySystemOrder';
 import { orderStatusScreenOrder } from './modules/orderStatusScreenOrder';
 import { kioskMachine } from './modules/kioskMachine';
 import referrals from './modules/referrals';
+import leaderboard from './modules/leaderboard';
 
 
 
@@ -200,7 +201,8 @@ export default new createStore({
         kitchenDisplaySystemOrder,
         orderStatusScreenOrder,
         kioskMachine,
-        referrals
+        referrals,
+        leaderboard
     },
     plugins: [
         createPersistedState({

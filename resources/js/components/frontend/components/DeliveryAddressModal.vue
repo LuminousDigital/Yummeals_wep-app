@@ -188,6 +188,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import ENV from "../../../config/env";
+import alertService from "../../../services/alertService";
 
 export default {
     name: "DeliveryAddressModal",
@@ -214,8 +215,6 @@ export default {
             formatted: "",
             coordinates: null,
         });
-
-        const GOOGLE_PLACES_API_KEY = "AIzaSyAajyqtgqXkk3Ib-9FHy6iovvEiZ5XBueI";
 
         const initializeSession = () => {
             sessionToken.value = uuidv4();
@@ -340,7 +339,7 @@ export default {
                 const { latitude, longitude } = position.coords;
 
                 const res = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${GOOGLE_PLACES_API_KEY}`
+                    `/api/places/reverse-geocode?latitude=${latitude}&longitude=${longitude}`
                 );
                 const data = await res.json();
 
@@ -366,7 +365,7 @@ export default {
                     );
                 }
             } catch (err) {
-                console.error("Location error:", err);
+                alertService.error("Unable to get your location. Please enter address manually.");
             } finally {
                 isLoadingLocation.value = false;
             }
@@ -374,11 +373,8 @@ export default {
 
         const checkAddressCoverage = async () => {
             if (!addressInput.value.trim() || !selectedAddress.coordinates) {
-                return showNotification(
-                    "Error",
-                    "Valid address required",
-                    "warning"
-                );
+                alertService.warning("Valid address required");
+                return;
             }
 
             isCheckingCoverage.value = true;
@@ -396,23 +392,14 @@ export default {
                     localStorage.setItem("userAddress", addressInput.value);
                     localStorage.setItem("hasEnteredAddress", "true");
                     localStorage.setItem("isLocationCovered", "true");
-                    showNotification(
-                        "Success",
-                        "We deliver to your area!",
-                        "success"
-                    );
+                    alertService.success("We deliver to your area!");
                     emit("location-covered");
                 } else {
                     localStorage.setItem("isLocationCovered", "false");
-                    showNotification(
-                        "Notice",
-                        "We currently do not deliver to this area.",
-                        "warning"
-                    );
+                    alertService.error("We currently do not deliver to this area.");
                     emit("location-not-covered", selectedAddress);
                 }
             } catch (err) {
-                console.error("Coverage error:", err);
                 localStorage.setItem("isLocationCovered", "false");
                 emit("location-not-covered", selectedAddress);
             } finally {
@@ -452,9 +439,7 @@ export default {
             );
         };
 
-        const showNotification = (title, message, type = "info") => {
-            console.log(`[${type.toUpperCase()}] ${title}: ${message}`);
-        };
+
 
         onMounted(() => {
             initializeSession();

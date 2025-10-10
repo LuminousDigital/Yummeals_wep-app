@@ -19,6 +19,7 @@
         "pages": "Pages",
         "customers": "Customers",
         "customer_app": "Customer App",
+        "leaderboard": "Leaderboard",
         "employees": "Employees",
         "deliveryBoys": "Delivery Boys",
         "coupons": "Coupons",
@@ -620,7 +621,17 @@
         "referral_code": "Referral Code",
         "user_referral_code": "User Referral Code",
         "referrals": "Referrals",
-        "loading": "Loading"
+        "loading": "Loading",
+        "search": "Search",
+        "sort_by": "Sort By",
+        "referral_count": "Referral Count",
+        "sort_order": "Sort Order",
+        "descending": "Descending",
+        "apply_filters": "Apply Filters",
+        "clear": "Clear",
+        "rank": "Rank",
+        "user": "User",
+        "join_date": "Join Date"
     },
     "button": {
         "add": "Add",

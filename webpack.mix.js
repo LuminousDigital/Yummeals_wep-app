@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const webpack = require('webpack');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,4 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').vue().postCss('resources/css/app.css', 'public/css', [require("tailwindcss")]).version(); 
+mix.js('resources/js/app.js', 'public/js').vue().postCss('resources/css/app.css', 'public/css', [require("tailwindcss")]).version().webpackConfig({
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.MIX_HOST': JSON.stringify(process.env.MIX_HOST),
+            'process.env.MIX_API_KEY': JSON.stringify(process.env.MIX_API_KEY),
+            'process.env.MIX_GOOGLE_MAP_KEY': JSON.stringify(process.env.MIX_GOOGLE_MAP_KEY),
+            'process.env.MIX_DEMO': JSON.stringify(process.env.MIX_DEMO),
+        }),
+    ],
+});

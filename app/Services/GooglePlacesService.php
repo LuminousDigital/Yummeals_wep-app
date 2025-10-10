@@ -44,4 +44,18 @@ public function getPlaceDetails(string $placeId, string $sessionToken): array
 
     return $response->json();
 }
+
+public function reverseGeocode(float $latitude, float $longitude): array
+{
+    $url = 'https://maps.googleapis.com/maps/api/geocode/json';
+
+    $response = Http::withOptions([
+        'verify' => false,
+    ])->get($url, [
+        'latlng' => $latitude . ',' . $longitude,
+        'key' => $this->apiKey,
+    ]);
+
+    return $response->json();
+}
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('themes/default/fonts/lab/lab.css') }}">
     <link rel="stylesheet" href="{{ asset('themes/default/css/custom.css') }}">
 </head>
-<body>
+<body style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;">
 
 <div class="py-14 px-4 w-full max-w-2xl mx-auto flex flex-col items-center justify-center">
     <a href="{{ route('home') }}" class="w-36 mb-8">

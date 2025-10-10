@@ -1,17 +1,23 @@
 <template>
   <section class="mb-12" v-if="offers.length > 0">
     <div class="container">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-        <router-link :to="{ name: 'frontend.offers.item', params: { slug: offer.slug } }" v-for="offer in offers"
-          :key="offer">
-          <img class="w-full rounded-2xl" :src="offer.image" alt="banner" />
-        </router-link>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="offer in offers" :key="offer">
+            <router-link :to="{ name: 'frontend.offers.item', params: { slug: offer.slug } }">
+              <img class="w-full rounded-2xl" :src="offer.image" alt="banner" />
+            </router-link>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
     </div>
   </section>
 </template>
 <script>
 import statusEnum from "../../../enums/modules/statusEnum";
+import Swiper from 'swiper/bundle';
+import 'swiper/css';
 
 export default {
   name: "OfferComponent",
@@ -44,6 +50,33 @@ export default {
       return this.$store.getters["frontendOffer/lists"];
     },
   },
-  methods: {},
+  watch: {
+    offers: {
+      handler() {
+        if (this.offers.length > 0) {
+          this.$nextTick(() => {
+            this.initSwiper();
+          });
+        }
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    initSwiper() {
+      new Swiper('.swiper', {
+        autoplay: {
+          delay: 4000,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: true,
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 16,
+      });
+    },
+  },
 };
 </script>
