@@ -42,6 +42,7 @@
                                             }}: <span class="font-medium">{{ activeOrder.total_currency_price }}</span>
                                         </p>
                                     <router-link
+                                        v-if="activeOrder.uuid"
                                         :to="{ name: 'frontend.myOrder.details', params: { id: activeOrder.uuid } }"
                                         class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary">
                                         {{ $t("label.see_details") }}
@@ -85,9 +86,9 @@
                                         <span class="font-medium">{{ previousOrder.total_currency_price }}</span>
                                     </p>
                                     <router-link
+                                        v-if="previousOrder.uuid"
                                         :to="{ name: 'frontend.myOrder.details', params: { id: previousOrder.uuid } }"
-                                        class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5
-                                                                                                                                                                                                                        text-primary">
+                                        class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary">
                                         {{ $t("label.see_details") }}
                                         <i class="lab lab-arrow-right lab-font-size-13"></i>
                                     </router-link>
