@@ -37,7 +37,8 @@ class Order extends Model
         'source',
         'pos_payment_method',
         'pos_payment_note',
-        'pos_received_amount'
+        'pos_received_amount',
+        'uuid'
     ];
 
     protected $casts = [
@@ -63,13 +64,19 @@ class Order extends Model
         'source'              => 'integer',
         'pos_payment_method'  => 'integer',
         'pos_payment_note'    => 'string',
-        'pos_received_amount' => 'decimal:6'
+        'pos_received_amount' => 'decimal:6',
+        'uuid'                => 'string'
     ];
 
     protected static function boot(): void
     {
         parent::boot();
         static::addGlobalScope(new BranchScope());
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
     public function orderItems(): \Illuminate\Database\Eloquent\Relations\HasMany

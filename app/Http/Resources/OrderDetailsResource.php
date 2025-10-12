@@ -18,6 +18,7 @@ class OrderDetailsResource extends JsonResource
     {
         return [
             'id'                                  => $this->id,
+            'uuid'                                => $this->uuid,
             'order_serial_no'                     => $this->order_serial_no,
             'token'                               => $this->token,
             "subtotal_currency_price"             => AppLibrary::currencyAmountFormat($this->subtotal),
@@ -57,7 +58,7 @@ class OrderDetailsResource extends JsonResource
             'otp'                                 => $this->otp_code,
             // 'otp_expiry'                          => $this->otp_expires_at,
             'is_advance_order'                    => $this->is_advance_order,
-            'payment_link'                        => route('payment.index', ['order' => $this->id,]),
+            'payment_link'                        => route('payment.index', ['order' => $this->uuid,]),
         ];
     }
 }

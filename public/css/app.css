@@ -3746,9 +3746,6 @@ input:checked + div svg {
 .h-\[52px\] {
   height: 52px;
 }
-.h-\[64px\] {
-  height: 64px;
-}
 .h-\[68px\] {
   height: 68px;
 }
@@ -4135,9 +4132,6 @@ input:checked + div svg {
 .gap-11 {
   gap: 2.75rem;
 }
-.gap-12 {
-  gap: 3rem;
-}
 .gap-2 {
   gap: 0.5rem;
 }
@@ -4268,9 +4262,6 @@ input:checked + div svg {
 }
 .rounded-\[4px\] {
   border-radius: 4px;
-}
-.rounded-\[8px\] {
-  border-radius: 8px;
 }
 .rounded-full {
   border-radius: 9999px;
@@ -4499,6 +4490,10 @@ input:checked + div svg {
   --tw-bg-opacity: 1;
   background-color: rgb(86 125 255 / var(--tw-bg-opacity, 1));
 }
+.bg-\[\#64961A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 150 26 / var(--tw-bg-opacity, 1));
+}
 .bg-\[\#8262FE\] {
   --tw-bg-opacity: 1;
   background-color: rgb(130 98 254 / var(--tw-bg-opacity, 1));
@@ -4689,10 +4684,6 @@ input:checked + div svg {
   --tw-bg-opacity: 1;
   background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
 }
-.bg-green-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
-}
 .bg-heading {
   background-color: rgb(100, 150, 26, 1);
 }
@@ -4746,10 +4737,6 @@ input:checked + div svg {
 .bg-yellow-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1));
-}
-.bg-\[\#64961A\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 150 26 / var(--tw-bg-opacity, 1));
 }
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
@@ -4920,10 +4907,6 @@ input:checked + div svg {
 .px-7 {
   padding-left: 1.75rem;
   padding-right: 1.75rem;
-}
-.px-\[12px\] {
-  padding-left: 12px;
-  padding-right: 12px;
 }
 .py-0 {
   padding-top: 0px;
@@ -5460,9 +5443,6 @@ input:checked + div svg {
 }
 .opacity-0 {
   opacity: 0;
-}
-.opacity-100 {
-  opacity: 1;
 }
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
@@ -6555,6 +6535,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 3.5rem;
   }
 
+  .sm\:w-16 {
+    width: 4rem;
+  }
+
   .sm\:w-36 {
     width: 9rem;
   }
@@ -6574,10 +6558,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   .sm\:w-fit {
     width: -moz-fit-content;
     width: fit-content;
-  }
-
-  .sm\:w-16 {
-    width: 4rem;
   }
 
   .sm\:max-w-\[155px\] {

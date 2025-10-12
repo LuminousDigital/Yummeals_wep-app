@@ -41,12 +41,12 @@
                                             $t("label.total")
                                             }}: <span class="font-medium">{{ activeOrder.total_currency_price }}</span>
                                         </p>
-                                        <router-link
-                                            :to="{ name: 'frontend.myOrder.details', params: { id: activeOrder.id } }"
-                                            class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary">
-                                            {{ $t("label.see_details") }}
-                                            <i class="lab lab-arrow-right rtl:rotate-180 lab-font-size-13"></i>
-                                        </router-link>
+                                    <router-link
+                                        :to="{ name: 'frontend.myOrder.details', params: { id: activeOrder.uuid } }"
+                                        class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5 text-primary">
+                                        {{ $t("label.see_details") }}
+                                        <i class="lab lab-arrow-right rtl:rotate-180 lab-font-size-13"></i>
+                                    </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                         <span class="font-medium">{{ previousOrder.total_currency_price }}</span>
                                     </p>
                                     <router-link
-                                        :to="{ name: 'frontend.myOrder.details', params: { id: previousOrder.id } }"
+                                        :to="{ name: 'frontend.myOrder.details', params: { id: previousOrder.uuid } }"
                                         class="text-[10px] leading-4 font-medium font-rubik flex items-center gap-1.5
                                                                                                                                                                                                                         text-primary">
                                         {{ $t("label.see_details") }}
@@ -163,20 +163,20 @@
 
                 <div class="flex gap-6"
                     v-if="setting.site_online_payment_gateway === enums.activityEnum.ENABLE && order.transaction === null && order.payment_status === enums.paymentStatusEnum.UNPAID">
-                    <router-link @click.prevent="closeModal"
+                    <router-link v-if="order.uuid" @click.prevent="closeModal"
                         class="w-full rounded-3xl text-center font-medium leading-6 py-3 border border-primary text-primary bg-white"
-                        :to="{ name: 'frontend.myOrder.details', params: { id: order.id } }">
+                        :to="{ name: 'frontend.myOrder.details', params: { id: order.uuid } }">
                         {{ $t('button.go_to_order') }}
                     </router-link>
-                    <a :href="'/payment/' + order.id + '/pay'"
+                    <a v-if="order.uuid" :href="'/payment/' + order.uuid + '/pay'"
                         class="w-full rounded-3xl text-center font-medium leading-6 py-3 text-white bg-primary">
                         {{ $t('button.pay_now') }}
                     </a>
                 </div>
 
-                <router-link v-else @click.prevent="closeModal"
+                <router-link v-else-if="order.uuid" @click.prevent="closeModal"
                     class="w-full rounded-3xl text-center font-medium leading-6 py-3 text-white bg-primary"
-                    :to="{ name: 'frontend.myOrder.details', params: { id: order.id } }">
+                    :to="{ name: 'frontend.myOrder.details', params: { id: order.uuid } }">
                     {{ $t('button.go_to_order') }}
                 </router-link>
 
@@ -272,6 +272,9 @@ export default {
         } catch (err) {
             this.loading.isActive = false;
         }
+    },
+    beforeUnmount() {
+        this.closeModal();
     },
     computed: {
         setting: function () {

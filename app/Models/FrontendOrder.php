@@ -31,7 +31,8 @@ class FrontendOrder extends Model
         'payment_status',
         'status',
         'dining_table_id',
-        'source'
+        'source',
+        'uuid'
     ];
 
     protected $casts = [
@@ -53,8 +54,14 @@ class FrontendOrder extends Model
         'payment_status'   => 'integer',
         'status'           => 'integer',
         'dining_table_id'  => 'integer',
-        'source'           => 'string'
+        'source'           => 'string',
+        'uuid'             => 'string'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     public function orderItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

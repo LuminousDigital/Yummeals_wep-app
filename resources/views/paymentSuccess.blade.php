@@ -37,7 +37,7 @@
 <script type="application/javascript">
     let data       = JSON.parse(localStorage.getItem('vuex'));
     const url      = '<?=URL::to('/') . "/table-order/"?>';
-    const order_id = '<?=$order?->id?>';
+    const order_id = '<?=$order?->uuid?>';
     if (data.tableCart.paymentMethod) {
         document.getElementById('home-route').setAttribute('href', url + data.tableCart.table.slug + '/' + order_id);
     }

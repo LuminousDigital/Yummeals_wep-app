@@ -1424,7 +1424,7 @@ orderSubmit: function () {
                     this.loading.isActive = false;
                     router.push({
                         name: "frontend.myOrder",
-                        query: { id: orderResponse.data.data.id },
+                        query: { id: orderResponse.data.data.uuid },
                     });
                 })
                 .catch();
