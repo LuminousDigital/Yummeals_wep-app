@@ -1,5 +1,5 @@
 <template>
-    <LoadingComponent :props="loading" />
+    <VueElementLoading spinner="bar-fade-scale" color="#f25b0a" :active="loading.isActive" :is-full-screen="true"/>
     <section class="mt-6 ms:mt-10 mb-16">
         <div class="container">
             <div
@@ -347,15 +347,18 @@
 </template>
 
 <script>
-import LoadingComponent from "../components/LoadingComponent";
+import VueElementLoading from 'vue-element-loading';
 import OfferComponent from "../components/OfferComponent";
 import axios from "axios";
 
 export default {
     name: "OffersComponent",
-    components: { OfferComponent },
+    components: { OfferComponent, VueElementLoading },
     data() {
         return {
+            loading: {
+                isActive: false,
+            },
             limit: null,
             referralCode: "",
             referralLink: "",
@@ -371,6 +374,7 @@ export default {
         };
     },
     mounted() {
+        this.loading.isActive = true;
         this.fetchReferralData();
     },
     methods: {
@@ -476,6 +480,8 @@ export default {
             } catch (error) {
                 console.error("Referral fetch error:", error);
                 this.$toast?.error("Unable to load referral data.");
+            } finally {
+                this.loading.isActive = false;
             }
         },
     },
