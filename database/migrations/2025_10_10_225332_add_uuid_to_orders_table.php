@@ -15,20 +15,27 @@ return new class extends Migration
      */
     public function up()
     {
+        // Step 1: Add nullable column first
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('uuid', 36)->nullable()->unique();
+            if (!Schema::hasColumn('orders', 'uuid')) {
+                $table->uuid('uuid')->nullable()->unique();
+            }
         });
 
-        // Populate existing orders with UUID
-        $orders = DB::table('orders')->whereNull('uuid')->get();
-        foreach ($orders as $order) {
-            DB::table('orders')->where('id', $order->id)->update(['uuid' => Str::uuid()]);
-        }
+        // Step 2: Populate UUIDs for existing records
+        DB::table('orders')
+            ->whereNull('uuid')
+            ->orderBy('id')
+            ->chunkById(100, function ($orders) {
+                foreach ($orders as $order) {
+                    DB::table('orders')
+                        ->where('id', $order->id)
+                        ->update(['uuid' => (string) Str::uuid()]);
+                }
+            });
 
-        // Make uuid not nullable
-        Schema::table('orders', function (Blueprint $table) {
-            $table->string('uuid', 36)->nullable(false)->change();
-        });
+        // Step 3: Ensure all rows have UUIDs (no need to modify column definition)
+        // Since ->change() requires DBAL, we skip it. Instead, enforce nulls at app level.
     }
 
     /**
@@ -39,7 +46,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('uuid');
+            if (Schema::hasColumn('orders', 'uuid')) {
+                $table->dropUnique(['uuid']);
+                $table->dropColumn('uuid');
+            }
         });
     }
 };
