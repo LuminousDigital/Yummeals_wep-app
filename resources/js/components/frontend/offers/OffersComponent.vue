@@ -392,11 +392,11 @@
                         <div
                             class="flex flex-col items-center justify-center text-center py-10"
                         >
-                            <img
+                            <!-- <img
                                 src="/images/social-icon/empty-referrals.png"
                                 alt="Empty Leaderboard"
                                 class="object-contain w-40 h-40 mb-4"
-                            />
+                            /> -->
                             <p
                                 class="text-sm font-semibold text-black md:text-base"
                             >
