@@ -19,6 +19,7 @@ class UserOrderResource extends JsonResource
     {
         return [
             'id'                             => $this->id,
+            'uuid'                           => $this->uuid,
             'order_serial_no'                => $this->order_serial_no,
             'user_id'                        => $this->user_id,
             'branch_id'                      => $this->branch_id,

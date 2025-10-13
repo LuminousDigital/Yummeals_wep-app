@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OrderRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Http\Requests\PaginateRequest;
 use Smartisan\Settings\Facades\Settings;
 use App\Http\Requests\OrderStatusRequest;
@@ -102,6 +103,7 @@ class FrontendOrderService
                 $this->frontendOrder = FrontendOrder::create(
                     $request->validated() + [
                         'user_id'          => Auth::user()->id,
+                        'uuid'             => Str::uuid(),
                         'status'           => OrderStatus::DEFAULT,
                         // 'order_datetime'   => date('Y-m-d H:i:s'),
                         // 'preparation_time' => Settings::group('order_setup')->get('order_setup_food_preparation_time')

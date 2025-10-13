@@ -46,7 +46,7 @@
                        </div>
                         <OrderStatusComponent :props="order" />
 
-                        <div>
+                        <div v-if="orderBranch">
                             <h3 class="font-medium mb-2">{{ orderBranch.name }}</h3>
                             <div class="flex items-center justify-between gap-5">
                                 <div class="flex items-start justify-start gap-2.5">
@@ -121,7 +121,7 @@
                             </li>
                         </ul>
 
-                        <a :href="'/payment/' + order.id + '/pay'"
+                        <a :href="'/payment/' + order.uuid + '/pay'"
                             v-if="setting.site_online_payment_gateway === enums.activityEnum.ENABLE && order.transaction === null && order.payment_status === enums.paymentStatusEnum.UNPAID"
                             class="w-full rounded-3xl capitalize font-medium text-center leading-6 py-3 text-white bg-primary">
                             {{ $t('button.pay_now') }}

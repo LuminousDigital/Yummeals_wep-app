@@ -19,13 +19,13 @@
     </h4>
 
     <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.CANCELED)" class="h-32 mx-auto mb-3"
-        :src="setting.image_order_canceled" alt="gif">
+        :src="setting?.image_order_canceled" alt="gif">
 
     <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.REJECTED)" class="h-32 mx-auto mb-3"
-        :src="setting.image_order_rejected" alt="gif">
+        :src="setting?.image_order_rejected" alt="gif">
 
     <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.RETURNED)" class="h-32 mx-auto mb-3"
-        :src="setting.image_order_returned" alt="gif">
+        :src="setting?.image_order_returned" alt="gif">
 
 
 
@@ -43,23 +43,23 @@
         </div>
 
         <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.DELIVERED) && parseInt(props.order_type) == parseInt(enums.orderTypeEnum.DELIVERY)"
-            class="h-32 mx-auto mb-3" :src="setting.image_order_delivered" alt="gif">
+            class="h-32 mx-auto mb-3" :src="setting?.image_order_delivered" alt="gif">
         <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.DELIVERED) && parseInt(props.order_type) == parseInt(enums.orderTypeEnum.TAKEAWAY)"
-            class="h-32 mx-auto mb-3" :src="setting.image_order_complete" alt="gif">
+            class="h-32 mx-auto mb-3" :src="setting?.image_order_complete" alt="gif">
         <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.PENDING) || parseInt(props.status) == parseInt(enums.orderStatusEnum.ACCEPT)"
-            class="h-32 mx-auto mb-3" :src="setting.image_order_placed" alt="gif">
+            class="h-32 mx-auto mb-3" :src="setting?.image_order_placed" alt="gif">
         <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.PREPARING)" class="h-32 mx-auto mb-3"
-            :src="setting.image_order_preparing" alt="gif">
+            :src="setting?.image_order_preparing" alt="gif">
         <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.PREPARED)" class="h-32 mx-auto mb-3"
-            :src="setting.image_order_prepared" alt="gif">
+            :src="setting?.image_order_prepared" alt="gif">
         <img v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.OUT_FOR_DELIVERY)" class="h-32 mx-auto mb-3"
-            :src="setting.image_order_out_for_delivery" alt="gif">
+            :src="setting?.image_order_out_for_delivery" alt="gif">
 
         <h5 v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.DELIVERED)"
             class="text-xs font-normal text-center mb-8">{{ $t("message.enjoy_your_food") }}</h5>
         <h5 v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.PENDING)"
             class="text-xs font-normal text-center mb-8">
-            {{ $t("label.got_your_order", { name: profile.name, }) }}
+            {{ $t("label.got_your_order", { name: profile?.name || '', }) }}
         </h5>
         <h5 v-if="parseInt(props.status) == parseInt(enums.orderStatusEnum.ACCEPT)"
             class="text-xs font-normal text-center mb-8">{{ $t("message.Your_order_is_accepted") }}</h5>

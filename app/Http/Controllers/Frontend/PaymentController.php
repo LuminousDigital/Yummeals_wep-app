@@ -120,7 +120,7 @@ class PaymentController extends Controller
         $orderDatetime = Carbon::now();
 
         if ($request->paymentMethod === "cash") {
-            return redirect()->route('payment.successful', ['order' => $order->id, 'otp' => $order->otp, 'otp_expiry' => $order->otp_expiry, 'paymentMethod' => 'cash']);
+            return redirect()->route('payment.successful', ['order' => $order->uuid, 'otp' => $order->otp, 'otp_expiry' => $order->otp_expiry, 'paymentMethod' => 'cash']);
         }
 
         if ($order->order_type === OrderType::DELIVERY) {
@@ -144,7 +144,7 @@ class PaymentController extends Controller
                 'order_datetime'   => $orderDatetime->toDateTimeString(),
             ]);
 
-            return redirect()->route('payment.successful', ['order' => $order->id, 'paymentMethod' => 'cash-on-delivery']);
+            return redirect()->route('payment.successful', ['order' => $order->uuid, 'paymentMethod' => 'cash-on-delivery']);
         }
 
         if ($this->paymentManagerService->gateway($request->paymentMethod)->status()) {

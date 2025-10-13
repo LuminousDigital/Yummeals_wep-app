@@ -15,11 +15,12 @@
     <SwiperSlide
       v-for="category in categories"
       :key="category"
+      class="!w-[155.25px] !mr-[20px]"
     >
       <router-link
         v-if="design === categoryDesignEnum.FIRST"
         :to="{ name: 'frontend.menu', query: { s: category.slug } }"
-        class="w-32 flex flex-col items-center text-center gap-4 p-4 c-h-30
+        class="flex flex-col items-center text-center gap-4 p-4 c-h-30
                rounded-2xl border-b-2 border-transparent transition
                hover:bg-[#f8e5db] bg-[#F7F7FC] shadow-sm"
       >
@@ -30,7 +31,7 @@
         :class="checkIsQueryAndRouteQuerySame(category.slug) ? 'menu-category-active' : ''"
         v-else-if="design === categoryDesignEnum.SECOND"
         :to="{ name: 'frontend.menu', query: { s: category.slug } }"
-        class="w-32 flex flex-col items-center text-center gap-4 p-4 c-h-25
+        class="flex flex-col items-center text-center gap-4 p-4 c-h-25
                rounded-2xl border-b-2 border-transparent transition
                hover:bg-[#f8e5db] shadow-sm"
       >

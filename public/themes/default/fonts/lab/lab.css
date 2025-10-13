@@ -714,3 +714,7 @@
 .lab-kiosk:before {
   content: "\e0ab";
 }
+
+.lab-trophy:before {
+  content: "\e99e";
+}

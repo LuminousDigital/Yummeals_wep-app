@@ -1422,10 +1422,14 @@ orderSubmit: function () {
                 .dispatch("frontendCart/resetCart")
                 .then(() => {
                     this.loading.isActive = false;
-                    router.push({
-                        name: "frontend.myOrder",
-                        query: { id: orderResponse.data.data.id },
-                    });
+                    if (orderResponse.data.data.uuid) {
+                        router.push({
+                            name: "frontend.myOrder.details",
+                            params: { id: orderResponse.data.data.uuid },
+                        });
+                    } else {
+                        console.error('Order UUID is missing');
+                    }
                 })
                 .catch();
         })

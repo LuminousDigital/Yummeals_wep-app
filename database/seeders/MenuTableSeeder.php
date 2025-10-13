@@ -16,6 +16,8 @@ class MenuTableSeeder extends Seeder
      */
     public function run()
     {
+        Menu::truncate();
+
         $menus = [
             [
                 'name'       => 'Dashboard',
@@ -250,6 +252,16 @@ class MenuTableSeeder extends Seeder
                         'language'   => 'employees',
                         'url'        => 'employees',
                         'icon'       => 'lab lab-employee-2',
+                        'priority'   => 100,
+                        'status'     => 1,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ],
+                    [
+                        'name'       => 'Leaderboard',
+                        'language'   => 'leaderboard',
+                        'url'        => 'referral-leaderboard',
+                        'icon'       => 'lab lab-customers',
                         'priority'   => 100,
                         'status'     => 1,
                         'created_at' => now(),

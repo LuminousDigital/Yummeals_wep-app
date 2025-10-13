@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('themes/default/fonts/lab/lab.css') }}">
     <link rel="stylesheet" href="{{ asset('themes/default/css/custom.css') }}">
 </head>
-<body>
+<body style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;">
 
 <div class="py-14 px-4 w-full max-w-2xl mx-auto flex flex-col items-center justify-center">
     <a href="{{ route('home') }}" class="w-36 mb-8">
@@ -37,7 +37,7 @@
 <script type="application/javascript">
     let data       = JSON.parse(localStorage.getItem('vuex'));
     const url      = '<?=URL::to('/') . "/table-order/"?>';
-    const order_id = '<?=$order?->id?>';
+    const order_id = '<?=$order?->uuid?>';
     if (data.tableCart.paymentMethod) {
         document.getElementById('home-route').setAttribute('href', url + data.tableCart.table.slug + '/' + order_id);
     }
