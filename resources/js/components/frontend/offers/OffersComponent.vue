@@ -398,7 +398,7 @@
                                 class="object-contain w-40 h-40 mb-4"
                             /> -->
                             <p
-                                class="text-sm font-semibold text-black md:text-base"
+                                class="text-sm font-semibold text-gray-900 md:text-base"
                             >
                                 No leaderboard data available yet.
                             </p>
