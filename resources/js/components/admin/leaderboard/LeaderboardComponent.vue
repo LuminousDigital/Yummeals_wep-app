@@ -1,5 +1,5 @@
 <template>
-    <LoadingComponent :props="loading" />
+    <LoadingContentComponent :props="{ isActive: loading }" />
     <div class="col-12">
         <div class="db-card">
             <div class="db-card-header border-none">
@@ -88,7 +88,7 @@
                             <td class="db-table-body-td hidden-print"
                                 v-if="permissionChecker('customers_show') || permissionChecker('customers_edit')">
                                 <div class="flex justify-start items-center gap-1.5">
-                                    <SmIconViewComponent :link="'admin.customers.show'" :id="user.id" v-if="permissionChecker('customers_show')" />
+                                    <SmIconViewComponent @click="viewReferrals(user)" v-if="permissionChecker('customers_show')" />
                                     <SmIconSidebarModalEditComponent @click="editUser(user)" v-if="permissionChecker('customers_edit')" />
                                 </div>
                             </td>
@@ -118,13 +118,21 @@
             </div>
         </div>
     </div>
+    <SmReferralsModalComponent
+        :visible="showReferralsModal"
+        :referrals="selectedUserReferrals"
+        :loading="referralsLoading"
+        @close="closeReferralsModal"
+    />
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import LoadingComponent from "../components/LoadingComponent.vue";
+import LoadingContentComponent from "../components/LoadingContentComponent.vue";
 import SmIconViewComponent from "../components/buttons/SmIconViewComponent";
 import SmIconSidebarModalEditComponent from "../components/buttons/SmIconSidebarModalEditComponent";
+import SmReferralsModalComponent from "../components/buttons/SmReferralsModalComponent.vue";
+import axios from "axios";
 import appService from "../../../services/appService";
 import PaginationTextComponent from "../components/pagination/PaginationTextComponent";
 import PaginationBox from "../components/pagination/PaginationBox";
@@ -136,9 +144,10 @@ import ENV from "../../../config/env";
 export default {
     name: "LeaderboardComponent",
     components: {
-        LoadingComponent,
+        LoadingContentComponent,
         SmIconViewComponent,
         SmIconSidebarModalEditComponent,
+        SmReferralsModalComponent,
         TableLimitComponent,
         PaginationSMBox,
         PaginationBox,
@@ -147,7 +156,10 @@ export default {
     },
     data() {
         return {
-            ENV: ENV
+            ENV: ENV,
+            showReferralsModal: false,
+            selectedUserReferrals: [],
+            referralsLoading: false
         };
     },
     computed: {
@@ -258,11 +270,23 @@ export default {
         formatDate(date) {
             return new Date(date).toLocaleDateString();
         },
-        viewReferrals(user) {
-            this.$router.push({
-                name: "admin.customers.show",
-                params: { id: user.id },
-            });
+        async viewReferrals(user) {
+            this.referralsLoading = true;
+            this.showReferralsModal = true;
+            try {
+                const response = await axios.get(`admin/customers/${user.id}/referrals`);
+                this.selectedUserReferrals = response.data.data || [];
+            } catch (error) {
+                console.error('Error fetching referrals:', error);
+                this.selectedUserReferrals = [];
+            } finally {
+                this.referralsLoading = false;
+            }
+        },
+        closeReferralsModal() {
+            this.showReferralsModal = false;
+            this.selectedUserReferrals = [];
+            this.referralsLoading = false;
         },
         permissionChecker(e) {
             return appService.permissionChecker(e);
