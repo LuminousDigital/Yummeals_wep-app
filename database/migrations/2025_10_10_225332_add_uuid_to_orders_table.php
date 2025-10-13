@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        // Step 1: Add nullable column first
+        // Step 1: Add nullable column
         Schema::table('orders', function (Blueprint $table) {
             if (!Schema::hasColumn('orders', 'uuid')) {
                 $table->uuid('uuid')->nullable()->unique();
@@ -34,8 +34,6 @@ return new class extends Migration
                 }
             });
 
-        // Step 3: Ensure all rows have UUIDs (no need to modify column definition)
-        // Since ->change() requires DBAL, we skip it. Instead, enforce nulls at app level.
     }
 
     /**
