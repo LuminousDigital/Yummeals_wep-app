@@ -51,6 +51,8 @@ return [
         'expires'          =>  'Expires',
         'referral_code'    => 'Referral Code',
         'referrals'        => 'Referrals',
+        'total_referrals'  => 'Total Referrals',
+        'referral_balance' => 'Referral Balance',
         'loading'          => 'Loading',
     ],
     'message' => [

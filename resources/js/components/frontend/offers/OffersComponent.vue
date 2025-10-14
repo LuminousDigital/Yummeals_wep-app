@@ -49,7 +49,7 @@
                         >
                             <div class="p-3 md:p-4 bg-[#F6F6F6] flex-1 min-w-0">
                                 <p
-                                    class="text-[13px] sm:text-[14px] md:text-[15px] text-[#000000] font-medium truncate"
+                                    class="text-[13px] sm:text] md:text-[15px] text-[#000000] font-medium truncate"
                                 >
                                     {{ referralLink }}
                                 </p>
@@ -267,13 +267,10 @@
                             >
                                 <div class="flex items-center gap-3">
                                     <div
-                                        class="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                                        class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full"
+                                        style="background-image: url('/images/LeaderBoard/posisionBD.png'); background-size: cover; background-position: center;"
                                     >
-                                        <img
-                                            :src="`/images/LeaderBoard/${user.rank}th.png`"
-                                            :alt="`${user.rank} Trophy`"
-                                            class="object-contain h-8"
-                                        />
+                                        <span class="text-[#F25B0A] font-bold text-md">{{ user.rank }}</span>
                                     </div>
                                     <div
                                         :class="[
@@ -335,11 +332,7 @@
                                         <div
                                             class="rounded-full w-8 h-8 flex items-center justify-center"
                                         >
-                                            <img
-                                                :src="`/images/LeaderBoard/${currentUser.rank}th.png`"
-                                                :alt="`${currentUser.rank} Trophy`"
-                                                class="object-contain h-8"
-                                            />
+                                        <span class="text-[#F25B0A] font-bold text-sm">{{ currentUser.rank }}</span>
                                         </div>
                                         <div
                                             class="bg-orange-100 rounded-full w-8 h-8 flex items-center justify-center"
@@ -400,7 +393,7 @@
                             <p
                                 class="text-sm font-semibold text-gray-600 md:text-base"
                             >
-                                No leaderboard data available yet.
+                                You have to have at least one referral to appear on the leaderboard
                             </p>
                         </div>
                     </template>
@@ -445,7 +438,7 @@
                                     {{ referral.name }}
                                 </h3>
                                 <p class="font-semibold text-gray-900">
-                                    {{ referral.reward }}
+                                    {{ referral.email }}
                                 </p>
                                 <p class="text-xs text-gray-500 md:text-sm">
                                     {{ referral.date }}
@@ -513,6 +506,7 @@ export default {
                     (item, index) => ({
                         id: index + 1,
                         name: item.name ?? item.email ?? "Unknown",
+                        email: item.email ?? "",
                         date: new Date(item.created_at).toLocaleDateString(
                             "en-NG"
                         ),
@@ -540,6 +534,7 @@ export default {
                     (item, index) => ({
                         id: index + 1,
                         name: item.name ?? item.email ?? "Unknown",
+                        email: item.email ?? "",
                         date: new Date(item.created_at).toLocaleDateString(
                             "en-NG"
                         ),
@@ -590,9 +585,7 @@ export default {
                 this.currentUser = relativeUsersArray.find(
                     (user) => user.is_current_user
                 );
-                this.relativeUsers = relativeUsersArray.filter(
-                    (user) => user.rank > 3
-                );
+                this.relativeUsers = relativeUsersArray;
 
                 this.socialIcons = [
                     {
