@@ -5334,6 +5334,10 @@ input:checked + div svg {
   --tw-text-opacity: 1;
   color: rgb(233 60 60 / var(--tw-text-opacity, 1));
 }
+.text-\[\#F25B0A\] {
+  --tw-text-opacity: 1;
+  color: rgb(242 91 10 / var(--tw-text-opacity, 1));
+}
 .text-\[\#F6A609\] {
   --tw-text-opacity: 1;
   color: rgb(246 166 9 / var(--tw-text-opacity, 1));
@@ -6717,10 +6721,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .sm\:text-left {
     text-align: left;
-  }
-
-  .sm\:text-\[14px\] {
-    font-size: 14px;
   }
 
   .sm\:text-base {

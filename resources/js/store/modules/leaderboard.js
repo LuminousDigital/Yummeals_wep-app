@@ -49,13 +49,14 @@ const mutations = {
 };
 
 const actions = {
-  async fetchLeaderboard({ commit, state }) {
+  async fetchLeaderboard({ commit }) {
     commit('SET_LOADING', true);
     try {
-      const params = new URLSearchParams(state.filters);
-      const response = await axios.get(`admin/referrals/leaderboard?${params}`);
-      commit('SET_LEADERBOARD', response.data);
-      commit('SET_TOP_THREE', response.data.data || []);
+      const response = await axios.get('/referral');
+      const data = response.data;
+      const relativeUsersArray = Object.values(data.leaderboard.relative_leaderboard.users);
+      commit('SET_LEADERBOARD', { data: relativeUsersArray, current_page: 1, last_page: 1, per_page: relativeUsersArray.length, total: relativeUsersArray.length, from: 1, to: relativeUsersArray.length });
+      commit('SET_TOP_THREE', data.leaderboard.top_three || []);
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
     } finally {
