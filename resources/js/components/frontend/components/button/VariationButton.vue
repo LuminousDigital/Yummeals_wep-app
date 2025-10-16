@@ -23,7 +23,7 @@ export default {
             if (isLocationCovered === "true") {
                 this.$emit("variation-click", this.item);
             } else {
-                this.$emit("show-location-modal");
+                this.$emit("show-location-modal", this.item);
             }
         },
     },

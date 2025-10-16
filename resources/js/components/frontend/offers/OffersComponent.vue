@@ -473,9 +473,10 @@ import axios from "axios";
 
 export default {
     name: "OffersComponent",
-    components: { OfferComponent },
+    components: { LoadingComponent, OfferComponent },
     data() {
         return {
+            loading: false,
             limit: null,
             referralCode: "",
             referralLink: "",
