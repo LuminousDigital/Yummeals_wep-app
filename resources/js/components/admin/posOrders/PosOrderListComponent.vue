@@ -94,7 +94,7 @@
                         </tr>
                     </thead>
                     <tbody class="db-table-body" v-if="orders.length > 0">
-                        <tr class="db-table-body-tr" v-for="order in orders" :key="order">
+                        <tr class="db-table-body-tr" v-for="order in orders" :key="order.uuid">
                             <td class="db-table-body-td">
                                 {{ order.order_serial_no }}
                             </td>
@@ -115,9 +115,9 @@
                             </td>
                             <td class="db-table-body-td hidden-print" v-if="permissionChecker('pos-orders')">
                                 <div class="flex justify-start items-center sm:items-start sm:justify-start gap-1.5">
-                                    <SmIconViewComponent :link="'admin.pos-orders.show'" :id="order.id"
+                                    <SmIconViewComponent :link="'admin.pos-orders.show'" :id="order.uuid"
                                         v-if="permissionChecker('pos-orders')" />
-                                    <SmIconDeleteComponent @click="destroy(order.id)"
+                                    <SmIconDeleteComponent @click="destroy(order.uuid)"
                                         v-if="permissionChecker('pos-orders')" />
                                 </div>
                             </td>
@@ -336,11 +336,11 @@ export default {
                 this.loading.isActive = false;
             });
         },
-        destroy: function (id) {
+        destroy: function (uuid) {
             appService.destroyConfirmation().then((res) => {
                 try {
                     this.loading.isActive = true;
-                    this.$store.dispatch('posOrder/destroy', { id: id, search: this.props.search }).then((res) => {
+                    this.$store.dispatch('posOrder/destroy', { uuid: uuid, search: this.props.search }).then((res) => {
                         this.loading.isActive = false;
                         alertService.successFlip(null, this.$t('menu.pos_orders'));
                     }).catch((err) => {

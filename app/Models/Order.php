@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use App\Models\Scopes\BranchScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -72,6 +73,11 @@ class Order extends Model
     {
         parent::boot();
         static::addGlobalScope(new BranchScope());
+        static::creating(function ($order) {
+            if (!$order->uuid) {
+                $order->uuid = (string) Str::uuid();
+            }
+        });
     }
 
     public function getRouteKeyName()

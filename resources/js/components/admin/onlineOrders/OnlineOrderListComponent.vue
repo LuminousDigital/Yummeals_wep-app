@@ -101,7 +101,7 @@
                         </tr>
                     </thead>
                     <tbody class="db-table-body" v-if="orders.length > 0">
-                        <tr class="db-table-body-tr" v-for="order in orders" :key="order">
+                        <tr class="db-table-body-tr" v-for="order in orders" :key="order.uuid || order.id">
                             <td class="db-table-body-td">
                                 {{ order.order_serial_no }}
 
@@ -130,7 +130,7 @@
                             </td>
                             <td class="db-table-body-td hidden-print" v-if="permissionChecker('online-orders')">
                                 <div class="flex justify-start items-center sm:items-start sm:justify-start gap-1.5">
-                                    <SmIconViewComponent :link="'admin.order.show'" :id="order.id"
+                                    <SmIconViewComponent :link="'admin.order.show'" :id="order.uuid"
                                         v-if="permissionChecker('online-orders')" />
                                 </div>
                             </td>

@@ -93,7 +93,7 @@ export const posOrder = {
         },
         destroy: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.delete(`admin/pos-order/${payload.id}`).then((res) => {
+                axios.delete(`admin/pos-order/${payload.uuid}`).then((res) => {
                     context.dispatch('lists', payload.search).then().catch();
                     resolve(res);
                 }).catch((err) => {
@@ -103,7 +103,7 @@ export const posOrder = {
         },
         changeStatus: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`admin/pos-order/change-status/${payload.id}`, payload).then((res) => {
+                axios.post(`admin/pos-order/change-status/${payload.uuid}`, payload).then((res) => {
                     context.commit('show', res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -113,7 +113,7 @@ export const posOrder = {
         },
         changePaymentStatus: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`admin/pos-order/change-payment-status/${payload.id}`, payload).then((res) => {
+                axios.post(`admin/pos-order/change-payment-status/${payload.uuid}`, payload).then((res) => {
                     context.commit('show', res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -123,7 +123,7 @@ export const posOrder = {
         },
         selectDeliveryBoy: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`admin/pos-order/select-delivery-boy/${payload.id}`,payload).then((res) => {
+                axios.post(`admin/pos-order/select-delivery-boy/${payload.uuid}`,payload).then((res) => {
                     context.commit('show', res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -150,7 +150,7 @@ export const posOrder = {
     },
     mutations: {
         lists: function (state, payload) {
-            state.lists = payload
+            state.lists = (payload || []).filter(item => item !== null && item !== undefined)
         },
         pagination: function (state, payload) {
             state.pagination = payload;

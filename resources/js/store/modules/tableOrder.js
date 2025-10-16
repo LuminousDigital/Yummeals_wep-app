@@ -83,7 +83,7 @@ export const tableOrder = {
         },
         show: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.get(`admin/table-order/show/${payload}`).then((res) => {
+                axios.get(`admin/table-order/show/${payload.uuid}`).then((res) => {
                     context.commit('show', res.data.data);
                     context.commit("orderItems", res.data.data.order_items);
                     context.commit("orderBranch", res.data.data.branch);
@@ -98,7 +98,7 @@ export const tableOrder = {
         },
         changeStatus: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`admin/table-order/change-status/${payload.id}`,payload).then((res) => {
+                axios.post(`admin/table-order/change-status/${payload.uuid}`,payload).then((res) => {
                     context.commit('show', res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -108,7 +108,7 @@ export const tableOrder = {
         },
         changePaymentStatus: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`admin/table-order/change-payment-status/${payload.id}`,payload).then((res) => {
+                axios.post(`admin/table-order/change-payment-status/${payload.uuid}`,payload).then((res) => {
                     context.commit('show', res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -118,7 +118,7 @@ export const tableOrder = {
         },
         tokenCreate: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`admin/table-order/token-create/${payload.id}`,payload).then((res) => {
+                axios.post(`admin/table-order/token-create/${payload.uuid}`,payload).then((res) => {
                     context.commit('show', res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -145,7 +145,7 @@ export const tableOrder = {
     },
     mutations: {
         lists: function (state, payload) {
-            state.lists = payload
+            state.lists = (payload || []).filter(item => item !== null && item !== undefined)
         },
         pagination: function (state, payload) {
             state.pagination = payload;
