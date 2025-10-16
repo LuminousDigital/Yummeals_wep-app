@@ -5,18 +5,34 @@
             <h2 class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading">
                 {{ $t('label.create_new_password') }}</h2>
             <form @submit.prevent="resetPassword">
-                <div class="mb-4">
+                <div class="mb-4 relative">
                     <label class="text-sm capitalize mb-1 text-heading">{{ $t('label.new_password') }}</label>
-                    <input :class="errors.password ? 'invalid' : ''" v-model="form.password" type="password"
-                           class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+                    <input :class="errors.password ? 'invalid' : ''" v-model="form.password" :type="showPassword ? 'text' : 'password'"
+                           class="w-full h-12 rounded-lg border px-4 pr-12 border-[#D9DBE9]">
+     <button
+  type="button"
+  @click="showPassword = !showPassword"
+  class="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400"
+>
+  <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+</button>
+
                     <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 relative">
                     <label class="text-sm capitalize mb-1 text-heading">{{ $t('label.confirm_password') }}</label>
                     <input :class="errors.password_confirmation ? 'invalid' : ''" v-model="form.password_confirmation"
-                           type="password"
-                           class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+                           :type="showConfirmPassword ? 'text' : 'password'"
+                           class="w-full h-12 rounded-lg border px-4 pr-12 border-[#D9DBE9]">
+<button
+  type="button"
+  @click="showConfirmPassword = !showConfirmPassword"
+  class="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400"
+>
+  <i :class="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+</button>
+
                     <small class="db-field-alert" v-if="errors.password_confirmation">{{
                             errors.password_confirmation[0]
                         }}</small>
@@ -48,7 +64,9 @@ export default {
                 password: null,
                 password_confirmation: null
             },
-            errors: {}
+            errors: {},
+            showPassword: false,
+            showConfirmPassword: false
         }
     },
     computed: {
