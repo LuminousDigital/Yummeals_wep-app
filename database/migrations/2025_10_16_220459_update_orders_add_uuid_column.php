@@ -8,23 +8,17 @@ use Illuminate\Support\Str;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
-        // Step 1: Add nullable column
-        Schema::table('orders', function (Blueprint $table) {
-            if (!Schema::hasColumn('orders', 'uuid')) {
+        if (!Schema::hasColumn('orders', 'uuid')) {
+            Schema::table('orders', function (Blueprint $table) {
                 $table->uuid('uuid')->nullable()->unique();
-            }
-        });
+            });
+        }
 
-        // Step 2: Populate UUIDs for existing records
         DB::table('orders')
             ->whereNull('uuid')
+            ->orWhere('uuid', '')
             ->orderBy('id')
             ->chunkById(100, function ($orders) {
                 foreach ($orders as $order) {
@@ -33,19 +27,12 @@ return new class extends Migration
                         ->update(['uuid' => (string) Str::uuid()]);
                 }
             });
-
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
             if (Schema::hasColumn('orders', 'uuid')) {
-                $table->dropUnique(['uuid']);
                 $table->dropColumn('uuid');
             }
         });
