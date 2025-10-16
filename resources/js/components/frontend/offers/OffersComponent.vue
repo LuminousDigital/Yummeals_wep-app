@@ -437,8 +437,8 @@
                                 >
                                     {{ referral.name }}
                                 </h3>
-                                <p class="font-semibold text-gray-900">
-                                    {{ referral.email }}
+                                <p class="font-semibold text-gray-90`0">
+                                    {{ referral.reward }}
                                 </p>
                                 <p class="text-xs text-gray-500 md:text-sm">
                                     {{ referral.date }}

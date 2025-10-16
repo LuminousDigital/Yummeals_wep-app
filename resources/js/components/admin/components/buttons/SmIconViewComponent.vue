@@ -10,7 +10,7 @@ export default {
     name: "SmIconViewComponent",
     props: {
         link: String,
-        id: Number
+        id: [Number, String]
     }
 }
 </script>

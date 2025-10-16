@@ -410,10 +410,9 @@ export default {
             try {
                 this.loading.isActive = true;
                 this.$store.dispatch("posOrder/changeStatus", {
-                    id: this.$route.params.id,
+                    uuid: this.$route.params.id,
                     status: status,
                 }).then((res) => {
-                    this.loading.isActive = false;
                     alertService.successFlip(
                         1,
                         this.$t("label.status")
@@ -431,7 +430,7 @@ export default {
             try {
                 this.loading.isActive = true;
                 this.$store.dispatch("posOrder/changePaymentStatus", {
-                    id: this.$route.params.id,
+                    uuid: this.$route.params.id,
                     payment_status: status,
                 }).then((res) => {
                     this.loading.isActive = false;
@@ -452,7 +451,7 @@ export default {
             try {
                 this.loading.isActive = true;
                 this.$store.dispatch("posOrder/selectDeliveryBoy", {
-                    id: this.$route.params.id,
+                    uuid: this.$route.params.id,
                     delivery_boy_id: id,
                 }).then((res) => {
                     this.loading.isActive = false;
