@@ -136,9 +136,10 @@ export default {
         checkDeliveryModalStatus() {
             const isLocationCovered = localStorage.getItem("isLocationCovered");
 
-            if (isLocationCovered === null || isLocationCovered === undefined) {
-                this.showDeliveryModal = true;
-            }
+            // Temporarily disabled delivery address modal
+            // if (isLocationCovered === null || isLocationCovered === undefined) {
+            //     this.showDeliveryModal = true;
+            // }
         },
 
         closeDeliveryModal() {
@@ -147,7 +148,8 @@ export default {
 
         handleGoToDeliveryModal() {
             this.showWaitlistModal = false;
-            this.showDeliveryModal = true;
+            // Temporarily disabled delivery address modal
+            // this.showDeliveryModal = true;
         },
 
         handleLocationCovered() {

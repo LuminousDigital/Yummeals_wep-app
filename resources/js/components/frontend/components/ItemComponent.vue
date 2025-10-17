@@ -726,11 +726,12 @@ export default {
         handleGoToDeliveryModal() {
             this.showWaitlistModal = false;
 
+            // Temporarily disabled delivery address modal
             // Add this to force DeliveryModal to open after a short delay
-            setTimeout(() => {
-                this.waitlistKey += 1;
-                this.showDeliveryModal = true; // ✅ show DeliveryAddressModal
-            }, 300);
+            // setTimeout(() => {
+            //     this.waitlistKey += 1;
+            //     this.showDeliveryModal = true; // ✅ show DeliveryAddressModal
+            // }, 300);
         },
 
         openDeliveryModal(item) {
@@ -747,7 +748,9 @@ export default {
             } else if (isLocationCovered === "false") {
                 this.showWaitlistModal = true;
             } else {
-                this.showDeliveryModal = true;
+                // Temporarily disabled delivery address modal
+                // this.showDeliveryModal = true;
+                this.variationModalShow(item); // Allow proceeding without modal
             }
         },
         handleLocationModal(item) {
@@ -758,7 +761,9 @@ export default {
             if (isLocationCovered === "false") {
                 this.showWaitlistModal = true;
             } else {
-                this.showDeliveryModal = true;
+                // Temporarily disabled delivery address modal
+                // this.showDeliveryModal = true;
+                this.variationModalShow(item); // Allow proceeding without modal
             }
         },
         closeDeliveryModal() {

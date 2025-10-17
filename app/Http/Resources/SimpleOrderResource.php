@@ -18,6 +18,7 @@ class SimpleOrderResource extends JsonResource
     {
         return [
             'id'                           => $this->id,
+            'uuid'                         => $this->uuid,
             'order_serial_no'              => $this->order_serial_no,
             'order_datetime'               => AppLibrary::datetime($this->order_datetime),
             "total_currency_price"         => AppLibrary::currencyAmountFormat($this->total),

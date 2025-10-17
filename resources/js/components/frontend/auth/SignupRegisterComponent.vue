@@ -22,9 +22,17 @@
             <input v-model="form.last_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
             <small class="db-field-alert" v-if="errors.last_name">{{ errors.last_name[0] }}</small>
           </div>
-          <div class="col-12">
-            <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.password') }}</label>
-            <input v-model="form.password" type="password" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+          <div class="col-12 sm:col-6 relative">
+            <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.email') }}</label>
+            <input v-model="form.email" type="email" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+            <small class="db-field-alert" v-if="errors.email">{{ errors.email[0] }}</small>
+          </div>
+          <div class="col-12 sm:col-6 relative">
+            <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.password') }}</label>
+            <input v-model="form.password" :type="showPassword ? 'text' : 'password'" class="w-full h-12 rounded-lg border px-4 pr-12 border-[#D9DBE9]">
+            <button type="button" @click="showPassword = !showPassword" class="absolute right-6 top-1/2 translate-y-[2px] text-gray-400">
+              <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+            </button>
             <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
           </div>
           <div class="col-12">
@@ -113,7 +121,8 @@ export default {
         country_code: "",
         referral_code: ""
       },
-      errors: {}
+      errors: {},
+      showPassword: false
     };
   },
   computed: {

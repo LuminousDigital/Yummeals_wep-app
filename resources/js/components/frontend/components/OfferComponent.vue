@@ -1,7 +1,7 @@
 <template>
   <section class="mb-12" v-if="offers.length > 0">
     <div class="container">
-      <div class="swiper">
+      <div class="swiper" ref="swiperContainer">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="offer in offers" :key="offer">
             <router-link :to="{ name: 'frontend.offers.item', params: { slug: offer.slug } }">
@@ -30,6 +30,7 @@ export default {
       loading: {
         isActive: false,
       },
+      swiperInstance: null,
     };
   },
   mounted() {
@@ -62,20 +63,30 @@ export default {
       immediate: true,
     },
   },
+  beforeUnmount() {
+    if (this.swiperInstance) {
+      this.swiperInstance.destroy();
+    }
+  },
   methods: {
     initSwiper() {
-      new Swiper('.swiper', {
-        autoplay: {
-          delay: 4000,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-        },
-        navigation: true,
-        loop: true,
-        slidesPerView: 1,
-        spaceBetween: 16,
-      });
+      if (this.swiperInstance) {
+        this.swiperInstance.destroy();
+      }
+      if (this.$refs.swiperContainer) {
+        this.swiperInstance = new Swiper(this.$refs.swiperContainer, {
+          autoplay: {
+            delay: 4000,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+          },
+          navigation: true,
+          loop: true,
+          slidesPerView: 1,
+          spaceBetween: 16,
+        });
+      }
     },
   },
 };
