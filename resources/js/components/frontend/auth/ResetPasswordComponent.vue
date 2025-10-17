@@ -1,8 +1,8 @@
 <template>
     <LoadingComponent :props="loading"/>
-    <section class="pt-8 pb-16">
-        <div class="container max-w-[360px] py-6 p-4 sm:px-6 shadow-xs rounded-2xl bg-white">
-            <h2 class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading">
+    <section class="pt-28 pb-16">
+        <div class="container max-w-[600px] py-6 p-4 mb-6 sm:mt-12 sm:pb-12  sm:pt-8 sm:px-12 md:shadow-md rounded-2xl bg-white md:border">
+            <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">
                 {{ $t('label.create_new_password') }}</h2>
             <form @submit.prevent="resetPassword">
                 <div class="mb-4 relative">

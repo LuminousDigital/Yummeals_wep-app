@@ -1,13 +1,9 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="pt-8 pb-16">
-        <div
-            class="container max-w-[360px] py-6 p-4 mb-6 sm:px-6 shadow-xs rounded-2xl bg-white"
-        >
-            <h2
-                class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading"
-            >
-                {{ $t("label.welcome_back") }}
+    <section class="pt-28 pb-16">
+        <div class="container max-w-[600px] py-6 p-4 mb-6 sm:mt-12 sm:pb-12  sm:pt-8 sm:px-12 md:shadow-md rounded-2xl bg-white md:border ">
+            <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">
+                {{ $t('label.welcome_back') }}
             </h2>
             <div
                 v-if="errors.validation"
@@ -23,52 +19,21 @@
             </div>
             <form @submit.prevent="login">
                 <div class="mb-4">
-                    <label
-                        for="formEmail"
-                        class="text-sm capitalize mb-1 text-heading"
-                        >{{ $t("label.email") }}</label
-                    >
-                    <input
-                        type="text"
-                        :class="errors.email ? 'invalid' : ''"
-                        v-model="form.email"
-                        class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]"
-                        id="formEmail"
-                    />
-                    <small class="db-field-alert" v-if="errors.email">{{
-                        errors.email[0]
-                    }}</small>
+                    <label for="formEmail" class="text-sm capitalize mb-1 text-heading-light tracking-[1px]">{{ $t('label.email') }}</label>
+                    <input type="text" :class="errors.email ? 'invalid' : ''" v-model="form.email"
+                        class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]" id="formEmail">
+                    <small class="db-field-alert" v-if="errors.email">{{ errors.email[0] }}</small>
                 </div>
-                <div class="mb-4 relative">
-                    <label
-                        for="formPassword"
-                        class="text-sm capitalize mb-1 text-heading"
-                        >{{ $t("label.password") }}</label
-                    >
-                    <input
-                        autocomplete="off"
-                        :type="showPassword ? 'text' : 'password'"
-                        :class="errors.password ? 'invalid' : ''"
-                        v-model="form.password"
-                        class="w-full h-12 rounded-lg border px-4 pr-12 border-[#D9DBE9]"
-                        id="formPassword"
-                    />
-                    <button
-                        type="button"
-                        @click="showPassword = !showPassword"
-                        class="absolute right-5 top-10 text-gray-400"
-                    >
-                        <i
-                            :class="
-                                showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'
-                            "
-                        ></i>
-                    </button>
-                    <small class="db-field-alert" v-if="errors.password">{{
-                        errors.password[0]
-                    }}</small>
+                <div class="mb-4">
+                    <label for="formPassword" class="text-sm capitalize mb-1 text-heading-light tracking-[1px]">{{
+                        $t('label.password')
+                    }}</label>
+                    <input autocomplete="off" type="password" :class="errors.password ? 'invalid' : ''"
+                        v-model="form.password" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]"
+                        id="formPassword">
+                    <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
                 </div>
-                <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center justify-between sm:mb-12 mb-12">
                     <div class="db-field-checkbox p-0">
                         <div class="custom-checkbox w-3 h-3">
                             <input
@@ -80,69 +45,40 @@
                                 class="fa-solid fa-check custom-checkbox-icon leading-[9px] text-[9px] rounded-[3px] border-[#6E7191]"
                             ></i>
                         </div>
-                        <label
-                            for="checkbox2"
-                            class="db-field-label text-xs text-heading"
-                        >
-                            {{ $t("label.remember_me") }}
+                        <label for="checkbox2" class="db-field-label sm:text-sm text-xs text-heading">
+                            {{ $t('label.remember_me') }}
                         </label>
                     </div>
-                    <router-link
-                        :to="{ name: 'auth.forgetPassword' }"
-                        class="capitalize text-xs font-medium transition text-primary"
-                    >
-                        {{ $t("button.forgot_password") }}
+                    <router-link :to="{ name: 'auth.forgetPassword' }"
+                        class="capitalize sm:text-sm text-xs font-medium transition text-primary">
+                        {{ $t('button.forgot_password') }}
                     </router-link>
                 </div>
-                <button
-                    type="submit"
-                    class="w-full h-12 text-center capitalize font-medium rounded-3xl mb-6 text-white bg-primary"
-                >
-                    {{ $t("button.login") }}
+                <button type="submit"
+                    class="w-full h-12 text-center capitalize font-medium rounded-lg mb-6 text-white bg-primary">
+                    {{ $t('button.login') }}
                 </button>
                 <div class="flex items-center justify-center gap-2 mb-4">
-                    <span class="text-xs text-[#6E7191]">{{
-                        $t("message.have_account")
-                    }}</span>
-                    <router-link
-                        :to="{ name: 'auth.signupPhone' }"
-                        class="text-xs font-medium text-primary"
-                    >
-                        {{ $t("button.signup") }}
+                    <span class="sm:text-sm text-xs text-[#6E7191]">{{ $t('message.have_account') }}</span>
+                    <router-link :to="{ name: 'auth.signupPhone' }" class="sm:text-sm text-xs font-medium text-primary">
+                        {{ $t('button.signup') }}
                     </router-link>
                 </div>
 
-                <div
-                    v-if="enums.activityEnum.ENABLE == setting.site_guest_login"
-                >
-                    <p
-                        class="text-sm uppercase text-center mb-3 text-[#6E7191]"
-                    >
-                        {{ $t("label.or") }}
-                    </p>
-                    <router-link
-                        :to="{ name: 'auth.guestLogin' }"
-                        class="w-full h-12 leading-[46px] text-center capitalize font-medium rounded-3xl border text-primary border-primary bg-white"
-                    >
-                        {{ $t("button.login_as_guest") }}
+                <div v-if="enums.activityEnum.ENABLE == setting.site_guest_login">
+                    <p class="text-sm uppercase text-center mb-3 text-[#6E7191]">{{ $t('label.or') }}</p>
+                    <router-link :to="{ name: 'auth.guestLogin' }"
+                        class="w-full h-12 leading-[46px] text-center capitalize font-medium rounded-lg border text-primary border-primary bg-white">
+                        {{ $t('button.login_as_guest') }}
                     </router-link>
                 </div>
             </form>
+            <SocialAuthButtons class="mt-12"/>
         </div>
 
-        <div
-            v-if="
-                demo === 'true' ||
-                demo === 'TRUE' ||
-                demo === 'True' ||
-                demo === '1' ||
-                demo === 1
-            "
-            class="container max-w-[360px] py-6 p-4 sm:px-6 shadow-xs rounded-2xl bg-white"
-        >
-            <h2 class="mb-6 text-center text-lg font-medium text-heading">
-                {{ $t("message.for_quick_demo") }}
-            </h2>
+        <div v-if="demo === 'true' || demo === 'TRUE' || demo === 'True' || demo === '1' || demo === 1"
+            class="container max-w-[600px] py-6 p-4 mb-6 sm:mt-12 sm:pb-12  sm:pt-8 sm:px-12 md:shadow-md rounded-2xl bg-white md:border">
+            <h2 class="mb-6 text-center text-lg font-medium text-heading">{{ $t('message.for_quick_demo') }}</h2>
             <nav class="grid grid-cols-2 gap-3">
                 <button
                     @click.prevent="setupCredit('admin')"
@@ -187,6 +123,7 @@
 <script>
 import router from "../../../router";
 import LoadingComponent from "../components/LoadingComponent";
+import SocialAuthButtons from "../components/button/SocialAuthButtons.vue";
 import alertService from "../../../services/alertService";
 import appService from "../../../services/appService";
 import ENV from "../../../config/env";
@@ -195,7 +132,7 @@ import { routes } from "../../../router";
 
 export default {
     name: "LoginComponent",
-    components: { LoadingComponent },
+    components: { LoadingComponent, SocialAuthButtons },
     data() {
         return {
             loading: {

@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="pt-8 pb-16">
+    <section class="pt-28 pb-16">
         <div class="container max-w-3xl">
             <div class="flex items-start flex-col md:flex-row gap-6">
                 <div class="w-full">

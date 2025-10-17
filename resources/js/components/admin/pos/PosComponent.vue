@@ -355,8 +355,8 @@
                         <div class="col-12 sm:col-6">
                             <label for="phone" class="db-field-title">{{ $t("label.phone") }}</label>
                             <div :class="errors.phone ? 'invalid' : ''"
-                                class="w-full h-12 rounded-lg border px-4 flex items-center border-[#D9DBE9]">
-                                <div class="w-fit flex-shrink-0 dropdown-group">
+                                class="w-full h-12 rounded-lg border px-4 flex items-center border-[#D9DBE9] bg-[#eff0f6] focus:bg-white">
+                                <div class="w-fit flex-shrink-0 dropdown-group pr-4">
                                     <button type="button" class="flex items-center gap-1 dropdown-btn">
                                         {{ flag }}
                                         <span class="whitespace-nowrap flex-shrink-0 text-xs">

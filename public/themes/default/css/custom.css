@@ -400,6 +400,11 @@
     color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
+.text-heading-light {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1)) !important;
+}
+
 .language-note-font-size {
     font-size: 12px;
 }

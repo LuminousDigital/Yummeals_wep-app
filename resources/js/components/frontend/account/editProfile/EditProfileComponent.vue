@@ -38,8 +38,8 @@
                         </div>
                         <div class="col-12 sm:col-6">
                             <label for="phone" class="text-xs capitalize mb-1 text-heading">{{ $t('label.phone') }}</label>
-                            <div class="w-full h-12 rounded-lg border px-4 flex items-center border-[#D9DBE9]" :class="errors.phone ? 'invalid' : ''">
-                                <div class="w-fit flex-shrink-0 dropdown-group">
+                            <div class="w-full h-12 rounded-lg border px-4 flex items-center border-[#D9DBE9] bg-[#eff0f6] focus:bg-white" :class="errors.phone ? 'invalid' : ''">
+                                <div class="w-fit flex-shrink-0 dropdown-group pr-4">
                                     <button type="button" class="flex items-center gap-1 dropdown-btn">
                                         {{ flag }}
                                         <span class="whitespace-nowrap flex-shrink-0 text-xs">
@@ -49,7 +49,7 @@
                                     </button>
                                 </div>
                                 <input id="phone" type="text" v-on:keypress="phoneNumber($event)" v-model="form.phone"
-                                    class="pl-4 text-sm w-full h-full text-heading">
+                                    class="pl-4 text-sm w-full h-full text-heading focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg">
                             </div>
                             <small class="db-field-alert" v-if="errors.phone">
                                 {{ errors.phone[0] }}
@@ -128,6 +128,18 @@ export default {
                         this.loading.isActive = false;
                         alertService.successFlip(1, this.$t("menu.profile"));
                         this.errors = {};
+                        try {
+                            const fromSocial = this.$store.getters.socialEntry === true;
+                            if (fromSocial) {
+                                const carts = (this.$store.getters['frontendCart/lists'] || []);
+                                this.$store.commit('setSocialEntry', false);
+                                if (Array.isArray(carts) && carts.length > 0) {
+                                    this.$router.replace({ name: 'frontend.checkout' });
+                                } else {
+                                    this.$router.replace({ name: 'frontend.home' });
+                                }
+                            }
+                        } catch (e) {}
                     }).catch((err) => {
                         this.loading.isActive = false;
                         alertService.error(err);

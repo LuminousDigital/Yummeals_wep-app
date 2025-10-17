@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\RootController;
 use App\Http\Controllers\Installer\InstallerController;
+use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\PaymentGateways\Gateways\Paytm;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,15 @@ Route::prefix('payment')->name('payment.')->middleware(['installed'])->group(fun
     Route::match(['get', 'post'], '/{paymentGateway:slug}/{order}/fail', [PaymentController::class, 'fail'])->name('fail');
     Route::match(['get', 'post'], '/{paymentGateway:slug}/{order}/cancel', [PaymentController::class, 'cancel'])->name('cancel');
     Route::get('/successful/{order}', [PaymentController::class, 'successful'])->name('successful');
+});
+
+// Social login (no apiKey header required for provider callbacks)
+Route::prefix('auth/social')->name('auth.social.')->middleware(['web'])->group(function () {
+    Route::get('/google/redirect', [SocialLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+    Route::get('/google/callback', [SocialLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
+    Route::get('/facebook/redirect', [SocialLoginController::class, 'redirectToFacebook'])->name('facebook.redirect');
+    Route::get('/facebook/callback', [SocialLoginController::class, 'handleFacebookCallback'])->name('facebook.callback');
 });
 
 Route::get('/{any}', [RootController::class, 'index'])->middleware(['installed'])->where(['any' => '.*']);

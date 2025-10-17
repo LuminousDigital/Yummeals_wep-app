@@ -1,20 +1,20 @@
 <template>
     <LoadingComponent :props="loading" />
     <!-- <footer class="pt-12 footer-part mb-14 lg:mb-0"> -->
-    <footer class="footer-part pt-12 mb-14 lg:mb-0 bg-[#1a0c05]">
+    <footer class="footer-part pt-12 mb-14 lg:mb-0 bg-primary">
         <div class="container">
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
                 <div>
                     <router-link :to="{ name: 'frontend.home' }">
                         <img class="mb-8 w-36" :src="setting.theme_footer_logo" alt="logo">
                     </router-link>
-                    <p class="mb-3 text-xs text-white">{{ $t('label.subscribe_short_text') }}</p>
+                    <p class="mb-3 text-sm text-white">{{ $t('label.subscribe_short_text') }}</p>
                     <form @submit.prevent="saveSubscription"
                         class="flex items-center w-full h-12 p-2 mb-8 bg-white rounded-lg sm:max-w-xs">
                         <input type="email" :placeholder="$t('label.your_email_address')"
-                            v-model="subscriptionProps.post.email" class="w-full h-full ltr:pl-2 rtl:pr-2">
+                            v-model="subscriptionProps.post.email" class="w-full h-full ltr:pl-2 rtl:pr-2 bg-white rounded-lg">
                         <button type="submit"
-                            class="capitalize text-xs font-medium rounded-md flex-shrink-0 p-2.5 text-white bg-primary">
+                            class="capitalize text-xs font-medium flex-shrink-0 p-2.5 text-white bg-primary rounded-lg">
                             {{ $t('button.subscribe') }}
                         </button>
                     </form>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <div class="sm:w-fit sm:mx-auto">
-                        <h3 class="mb-6 text-lg font-semibold text-white capitalize">{{ $t('label.useful_links') }}</h3>
+                        <h3 class="mb-6 text-[1rem] font-normal text-white capitalize">{{ $t('label.useful_links') }}</h3>
                         <nav v-if="pages.length > 0" class="flex flex-col items-start gap-3">
                             <router-link v-for="page in pages" class="text-white capitalize hover:underline"
                                 :to="{ name: 'frontend.page', params: { slug: page.slug } }">
@@ -45,7 +45,7 @@
                 </div>
                 <div>
                     <h3 v-if="setting.site_android_app_link || setting.site_ios_app_link"
-                        class="mb-3 text-lg font-semibold text-white capitalize">
+                        class="mb-3 text-sm font-semibold text-white capitalize">
                         {{ $t('label.download_our_apps') }}
                     </h3>
                     <nav class="flex items-center gap-3 mb-7 w-full max-w-[265px]">
@@ -59,17 +59,17 @@
                     <ul class="flex flex-col gap-5">
                         <li class="flex items-center gap-2.5 text-white">
                             <i class="lab lab-sms-tracking lab-font-size-24"></i>
-                            <span class="text-lg">{{ setting.company_email }}</span>
+                            <span class="text-sm">{{ setting.company_email }}</span>
                         </li>
                         <li class="flex items-center gap-2.5 text-white">
                             <i class="lab lab-call-center lab-font-size-24"></i>
-                            <span class="text-lg font-medium">{{ setting.company_phone }}</span>
+                            <span class="text-sm">{{ setting.company_phone }}</span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="py-8 mt-8 border-t border-[#e5e7eb]">
+        <div class="py-8 mt-8 border-t border-[#ffffff1f]">
             <p class="text-sm text-center text-white">{{ setting.site_copyright }}</p>
         </div>
     </footer>
