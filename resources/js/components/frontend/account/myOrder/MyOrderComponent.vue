@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="pt-8 pb-16">
+    <section class="pt-28 pb-16">
         <div class="container max-w-3xl">
             <router-link :to="{ name: 'frontend.home' }" class="mb-3 inline-flex items-center gap-2 text-primary"
                 v-if="activeOrders.length > 0 || previousOrders.length > 0">

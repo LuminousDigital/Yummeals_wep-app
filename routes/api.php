@@ -167,7 +167,7 @@ Route::prefix('auth')->middleware(['installed', 'apiKey', 'localization'])->name
     });
 });
 
-/* all routes must be singular word*/
+
 // Profile routes
 Route::prefix('profile')->name('profile.')->middleware(['installed', 'apiKey', 'auth:sanctum', 'localization'])->group(function () {
     Route::get('/', [ProfileController::class, 'profile']);

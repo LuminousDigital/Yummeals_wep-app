@@ -1,54 +1,55 @@
 <template>
   <LoadingComponent :props="loading" />
-  <section class="pt-8 pb-16">
-    <div class="container max-w-[550px] py-6 p-4 sm:px-6 shadow-xs rounded-2xl bg-white">
-      <h2 class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading">
+  <section class="pt-28 pb-16">
+        <div class="container max-w-[600px] py-6 p-4 mb-6 sm:mt-12 sm:pb-12  sm:pt-8 sm:px-12 md:shadow-md rounded-2xl bg-white md:border">
+      <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">
         {{ $t('label.create_account') }}
       </h2>
       <form @submit.prevent="save">
         <div class="row">
-          <div class="col-12 sm:col-6">
-            <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.first_name') }}</label>
-            <input v-model="form.first_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
-            <small class="db-field-alert" v-if="errors.first_name">{{ errors.first_name[0] }}</small>
-          </div>
-          <div class="col-12 sm:col-6">
-            <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.last_name') }}</label>
-            <input v-model="form.last_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
-            <small class="db-field-alert" v-if="errors.last_name">{{ errors.last_name[0] }}</small>
-          </div>
-          <div class="col-12 sm:col-6">
-            <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.email') }}</label>
+         <div class="col-12">
+            <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.email') }}</label>
             <input v-model="form.email" type="email" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
             <small class="db-field-alert" v-if="errors.email">{{ errors.email[0] }}</small>
           </div>
           <div class="col-12 sm:col-6">
-            <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.password') }}</label>
+            <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.first_name') }}</label>
+            <input v-model="form.first_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+            <small class="db-field-alert" v-if="errors.first_name">{{ errors.first_name[0] }}</small>
+          </div>
+          <div class="col-12 sm:col-6">
+            <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.last_name') }}</label>
+            <input v-model="form.last_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+            <small class="db-field-alert" v-if="errors.last_name">{{ errors.last_name[0] }}</small>
+          </div>
+          <div class="col-12">
+            <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.password') }}</label>
             <input v-model="form.password" type="password" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
             <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
           </div>
           <div class="col-12">
-            <button type="submit" class="w-full h-12 font-medium text-center text-white capitalize rounded-3xl bg-primary">
+            <button type="submit" class="w-full h-12 text-center text-white capitalize rounded-lg bg-primary">
               {{ $t('button.sign_up') }}
             </button>
           </div>
         </div>
       </form>
+      <SocialAuthButtons class="mt-12"/>
     </div>
   </section>
 </template>
 
 <script>
 //     <LoadingComponent :props="loading" />
-//     <section class="pt-8 pb-16">
+//     <section class="pt-28 pb-16">
 //         <div class="container max-w-[550px] py-6 p-4 sm:px-6 shadow-xs rounded-2xl bg-white">
-//             <h2 class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading">
+//             <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">
 //                 {{ $t('label.create_account') }}
 //             </h2>
 //             <form @submit.prevent="save">
 //                 <div class="row">
 //                     <div class="col-12 sm:col-6">
-//                         <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.first_name') }}</label>
+//                         <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.first_name') }}</label>
 //                         <input type="text" v-model="props.form.first_name"
 //                             class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
 //                         <small class="db-field-alert" v-if="errors.first_name">
@@ -56,7 +57,7 @@
 //                         </small>
 //                     </div>
 //                     <div class="col-12 sm:col-6">
-//                         <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.last_name') }}</label>
+//                         <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.last_name') }}</label>
 //                         <input type="text" v-model="props.form.last_name"
 //                             class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
 //                         <small class="db-field-alert" v-if="errors.last_name">
@@ -64,7 +65,7 @@
 //                         </small>
 //                     </div>
 //                     <div class="col-12 sm:col-6">
-//                         <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.email') }}</label>
+//                         <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.email') }}</label>
 //                         <input type="email" v-model="props.form.email"
 //                             class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
 //                         <small class="db-field-alert" v-if="errors.email">
@@ -72,7 +73,7 @@
 //                         </small>
 //                     </div>
 //                     <div class="col-12 sm:col-6">
-//                         <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.password') }}</label>
+//                         <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.password') }}</label>
 //                         <input type="password" v-model="props.form.password"
 //                             class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
 //                         <small class="db-field-alert" v-if="errors.password">
@@ -94,11 +95,12 @@
 // <script>
 
 import LoadingComponent from "../components/LoadingComponent";
+import SocialAuthButtons from "../components/button/SocialAuthButtons.vue";
 import alertService from "../../../services/alertService";
 
 export default {
   name: "SignupRegisterComponent",
-  components: { LoadingComponent },
+  components: { LoadingComponent, SocialAuthButtons },
   data() {
     return {
       loading: { isActive: false },

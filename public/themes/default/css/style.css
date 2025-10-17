@@ -479,7 +479,8 @@ body {
   line-height: 1.5rem;
   font-weight: 400;
   --tw-text-opacity: 1;
-  color: rgb(110 113 145 / var(--tw-text-opacity));
+  /* color: rgb(110 113 145 / var(--tw-text-opacity)); */
+  color: rgb(31 41 55 / var(--tw-text-opacity, 1));
 }
 
 *,
@@ -6118,6 +6119,11 @@ input:checked+div svg {
 .text-heading {
   --tw-text-opacity: 1;
   color: rgb(100, 150, 26, 1);
+}
+
+.text-heading-light {
+  --tw-text-opacity: 1;
+  color: rgb(110 113 145 / var(--tw-text-opacity)) !important;
 }
 
 .text-\[\#E93C3C\] {

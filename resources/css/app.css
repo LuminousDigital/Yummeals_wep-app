@@ -9,7 +9,7 @@
         /* --primary: 242 91 10; */
         --primary-slate: 255 59 142;
         --primary-light: 255 237 244;
-        --client-font: 'Rubik', sans-serif;
+        --client-font: 'Nunito Sans', sans-serif;
         --admin-font: 'Public Sans', sans-serif;
     }
 
@@ -23,7 +23,8 @@
     textarea {
         @apply
         placeholder:text-sm placeholder:text-placeholder
-        focus-within:outline-0 bg-transparent text-[15px]
+        focus-within:outline-0 text-[15px]
+        bg-[#eff0f6] focus:border-primary focus:bg-white
     }
 
     h1,
@@ -33,11 +34,11 @@
     h5,
     h6 { @apply text-heading; font-style: initial; }
 
-    body { @apply text-base font-normal font-rubik scroll-smooth text-paragraph bg-white }
+    body { @apply text-base font-normal font-inter scroll-smooth text-gray-800 bg-white tracking-[.5px] }
 }
 
 @layer components {
-    .container { @apply max-w-6xl mx-auto px-2.5 sm:px-4 }
+    .container { @apply w-full max-w-full mx-auto px-2.5 sm:px-12 }
     .row { @apply flex flex-wrap -m-3 }
     .col-1 { @apply w-1/6 p-3 }
     .col-2 { @apply w-1/5 p-3 }
@@ -113,7 +114,7 @@
     /*===================================
             COMPONENTS PART START
     ====================================*/
-    .ff-header .container { @apply h-[118px] lg:h-[74px] py-3 lg:py-0 }
+    .ff-header .container { @apply sm:py-6 py-3 pb-4 fixed h-fit inset-0 z-[9999] bg-white shadow-sm }
     .ff-header.active { @apply fixed top-0 left-0 w-full z-60 }
     #cart.active { @apply opacity-100 visible }
     #cart.active > div { @apply ltr:translate-x-0 rtl:-translate-x-0 }
