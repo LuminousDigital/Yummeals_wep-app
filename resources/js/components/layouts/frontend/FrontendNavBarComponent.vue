@@ -33,7 +33,7 @@
 
             <div class="flex flex-col items-center justify-end gap-3 w-full mt-4 lg:flex-row lg:w-fit lg:mt-0">
                 <form @submit.prevent="search"
-                    class="header-search-group group flex items-center justify-center border border-solid gap-2 px-2 w-full lg:w-[20rem] h-12 rounded-lg transition bg-[#EFF0F6] focus-within:bg-white focus-within:border-primary">
+                    class="header-search-group group flex items-center justify-center border-2 border-solid gap-2 px-2 w-full lg:w-[20rem] h-12 rounded-lg transition bg-[#EFF0F6] focus-within:bg-white focus-within:border-primary">
                     <button type="submit" class="header-search-submit flex justify-center items-center pl-1 text-heading-light">
                         <i class="lab lab-search-normal !text-sm text-heading-light"></i>
                     </button>
