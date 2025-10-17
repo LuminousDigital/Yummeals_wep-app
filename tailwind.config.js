@@ -25,6 +25,11 @@ module.exports = {
           fontFamily: {
               "rubik": ["'Rubik', sans-serif"],
               "public": ["'Public Sans', sans-serif"],
+              "inter": ["'Inter', sans-serif"],
+              "poppins": ["'Poppins', sans-serif"],
+              "nunito": ["'Nunito Sans', sans-serif"],
+              "sora": ["'Sora', sans-serif"],
+              "urbanist": ["'Urbanist', sans-serif"],
               "awesome": ["'Font Awesome 6 Free'"],
               "lab": ["'Lab'"]
           },

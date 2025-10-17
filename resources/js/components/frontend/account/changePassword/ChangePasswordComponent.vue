@@ -14,7 +14,7 @@
                 <form @submit.prevent="changePassword">
                     <div class="row">
                         <div class="col-12 sm:col-12">
-                            <label for="old_password" class="text-sm capitalize mb-1 text-heading">
+                            <label for="old_password" class="text-sm capitalize mb-1 text-heading-light tracking-[1px]">
                                 {{ $t('label.old_password') }}
                             </label>
                             <input v-model="form.old_password" v-bind:class="errors.old_password ? 'invalid' : ''"
@@ -25,7 +25,7 @@
                             }}</small>
                         </div>
                         <div class="col-12 sm:col-6">
-                            <label for="password" class="text-sm capitalize mb-1 text-heading">{{
+                            <label for="password" class="text-sm capitalize mb-1 text-heading-light tracking-[1px]">{{
                                 $t('label.new_password')
                             }}
                             </label>
@@ -36,7 +36,7 @@
                             }}</small>
                         </div>
                         <div class="col-12 sm:col-6">
-                            <label for="password_confirmation" class="text-sm capitalize mb-1 text-heading">
+                            <label for="password_confirmation" class="text-sm capitalize mb-1 text-heading-light tracking-[1px]">
                                 {{ $t('label.retype_new_password') }}</label>
                             <input v-model="form.password_confirmation"
                                 v-bind:class="errors.password_confirmation ? 'invalid' : ''" id="password_confirmation"

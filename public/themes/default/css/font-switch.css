@@ -1,0 +1,22 @@
+:root {
+  --font-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+}
+
+/* Body-level switches (override defaults) */
+body.font-inter, .font-inter body { font-family: 'Inter', var(--font-fallback); }
+body.font-sora, .font-sora body { font-family: 'Sora', var(--font-fallback); }
+body.font-poppins, .font-poppins body { font-family: 'Poppins', var(--font-fallback); }
+body.font-manrope, .font-manrope body { font-family: 'Manrope', var(--font-fallback); }
+body.font-urbanist, .font-urbanist body { font-family: 'Urbanist', var(--font-fallback); }
+body.font-nunito-sans, .font-nunito-sans body { font-family: 'Nunito Sans', var(--font-fallback); }
+body.font-roboto-flex, .font-roboto-flex body { font-family: 'Roboto Flex', var(--font-fallback); }
+
+/* Utility classes (for scoping to sections/components) */
+.font-inter { font-family: 'Inter', var(--font-fallback) !important; }
+.font-sora { font-family: 'Sora', var(--font-fallback) !important; }
+.font-poppins { font-family: 'Poppins', var(--font-fallback) !important; }
+.font-manrope { font-family: 'Manrope', var(--font-fallback) !important; }
+.font-urbanist { font-family: 'Urbanist', var(--font-fallback) !important; }
+.font-nunito-sans { font-family: 'Nunito Sans', var(--font-fallback) !important; }
+.font-roboto-flex { font-family: 'Roboto Flex', var(--font-fallback) !important; }
+

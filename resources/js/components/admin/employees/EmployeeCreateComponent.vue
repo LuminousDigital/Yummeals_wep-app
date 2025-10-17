@@ -33,7 +33,7 @@
                     <div class="form-col-12 sm:form-col-6">
                         <label for="phone" class="db-field-title">{{ $t('label.phone') }}</label>
                         <div :class="errors.phone ? 'invalid' : ''" class="db-field-control flex items-center">
-                            <div class="w-fit flex-shrink-0 dropdown-group">
+                            <div class="w-fit flex-shrink-0 dropdown-group pr-4">
                                 <button type="button" class="flex items-center gap-1 dropdown-btn">
                                     {{ flag }}
                                     <span class="whitespace-nowrap flex-shrink-0 text-xs">

@@ -1,7 +1,7 @@
 <template>
     <aside @click="closeBackdrop($event)" id="cart"
         class="w-screen h-full fixed top-[58px] lg:top-[74px] left-0 z-60 opacity-0 invisible bg-black/60 transition">
-        <div class="max-w-sm w-full h-screen absolute top-0 right-0 translate-x-full bg-white transition">
+        <div class="max-w-sm w-full h-screen absolute top-[72px] md:top-[91px] lg:top-[22px] right-0 translate-x-full bg-white transition">
             <div :class="carts.length === 0 || orderType === null ? 'flex items-center justify-center flex-col text-center overflow-y-auto' : 'thin-scrolling'"
                 class="h-[calc(96vh-200px)] lg:h-[calc(100vh-220px)] p-4 relative">
                 <h3 :class="carts.length === 0 || orderType === null ? 'mb-16' : 'mb-5'"

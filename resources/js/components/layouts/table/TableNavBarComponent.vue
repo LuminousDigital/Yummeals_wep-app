@@ -9,7 +9,7 @@
                 </router-link>
 
                 <button type="button" @click.prevent="openCanvas('cart')"
-                    class="webcart flex lg:hidden items-center justify-center gap-1.5 w-fit rounded-3xl capitalize text-sm font-medium h-8 px-3 transition text-white bg-heading">
+                    class="webcart flex lg:hidden items-center justify-center gap-1.5 w-fit rounded-lg capitalize text-sm font-medium h-8 px-3 transition text-white bg-heading">
                     <i class="fa-solid fa-bag-shopping text-sm"></i>
                     <span class="whitespace-nowrap">
                         {{ currencyFormat(subtotal, setting.site_digit_after_decimal_point,
@@ -20,12 +20,12 @@
 
             <div class="flex flex-col items-center justify-end gap-3 w-full mt-4 lg:flex-row lg:w-fit lg:mt-0">
                 <form @submit.prevent="search"
-                    class="header-search-group group flex items-center justify-center border border-solid gap-2 px-2 w-full lg:w-52 h-8 rounded-3xl transition border-[#EFF0F6] bg-[#EFF0F6] focus-within:bg-white focus-within:border-primary">
-                    <button type="submit" class="header-search-submit">
-                        <i class="lab lab-search-normal"></i>
+                    class="header-search-group group flex items-center justify-center border border-solid gap-2 px-2 w-full lg:w-[20rem] h-12 rounded-lg transition border-[#EFF0F6] bg-[#EFF0F6] focus-within:bg-white focus-within:border-primary">
+                    <button type="submit" class="header-search-submit flex justify-center items-center pl-1">
+                        <i class="lab lab-search-normal !text-sm"></i>
                     </button>
                     <input type="search" v-model="searchItem" :placeholder="$t('button.search')"
-                        class="header-search-field w-full h-full text-xs appearance-none placeholder:font-normal placeholder:text-paragraph text-heading">
+                        class="header-search-field rounded-tr-lg rounded-br-lg w-full h-full text-xs appearance-none placeholder:font-normal placeholder:text-paragraph text-heading-light">
                     <button type="button" @click.prevent="searchReset"
                         class="header-search-button transition invisible group-focus-within:visible">
                         <i class="lab lab-close-circle-line lab-font-size-16 lab-font-weight-600 text-red-500"></i>
@@ -35,7 +35,7 @@
                 <div v-if="setting.site_language_switch === enums.activityEnum.ENABLE"
                     class="hidden lg:block relative dropdown-group w-full sm:w-fit">
                     <button
-                        class="flex items-center justify-center gap-1.5 w-fit rounded-3xl capitalize text-sm font-medium h-8 px-3 border transition text-heading bg-white border-gray-200 dropdown-btn">
+                        class="flex items-center justify-center gap-1.5 w-fit rounded-lg capitalize text-sm font-medium h-8 px-3 border transition text-heading bg-white border-gray-200 dropdown-btn">
                         <img :src="language.image" alt="flag" class="w-4 h-4 rounded-full">
                         <span class="whitespace-nowrap">{{ language.name }}</span>
                     </button>
@@ -50,7 +50,7 @@
                 </div>
 
                 <button type="button" @click.prevent="openCanvas('cart')"
-                    class="webcart hidden lg:flex items-center justify-center gap-1.5 w-fit rounded-3xl capitalize text-sm font-medium h-8 px-3 transition text-white bg-heading">
+                    class="webcart hidden lg:flex items-center justify-center gap-1.5 w-fit rounded-lg capitalize text-sm font-normal h-12 px-3 transition text-white bg-heading">
                     <i class="fa-solid fa-bag-shopping text-sm"></i>
                     <span class="whitespace-nowrap">
                         {{ currencyFormat(subtotal, setting.site_digit_after_decimal_point,

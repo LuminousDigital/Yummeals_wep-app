@@ -1,19 +1,19 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="pt-8 pb-16">
-        <div class="container max-w-[360px] py-6 p-4 sm:px-6 shadow-xs rounded-2xl bg-white">
-            <h2 class="capitalize mb-6 text-center text-[22px] font-semibold leading-[34px] text-heading">{{
+    <section class="pt-28 pb-16">
+        <div class="container max-w-[600px] py-6 p-4 mb-6 sm:mt-12 sm:pb-12  sm:pt-8 sm:px-12 md:shadow-md rounded-2xl bg-white md:border">
+            <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">{{
                 $t('label.lets_get_started')
                 }}
             </h2>
             <form @submit.prevent="save">
                 <div class="mb-6">
-                    <label for="phone" class="text-sm capitalize mb-1 text-heading">
+                    <label for="phone" class="text-sm capitalize mb-1 text-heading-light tracking-[1px]">
                         {{ $t('label.mobile_number') }}
                     </label>
                     <div :class="errors.phone ? 'invalid' : ''"
-                        class="w-full h-12 rounded-lg border px-4 flex items-center border-[#D9DBE9]">
-                        <div class="w-fit flex-shrink-0 dropdown-group">
+                        class="w-full h-12 rounded-lg border pl-4 flex items-center border-[#D9DBE9] bg-[#eff0f6] focus:bg-white">
+                        <div class="w-fit flex-shrink-0 dropdown-group pr-4">
                             <button type="button" class="flex items-center gap-1">
                                 {{ flag }}
                                 <span class="whitespace-nowrap flex-shrink-0 text-sm">{{ props.form.code }}</span>
@@ -22,19 +22,19 @@
                         </div>
                         <input id="phone" v-model="props.form.phone" v-on:keyup.enter="save"
                             v-on:keypress="phoneNumber($event)" type="text"
-                            class="pl-4 text-sm w-full h-full text-heading">
+                            class="pl-4 text-sm w-full h-full text-heading focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg">
                     </div>
                     <small class="db-field-alert" v-if="errors.phone">
                         {{ errors.phone[0] }}
                     </small>
                 </div>
                 <button type="submit"
-                    class="w-full h-12 text-center capitalize font-medium rounded-3xl mb-6 text-white bg-primary">
+                    class="w-full h-12 text-center capitalize font-medium rounded-lg mb-6 mt-4 sm:mt-6 text-white bg-primary">
                     {{ $t('label.next') }}
                 </button>
                 <div class="flex items-center justify-center gap-2">
-                    <span class="text-base text-[#6E7191]">{{ $t('label.already_have_an_account') }}</span>
-                    <router-link :to="{ name: 'auth.login' }" class="text-base font-medium text-primary">
+                    <span class="text-sm">{{ $t('label.already_have_an_account') }}</span>
+                    <router-link :to="{ name: 'auth.login' }" class="text-sm text-primary">
                         {{ $t('label.login') }}
                     </router-link>
                 </div>

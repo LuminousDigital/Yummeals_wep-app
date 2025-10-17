@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <address class="pt-8 pb-16">
+    <address class="pt-28 pb-16">
         <div class="container max-w-3xl">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-[26px] leading-10 font-semibold capitalize">{{ $t('label.address') }}</h3>

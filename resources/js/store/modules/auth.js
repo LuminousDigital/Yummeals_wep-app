@@ -13,7 +13,8 @@ export const auth = {
         },
         authPermission: {},
         authDefaultPermission: {},
-        authDefaultMenu: {}
+        authDefaultMenu: {},
+        socialEntry: false
     },
     getters: {
         authStatus: function (state) {
@@ -42,6 +43,9 @@ export const auth = {
         },
         resetInfo: function (state) {
             return state.resetInfo;
+        },
+        socialEntry: function (state) {
+            return state.socialEntry;
         }
     },
     actions: {
@@ -150,6 +154,7 @@ export const auth = {
             state.authPermission = {};
             state.authDefaultPermission = {};
             state.authDefaultMenu = {};
+            state.socialEntry = false;
         },
         forgetPassword: function (state, payload) {
             state.resetInfo = {
@@ -163,6 +168,9 @@ export const auth = {
         },
         authInfo: function (state, payload) {
             state.authInfo = payload;
+        },
+        setSocialEntry: function (state, payload) {
+            state.socialEntry = !!payload;
         }
     },
 }

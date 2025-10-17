@@ -55,7 +55,10 @@ class User extends Authenticatable implements HasMedia
         'referral_code',
         'referred_by',
         'referral_balance',
-        'total_referrals'
+        'total_referrals',
+        'google_id', 'facebook_id',
+        'google_token', 'facebook_token',
+        'google_refresh_token', 'facebook_refresh_token',
     ];
 
     /**
@@ -74,7 +77,13 @@ class User extends Authenticatable implements HasMedia
         'country_code'      => 'string',
         'is_guest'          => 'integer',
         'status'            => 'integer',
-        'email_verified_at' => 'datetime',
+'email_verified_at' => 'datetime',
+        'google_id' => 'string',
+        'facebook_id' => 'string',
+        'google_token' => 'string',
+        'facebook_token' => 'string',
+        'google_refresh_token' => 'string',
+        'facebook_refresh_token' => 'string',
     ];
 
     /**

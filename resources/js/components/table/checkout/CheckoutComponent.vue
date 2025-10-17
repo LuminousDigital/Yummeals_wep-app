@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="pt-8 pb-16">
+    <section class="pt-28 pb-16">
         <div class="container max-w-[965px]">
             <router-link :to="{ name: 'table.menu.table', params: { slug: this.$route.params.slug } }"
                 class="text-xs font-medium inline-flex mb-3 items-center gap-2 text-primary">

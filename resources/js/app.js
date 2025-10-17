@@ -3,21 +3,20 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-import {createApp} from 'vue';
+import { createApp } from "vue";
 import DefaultComponent from "./components/DefaultComponent";
-import router from './router';
-import store from './store';
-import axios from 'axios';
+import router from "./router";
+import store from "./store";
+import axios from "axios";
 import i18n from "./i18n";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import VueSimpleAlert from "vue3-simple-alert";
-import VueNextSelect from 'vue-next-select';
-import 'vue-next-select/dist/index.css';
+import VueNextSelect from "vue-next-select";
+import "vue-next-select/dist/index.css";
 import VueApexCharts from "vue3-apexcharts";
-import ENV from './config/env';
+import ENV from "./config/env";
 import VariationButton from "../js/components/frontend/components/button/VariationButton.vue";
-
 
 /* Start tooltip alert code */
 const options = {
@@ -31,40 +30,70 @@ const options = {
     hideProgressBar: false,
     closeButton: "button",
     icon: true,
-    rtl: false
+    rtl: false,
 };
 /* End tooltip alert code */
-
 
 /* Start axios code*/
 const API_URL = ENV.API_URL;
 const API_KEY = ENV.API_KEY;
 
-axios.defaults.baseURL = API_URL + '/api';
+axios.defaults.baseURL = API_URL + "/api";
 axios.interceptors.request.use(
-    config => {
-        config.headers['x-api-key'] = API_KEY;
-        if (localStorage.getItem('vuex')) {
-            const vuex = JSON.parse(localStorage.getItem('vuex'));
+    (config) => {
+        config.headers["x-api-key"] = API_KEY;
+        if (localStorage.getItem("vuex")) {
+            const vuex = JSON.parse(localStorage.getItem("vuex"));
             const token = vuex.auth.authToken;
             const language = vuex.globalState.lists.language_code;
-            config.headers['Authorization'] = token ? `Bearer ${token}` : '';
-            config.headers['x-localization'] = language;
+            config.headers["Authorization"] = token ? `Bearer ${token}` : "";
+            config.headers["x-localization"] = language;
         }
         return config;
     },
-    error => Promise.reject(error),
+    (error) => Promise.reject(error)
 );
 /* End axios code */
 
+(function handleSocialAuthHash() {
+    try {
+        if (location.hash && location.hash.indexOf("#social=") === 0) {
+            const b64 = decodeURIComponent(location.hash.substring(8));
+            const json = JSON.parse(atob(b64));
+            if (json && json.token) {
+                store.commit("authLogin", json);
+
+                history.replaceState(
+                    {},
+                    document.title,
+                    location.pathname + location.search
+                );
+                try {
+                    if ((location.pathname || "").endsWith("/edit-profile")) {
+                        location.replace(location.pathname);
+                    }
+                } catch (e) {}
+                const carts = store.getters["frontendCart/lists"] || [];
+                if (Array.isArray(carts) && carts.length > 0) {
+                    router.replace({ name: "frontend.checkout" });
+                } else {
+                    router.replace({ name: "frontend.home" });
+                }
+            }
+        }
+    } catch (e) {
+        console.warn("Social auth hash parse failed", e);
+    }
+})();
+
 const app = createApp({});
-app.component('default-component', DefaultComponent);
-app.component('vue-select', VueNextSelect)
+app.component("default-component", DefaultComponent);
+app.component("vue-select", VueNextSelect);
 app.component("VariationButton", VariationButton);
-app.use(router)
-app.use(store)
-app.use(VueSimpleAlert)
-app.use(VueApexCharts)
-app.use(Toast, options)
-app.use(i18n)
-app.mount('#app');
+app.use(router);
+app.use(store);
+app.use(VueSimpleAlert);
+app.use(VueApexCharts);
+app.use(Toast, options);
+app.use(i18n);
+app.mount("#app");
