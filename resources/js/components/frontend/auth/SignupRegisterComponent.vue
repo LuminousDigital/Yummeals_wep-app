@@ -22,7 +22,7 @@
             <input v-model="form.last_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
             <small class="db-field-alert" v-if="errors.last_name">{{ errors.last_name[0] }}</small>
           </div>
-          <div class="col-12 sm:col-6">
+          <div class="col-12 sm:col-6 relative">
             <label class="mb-1 text-sm capitalize text-heading">{{ $t('label.email') }}</label>
             <input v-model="form.email" type="email" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
             <small class="db-field-alert" v-if="errors.email">{{ errors.email[0] }}</small>

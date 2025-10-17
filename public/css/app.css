@@ -5308,6 +5308,9 @@ input:checked + div svg {
 .tracking-widest {
   letter-spacing: 0.1em;
 }
+.tracking-\[\] {
+  letter-spacing: ;
+}
 .\!text-\[\#008BBA\] {
   --tw-text-opacity: 1 !important;
   color: rgb(0 139 186 / var(--tw-text-opacity, 1)) !important;
