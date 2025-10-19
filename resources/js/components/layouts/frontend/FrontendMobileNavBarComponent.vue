@@ -13,9 +13,11 @@
             <span class="text-xs capitalize">{{ $t('label.menu') }}</span>
         </router-link>
 
-        <button @click.prevent="openCanvas('cart')" type="button" ref="mobileCartButton" data-cart-icon class="mobcart fa-solid fa-bag-shopping text-base w-12 h-12 leading-[48px] text-center rounded-full -mt-12 text-white bg-primary
+        <button @click.prevent="openCanvas('cart')" type="button" ref="mobileCartButton" data-cart-icon class="mobcart text-base w-12 h-12 leading-[48px] text-center rounded-full -mt-12 text-white bg-primary
         relative after:absolute after:top-3 ltr:after:right-2.5 rtl:after:left-2.5 after:w-2 after:h-2 after:rounded-full after:bg-[#FFDB1F]
-        after:shadow" :class="subtotal > 0 ? ' after:bg-[#FFDB1F]' : 'after:bg-gray-400'"></button>
+        after:shadow" :class="subtotal > 0 ? ' after:bg-[#FFDB1F]' : 'after:bg-gray-400'">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </button>
 
         <router-link v-if="logged && profile.role_id !== enums.roleEnum.ADMIN" :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
             class="flex flex-col items-center gap-1" :to="{ name: 'frontend.offers' }">
@@ -145,7 +147,7 @@ export default {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.3);
+        transform: scale(1.6);
     }
     100% {
         transform: scale(1);
