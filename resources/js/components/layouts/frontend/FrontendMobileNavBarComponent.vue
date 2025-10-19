@@ -13,9 +13,9 @@
             <span class="text-xs capitalize">{{ $t('label.menu') }}</span>
         </router-link>
 
-        <button @click.prevent="openCanvas('cart')" type="button" class="mobcart fa-solid fa-bag-shopping text-base w-12 h-12 leading-[48px] text-center rounded-full -mt-12 text-white bg-primary
-        relative after:absolute after:top-3 ltr:after:right-2.5 rtl:after:left-2.5 after:w-2 after:h-2 after:rounded-full
-        after:shadow " :class="subtotal > 0 ? ' after:bg-[#FFDB1F]' : ''"></button>
+        <button @click.prevent="openCanvas('cart')" type="button" ref="mobileCartButton" data-cart-icon class="mobcart fa-solid fa-bag-shopping text-base w-12 h-12 leading-[48px] text-center rounded-full -mt-12 text-white bg-primary
+        relative after:absolute after:top-3 ltr:after:right-2.5 rtl:after:left-2.5 after:w-2 after:h-2 after:rounded-full after:bg-[#FFDB1F]
+        after:shadow" :class="subtotal > 0 ? ' after:bg-[#FFDB1F]' : 'after:bg-gray-400'"></button>
 
         <router-link v-if="logged && profile.role_id !== enums.roleEnum.ADMIN" :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
             class="flex flex-col items-center gap-1" :to="{ name: 'frontend.offers' }">
@@ -110,7 +110,45 @@ export default {
         profileActive: function () {
             return appService.profileOpen('.user-profile-dropdown-box');
         },
+        triggerCartAnimation: function (buttonElement) {
+            // Trigger shake animation on mobile cart button
+            const cartButton = this.$refs.mobileCartButton;
+            if (cartButton) {
+                cartButton.classList.add('animate-shake');
+                setTimeout(() => {
+                    cartButton.classList.remove('animate-shake');
+                }, 500);
+            }
+        },
     }
 
 }
 </script>
+
+<style>
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.cart-icon-pop {
+    animation: cartIconPop 0.3s ease-out;
+}
+
+@keyframes cartIconPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>

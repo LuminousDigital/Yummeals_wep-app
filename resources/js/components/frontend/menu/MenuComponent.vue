@@ -133,7 +133,8 @@ export default {
                     this.loading.isActive = false;
                 });
             }
-        }
+        },
+
     },
     watch: {
         $route() {

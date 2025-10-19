@@ -1,5 +1,6 @@
 <template>
     <button
+        ref="addToCartBtn"
         @click.prevent="handleClick"
         class="product-card-grid-cart-btn add-btn"
     >
@@ -13,6 +14,8 @@
 </template>
 
 <script>
+import { animateToCart } from '../../utils/animateToCart.js';
+
 export default {
     props: {
         item: Object,
@@ -25,6 +28,12 @@ export default {
             } else {
                 this.$emit("show-location-modal", this.item);
             }
+        },
+        triggerAnimation() {
+            const cartIcon = document.querySelector('[data-cart-icon]');
+            animateToCart(this.$refs.addToCartBtn, cartIcon, () => {
+                this.$emit('cart-animation-complete');
+            });
         },
     },
 };

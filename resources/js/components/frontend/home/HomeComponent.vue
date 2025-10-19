@@ -19,6 +19,7 @@
         v-if="showVariationModal"
         :item="selectedItem"
         @close="() => (showVariationModal = false)"
+        @cart-animation-complete="handleCartItemAdded"
     />
 
     <!--======== TRACK PART START ===========-->
@@ -169,6 +170,8 @@ export default {
 
         handleCloseWaitlist() {
             this.showWaitlistModal = false;
+        },
+        handleCartItemAdded() {
         },
     },
 
