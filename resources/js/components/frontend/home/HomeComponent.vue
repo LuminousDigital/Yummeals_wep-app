@@ -94,6 +94,7 @@ export default {
         WaitlistModal,
         VariationModal,
     },
+    emits: ['cartItemAdded'],
     data() {
         return {
             loading: {
