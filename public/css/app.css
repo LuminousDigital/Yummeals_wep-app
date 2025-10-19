@@ -105,7 +105,7 @@
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }/*
-! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.18 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -5102,9 +5102,6 @@ input:checked + div svg {
 .pt-7 {
   padding-top: 1.75rem;
 }
-.pt-8 {
-  padding-top: 2rem;
-}
 .text-left {
   text-align: left;
 }
@@ -5307,9 +5304,6 @@ input:checked + div svg {
 }
 .tracking-widest {
   letter-spacing: 0.1em;
-}
-.tracking-\[\] {
-  letter-spacing: ;
 }
 .\!text-\[\#008BBA\] {
   --tw-text-opacity: 1 !important;
@@ -6779,6 +6773,11 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   .sm\:bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  }
+
+  .sm\:bg-\[\#f25b0a\] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(242 91 10 / var(--tw-bg-opacity, 1));
   }
 
   .sm\:p-10 {
