@@ -1,8 +1,8 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="mb-12">
+    <section class="mb-12 sm:mb-20">
         <div class="container" v-if="featuredItems.length > 0">
-            <h2 class="text-2xl font-semibold capitalize mb-6">{{ $t('label.featured_items') }}</h2>
+            <h2 class="text-2xl font-normal capitalize text-primary text-heading-light mb-6 text-heading-light">{{ $t('label.featured_items') }}</h2>
             <ItemComponent :items="featuredItems" :type="itemProps.type" :design="itemProps.design" />
         </div>
     </section>

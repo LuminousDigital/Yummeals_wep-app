@@ -45,9 +45,9 @@ class Paystack extends PaymentAbstract
             $currencyId   = Settings::group('site')->get('site_default_currency');
             if (!blank($currencyId)) {
                 $currency = Currency::find($currencyId);
-                if ($currency) {
-                    $currencyCode = $currency->code;
-                }
+                // if ($currency) {
+                //     $currencyCode = $currency->code;
+                // }
             }
             $data = [
                 "amount"       => ceil( $order->total * 100),

@@ -98,6 +98,8 @@ class PaymentController extends Controller
             $credit = true;
         }
 
+        $isIframe = request()->query('isIframe') === 'true';
+
         if (blank($order->transaction) && $order->payment_status === PaymentStatus::UNPAID) {
             return view('payment', [
                 'company'         => $company,
@@ -107,13 +109,13 @@ class PaymentController extends Controller
                 'paymentGateways' => $paymentGateways,
                 'order'           => $order,
                 'creditAmount'    => AppLibrary::currencyAmountFormat($order?->user?->balance),
-                'credit'          => $credit
+                'credit'          => $credit,
+                'isIframe'        => $isIframe
             ]);
         }
 
         return redirect()->route('home')->with('error', trans('all.message.payment_canceled'));
     }
-
 
     public function payment(Order $order, PaymentRequest $request)
     {

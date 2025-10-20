@@ -13,32 +13,73 @@
     @swiper="onSwiper"
   >
     <SwiperSlide
-      v-for="category in categories"
-      :key="category"
-      class="!w-[155.25px] !mr-[20px]"
+  v-for="category in categories"
+  :key="category"
+  class="!w-[155.25px] !mr-[20px]"
+>
+  <router-link
+    v-if="design === categoryDesignEnum.FIRST"
+    :to="{ name: 'frontend.menu', query: { s: category.slug } }"
+    class="flex flex-col items-center text-center c-h-30
+           rounded-2xl border shadow-md transition-all duration-300
+           hover:bg-[#f8e5db] bg-[#F7F7FC] hover:shadow-lg relative overflow-hidden group"
+  >
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-2xl z-10"></div>
+    <img class="h-full w-full drop-shadow-category rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300" :src="category.thumb" alt="category" />
+    <h3 class="text-sm font-normal text-white relative z-20 px-2 -mt-8 drop-shadow-lg">{{ category.name }}</h3>
+  </router-link>
+
+  <router-link
+    v-else-if="design === categoryDesignEnum.SECOND"
+    :to="{ name: 'frontend.menu', query: { s: category.slug } }"
+    :class="[
+      checkIsQueryAndRouteQuerySame(category.slug) 
+        ? 'menu-category-active bg-primary shadow-lg scale-105' 
+        : 'border-transparent',
+      'flex flex-col items-center text-center gap-4 c-h-30 rounded-2xl border-b-[3px] transition-all duration-300 bg-[#F7F7FC] hover:bg-[#f8e5db] shadow-sm hover:shadow-md relative overflow-hidden group'
+    ]"
+  >
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-2xl z-10"></div>
+    <img class="h-full w-full drop-shadow-category rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300" :src="category.thumb" alt="category" />
+    <h3 class="text-sm font-normal text-white relative z-20 px-2 -mt-12 drop-shadow-lg">{{ category.name }}</h3>
+  </router-link>
+  
+  <!-- <router-link
+    :class="[
+      checkIsQueryAndRouteQuerySame(category.slug) 
+        ? 'menu-category-active bg-primary shadow-lg scale-105' 
+        : 'border-transparent',
+      'flex flex-col items-center text-center gap-4 c-h-30 rounded-2xl border-b-2 transition-all duration-300 bg-[#F7F7FC] hover:bg-[#f8e5db] shadow-sm hover:shadow-md relative overflow-hidden group'
+    ]"
+    v-else-if="design === categoryDesignEnum.SECOND"
+    :to="{ name: 'frontend.menu', query: { s: category.slug } }"
+  >
+
+    <div 
+      :class="[
+        checkIsQueryAndRouteQuerySame(category.slug) 
+          ? '' 
+          : '',
+        'absolute inset-0 rounded-2xl z-[9999] transition-all duration-300 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:bg-black/40'
+      ]"
+    ></div>
+    <img 
+      class="drop-shadow-category relative z-20 group-hover:scale-110 h-full w-full rounded-2xl object-cover transition-transform duration-300" 
+      :src="category.thumb" 
+      alt="category" 
+    />
+    <h3 
+      :class="[
+        checkIsQueryAndRouteQuerySame(category.slug) 
+          ? 'text-white font-normal' 
+          : 'text-white font-normal',
+        'ttext-sm font-normal text-white relative z-20 px-2  -mt-12 drop-shadow-lg'
+      ]"
     >
-      <router-link
-        v-if="design === categoryDesignEnum.FIRST"
-        :to="{ name: 'frontend.menu', query: { s: category.slug } }"
-        class="flex flex-col items-center text-center gap-4 p-4 c-h-30
-               rounded-2xl border-b-2 border-transparent transition
-               hover:bg-[#f8e5db] bg-[#F7F7FC] shadow-sm"
-      >
-        <img class="h-12 drop-shadow-category" :src="category.thumb" alt="category" />
-        <h3 class="text-xs font-medium">{{ category.name }}</h3>
-      </router-link>
-      <router-link
-        :class="checkIsQueryAndRouteQuerySame(category.slug) ? 'menu-category-active' : ''"
-        v-else-if="design === categoryDesignEnum.SECOND"
-        :to="{ name: 'frontend.menu', query: { s: category.slug } }"
-        class="flex flex-col items-center text-center gap-4 p-4 c-h-25
-               rounded-2xl border-b-2 border-transparent transition
-               hover:bg-[#f8e5db] shadow-sm"
-      >
-        <img class="h-9 drop-shadow-category" :src="category.thumb" alt="category" />
-        <h3 class="text-xs font-medium">{{ category.name }}</h3>
-      </router-link>
-    </SwiperSlide>
+      {{ category.name }}
+    </h3>
+  </router-link> -->
+</SwiperSlide>
   </Swiper>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="mb-16 mt-8">
+    <section class="mb-16 mt-36">
         <div class="container">
             <div v-if="categories.length > 0" class="swiper mb-12 menu-swiper">
                 <CategoryComponent :categories="categories" :design="categoryProps.design" />

@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="mb-16 mt-8">
+    <section class="mb-16 mt-36">
         <div class="container">
             <div class="flex gap-4 flex-col sm:flex-row items-center justify-between mb-6">
                 <h2 class="capitalize text-[26px] leading-[40px] font-semibold text-center sm:text-left text-primary">
