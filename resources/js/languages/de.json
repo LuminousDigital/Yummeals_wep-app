@@ -776,6 +776,7 @@
         "no_schedule_found": "Geen schema gevonden.",
         "location_not_covered": "Sorry, we bezorgen momenteel niet op uw locatie.",   
         "kiosk_log_out": "Kiosk succesvol uitgelogd.",
+        "logout_success": "Erfolgreich abgemeldet.",
         "no_orders_found": "Je hebt nog geen bestellingen! Laten we iets lekkers beginnen.",
         "no_items_found": "Er zijn geen items gevonden die aan uw zoekopdracht voldoen! Probeer andere zoekwoorden.",
         "no_data_available": "Geen gegevens beschikbaar.",
