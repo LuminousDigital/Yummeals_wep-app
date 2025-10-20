@@ -1,8 +1,8 @@
 <template>
     <!--========ITEM PART START=========-->
-    <div v-if="design === itemDesignEnum.LIST" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+    <div v-if="design === itemDesignEnum.LIST" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         <div v-for="item in items" :key="item" v-show="type === null || type === item.item_type"
-            class="product-card-list">
+            class="product-card-list border-primary">
             <img class="product-card-list-image" :src="item.thumb" alt="thumbnail">
             <div class="product-card-list-content-group">
                 <div class="product-card-list-header-group">

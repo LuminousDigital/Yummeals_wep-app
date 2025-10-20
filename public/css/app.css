@@ -3645,6 +3645,9 @@ input:checked + div svg {
 .mt-3 {
   margin-top: 0.75rem;
 }
+.mt-36 {
+  margin-top: 9rem;
+}
 .mt-4 {
   margin-top: 1rem;
 }
@@ -6611,10 +6614,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .sm\:mt-6 {
     margin-top: 1.5rem;
-  }
-
-  .sm\:mt-8 {
-    margin-top: 2rem;
   }
 
   .sm\:inline-block {

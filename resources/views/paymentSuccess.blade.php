@@ -14,23 +14,23 @@
 </head>
 <body style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;">
 
-<div class="py-14 px-4 w-full max-w-2xl mx-auto flex flex-col items-center justify-center">
+<div class="success-page-container max-w-[600px] py-6 p-4 mb-6 sm:mt-12 sm:pb-12  sm:pt-8 sm:px-12 md:shadow-md rounded-2xl bg-white md:border flex flex-col items-center justify-center border">
     <a href="{{ route('home') }}" class="w-36 mb-8">
         <img class="w-full" src="{{ $logo->logo }}" alt="logo">
     </a>
 
     <img class="w-full max-w-[120px] mb-3" src="{{ asset('images/default/payment-success.gif') }}" alt="success">
 
-    <h3 class="text-[22px] font-medium leading-[34px] text-center text-[#1AB759] mb-12">
-        <span class="block">{{ __('all.label.congratulations') }}</span>
+    <h3 class="text-sm font-normal leading-[34px] text-center text-heading-light mb-12">
+        <span class="text-lg block">{{ __('all.label.congratulations') }}</span>
         {{ __('all.message.payment_successful') }}
     </h3>
     <div class="w-full max-w-[360px]">
         <dl class="text-center shadow-xs w-full mb-8">
-            <dt class="uppercase py-2.5 rounded-tl-lg rounded-tr-lg text-heading bg-[#F7F7FC]">{{ __('all.label.transaction_id')  }}</dt>
-            <dd class="uppercase py-3 rounded-bl-lg rounded-br-lg payment-font-size font-medium leading-10 text-heading bg-white">{{ $order?->transaction?->transaction_no }}</dd>
+            <dt class="uppercase py-2.5 rounded-tl-lg rounded-tr-lg  bg-[#F7F7FC]">{{ __('all.label.transaction_id')  }}</dt>
+            <dd class="uppercase py-3 rounded-bl-lg rounded-br-lg payment-font-size font-normal leading-10 bg-white">{{ $order?->transaction?->transaction_no }}</dd>
         </dl>
-        <a id="home-route" href="{{ route('home') }}" class="py-3 w-full rounded-3xl text-center text-base font-medium bg-primary text-white">{{ __('all.label.back_to_home') }}</a>
+        <a id="home-route" href="{{ route('home') }}" class="py-3 w-full rounded-lg text-center text-sm font-ormal bg-primary text-white">{{ __('all.label.back_to_home') }}</a>
     </div>
 </div>
 

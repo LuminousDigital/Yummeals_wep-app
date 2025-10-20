@@ -16,11 +16,13 @@
 </head>
 
 <body>
-    <div class="py-14 px-4 w-full max-w-3xl mx-auto">
-        <a id="home-route1"  href="{{ route('home') }}" class="block mx-auto w-36 mb-8 home-routes">
-            <img class="w-full" src="{{ $logo->logo }}" alt="logo">
-        </a>
-        <h3 class="text-[22px] text-center font-medium leading-[34px] mb-6">
+    <div class="py-2 px-4 w-full max-w-3xl mx-auto">
+        @if (!$isIframe)
+            <a id="home-route1" href="{{ route('home') }}" class="block mx-auto w-36 mb-8 home-routes">
+                <img class="w-full" src="{{ $logo->logo }}" alt="logo">
+            </a>
+        @endif
+        <h3 class="text-[22px] text-center font-normal font-poppins leading-[34px] mb-6">
             {{ __('all.message.select_your_payment_method') }}</h3>
 
         @if ($errors->any())
@@ -46,6 +48,8 @@
 
         <form id="paymentForm" method="POST" action="{{ route('payment.store', ['order' => $order]) }}">
             @csrf
+            <!-- Debug: Show that CSRF token is present -->
+            <input type="hidden" id="debugCsrfToken" value="{{ csrf_token() }}">
             <fieldset class="payment-fieldset">
                 @if (!blank($paymentGateways))
                     @foreach ($paymentGateways as $paymentGateway)
@@ -84,18 +88,154 @@
 
             @if (!blank($paymentGateways))
                 <button type="submit"
-                    class="py-3 w-full rounded-3xl text-center text-base font-medium bg-primary text-white"
+                    class="py-3 w-full rounded-lg text-center text-sm font-normal font-poppins tracking-[1px] bg-primary text-white"
                     id="confirmBtn">
                     {{ __('all.label.confirm') }}
                 </button>
             @endif
 
-            <div class="py-5 px-4 w-full max-w-3xl mx-auto flex flex-col items-center justify-center">
-                <a id="home-route"  class="text-primary" href="{{ route('home') }}">{{ __('all.label.back_to_home') }}</a>
-            </div>
+            @if (!$isIframe)
+                <div class="py-5 px-4 w-full max-w-3xl mx-auto flex flex-col items-center justify-center">
+                    <a id="home-route" class="text-primary"
+                        href="{{ route('home') }}">{{ __('all.label.back_to_home') }}</a>
+                </div>
+            @endif
         </form>
 
     </div>
+
+    <script>
+        console.log('Iframe: Payment page loaded, isIframe:', {{ $isIframe ? 'true' : 'false' }});
+
+        const appUrl = '{{ config('app.url') }}';
+        console.log('Iframe: APP_URL from environment:', appUrl);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Iframe: DOM content loaded');
+
+            const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+            const paymentForm = document.getElementById('paymentForm');
+            const confirmBtn = document.getElementById('confirmBtn');
+            const isIframe = {{ $isIframe ? 'true' : 'false' }};
+
+            console.log('Iframe: Found', paymentMethods.length, 'payment methods');
+            console.log('Iframe: Found form:', !!paymentForm);
+            console.log('Iframe: Found confirm button:', !!confirmBtn);
+
+            // Notify parent that iframe is ready
+            if (isIframe && window.parent !== window) {
+                console.log('Iframe: Sending ready message to parent');
+                window.parent.postMessage({
+                    type: 'PAYMENT_IFRAME_READY',
+                    message: 'Iframe is ready'
+                }, appUrl);
+            }
+
+            // Notify parent about initial state
+            notifyParentAboutSelection();
+
+            // Add change listeners to payment methods
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    console.log('Iframe: Payment method changed to:', this.value);
+                    notifyParentAboutSelection();
+                });
+            });
+
+            // Handle form submission differently based on iframe mode
+            if (paymentForm) {
+                console.log('Iframe: Setting up form handling, isIframe:', isIframe);
+
+                if (isIframe) {
+                    // In iframe mode: prevent actual submission, only notify parent
+                    console.log('Iframe: Setting up iframe-specific form handling');
+
+                    // Replace the submit button click handler
+                    if (confirmBtn) {
+                        confirmBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            console.log('Iframe: Confirm button clicked in iframe mode');
+
+                            const selectedMethod = document.querySelector(
+                                'input[name="paymentMethod"]:checked');
+                            if (!selectedMethod) {
+                                console.error('Iframe: No payment method selected!');
+                                alert('Please select a payment method');
+                                return;
+                            }
+
+                            // Get all form data
+                            const formData = new FormData(paymentForm);
+                            const data = {};
+                            for (let [key, value] of formData.entries()) {
+                                data[key] = value;
+                            }
+
+                            console.log('Iframe: Selected payment method:', selectedMethod.value);
+                            console.log('Iframe: Form data to send to parent:', data);
+
+                            // Notify parent about payment confirmation
+                            if (window.parent !== window) {
+                                console.log('Iframe: Sending payment confirmation to parent');
+                                window.parent.postMessage({
+                                    type: 'PAYMENT_FORM_SUBMIT',
+                                    paymentMethod: selectedMethod.value,
+                                    formData: data
+                                }, appUrl);
+                            }
+                        });
+                    }
+
+                    // Also prevent form submission via other means (like pressing enter)
+                    paymentForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        console.log('Iframe: Form submission prevented in iframe mode');
+                    });
+                } else {
+                    // Not in iframe: normal form submission
+                    console.log('Iframe: Setting up normal form submission');
+                    paymentForm.addEventListener('submit', function(e) {
+                        console.log('Iframe: Normal form submission proceeding');
+                        // Allow normal form submission
+                    });
+                }
+            }
+
+            function notifyParentAboutSelection() {
+                if (isIframe && window.parent !== window) {
+                    const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+                    const formData = new FormData(paymentForm);
+                    const data = {};
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+
+                    console.log('Iframe: Notifying parent about selection:', selectedMethod?.value);
+                    window.parent.postMessage({
+                        type: 'PAYMENT_METHOD_SELECTED',
+                        paymentMethod: selectedMethod?.value,
+                        formData: data
+                    }, appUrl);
+                }
+            }
+
+            // Also trigger on any input changes for additional form fields
+            const additionalInputs = paymentForm ? paymentForm.querySelectorAll(
+                'input:not([name="paymentMethod"]), select, textarea') : [];
+            additionalInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    console.log('Iframe: Additional form field changed:', this.name, '=', this
+                        .value);
+                    notifyParentAboutSelection();
+                });
+
+                input.addEventListener('input', function() {
+                    console.log('Iframe: Additional form field input:', this.name, '=', this.value);
+                    notifyParentAboutSelection();
+                });
+            });
+        });
+    </script>
 
     @php
         $jsGateway = [];
@@ -133,16 +273,20 @@
     <script>
         const gateway = <?= $jsGateway ?>;
         const submitGateway = <?= $submitGateway ?>;
+        console.log('Iframe: Gateway configuration loaded:', gateway);
     </script>
     <script src="{{ asset('paymentGateways/payment.js') }}"></script>
-    <script type="application/javascript">
-        let data       = JSON.parse(localStorage.getItem('vuex'));
-        const url      = '<?=URL::to('/') . "/menu/"?>';
-        if (data.tableCart.paymentMethod) {
-            document.getElementById('home-route').setAttribute('href', url + data.tableCart.table.slug);
-            document.getElementById('home-route1').setAttribute('href', url + data.tableCart.table.slug);
-        }
-    </script>
+
+    @if (!$isIframe)
+        <script type="application/javascript">
+            let data       = JSON.parse(localStorage.getItem('vuex'));
+            const url      = '<?=URL::to('/') . "/menu/"?>';
+            if (data.tableCart.paymentMethod) {
+                document.getElementById('home-route').setAttribute('href', url + data.tableCart.table.slug);
+                document.getElementById('home-route1').setAttribute('href', url + data.tableCart.table.slug);
+            }
+        </script>
+    @endif
 </body>
 
 </html>

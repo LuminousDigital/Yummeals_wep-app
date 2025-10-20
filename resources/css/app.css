@@ -34,7 +34,7 @@
     h5,
     h6 { @apply text-heading; font-style: initial; }
 
-    body { @apply text-base font-normal font-inter scroll-smooth text-gray-800 bg-white tracking-[.5px] }
+    body { @apply text-base font-normal font-poppins scroll-smooth text-gray-800 bg-white tracking-[.5px] }
 }
 
 @layer components {
@@ -159,12 +159,12 @@
     .payment-label span { @apply text-sm capitalize text-heading }
 
     /* PRODUCT CARD GRID */
-    .product-card-grid { @apply relative flex flex-col rounded-2xl border transition border-[#EFF0F6] bg-white hover:shadow-xl }
-    .product-card-grid-image { @apply w-full rounded-t-2xl }
+    .product-card-grid { @apply relative flex flex-col rounded-2xl border transition border-[#EFF0F6] bg-white hover:shadow-xl  }
+    .product-card-grid-image { @apply w-full rounded-2xl  }
     .product-card-grid-badge-group { @apply absolute top-3 left-3 rotate-[-35deg] }
     .product-card-grid-badge-image { @apply w-12 h-12 }
     .product-card-grid-badge-text { @apply capitalize text-sm font-semibold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white }
-    .product-card-grid-content-group { @apply py-4 px-3 rounded-b-2xl h-full flex flex-col justify-between }
+    .product-card-grid-content-group { @apply py-4 pt-6 px-3 rounded-b-2xl h-full flex flex-col justify-between }
     .product-card-grid-header-group { @apply flex items-start gap-2 mb-2 }
     .product-card-grid-title { @apply text-sm font-semibold capitalize text-ellipsis whitespace-nowrap overflow-hidden w-fit max-w-[200px] }
     .product-card-grid-describe { @apply text-xs text-ellipsis mb-3 }
@@ -405,7 +405,7 @@
 
     /* MODAL */
     .modal { @apply fixed top-0 left-1/2 -translate-x-1/2 z-60 invisible opacity-0 w-full h-full overflow-y-auto transition bg-black/60 }
-    .ff-modal { @apply lg:top-[74px] }
+    /* .ff-modal { @apply lg:top-[74px] } */
     .info-modal { @apply z-70 }
     .modal.ff-modal.active .modal-dialog { @apply lg:mt-10 lg:mb-32 }
     .modal.active { @apply visible opacity-100 }
@@ -501,7 +501,7 @@
 .banner-swiper .swiper-button-next { @apply w-8 h-8 flex items-center justify-center sm:w-10 sm:h-10 shadow-lg text-center rounded-full cursor-pointer bg-white after:content-['\f054'] after:font-awesome after:font-bold after:text-base invisible opacity-0 transition-all duration-300 hover:bg-primary hover:after:text-white  absolute z-50 top-1/2 -translate-y-1/2 !right-7 !left-[inherit] }
 .banner-swiper:hover .swiper-button-prev,
 .banner-swiper:hover .swiper-button-next { @apply visible opacity-100 }
-.banner-swiper .swiper-pagination { @apply flex items-center justify-center gap-2.5 absolute right-1/2 translate-x-1/2 z-50 !bottom-5 sm:!bottom-7 }
+.banner-swiper .swiper-pagination { @apply flex items-center justify-center gap-2.5 absolute right-1/2 translate-x-1/2 z-50 !bottom-8 sm:!bottom-10 }
 .banner-swiper .swiper-pagination-bullet { @apply flex-shrink-0 w-3 h-1.5 rounded-xl shadow cursor-pointer !m-0 opacity-30 bg-primary transition-all duration-300 }
 .banner-swiper .swiper-pagination-bullet-active { @apply flex-shrink-0 w-4 opacity-100 }
 

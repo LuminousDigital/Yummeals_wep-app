@@ -44,7 +44,6 @@ Route::prefix('payment')->name('payment.')->middleware(['installed'])->group(fun
     Route::get('/successful/{order}', [PaymentController::class, 'successful'])->name('successful');
 });
 
-// Social login (no apiKey header required for provider callbacks)
 Route::prefix('auth/social')->name('auth.social.')->middleware(['web'])->group(function () {
     Route::get('/google/redirect', [SocialLoginController::class, 'redirectToGoogle'])->name('google.redirect');
     Route::get('/google/callback', [SocialLoginController::class, 'handleGoogleCallback'])->name('google.callback');
