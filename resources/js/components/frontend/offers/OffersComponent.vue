@@ -10,14 +10,15 @@
                         <h1
                             class="text-[20px] md:text-2xl lg:text-3xl font-bold text-[rgb(242,91,10)] mb-6"
                         >
-                            Refer Your Friends and Win
+                            Send your friend a little food love!
                         </h1>
                         <p
                             class="text-[13px] md:text-[14px] lg:text-[16px] text-black leading-snug"
                         >
-                            Invite your friends to order with the Yummeals app
+                            When they order with your link, you both get 15%
+                            off.
                             <br />
-                            and get rewarded for every successful referral.
+                            Two discounts, one delicious connection
                         </p>
                     </div>
                     <!-- <p
@@ -268,9 +269,16 @@
                                 <div class="flex items-center gap-3">
                                     <div
                                         class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full"
-                                        style="background-image: url('/images/LeaderBoard/posisionBD.png'); background-size: cover; background-position: center;"
+                                        style="
+                                            background-image: url('/images/LeaderBoard/posisionBD.png');
+                                            background-size: cover;
+                                            background-position: center;
+                                        "
                                     >
-                                        <span class="text-[#F25B0A] font-bold text-md">{{ user.rank }}</span>
+                                        <span
+                                            class="text-[#F25B0A] font-bold text-md"
+                                            >{{ user.rank }}</span
+                                        >
                                     </div>
                                     <div
                                         :class="[
@@ -332,7 +340,10 @@
                                         <div
                                             class="rounded-full w-8 h-8 flex items-center justify-center"
                                         >
-                                        <span class="text-[#F25B0A] font-bold text-sm">{{ currentUser.rank }}</span>
+                                            <span
+                                                class="text-[#F25B0A] font-bold text-sm"
+                                                >{{ currentUser.rank }}</span
+                                            >
                                         </div>
                                         <div
                                             class="bg-orange-100 rounded-full w-8 h-8 flex items-center justify-center"
@@ -393,7 +404,10 @@
                             <p
                                 class="text-sm font-semibold text-gray-600 md:text-base"
                             >
-                                You have to have at least one referral to appear on the leaderboard
+                                Top the leaderboard. Earn your crown. <br> Win weekly
+                                Free meals, monthly cash rewards, bragging
+                                rights — it all starts with just one referral.
+                                Refer your people to Yummeals now.
                             </p>
                         </div>
                     </template>
