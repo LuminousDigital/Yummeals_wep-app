@@ -514,7 +514,7 @@ export default {
 
             // Validate origin for security using APP_URL from environment
             const allowedOrigin =
-                process.env.MIX_APP_URL || "http://127.0.0.1:9080";
+                process.env.MIX_APP_URL || "https://app.yummealsapp.com";
             console.log(
                 "Parent: Checking origin. Allowed:",
                 allowedOrigin,
