@@ -75,6 +75,20 @@ export const auth = {
             return new Promise((resolve, reject) => {
                 axios.post('auth/logout').then((res) => {
                     context.commit('authLogout');
+
+                    // Clear persisted/vuex-managed client state on logout
+                    try {
+                        context.dispatch('frontendCart/resetCart', null, { root: true });
+                        context.dispatch('posCart/resetCart', null, { root: true });
+                        context.dispatch('tableCart/resetCart', null, { root: true });
+                        context.dispatch('frontendSignup/reset', null, { root: true });
+                        context.dispatch('GuestSignup/reset', null, { root: true });
+                        context.dispatch('globalState/reset', null, { root: true });
+                        // Remove any auxiliary persisted values
+                        window?.localStorage?.removeItem('referral_code');
+                        window?.sessionStorage?.removeItem('referral_code');
+                    } catch (e) {}
+
                     resolve(res);
                 }).catch((err) => {
                     reject(err);
@@ -132,6 +146,16 @@ export const auth = {
         },
         loginDataReset: function (context) {
             context.commit('authLogout');
+            try {
+                context.dispatch('frontendCart/resetCart', null, { root: true });
+                context.dispatch('posCart/resetCart', null, { root: true });
+                context.dispatch('tableCart/resetCart', null, { root: true });
+                context.dispatch('frontendSignup/reset', null, { root: true });
+                context.dispatch('GuestSignup/reset', null, { root: true });
+                context.dispatch('globalState/reset', null, { root: true });
+                window?.localStorage?.removeItem('referral_code');
+                window?.sessionStorage?.removeItem('referral_code');
+            } catch (e) {}
         }
     },
     mutations: {
