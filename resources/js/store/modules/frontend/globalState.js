@@ -28,6 +28,9 @@ export const globalState = {
                     reject("object not found");
                 }
             });
+        },
+        reset: function (context) {
+            context.commit('reset');
         }
     },
     mutations: {
@@ -50,6 +53,9 @@ export const globalState = {
                     }
                 }
             }
+        },
+        reset: function(state) {
+            state.lists = {};
         }
     },
 };

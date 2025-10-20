@@ -1,6 +1,6 @@
 <template>
   <LoadingComponent :props="loading" />
-  <div v-if="sliders.length > 0" class="container mb-5 mt-36 md:mt-48 lg:mt-32">
+  <div v-if="sliders.length > 0" class="container mb-5 mt-36 sm:mt-8">
     <Swiper
       dir="rtl"
       :slides-per-view="1"
