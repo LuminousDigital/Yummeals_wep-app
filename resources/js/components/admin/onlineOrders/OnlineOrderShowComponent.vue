@@ -389,7 +389,7 @@ export default {
             order_type: 'asc',
             status: statusEnum.ACTIVE
         });
-        this.$store.dispatch('onlineOrder/show', this.$route.params.id).then(res => {
+        this.$store.dispatch('onlineOrder/show', { uuid: this.$route.params.id }).then(res => {
             this.payment_status = res.data.data.payment_status;
             this.delivery_boy = res.data.data.delivery_boy ? res.data.data.delivery_boy.id : 0;
             this.order_status = res.data.data.status;
@@ -413,7 +413,7 @@ export default {
                 try {
                     this.loading.isActive = true;
                     this.$store.dispatch("onlineOrder/changeStatus", {
-                        id: this.$route.params.id,
+                        uuid: this.$route.params.id,
                         status: status,
                     }).then((res) => {
                         this.order_status = res.data.data.status;
@@ -438,7 +438,7 @@ export default {
             try {
                 this.loading.isActive = true;
                 this.$store.dispatch("onlineOrder/selectDeliveryBoy", {
-                    id: this.$route.params.id,
+                    uuid: this.$route.params.id,
                     delivery_boy_id: id,
                 }).then((res) => {
                     this.loading.isActive = false;
@@ -459,7 +459,7 @@ export default {
             try {
                 this.loading.isActive = true;
                 this.$store.dispatch("onlineOrder/changePaymentStatus", {
-                    id: this.$route.params.id,
+                    uuid: this.$route.params.id,
                     payment_status: status,
                 }).then((res) => {
                     this.loading.isActive = false;
@@ -480,7 +480,7 @@ export default {
             try {
                 this.loading.isActive = true;
                 this.$store.dispatch("onlineOrder/changeStatus", {
-                    id: this.$route.params.id,
+                    uuid: this.$route.params.id,
                     status: status,
                 }).then((res) => {
                     this.loading.isActive = false;

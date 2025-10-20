@@ -710,6 +710,11 @@
             </div>
         </div>
     </div>
+    <WaitlistModal
+        :isOpen="showWaitlistModal"
+        @close="closeWaitlistModal"
+        @go-to-delivery-modal="goToDeliveryAddressModal"
+    />
 </template>
 <script>
 import appService from "../../../services/appService";
@@ -725,6 +730,7 @@ import activityEnum from "../../../enums/modules/activityEnum";
 import orderTypeEnum from "../../../enums/modules/orderTypeEnum";
 import statusEnum from "../../../enums/modules/statusEnum";
 import CouponComponent from "./CouponComponent";
+import WaitlistModal from "../components/WaitlistModal.vue";
 import router from "../../../router";
 import _ from "lodash";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -737,6 +743,7 @@ export default {
         AddressComponent,
         CouponComponent,
         MapComponent,
+        WaitlistModal,
         Swiper,
         SwiperSlide,
     },
@@ -914,6 +921,7 @@ export default {
                 },
             },
             default_branch: null,
+            showWaitlistModal: false,
         };
     },
     computed: {
@@ -1308,9 +1316,7 @@ export default {
                         this.localAddress = {};
                         this.checkoutProps.form.address_id = null;
                         this.checkoutProps.form.delivery_charge = 0;
-                        alertService.error(
-                            this.$t("message.location_not_covered")
-                        );
+                        this.showWaitlistModal = true;
                     });
             } else {
                 this.localAddress = {};
@@ -1462,6 +1468,16 @@ orderSubmit: function () {
             } else {
                 this.deliveryChargeCalculation();
             }
+        },
+        closeWaitlistModal: function () {
+            this.showWaitlistModal = false;
+        },
+        goToDeliveryAddressModal: function () {
+            this.showWaitlistModal = false;
+            // Trigger the address component to open
+            this.addressProps.status = true;
+            this.addressProps.isMap = true;
+            appService.modalShow(".address-modal");
         },
     },
     watch: {

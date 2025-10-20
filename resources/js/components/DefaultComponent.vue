@@ -1,9 +1,9 @@
 <template>
   <div :dir="direction">
     <div v-if="theme === 'frontend'">
-      <FrontendNavbarComponent />
+      <FrontendNavbarComponent ref="frontendNavbar" />
       <FrontendCartComponent />
-      <router-view></router-view>
+      <router-view @cart-item-added="handleCartItemAdded"></router-view>
       <FrontendMobileNavBarComponent />
       <FrontendMobileAccountComponent />
       <FrontendCookiesComponent />
@@ -95,6 +95,13 @@ export default {
     }
 
   },
+  methods: {
+    handleCartItemAdded: function (buttonElement) {
+      this.$refs.frontendNavbar?.triggerCartAnimation(buttonElement);
+    },
+  },
+  emits: ['cart-item-added'],
+
   watch: {
     $route(e) {
       if (e.meta.isFrontend === true) {

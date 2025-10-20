@@ -163,7 +163,7 @@
                                     <a href="javascript:void(0)" @click="openModal"
                                         class="text-primary text-xs">
                                         <span class="underline">({{ $t("button.show_referrals") }})</span>
-                                        
+
                                     </a>
                                 </span>
 
@@ -233,7 +233,7 @@
                 <div class="db-card-body">
                     <div class="row">
                         <div class="col-12 md:col-6 lg:col-6 xl:col-4" v-if="myOrders.length > 0"
-                            v-for="order in myOrders" :key="order">
+                            v-for="order in myOrders" :key="order.uuid || order.id">
                             <div class="w-full rounded-lg py-2 px-3 flex items-center gap-5 border border-[#EFF0F6]">
                                 <i class="lab lab-reserve lab-font-size-24 lab-font-color-2"></i>
                                 <div class="w-full">
