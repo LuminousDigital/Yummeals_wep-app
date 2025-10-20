@@ -20,6 +20,7 @@ use App\Http\Requests\VerifyPhoneRequest;
 use App\Enums\Role as EnumRole;
 use Smartisan\Settings\Facades\Settings;
 use App\Models\ReferralBonus;
+use App\Events\ReferralSignedUp;
 use App\Models\ReferralTransaction;
 
 
@@ -56,56 +57,6 @@ class SignupController extends Controller
             return response(['status' => false, 'message' => $exception->getMessage()], 422);
         }
     }
-
-    // public function register(
-    //     SignupRequest $request
-    // ): \Illuminate\Http\Response | \Illuminate\Contracts\Foundation\Application | \Illuminate\Contracts\Routing\ResponseFactory {
-    //     $flag = false;
-    //     $otp  = DB::table('otps')->where([
-    //         ['phone', $request->post('phone')]
-    //     ]);
-
-    //     if (env('DEMO')) {
-    //         $flag = true;
-    //     } else {
-    //         if (Settings::group('site')->get('site_phone_verification') == Activity::DISABLE) {
-    //             $otp?->delete();
-    //             $flag = true;
-    //         } else {
-    //             if (!$otp->exists()) {
-    //                 $flag = true;
-    //             }
-    //         }
-    //     }
-
-    //     if ($flag) {
-    //         $user = User::where(['phone' => $request->post('phone'), 'is_guest' => Ask::YES])->first();
-    //         $name = AppLibrary::name($request->post('first_name'), $request->post('last_name'));
-    //         if ($user) {
-    //             $user->name     = $name;
-    //             $user->username = Str::slug($name);
-    //             $user->email    = $request->post('email');
-    //             $user->password = Hash::make($request->post('password'));
-    //             $user->is_guest = Ask::NO;
-    //             $user->save();
-    //         } else {
-    //             $user = User::create([
-    //                 'name'              => $name,
-    //                 'username'          => Str::slug($name),
-    //                 'email'             => $request->post('email'),
-    //                 'phone'             => $request->post('phone'),
-    //                 'country_code'      => $request->post('country_code'),
-    //                 'branch_id'         => 0,
-    //                 'email_verified_at' => Carbon::now()->getTimestamp(),
-    //                 'is_guest'          => Ask::NO,
-    //                 'password'          => Hash::make($request->post('password'))
-    //             ]);
-    //             $user->assignRole(EnumRole::CUSTOMER);
-    //         }
-    //         return response(['status' => true, 'message' => trans('all.message.register_successfully')], 201);
-    //     }
-    //     return response(['status' => false, 'message' => trans('all.message.code_is_invalid')], 422);
-    // }
 
     public function register(SignupRequest $request)
     {
@@ -203,7 +154,6 @@ class SignupController extends Controller
             'referee_bonus'  => $refereeBonus,
         ]);
 
-        // Create bonus records
         $referrerBonusRecord = ReferralBonus::create([
             'referrer_id' => $referrer->id,
             'referee_id' => $newUser->id,
@@ -213,7 +163,6 @@ class SignupController extends Controller
             'notes' => 'New user signup bonus'
         ]);
 
-        // Credit referrer
         DB::transaction(function () use ($referrer, $referralBonus, $referrerBonusRecord) {
             $referrer->increment('referral_balance', $referralBonus);
             $referrer->increment('total_referrals');
@@ -235,7 +184,6 @@ class SignupController extends Controller
             ]);
         });
 
-        // Credit referee if enabled
         if ($refereeBonus > 0) {
             $refereeBonusRecord = ReferralBonus::create([
                 'referrer_id' => $referrer->id,
