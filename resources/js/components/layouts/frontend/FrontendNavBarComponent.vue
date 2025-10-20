@@ -33,12 +33,12 @@
 
             <div class="flex flex-col items-center justify-end gap-3 w-full mt-4 lg:flex-row lg:w-fit lg:mt-0">
                 <form @submit.prevent="search"
-                    class="header-search-group group flex items-center justify-center border-2 border-solid gap-2 px-2 w-full lg:w-[20rem] h-12 rounded-lg transition bg-[#EFF0F6] focus-within:bg-white focus-within:border-primary">
+                    class="header-search-group group flex items-center justify-center border gap-2 px-2 w-full lg:w-[20rem] h-12 rounded-lg transition focus-within:bg-white border-primary focus-within:border-primary">
                     <button type="submit" class="header-search-submit flex justify-center items-center pl-1 text-heading-light">
                         <i class="lab lab-search-normal !text-sm text-heading-light"></i>
                     </button>
                     <input type="search" v-model="searchItem" :placeholder="$t('button.search')"
-                        class="header-search-field rounded-tr-lg rounded-br-lg w-full h-full text-sm appearance-none placeholder:font-normal placeholder:text-[#1f2937] text-heading-light">
+                        class="header-search-field rounded-tr-lg rounded-br-lg w-full h-full text-sm appearance-none placeholder:font-normal placeholder:text-[#1f2937] text-heading-light !bg-white">
                     <button v-if="searchItem" type="button" @click.prevent="searchReset"
                         class="header-search-button transition invisible group-focus-within:visible">
                         <i class="lab lab-close-circle-line lab-font-size-16 lab-font-weight-600 text-red-500"></i>

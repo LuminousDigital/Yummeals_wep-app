@@ -8,7 +8,7 @@
                     <router-link :to="{ name: 'frontend.home' }">
                         <img class="mb-8 w-36" :src="setting.theme_footer_logo" alt="logo">
                     </router-link>
-                    <p class="mb-3 text-sm text-white">{{ $t('label.subscribe_short_text') }}</p>
+                    <p class="mb-3 text-sm text-white tracking-none">{{ $t('label.subscribe_short_text') }}</p>
                     <form @submit.prevent="saveSubscription"
                         class="flex items-center w-full h-12 p-2 mb-8 bg-white rounded-lg sm:max-w-xs">
                         <input type="email" :placeholder="$t('label.your_email_address')"
@@ -34,9 +34,9 @@
                 </div>
                 <div>
                     <div class="sm:w-fit sm:mx-auto">
-                        <h3 class="mb-6 text-[1rem] font-normal text-white capitalize">{{ $t('label.useful_links') }}</h3>
+                        <h3 class="mb-6 text-[1rem] font-medium text-white capitalize">{{ $t('label.useful_links') }}</h3>
                         <nav v-if="pages.length > 0" class="flex flex-col items-start gap-3">
-                            <router-link v-for="page in pages" class="text-white capitalize hover:underline"
+                            <router-link v-for="page in pages" class="text-white capitalize hover:underline text-sm"
                                 :to="{ name: 'frontend.page', params: { slug: page.slug } }">
                                 {{ page.title }}
                             </router-link>
@@ -45,7 +45,7 @@
                 </div>
                 <div>
                     <h3 v-if="setting.site_android_app_link || setting.site_ios_app_link"
-                        class="mb-3 text-sm font-semibold text-white capitalize">
+                        class="mb-3 text-[1rem] font-medium text-white capitalize">
                         {{ $t('label.download_our_apps') }}
                     </h3>
                     <nav class="flex items-center gap-3 mb-7 w-full max-w-[265px]">
