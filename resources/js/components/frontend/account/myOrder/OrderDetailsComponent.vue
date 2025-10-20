@@ -342,6 +342,7 @@ import FrontendOrderReceiptComponent from "./FrontendOrderReceiptComponent";
 import activityEnum from "../../../../enums/modules/activityEnum";
 import sourceEnum from "../../../../enums/modules/sourceEnum";
 import posPaymentMethodEnum from "../../../../enums/modules/posPaymentMethodEnum";
+import ENV from "../../../../config/env";
 import axios from "axios";
 
 export default {
@@ -411,6 +412,7 @@ export default {
                 },
             },
             activeOrder: {},
+            ENV: ENV
         };
     },
     computed: {
@@ -514,7 +516,7 @@ export default {
 
             // Validate origin for security using APP_URL from environment
             const allowedOrigin =
-                process.env.MIX_APP_URL || "https://app.yummealsapp.com";
+                ENV.API_URL || "https://app.yummealsapp.com";
             console.log(
                 "Parent: Checking origin. Allowed:",
                 allowedOrigin,
