@@ -5,13 +5,13 @@
         <p class="text-sm leading-6 mb-8 text-heading-light">{{ setting.cookies_summary }}</p>
         <div class="flex flex-wrap items-center gap-[18px] mb-[18px]">
             <button @click.prevent="change(true)" type="button"
-                    class="h-10 py-2 px-6 rounded-3xl flex items-center gap-1.5 bg-primary">
+                    class="h-10 py-2 px-6 rounded-lg flex items-center gap-1.5 bg-primary">
                 <i class="lab lab-cookie-bite lab-font-size-16 text-white"></i>
-                <span class="leading-6 capitalize text-white">{{ $t('button.accept') }}</span>
+                <span class="leading-6 capitalize text-white text-sm">{{ $t('button.accept') }}</span>
             </button>
             <button @click.prevent="change(false)" type="button"
-                    class="cookie-cancel h-10 py-2 px-6 rounded-3xl flex items-center gap-1.5 bg-[#A0A3BD]">
-                <span class="leading-6 capitalize text-white">{{ $t('button.cancel') }}</span>
+                    class="cookie-cancel h-10 py-2 px-6 rounded-lg flex items-center gap-1.5 bg-[#A0A3BD]">
+                <span class="leading-6 capitalize text-white text-sm">{{ $t('button.cancel') }}</span>
             </button>
         </div>
 

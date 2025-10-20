@@ -431,6 +431,7 @@ export default {
         },
         logout: function () {
             this.$store.dispatch("logout").then(res => {
+                alertService.success(this.$t("message.logout_success"));
                 this.$router.push({ name: "frontend.home" });
             }).catch();
         },
