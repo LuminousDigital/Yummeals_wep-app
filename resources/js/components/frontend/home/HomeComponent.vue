@@ -31,10 +31,10 @@
     <!--======== BANNER PART END ============-->
 
     <!--======== CATEGORY PART START ========-->
-    <section v-if="categories.length > 0" class="mb-12">
+    <section v-if="categories.length > 0" class="mb-8 sm:mb-14">
         <div class="container">
-            <div class="flex items-center justify-between gap-2 mb-6 mt-4">
-                <h2 class="text-2xl font-semibold capitalize">
+            <div class="flex items-center justify-between gap-2 mb-6 mt-4 sm:mt-12">
+                <h2 class="text-2xl font-normal capitalize text-primary text-heading-light">
                     {{ $t("label.our_menu") }}
                 </h2>
                 <router-link
@@ -42,7 +42,7 @@
                         name: 'frontend.menu',
                         query: { s: categoryProps.slug },
                     }"
-                    class="rounded-3xl capitalize text-sm leading-6 font-medium py-1 px-3 transition text-white bg-primary hover:text-primary hover:bg-white"
+                    class="h-10 rounded-lg capitalize text-sm leading-6 font-medium px-3 transition text-white bg-primary hover:text-primary hover:bg-white hover:border hover:border-primary flex items-center justify-center"
                 >
                     {{ $t("button.view_all") }}
                 </router-link>

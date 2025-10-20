@@ -15,22 +15,27 @@
 
     <div
         v-if="design === itemDesignEnum.LIST"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
     >
         <div
             v-for="item in items"
             :key="item"
             v-show="type === null || type === item.item_type"
-            class="product-card-list"
+            class="product-card-list shadow-md p-2 sm:p-3"
         >
-            <img
-                class="product-card-list-image"
-                :src="item.thumb"
-                alt="thumbnail"
-            />
+            <div class="relative">
+                <div
+                    class="absolute inset-0 bg-black/20 z-10 pointer-events-none rounded-l-lg"
+                ></div>
+                <img
+                    class="product-card-list-image border-primary h-full !w-full"
+                    :src="item.thumb"
+                    alt="thumbnail"
+                />
+            </div>
             <div class="product-card-list-content-group">
                 <div class="product-card-list-header-group">
-                    <h3 class="product-card-list-title">
+                    <h3 class="product-card-list-title font-normal">
                         {{ textShortener(item.name, 25) }}
                     </h3>
                     <button
@@ -81,16 +86,22 @@
             v-for="item in items"
             :key="item"
             v-show="type === null || type === item.item_type"
-            class="product-card-grid"
+            class="product-card-grid shadow-md sm:p-3 p-2 border  "
         >
-            <img
-                class="product-card-grid-image"
-                :src="item.cover"
-                alt="product"
-            />
-            <div class="product-card-grid-content-group">
-                <div class="product-card-grid-header-group">
-                    <h3 class="product-card-grid-title">
+            <div class="relative">
+                <!-- Dark overlay only on image -->
+                <div
+                    class="absolute inset-0 bg-black/20 z-10 pointer-events-none rounded-2xl"
+                ></div>
+                <img
+                    class="product-card-grid-image"
+                    :src="item.cover"
+                    alt="product"
+                />
+            </div>
+            <div class="product-card-grid-content-group px-0 font-poppins">
+                <div class="product-card-grid-header-group flex items-center">
+                    <h3 class="product-card-grid-title font-normal">
                         {{ textShortener(item.name, 26) }}
                     </h3>
                     <button
@@ -104,7 +115,7 @@
                         ></i>
                     </button>
                 </div>
-                <p class="product-card-grid-describe char-limit">
+                <p class="product-card-grid-describe char-limit mb-6">
                     {{ textShortener(item.description, 75) }}
                 </p>
                 <div class="product-card-grid-footer-group">
@@ -115,7 +126,9 @@
                         >
                             {{ item.currency_price }}
                         </del>
-                        <h4 class="product-card-grid-price-current">
+                        <h4
+                            class="product-card-grid-price-current font-semibold"
+                        >
                             {{
                                 item.offer.length > 0
                                     ? item.offer[0].currency_price
@@ -124,17 +137,17 @@
                         </h4>
                     </div>
                     <!-- <button
-                        @click.prevent="variationModalShow(item)"
-                        data-modal="#item-variation-modal"
-                        class="product-card-grid-cart-btn add-btn"
-                    >
-                        <i
-                            class="lab lab-bag-2 font-fill-primary transition lab-font-size-14"
-                        ></i>
-                        <span class="text-xs text-primary transition">{{
-                            $t("button.add")
-                        }}</span>
-                    </button> -->
+                    @click.prevent="variationModalShow(item)"
+                    data-modal="#item-variation-modal"
+                    class="product-card-grid-cart-btn add-btn"
+                >
+                    <i
+                        class="lab lab-bag-2 font-fill-primary transition lab-font-size-14"
+                    ></i>
+                    <span class="text-xs text-primary transition">{{
+                        $t("button.add")
+                    }}</span>
+                </button> -->
 
                     <VariationButton
                         ref="variationButtonGrid"

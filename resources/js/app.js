@@ -53,7 +53,53 @@ axios.interceptors.request.use(
     },
     (error) => Promise.reject(error)
 );
+
 /* End axios code */
+
+// /* Start axios code*/
+// const API_URL = ENV.API_URL;
+// const API_KEY = ENV.API_KEY;
+
+// axios.defaults.baseURL = API_URL + "/api";
+// axios.interceptors.request.use(
+//     (config) => {
+//         console.log("Axios Interceptor - Original URL:", config.url);
+//         console.log("Axios Interceptor - isWeb property:", config.isWeb);
+
+//         if (config.isWeb === true) {
+//             console.log(
+//                 "Axios Interceptor - Web route detected, removing /api prefix"
+//             );
+//             config.baseURL = API_URL;
+
+//             delete config.isWeb;
+//         } else {
+//             console.log("Axios Interceptor - API route, keeping /api prefix");
+//         }
+
+//         config.headers["x-api-key"] = API_KEY;
+//         if (localStorage.getItem("vuex")) {
+//             const vuex = JSON.parse(localStorage.getItem("vuex"));
+//             const token = vuex.auth.authToken;
+//             const language = vuex.globalState.lists.language_code;
+//             config.headers["Authorization"] = token ? `Bearer ${token}` : "";
+//             config.headers["x-localization"] = language;
+//         }
+
+//         console.log("Axios Interceptor - Final baseURL:", config.baseURL);
+//         console.log(
+//             "Axios Interceptor - Final URL will be:",
+//             config.baseURL + config.url
+//         );
+
+//         return config;
+//     },
+//     (error) => {
+//         console.error("Axios Interceptor - Request error:", error);
+//         return Promise.reject(error);
+//     }
+// );
+// /* End axios code */
 
 (function handleSocialAuthHash() {
     try {

@@ -2622,6 +2622,9 @@ body {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
+  .success-page-container{
+    padding: 2rem 10rem !important;
+  }
 }
 
 .db-tabBtn.active {
@@ -3399,11 +3402,11 @@ input:checked+div svg {
   transition-timing-function: linear;
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   .ff-modal {
     top: 74px;
   }
-}
+} */
 
 .info-modal {
   z-index: 70;

@@ -1,11 +1,11 @@
 <template>
     <div v-if="status && setting.cookies_summary" :class="activeClass"
-         class="cookie-paper  fixed bottom-0 sm:bottom-16 h-80 overflow-auto sm:h-auto lg:bottom-8 left-0 sm:left-8 z-50 w-full sm:max-w-[300px] sm:rounded-xl p-6 shadow-paper bg-white">
-        <h3 class="font-medium leading-6 capitalize mb-3">{{ $t('label.about_our_privacy') }}</h3>
-        <p class="text-sm leading-6 mb-8 text-heading">{{ setting.cookies_summary }}</p>
+         class="cookie-paper  fixed bottom-0 sm:bottom-16 h-80 overflow-auto sm:h-auto lg:bottom-8 left-0 sm:left-8 z-50 w-full sm:max-w-[350px] sm:rounded-xl p-6 shadow-paper bg-white">
+        <h3 class="font-medium leading-6 capitalize mb-3 text-heading-light">{{ $t('label.about_our_privacy') }}</h3>
+        <p class="text-sm leading-6 mb-8 text-heading-light">{{ setting.cookies_summary }}</p>
         <div class="flex flex-wrap items-center gap-[18px] mb-[18px]">
             <button @click.prevent="change(true)" type="button"
-                    class="h-10 py-2 px-6 rounded-3xl flex items-center gap-1.5 bg-[#1AB759]">
+                    class="h-10 py-2 px-6 rounded-3xl flex items-center gap-1.5 bg-primary">
                 <i class="lab lab-cookie-bite lab-font-size-16 text-white"></i>
                 <span class="leading-6 capitalize text-white">{{ $t('button.accept') }}</span>
             </button>

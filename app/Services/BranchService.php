@@ -126,27 +126,136 @@ class BranchService
     /**
      * @throws Exception
      */
+    // public function showByLatLong(Request $request)
+    // {
+    //     try {
+    //         $branches = Branch::whereNotNull('zone')->where('status', Status::ACTIVE)->get();
+    //         $userLatitude = $request->input('latitude');
+    //         $userLongitude = $request->input('longitude');
+
+    //         foreach ($branches as $branch) {
+    //             $zoneData = json_decode(json_decode($branch->zone, true), true);
+
+    //             if ($this->isPointInPolygon($zoneData, $userLatitude, $userLongitude)) {
+    //                 return $branch;
+    //             }
+                
+    //         }
+
+    //         throw new Exception(trans('all.message.out_of_service_area'), 422);
+    //     } catch (Exception $exception) {
+    //         Log::info($exception->getMessage());
+    //         throw new Exception($exception->getMessage(), 422);
+    //     }
+    // }
+
     public function showByLatLong(Request $request)
-    {
-        try {
-            $branches = Branch::whereNotNull('zone')->where('status', Status::ACTIVE)->get();
-            $userLatitude = $request->input('latitude');
-            $userLongitude = $request->input('longitude');
+{
+    try {
+        Log::debug('showByLatLong - Starting method', [
+            'user_latitude' => $request->input('latitude'),
+            'user_longitude' => $request->input('longitude'),
+            'request_all' => $request->all()
+        ]);
 
-            foreach ($branches as $branch) {
-                $zoneData = json_decode(json_decode($branch->zone, true), true);
+        $branches = Branch::whereNotNull('zone')->where('status', Status::ACTIVE)->get();
+        
+        Log::debug('showByLatLong - Branches found', [
+            'total_branches' => $branches->count(),
+            'branch_ids' => $branches->pluck('id')->toArray()
+        ]);
 
-                if ($this->isPointInPolygon($zoneData, $userLatitude, $userLongitude)) {
-                    return $branch;
-                }
+        $userLatitude = $request->input('latitude');
+        $userLongitude = $request->input('longitude');
+
+        // Validate coordinates
+        if (empty($userLatitude) || empty($userLongitude)) {
+            Log::warning('showByLatLong - Missing coordinates', [
+                'latitude' => $userLatitude,
+                'longitude' => $userLongitude
+            ]);
+            throw new Exception(trans('all.message.invalid_coordinates'), 422);
+        }
+
+        Log::debug('showByLatLong - User coordinates', [
+            'latitude' => $userLatitude,
+            'longitude' => $userLongitude
+        ]);
+
+        $branchCounter = 0;
+        foreach ($branches as $branch) {
+            $branchCounter++;
+            Log::debug("showByLatLong - Processing branch {$branchCounter}/{$branches->count()}", [
+                'branch_id' => $branch->id,
+                'branch_name' => $branch->name
+            ]);
+
+            $zoneData = json_decode(json_decode($branch->zone, true), true);
+            
+            Log::debug("showByLatLong - Branch zone data", [
+                'branch_id' => $branch->id,
+                'zone_raw' => $branch->zone,
+                'zone_decoded' => $zoneData,
+                'zone_type' => gettype($zoneData)
+            ]);
+
+            // Check if zone data is valid
+            if (empty($zoneData) || !is_array($zoneData)) {
+                Log::warning("showByLatLong - Invalid zone data for branch", [
+                    'branch_id' => $branch->id,
+                    'zone_data' => $zoneData
+                ]);
+                continue;
             }
 
-            throw new Exception(trans('all.message.out_of_service_area'), 422);
-        } catch (Exception $exception) {
-            Log::info($exception->getMessage());
-            throw new Exception($exception->getMessage(), 422);
+            Log::debug("showByLatLong - Calling isPointInPolygon", [
+                'branch_id' => $branch->id,
+                'zone_point_count' => count($zoneData),
+                'user_lat' => $userLatitude,
+                'user_lng' => $userLongitude
+            ]);
+
+            $isInPolygon = $this->isPointInPolygon($zoneData, $userLatitude, $userLongitude);
+            
+            Log::debug("showByLatLong - Polygon check result", [
+                'branch_id' => $branch->id,
+                'is_in_polygon' => $isInPolygon,
+                'zone_points_sample' => array_slice($zoneData, 0, 3) // Log first 3 points for sample
+            ]);
+
+            if ($isInPolygon) {
+                Log::info('showByLatLong - Branch found for coordinates', [
+                    'branch_id' => $branch->id,
+                    'branch_name' => $branch->name,
+                    'user_latitude' => $userLatitude,
+                    'user_longitude' => $userLongitude,
+                    'branches_checked' => $branchCounter
+                ]);
+                return $branch;
+            }
+            return $branch;
         }
+
+        Log::warning('showByLatLong - No branch found for coordinates', [
+            'user_latitude' => $userLatitude,
+            'user_longitude' => $userLongitude,
+            'total_branches_checked' => $branches->count(),
+            'branches_with_zones' => $branches->whereNotNull('zone')->count()
+        ]);
+
+        throw new Exception(trans('all.message.out_of_service_area'), 422);
+    } catch (Exception $exception) {
+        Log::error('showByLatLong - Exception occurred', [
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'user_latitude' => $request->input('latitude'),
+            'user_longitude' => $request->input('longitude'),
+            'trace' => $exception->getTraceAsString()
+        ]);
+        throw new Exception($exception->getMessage(), 422);
     }
+}
 
     function isPointInPolygon($polygon, $latitude, $longitude)
     {
