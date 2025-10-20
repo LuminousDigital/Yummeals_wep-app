@@ -2,7 +2,7 @@
     <LoadingComponent :props="loading" />
     <div
         v-if="sliders.length > 0"
-        :class="logged && activeOrders ? 'container mb-5 mt-36 md:mt-8 lg:mt-32' : 'container mb-5 mt-36 md:mt-48 lg:mt-32'"
+        :class="logged && activeOrders.length > 0 ? 'container mb-5 mt-36 md:mt-8 lg:mt-8' : 'container mb-5 mt-36 md:mt-48 lg:mt-32'"
     >
         <Swiper
             dir="rtl"

@@ -27,6 +27,7 @@ class OrderPushNotificationBuilder
     public function send(): void
     {
         if (!blank($this->order)) {
+            Log::info('[OrderPush] start', ['order_id' => $this->orderId, 'status' => $this->status]);
             $user = User::find($this->order->user_id);
             if (!blank($user)) {
                 if (!blank($user->web_token) || !blank($user->device_token)) {
@@ -37,9 +38,19 @@ class OrderPushNotificationBuilder
                     if (!blank($user->device_token)) {
                         $fcmTokenArray[] = $user->device_token;
                     }
+                    Log::info('[OrderPush] tokens prepared', [
+                        'order_id' => $this->orderId,
+                        'count'    => count($fcmTokenArray)
+                    ]);
                     $this->message($fcmTokenArray, $this->status, $this->orderId);
+                } else {
+                    Log::warning('[OrderPush] No tokens for user', ['order_id' => $this->orderId, 'user_id' => $user->id]);
                 }
+            } else {
+                Log::warning('[OrderPush] User not found for order', ['order_id' => $this->orderId]);
             }
+        } else {
+            Log::warning('[OrderPush] Order not found', ['order_id' => $this->orderId]);
         }
     }
 
@@ -86,6 +97,8 @@ class OrderPushNotificationBuilder
         $notificationAlert = NotificationAlert::where(['language' => 'order_pending_message'])->first();
         if ($notificationAlert && $notificationAlert->push_notification == SwitchBox::ON) {
             $this->notification($fcmTokenArray, $orderId, $notificationAlert->push_notification_message);
+        } else {
+            Log::info('[OrderPush] Pending push disabled');
         }
     }
 

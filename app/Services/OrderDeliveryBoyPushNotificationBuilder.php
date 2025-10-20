@@ -27,6 +27,7 @@ class OrderDeliveryBoyPushNotificationBuilder
     public function send()
     {
         if (!blank($this->order)) {
+            Log::info('[DeliveryBoyPush] start', ['order_id' => $this->orderId, 'status' => $this->status]);
             if($this->order->delivery_boy_id > 0) {
                 $deliveryBoy = User::find($this->order->delivery_boy_id);
                 if (!blank($deliveryBoy)) {
@@ -38,7 +39,10 @@ class OrderDeliveryBoyPushNotificationBuilder
                         if (!blank($deliveryBoy->device_token)) {
                             $fcmTokenArray[] = $deliveryBoy->device_token;
                         }
+                        Log::info('[DeliveryBoyPush] tokens prepared', ['order_id' => $this->orderId, 'count' => count($fcmTokenArray)]);
                         $this->message($fcmTokenArray, $this->status, $this->orderId);
+                    } else {
+                        Log::warning('[DeliveryBoyPush] No tokens for delivery boy', ['delivery_boy_id' => $deliveryBoy->id]);
                     }
                 }
             }
@@ -73,6 +77,8 @@ class OrderDeliveryBoyPushNotificationBuilder
         $notificationAlert = NotificationAlert::where(['language' => 'delivery_boy_after_assign_message'])->first();
         if ($notificationAlert && $notificationAlert->push_notification == SwitchBox::ON) {
             $this->notification($fcmTokenArray, $orderId, $notificationAlert->push_notification_message);
+        } else {
+            Log::info('[DeliveryBoyPush] Push disabled via NotificationAlert');
         }
     }
 }

@@ -245,6 +245,7 @@ export default {
 
         window.setTimeout(() => {
             if (this.$store.getters.authStatus && this.setting.notification_fcm_api_key && this.setting.notification_fcm_auth_domain && this.setting.notification_fcm_project_id && this.setting.notification_fcm_storage_bucket && this.setting.notification_fcm_messaging_sender_id && this.setting.notification_fcm_app_id && this.setting.notification_fcm_measurement_id) {
+                console.log('[FCM] init admin web app', this.setting.notification_fcm_project_id);
                 initializeApp({
                     apiKey: this.setting.notification_fcm_api_key,
                     authDomain: this.setting.notification_fcm_auth_domain,
@@ -254,23 +255,34 @@ export default {
                     appId: this.setting.notification_fcm_app_id,
                     measurementId: this.setting.notification_fcm_measurement_id
                 });
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                        .then(reg => console.log('[FCM] SW registered', reg.scope))
+                        .catch(err => console.warn('[FCM] SW registration failed', err));
+                }
                 const messaging = getMessaging();
 
                 Notification.requestPermission().then((permission) => {
+                    console.log('[FCM] permission', permission);
                     if (permission === 'granted') {
                         getToken(messaging, { vapidKey: this.setting.notification_fcm_public_vapid_key }).then((currentToken) => {
                             if (currentToken) {
-                                axios.post('/frontend/device-token/web', { token: currentToken }).then().catch((error) => {
-                                    if (error.response.data.message === 'Unauthenticated.') {
+                                console.log('[FCM] token retrieved', currentToken.substring(0, 12) + '…');
+                                axios.post('/frontend/device-token/web', { token: currentToken }).then(() => console.log('[FCM] token saved to backend')).catch((error) => {
+                                    console.warn('[FCM] token save error', error?.response?.data || error);
+                                    if (error?.response?.data?.message === 'Unauthenticated.') {
                                         this.$store.dispatch('loginDataReset');
                                     }
                                 });
+                            } else {
+                                console.warn('[FCM] empty token returned');
                             }
-                        }).catch();
+                        }).catch(err => console.warn('[FCM] getToken failed', err));
                     }
                 });
 
                 onMessage(messaging, (payload) => {
+                    console.log('[FCM] onMessage', payload);
                     const notificationTitle = payload.notification.title;
                     const notificationOptions = {
                         body: payload.notification.body,

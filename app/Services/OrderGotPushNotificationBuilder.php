@@ -26,6 +26,7 @@ class OrderGotPushNotificationBuilder
     public function send(): void
     {
         if (!blank($this->order)) {
+            Log::info('[OrderGotPush] start', ['order_id' => $this->orderId, 'order_type' => $this->order->order_type, 'branch_id' => $this->order->branch_id]);
             $fcmWebDeviceTokenAllAdmins         = User::role(Role::ADMIN)->where(['branch_id' => 0])->whereNotNull('web_token')->get();
             $fcmWebDeviceTokenBranchAdmins      = User::role(Role::ADMIN)->where(['branch_id' => $this->order->branch_id])->whereNotNull('web_token')->get();
             $fcmWebDeviceTokenBranchManagers    = User::role(Role::BRANCH_MANAGER)->where(['branch_id' => $this->order->branch_id])->whereNotNull('web_token')->get();
@@ -80,6 +81,7 @@ class OrderGotPushNotificationBuilder
             if (count($fcmTokenArray) > 0) {
                 try {
                     $notificationAlert = NotificationAlert::where(['language' => 'admin_and_branch_manager_new_order_message'])->first();
+                    Log::info('[OrderGotPush] tokens prepared', ['count' => count($fcmTokenArray)]);
                     if ($notificationAlert && $notificationAlert->push_notification == SwitchBox::ON) {
                         $pushNotification = (object)[
                             'title'       => 'New Order Notification',
@@ -88,6 +90,8 @@ class OrderGotPushNotificationBuilder
                         ];
                         $firebase         = new FirebaseService();
                         $firebase->sendNotification($pushNotification, $fcmTokenArray, $this->order->order_type == OrderType::DINING_TABLE ? "new-table-order-found" :  "new-order-found");
+                    } else {
+                        Log::info('[OrderGotPush] Push disabled via NotificationAlert');
                     }
                 } catch (Exception $e) {
                     Log::info($e->getMessage());

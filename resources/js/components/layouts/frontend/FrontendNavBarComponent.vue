@@ -354,6 +354,7 @@ export default {
                 });
 
                 if (this.$store.getters.authStatus && res.data.data.notification_fcm_api_key && res.data.data.notification_fcm_auth_domain && res.data.data.notification_fcm_project_id && res.data.data.notification_fcm_storage_bucket && res.data.data.notification_fcm_messaging_sender_id && res.data.data.notification_fcm_app_id && res.data.data.notification_fcm_measurement_id) {
+                    console.log('[FCM] init web app', res.data.data.notification_fcm_project_id);
                     initializeApp({
                         apiKey: res.data.data.notification_fcm_api_key,
                         authDomain: res.data.data.notification_fcm_auth_domain,
@@ -363,23 +364,38 @@ export default {
                         appId: res.data.data.notification_fcm_app_id,
                         measurementId: res.data.data.notification_fcm_measurement_id
                     });
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                            .then(reg => console.log('[FCM] SW registered', reg.scope))
+                            .catch(err => console.warn('[FCM] SW registration failed', err));
+                    }
                     const messaging = getMessaging();
 
                     Notification.requestPermission().then((permission) => {
+                        console.log('[FCM] permission', permission);
                         if (permission === 'granted') {
-                            getToken(messaging, { vapidKey: res.data.data.notification_fcm_public_vapid_key }).then((currentToken) => {
-                                if (currentToken) {
-                                    axios.post('/frontend/device-token/web', { token: currentToken }).then().catch((error) => {
-                                        if (error.response.data.message === 'Unauthenticated.') {
-                                            this.$store.dispatch('loginDataReset');
-                                        }
-                                    });
-                                }
-                            }).catch();
+                            getToken(messaging, { vapidKey: res.data.data.notification_fcm_public_vapid_key })
+                                .then((currentToken) => {
+                                    if (currentToken) {
+                                        console.log('[FCM] token retrieved', currentToken.substring(0, 12) + '…');
+                                        axios.post('/frontend/device-token/web', { token: currentToken })
+                                            .then(() => console.log('[FCM] token saved to backend'))
+                                            .catch((error) => {
+                                                console.warn('[FCM] token save error', error?.response?.data || error);
+                                                if (error?.response?.data?.message === 'Unauthenticated.') {
+                                                    this.$store.dispatch('loginDataReset');
+                                                }
+                                            });
+                                    } else {
+                                        console.warn('[FCM] empty token returned');
+                                    }
+                                })
+                                .catch(err => console.warn('[FCM] getToken failed', err));
                         }
                     });
 
                     onMessage(messaging, (payload) => {
+                        console.log('[FCM] onMessage', payload);
                         const notificationTitle = payload.notification.title;
                         const notificationOptions = {
                             body: payload.notification.body,
