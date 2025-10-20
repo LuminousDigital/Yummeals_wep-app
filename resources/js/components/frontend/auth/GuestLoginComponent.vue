@@ -19,7 +19,7 @@
                         <input v-model="props.form.phone" v-on:keypress="phoneNumber($event)" v-on:keyup.enter="save"
                             :class="errors.phone
                                 ? 'invalid' : ''" type="text" id="phone"
-                            class="pl-4 text-sm w-full h-full text-heading focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg" />
+                            class="pl-4 text-sm w-full h-full text-heading-light focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg" />
                     </div>
                     <small class="db-field-alert" v-if="errors.phone">
                         {{ errors.phone[0] }}

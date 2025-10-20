@@ -180,7 +180,7 @@ class FrontendOrderService
                 }
                 // SendOrderMail::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
                 // SendOrderSms::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
-                // SendOrderPush::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
+                SendOrderPush::dispatch(['order_id' => $this->frontendOrder->id, 'status' => OrderStatus::PENDING]);
 
                 // SendOrderGotMail::dispatch(['order_id' => $this->frontendOrder->id]);
                 // SendOrderGotSms::dispatch(['order_id' => $this->frontendOrder->id]);

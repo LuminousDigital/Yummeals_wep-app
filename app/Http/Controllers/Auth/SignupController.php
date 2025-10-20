@@ -15,6 +15,7 @@ use App\Services\OtpManagerService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignupRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\VerifyPhoneRequest;
 use App\Enums\Role as EnumRole;
 use Smartisan\Settings\Facades\Settings;
@@ -130,11 +131,13 @@ class SignupController extends Controller
             $user = User::where(['phone' => $request->post('phone'), 'is_guest' => Ask::YES])->first();
             $name = AppLibrary::name($request->post('first_name'), $request->post('last_name'));
 
-
-            // Handle referral
             $referrer = null;
-            if ($request->has('referral_code')) {
-                $referrer = User::where('referral_code', $request->post('referral_code'))->first();
+            $rawReferral = $request->input('referral_code');
+            $code = is_string($rawReferral) ? strtoupper(trim($rawReferral)) : '';
+            if ($code !== '') {
+                $referrer = User::whereNotNull('referral_code')
+                    ->where('referral_code', $code)
+                    ->first();
             }
 
             if ($user) {
@@ -162,10 +165,14 @@ class SignupController extends Controller
                 ]);
                 $user->assignRole(EnumRole::CUSTOMER);
             }
-
-            // Process referral bonus if applicable
             if ($referrer) {
-                $this->processReferralBonus($user, $referrer);
+                if ($referrer->id !== $user->id) {
+                    ReferralSignedUp::dispatch([
+                        'referrer_id' => $referrer->id,
+                        'referee_id'  => $user->id,
+                    ]);
+                    $this->processReferralBonus($user, $referrer);
+                }
             }
 
             return response([
@@ -189,6 +196,12 @@ class SignupController extends Controller
         $referralBonus = (float) Settings::group('referral')->get('signup_bonus', 10);
         $refereeBonus = (float) Settings::group('referral')->get('referee_bonus', 0);
 
+        Log::info('[Signup] processReferralBonus start', [
+            'referrer_id'    => $referrer->id,
+            'referee_id'     => $newUser->id,
+            'referral_bonus' => $referralBonus,
+            'referee_bonus'  => $refereeBonus,
+        ]);
 
         // Create bonus records
         $referrerBonusRecord = ReferralBonus::create([
@@ -204,7 +217,10 @@ class SignupController extends Controller
         DB::transaction(function () use ($referrer, $referralBonus, $referrerBonusRecord) {
             $referrer->increment('referral_balance', $referralBonus);
             $referrer->increment('total_referrals');
-
+            Log::info('[Signup] referrer credited', [
+                'referrer_id' => $referrer->id,
+                'amount'      => $referralBonus,
+            ]);
 
             ReferralTransaction::create([
                 'user_id' => $referrer->id,
@@ -233,7 +249,10 @@ class SignupController extends Controller
             DB::transaction(function () use ($newUser, $refereeBonus, $refereeBonusRecord) {
                 $wallet = $newUser->wallet()->firstOrCreate([], ['balance' => 0, 'currency' => 'USD']);
                 $wallet->increment('balance', $refereeBonus);
-
+                Log::info('[Signup] referee credited', [
+                    'referee_id' => $newUser->id,
+                    'amount'     => $refereeBonus,
+                ]);
 
                 ReferralTransaction::create([
                     'user_id' => $newUser->id,
