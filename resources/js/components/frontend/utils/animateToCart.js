@@ -3,10 +3,8 @@ export function animateToCart(buttonEl, cartEl, onComplete) {
 
   const buttonRect = buttonEl.getBoundingClientRect();
 
-  // Ensure we have the visible cart element
   let visibleCartEl = cartEl;
   if (getComputedStyle(cartEl).display === 'none') {
-    // If the selected cart is hidden, find the visible one
     const allCarts = document.querySelectorAll('[data-cart-icon]');
     for (let cart of allCarts) {
       if (getComputedStyle(cart).display !== 'none') {
@@ -24,7 +22,7 @@ export function animateToCart(buttonEl, cartEl, onComplete) {
   dot.style.width = '12px';
   dot.style.height = '12px';
   dot.style.borderRadius = '50%';
-  dot.style.background = '#facc15';
+  dot.style.background = '#F25B0A';
   dot.style.left = `${buttonRect.left + buttonRect.width / 2 - 8}px`;
   dot.style.top = `${buttonRect.top + buttonRect.height / 2 - 8}px`;
   dot.style.zIndex = 9999;
@@ -55,14 +53,15 @@ export function animateToCart(buttonEl, cartEl, onComplete) {
 
   dot.addEventListener('animationend', () => {
     dot.remove();
-    // Add pop effect to cart icon only
     if (visibleCartEl) {
-      const icon = visibleCartEl.querySelector('i') || visibleCartEl; // Use visibleCartEl if no <i> inside (for mobile)
-      if (icon) {
-        icon.classList.add('cart-icon-pop');
+      const badge = visibleCartEl.parentElement.querySelector('span.absolute');
+      if (badge) {
         setTimeout(() => {
-          icon.classList.remove('cart-icon-pop');
-        }, 400);
+          badge.classList.add('badge-pop');
+          setTimeout(() => {
+            badge.classList.remove('badge-pop');
+          }, 400);
+        }, 200);
       }
     }
     onComplete && onComplete();

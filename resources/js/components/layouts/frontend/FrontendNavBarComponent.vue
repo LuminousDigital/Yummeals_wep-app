@@ -126,17 +126,18 @@
                         type="button"
                         ref="cartButton"
                         data-cart-icon
-                        class="webcart hidden lg:flex items-center justify-center gap-1.5 w-fit rounded-lg capitalize text-sm font-normal h-12 px-3 transition text-white bg-heading"
-                        :class="{ 'animate-shake': cartAnimation }"
+                        class="webcart hidden lg:flex items-center justify-center gap-1.5 w-fit rounded-lg capitalize text-sm font-normal h-12 px-3 transition text-white bg-heading relative"
                     >
                         <div class="relative inline-block">
-                            <i class="lab lab-bag-2 lab-font-size-17 relative">
-                                <span
-                                    v-if="subtotal > 0"
-                                    class="absolute -top-1 -right-1 bg-[#FFDB1F] text-black text-[10px] font-semibold rounded-full h-2 w-2 flex items-center justify-center border border-white shadow-sm transition-all duration-300"
-                                ></span>
-                            </i>
+                            <i class="lab lab-bag-2 lab-font-size-17"></i>
                         </div>
+                        <span
+                            v-if="itemCount > 0"
+                            :class="badgeAnimation ? 'animate-badge-pop' : ''"
+                            class="absolute -top-2 -right-2 bg-primary text-white text-[12px] font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-white shadow-lg transition-all duration-300"
+                        >
+                            {{ itemCount }}
+                        </span>
 
                         <span class="whitespace-nowrap">{{
                             currencyFormat(
@@ -411,6 +412,7 @@ export default {
             defaultLanguage: null,
             defaultCountryCode: null,
             cartAnimation: false,
+            badgeAnimation: false,
             flyingDot: {
                 visible: false,
                 x: 0,
@@ -794,11 +796,11 @@ export default {
                 this.flyingDot.targetY = cartRect.top + cartRect.height / 2 - 8;
                 this.flyingDot.visible = true;
 
-                // Trigger cart shake animation
-                this.cartAnimation = true;
+                // Trigger badge pop animation
+                this.badgeAnimation = true;
                 setTimeout(() => {
-                    this.cartAnimation = false;
-                }, 500);
+                    this.badgeAnimation = false;
+                }, 300);
             }
         },
         onFlyingDotEnd: function () {
@@ -857,6 +859,22 @@ export default {
     animation: shake 0.5s ease-in-out;
 }
 
+@keyframes badgePop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-badge-pop {
+    animation: badgePop 0.3s ease-out;
+}
+
 .cart-icon-pop {
     animation: cartIconPop 0.3s ease-out;
 }
@@ -871,5 +889,21 @@ export default {
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes badgePop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.badge-pop {
+    animation: badgePop 0.3s ease-out;
 }
 </style>
