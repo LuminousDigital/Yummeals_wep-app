@@ -125,6 +125,11 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
+    if ((to.name === "auth.signupPhone" || to.name === "auth.signupVerify" || to.name === "auth.signupRegister") && store.getters.authStatus) {
+        next({ name: "frontend.home" });
+        return;
+    }
+
     if (to.meta.auth === true) {
         if (!store.getters.authStatus) {
             next({ name: "auth.login" });
