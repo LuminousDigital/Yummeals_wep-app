@@ -18,6 +18,8 @@ class SendReferralPushNotification
 
             $referralBonus = (float) Settings::group('referral')->get('signup_bonus', 10);
             $refereeBonus  = (float) Settings::group('referral')->get('referee_bonus', 0);
+            $symbol        = (string) Settings::group('site')->get('site_default_currency_symbol', '$');
+            $decimals      = (int) Settings::group('site')->get('site_digit_after_decimal_point', 2);
 
             $firebase = new FirebaseService();
 
@@ -25,7 +27,12 @@ class SendReferralPushNotification
                 $tokens = array_values(array_filter([$referrer->web_token, $referrer->device_token]));
                 $payload = (object) [
                     'title'       => 'Referral Bonus',
-                    'description' => sprintf('Great news! %s just signed up using your referral code. You earned %.2f.', $referee?->name ?? 'Someone', $referralBonus),
+                    'description' => sprintf(
+                        'Great news! %s just signed up using your referral code. You earned %s%s.',
+                        $referee?->name ?? 'Someone',
+                        $symbol,
+                        number_format($referralBonus, $decimals)
+                    ),
                 ];
                 $firebase->sendNotification($payload, $tokens, 'referral');
             }
@@ -34,7 +41,11 @@ class SendReferralPushNotification
                 $tokens = array_values(array_filter([$referee->web_token, $referee->device_token]));
                 $payload = (object) [
                     'title'       => 'Welcome Bonus',
-                    'description' => sprintf('Welcome! You received a %.2f bonus for using a referral code.', $refereeBonus),
+                    'description' => sprintf(
+                        'Welcome! You received a %s%s bonus for using a referral code.',
+                        $symbol,
+                        number_format($refereeBonus, $decimals)
+                    ),
                 ];
                 $firebase->sendNotification($payload, $tokens, 'referral');
             }
