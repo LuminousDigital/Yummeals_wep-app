@@ -514,8 +514,8 @@ button:hover .font-fill {
 /* Modern Toast Notifications */
 .custom-toast {
     background-color: #FFFFFF !important;
-    border: 2px solid #E5E7EB !important;
-    border-left: 2px solid #6B7280 !important;
+    border: 0px solid #E5E7EB !important;
+    border-left: 3px solid #6B7280 !important;
     color: #1F2937 !important;
     /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important; */
     border-radius: 8px !important;
@@ -526,11 +526,11 @@ button:hover .font-fill {
 }
 
 .custom-toast-success {
-    border-left-color: rgb(242, 91, 10, 1)  !important;
+    border-left-color: #64961a  !important;
 }
 
 .custom-toast-error {
-    border-left-color: #DC2626 !important;
+    border-left-color: #64961a!important;
 }
 
 .custom-toast-info {
@@ -547,12 +547,12 @@ button:hover .font-fill {
 
 /* Progress Bar */
 .custom-toast .Vue-Toastification__progress-bar {
-    height: 2px !important;
+    height: 0px !important;
     border-radius: 0 0 8px 8px !important;
 }
 
 .custom-toast-success .Vue-Toastification__progress-bar {
-    background: linear-gradient(90deg, rgb(242, 91, 10, 1) , #FF8C42) !important;
+    background: linear-gradient(90deg, #64961a , #6da41a) !important;
 }
 
 .custom-toast-error .Vue-Toastification__progress-bar {
@@ -583,8 +583,11 @@ button:hover .font-fill {
     color: #374151 !important;
 }
 
-
 .Vue-Toastification__toast-body {
     font-size: 14px !important;
     letter-spacing: .5px;
+}
+
+.confirn-btn{
+    letter-spacing: 1px;
 }

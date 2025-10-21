@@ -89,8 +89,21 @@ class PushNotificationService
             }
 
             $fcmTokenArray = array_merge($fcmWebDeviceToken, $fcmMobileDeviceToken);
-            $firebase      = new FirebaseService();
-            $firebase->sendNotification($pushNotification, $fcmTokenArray, "promotion");
+            Log::info('[PushNotification] Target tokens', [
+                'role_id'     => $pushNotification->role_id,
+                'user_id'     => $pushNotification->user_id,
+                'branch_id'   => $pushNotification->branch_id,
+                'web_tokens'  => count($fcmWebDeviceToken ?? []),
+                'device_tokens' => count($fcmMobileDeviceToken ?? []),
+                'total'       => count($fcmTokenArray ?? []),
+            ]);
+
+            if (count($fcmTokenArray) === 0) {
+                Log::warning('[PushNotification] No FCM tokens found for this audience. Skipping send.');
+            } else {
+                $firebase = new FirebaseService();
+                $firebase->sendNotification($pushNotification, $fcmTokenArray, "promotion");
+            }
             return $pushNotification;
         } catch (Exception $exception) {
             Log::info($exception->getMessage());

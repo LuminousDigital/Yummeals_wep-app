@@ -11,6 +11,7 @@ class SendOrderPushNotification
 {
     public function handle(SendOrderPush $event)
     {
+        Log::info('[Listener] SendOrderPush received', $event->info ?? []);
         try{
             $orderPushNotificationBuilderService = new OrderPushNotificationBuilder($event->info['order_id'], $event->info['status']);
             $orderPushNotificationBuilderService->send();

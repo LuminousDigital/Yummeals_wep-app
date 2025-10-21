@@ -22,6 +22,11 @@ class TokenStoreService
             $user->web_token = $request->token;
             $user->save();
 
+            \Log::info('[DeviceToken] Web token saved', [
+                'user_id' => $user->id,
+                'token'   => substr($request->token ?? '', 0, 8) . '…'
+            ]);
+
             return true;
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
@@ -38,6 +43,11 @@ class TokenStoreService
             $user = User::find(auth()->user()->id);
             $user->device_token = $request->token;
             $user->save();
+
+            \Log::info('[DeviceToken] Mobile token saved', [
+                'user_id' => $user->id,
+                'token'   => substr($request->token ?? '', 0, 8) . '…'
+            ]);
 
             return true;
         } catch (Exception $exception) {

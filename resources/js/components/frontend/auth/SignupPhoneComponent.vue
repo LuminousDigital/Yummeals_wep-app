@@ -22,7 +22,7 @@
                         </div>
                         <input id="phone" v-model="props.form.phone" v-on:keyup.enter="save"
                             v-on:keypress="phoneNumber($event)" type="text"
-                            class="pl-4 text-sm w-full h-full text-heading focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg">
+                            class="pl-4 text-sm w-full h-full text-heading-light focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg">
                     </div>
                     <small class="db-field-alert" v-if="errors.phone">
                         {{ errors.phone[0] }}

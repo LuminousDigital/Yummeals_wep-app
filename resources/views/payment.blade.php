@@ -88,7 +88,7 @@
 
             @if (!blank($paymentGateways))
                 <button type="submit"
-                    class="py-3 w-full rounded-lg text-center text-sm font-normal font-poppins tracking-[1px] bg-primary text-white"
+                    class="py-3 w-full rounded-lg text-center text-sm font-normal font-poppins tracking-[1px] bg-primary text-white confirn-btn"
                     id="confirmBtn">
                     {{ __('all.label.confirm') }}
                 </button>

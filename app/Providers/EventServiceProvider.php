@@ -85,6 +85,9 @@ class EventServiceProvider extends ServiceProvider
         SendOrderOtp::class => [
             SendOrderOtpNotification::class,
         ],
+        \App\Events\ReferralSignedUp::class => [
+            \App\Listeners\SendReferralPushNotification::class,
+        ],
 
 
     ];
