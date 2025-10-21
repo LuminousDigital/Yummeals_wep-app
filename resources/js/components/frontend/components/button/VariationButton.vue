@@ -1,5 +1,6 @@
 <template>
     <button
+        ref="addToCartBtn"
         @click.prevent="handleClick"
         class="product-card-grid-cart-btn add-btn rounded-lg bg-primary hover:bg-white text-white hover:border-primary hover:border hover:!text-primary group"
     >
@@ -13,6 +14,8 @@
 </template>
 
 <script>
+import { animateToCart } from '../../utils/animateToCart.js';
+
 export default {
     props: {
         item: Object,
@@ -23,8 +26,14 @@ export default {
             if (isLocationCovered === "true") {
                 this.$emit("variation-click", this.item);
             } else {
-                this.$emit("show-location-modal");
+                this.$emit("show-location-modal", this.item);
             }
+        },
+        triggerAnimation() {
+            const cartIcon = document.querySelector('[data-cart-icon]');
+            animateToCart(this.$refs.addToCartBtn, cartIcon, () => {
+                this.$emit('cart-animation-complete');
+            });
         },
     },
 };
