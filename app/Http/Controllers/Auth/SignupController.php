@@ -22,6 +22,7 @@ use Smartisan\Settings\Facades\Settings;
 use App\Models\ReferralBonus;
 use App\Events\ReferralSignedUp;
 use App\Models\ReferralTransaction;
+use App\Models\Currency;
 
 
 class SignupController extends Controller
@@ -147,18 +148,22 @@ class SignupController extends Controller
         $referralBonus = (float) Settings::group('referral')->get('signup_bonus', 10);
         $refereeBonus = (float) Settings::group('referral')->get('referee_bonus', 0);
 
+        $currencyId   = (int) Settings::group('site')->get('site_default_currency', 1);
+        $currencyCode = optional(Currency::find($currencyId))->code ?? env('CURRENCY', 'NGN');
+
         Log::info('[Signup] processReferralBonus start', [
             'referrer_id'    => $referrer->id,
             'referee_id'     => $newUser->id,
             'referral_bonus' => $referralBonus,
             'referee_bonus'  => $refereeBonus,
+            'currency'       => $currencyCode,
         ]);
 
         $referrerBonusRecord = ReferralBonus::create([
             'referrer_id' => $referrer->id,
             'referee_id' => $newUser->id,
             'amount' => $referralBonus,
-            'currency' => 'USD',
+            'currency' => $currencyCode,
             'status' => 'pending',
             'notes' => 'New user signup bonus'
         ]);
@@ -189,13 +194,13 @@ class SignupController extends Controller
                 'referrer_id' => $referrer->id,
                 'referee_id' => $newUser->id,
                 'amount' => $refereeBonus,
-                'currency' => 'USD',
+                'currency' => $currencyCode,
                 'status' => 'completed',
                 'notes' => 'Welcome bonus for using referral code'
             ]);
 
-            DB::transaction(function () use ($newUser, $refereeBonus, $refereeBonusRecord) {
-                $wallet = $newUser->wallet()->firstOrCreate([], ['balance' => 0, 'currency' => 'USD']);
+            DB::transaction(function () use ($newUser, $refereeBonus, $refereeBonusRecord, $currencyCode) {
+                $wallet = $newUser->wallet()->firstOrCreate([], ['balance' => 0, 'currency' => $currencyCode]);
                 $wallet->increment('balance', $refereeBonus);
                 Log::info('[Signup] referee credited', [
                     'referee_id' => $newUser->id,
