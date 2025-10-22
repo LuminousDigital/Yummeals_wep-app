@@ -134,9 +134,6 @@ export default {
     if (referral) {
       this.form.referral_code = referral;
       this.$store.dispatch('frontendSignup/setReferralCode', referral);
-    } else {
-      const storedRef = this.$store.getters['frontendSignup/referralCode'];
-      if (storedRef) this.form.referral_code = storedRef;
     }
   },
   methods: {

@@ -48,12 +48,9 @@ export const frontendSignup = {
         });
     },
 
-    signup({ getters, commit }, payload) {
+    signup({ commit }, payload) {
       const url = "auth/signup/register";
 
-      if (!payload.referral_code) {
-        payload.referral_code = getters.referralCode || null;
-      }
 
       return axios
         .post(url, payload)

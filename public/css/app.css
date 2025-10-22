@@ -3427,12 +3427,6 @@ input:checked + div svg {
 .top-\[75px\] {
   top: 75px;
 }
-.right-12 {
-  right: 3rem;
-}
-.top-6 {
-  top: 1.5rem;
-}
 .-z-10 {
   z-index: -10;
 }
@@ -4142,17 +4136,14 @@ input:checked + div svg {
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.grid-cols-\[repeat\(auto-fill\2c _minmax\(140px\2c _1fr\)\)\] {
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-}
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 .grid-cols-\[2fr_1fr_1fr\] {
   grid-template-columns: 2fr 1fr 1fr;
 }
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+.grid-cols-\[repeat\(auto-fill\2c _minmax\(140px\2c _1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 .flex-col {
   flex-direction: column;
@@ -5161,9 +5152,6 @@ input:checked + div svg {
 }
 .pt-7 {
   padding-top: 1.75rem;
-}
-.pt-8 {
-  padding-top: 2rem;
 }
 .text-left {
   text-align: left;
@@ -6589,10 +6577,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     top: 3rem;
   }
 
-  .sm\:col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-
   .sm\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -6777,16 +6761,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
-  .sm\:grid-cols-\[repeat\(auto-fill\2c _minmax\(185px\2c _1fr\)\)\] {
-    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  .sm\:grid-cols-7 {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-\[2fr_1fr_1fr\] {
     grid-template-columns: 2fr 1fr 1fr;
   }
 
-  .sm\:grid-cols-7 {
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+  .sm\:grid-cols-\[repeat\(auto-fill\2c _minmax\(185px\2c _1fr\)\)\] {
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
   }
 
   .sm\:flex-row {
@@ -6815,10 +6799,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .sm\:justify-between {
     justify-content: space-between;
-  }
-
-  .sm\:gap-12 {
-    gap: 3rem;
   }
 
   .sm\:gap-5 {
