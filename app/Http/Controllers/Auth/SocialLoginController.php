@@ -62,6 +62,17 @@ class SocialLoginController extends Controller
     private function redirect(string $provider): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $driver = $this->buildDriver($provider);
+
+        // Pass through platform flag to callback via dynamic redirect URL
+        $platform = request()->query('platform', request()->query('source'));
+        if ($platform) {
+            $callback = route("auth.social.{$provider}.callback");
+            $callbackWithPlatform = $callback . (str_contains($callback, '?') ? '&' : '?') . http_build_query(['platform' => $platform]);
+            if (method_exists($driver, 'redirectUrl')) {
+                $driver = $driver->redirectUrl($callbackWithPlatform);
+            }
+        }
+
         $response = $driver->redirect();
         try {
             Log::info("SocialLogin: {$provider} redirect", [
@@ -70,6 +81,7 @@ class SocialLoginController extends Controller
                     'client_id_set' => (bool) config("services.{$provider}.client_id"),
                     'redirect' => config("services.{$provider}.redirect"),
                 ],
+                'platform' => $platform,
             ]);
         } catch (\Throwable $e) {}
         return $response;
@@ -112,6 +124,21 @@ class SocialLoginController extends Controller
                 return new JsonResponse($payload, 201);
             }
 
+            $b64 = base64_encode(json_encode($payload));
+            $platform = request()->query('platform', request()->query('source'));
+
+            // Mobile flow: use existing frontend route but different hash, and stay for the app to extract
+            if (in_array(strtolower((string) $platform), ['mobile', 'app'], true)) {
+                $front = $this->frontendBase();
+                $url = $front . '/login#social_mobile=' . urlencode($b64);
+                Log::info("SocialLogin: mobile platform detected, redirecting to frontend with mobile hash", [
+                    'platform' => $platform,
+                    'url' => $url,
+                ]);
+                return redirect()->to($url);
+            }
+
+            // Web flow: send to SPA with hash payload
             $front = $this->frontendBase();
             $needsUpdate = $this->needsProfileUpdate($user);
             $dest = $needsUpdate ? '/edit-profile' : '/login';
@@ -120,7 +147,6 @@ class SocialLoginController extends Controller
                 'dest' => $dest,
                 'needs_update' => $needsUpdate,
             ]);
-            $b64 = base64_encode(json_encode($payload));
             return redirect()->to($front . $dest . '#social=' . urlencode($b64));
         } catch (\Throwable $e) {
             Log::error(ucfirst($provider).' authentication failed', [
