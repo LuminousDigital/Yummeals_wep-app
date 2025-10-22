@@ -5153,6 +5153,18 @@ input:checked + div svg {
 .pt-7 {
   padding-top: 1.75rem;
 }
+.pt-\[\] {
+  padding-top: ;
+}
+.pt-\[50px\] {
+  padding-top: 50px;
+}
+.pt-\[1000px\] {
+  padding-top: 1000px;
+}
+.pt-\[100px\] {
+  padding-top: 100px;
+}
 .text-left {
   text-align: left;
 }

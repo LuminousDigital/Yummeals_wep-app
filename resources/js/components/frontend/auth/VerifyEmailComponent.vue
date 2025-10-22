@@ -5,7 +5,7 @@
             <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">
                 {{ $t('label.verify_email') }}</h2>
             <form @submit.prevent="verifyCode">
-                <label class="text-sm mb-1 first-letter:uppercase text-heading">{{
+                <label class="text-sm mb-1 first-letter:uppercase text-heading-light">{{
                     $t('message.enter_the_code_sent_to')
                     }} <span class="font-medium">{{ resetInfo.email }}</span></label>
                 <input :class="errors.code ? 'invalid' : ''" v-model="form.code" type="number"

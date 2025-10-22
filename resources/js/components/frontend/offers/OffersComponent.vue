@@ -245,7 +245,7 @@
                         </div>
                     </div>
 
-                    <div class="px-3 mb-2">
+                    <div class="mb-2">
                         <template v-if="relativeUsers && relativeUsers.length">
                             <div
                                 class="grid grid-cols-[2fr_1fr_1fr] text-xs text-gray-500 font-medium mb-2 sm:grid-cols-[2fr_1fr_1fr]"
