@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="{ isActive: loading }" />
-    <section class="mt-6 ms:mt-10 mb-16">
+    <section class="pt-28 mt-6 ms:mt-10 mb-16">
         <div class="container">
             <div
                 class="grid grid-cols-1 gap-8 pt-4 mb-12 md:grid-cols-2 md:gap-20 lg:gap-24"

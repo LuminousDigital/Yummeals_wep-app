@@ -5165,6 +5165,9 @@ input:checked + div svg {
 .pt-\[100px\] {
   padding-top: 100px;
 }
+.pt-32 {
+  padding-top: 8rem;
+}
 .text-left {
   text-align: left;
 }
