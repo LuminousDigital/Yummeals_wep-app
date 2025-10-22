@@ -1,5 +1,5 @@
 <template>
-    <LoadingComponent :props="loading" />
+    <LoadingComponent :props="{ isActive: loading }" />
     <section class="mt-6 ms:mt-10 mb-16">
         <div class="container">
             <div
@@ -532,6 +532,7 @@ export default {
             setTimeout(() => (this.copied = false), 2000);
         },
         async fetchAllReferrals() {
+            this.loading = true;
             try {
                 const response = await axios.get("/referral?per_page=100");
                 this.referralHistory = response.data.referrals.data.map(
@@ -550,9 +551,12 @@ export default {
                 this.showAllReferrals = true;
             } catch (error) {
                 console.error("Fetch all referrals error:", error);
+            } finally {
+                this.loading = false;
             }
         },
         async fetchReferralData() {
+            this.loading = true;
             try {
                 const response = await axios.get("/referral");
                 const data = response.data;
@@ -649,6 +653,8 @@ export default {
             } catch (error) {
                 console.error("Referral fetch error:", error);
                 this.$toast?.error("Unable to load referral data.");
+            } finally {
+                this.loading = false;
             }
         },
     },
