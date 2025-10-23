@@ -1,7 +1,7 @@
 <template>
     <LoadingComponent :props="loading" />
     <button data-modal="#address" @click="add" v-on:click="this.props.isMap = true" type="button"
-        class="address-btn flex items-center rounded-3xl px-3 h-8 gap-2 text-primary bg-[#FFEDF4] transition hover:bg-primary hover:text-white">
+        class="address-btn flex items-center rounded-lg px-3 h-8 gap-2 text-primary bg-[#FFEDF4] transition hover:bg-primary hover:text-white">
         <i class="lab lab-add-circle lab-font-size-16"></i>
         <span class="text-sm leading-6 capitalize font-medium transition">{{ addButton.title }}</span>
     </button>
@@ -72,7 +72,7 @@
                             <small class="db-field-alert" v-if="errors.label">{{ errors.label[0] }}</small>
                         </div>
                     </div>
-                    <button type="submit" class="rounded-3xl text-base py-3 px-3 font-medium w-full text-white bg-primary">
+                    <button type="submit" class="rounded-lg text-base py-3 px-3 font-medium w-full text-white bg-primary">
                         {{ $t('button.confirm_location') }}
                     </button>
                 </form>

@@ -140,7 +140,7 @@
                             <span class="text-sm leading-6 text-heading">{{ selectedAddress?.address }}</span>
                         </div>
                         <button @click="editAddressModal(selectedAddress)" data-modal="#addaddress" type="button"
-                            class="absolute top-2 right-2 group text-xs capitalize font-medium flex items-center rounded-3xl py-1.5 px-3 gap-1 text-[#00749B] bg-[#D6F5FF] transition hover:text-white hover:bg-[#00749B]">
+                            class="absolute top-2 right-2 group text-xs capitalize font-medium flex items-center rounded-lg py-1.5 px-3 gap-1 text-[#00749B] bg-[#D6F5FF] transition hover:text-white hover:bg-[#00749B]">
                             <svg class="fill-[#00749B] transition group-hover:fill-white" width="10" height="10"
                                 viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -319,11 +319,11 @@
             </ul>
             <div class="flex items-center justify-center gap-6" v-if="carts.length > 0">
                 <button @click.prevent="resetCart"
-                    class="capitalize text-sm font-medium leading-6 font-rubik w-full text-center rounded-3xl py-2 text-white bg-[#FB4E4E]">
+                    class="capitalize text-sm font-medium leading-6 font-rubik w-full text-center rounded-lg py-2 text-white bg-[#FB4E4E]">
                     {{ $t('button.cancel') }}
                 </button>
                 <button @click.prevent="orderSubmit"
-                    class="capitalize text-sm font-medium leading-6 font-rubik w-full text-center rounded-3xl py-2 text-white bg-[#1AB759]">
+                    class="capitalize text-sm font-medium leading-6 font-rubik w-full text-center rounded-lg py-2 text-white bg-[#1AB759]">
                     {{ $t('button.order') }}
                 </button>
             </div>
@@ -396,7 +396,7 @@
                         <input type="hidden" v-model="customerProps.form.password_confirmation" />
                     </div>
                     <button type="submit"
-                        class="rounded-3xl text-base py-3 px-3 font-medium w-full text-white bg-primary">
+                        class="rounded-lg text-base py-3 px-3 font-medium w-full text-white bg-primary">
                         {{ $t('button.add_customer') }}
                     </button>
                 </form>

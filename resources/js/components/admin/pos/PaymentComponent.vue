@@ -129,7 +129,7 @@
                         class="num bg-[#F7F7FC] rounded-lg p-2.5 flex items-center justify-center text-base font-medium text-[#1F1F39]">.</button>
                 </div>
                 <button @click="confirmOrder" type="button"
-                    class="rounded-3xl text-base py-2 px-3 font-medium w-full text-white bg-primary">Confirm & Print
+                    class="rounded-lg text-base py-2 px-3 font-medium w-full text-white bg-primary">Confirm & Print
                     Reciept</button>
             </div>
         </div>

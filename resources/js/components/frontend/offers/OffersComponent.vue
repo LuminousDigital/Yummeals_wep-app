@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="{ isActive: loading }" />
-    <section class="mt-6 ms:mt-10 mb-16">
+    <section class="pt-28 ms:mt-10 mb-16">
         <div class="container">
             <div
                 class="grid grid-cols-1 gap-8 pt-4 mb-12 md:grid-cols-2 md:gap-20 lg:gap-24"
@@ -30,40 +30,157 @@
                         }}</span>
                     </p> -->
                     <div>
-                        <!-- <div class="flex items-center gap-3 pb-5">
-                            <h2
-                                class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium"
-                            >
-                                Referral Code:
-                            </h2>
-                            <p
-                                class="text-[15px] md:text-base text-[rgb(242,91,10)] font-medium break-all"
-                            >
-                                {{ referralCode }}
-                            </p>
-                        </div> -->
-                        <h2 class="text-[16px] text-[#212121] font-medium pb-4">
+                        <h2
+                            class="text-[16px] text-[#212121] font-bold pb-4 pt-4"
+                        >
                             Referral Link
                         </h2>
                         <div
-                            class="flex flex-col md:flex-row rounded-xl overflow-hidden shadow-sm"
+                            class="flex items-center justify-between bg-[#FFEBE1] from-orange-50 to-orange-100 rounded-xl px-4 py-3 shadow-sm"
                         >
-                            <div class="p-3 md:p-4 bg-[#F6F6F6] flex-1 min-w-0">
-                                <p
-                                    class="text-[13px] sm:text] md:text-[15px] text-[#000000] font-medium truncate"
-                                >
-                                    {{ referralLink }}
-                                </p>
-                            </div>
-                            <button
-                                @click="copyLink"
-                                class="w-auto md:w-[130px] bg-[#F25B0A] hover:bg-orange-600 text-white font-medium py-2 md:py-3 px-4 md:px-6 flex items-center justify-center transition-all"
+                            <p
+                                class="text-heading-light font-semibold text-[#F25B0A] tracking-wider truncate"
                             >
-                                <span>{{
-                                    copied ? "Copied!" : "Copy Link"
-                                }}</span>
+                                {{ referralLink }}
+                            </p>
+                                                 <button
+                                @click="copyLink"
+                                class="p-2 bg-white bg-opacity-80 rounded-full hover:bg-opacity-100 transition-all ml-3 flex-shrink-0"
+                                title="Copy Link"
+                            >
+                                <svg
+                                    v-if="!copied"
+                                    class="w-5 h-5 text-[#F25B0A]"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                    ></path>
+                                </svg>
+                                <svg
+                                    v-else
+                                    class="w-5 h-5 text-green-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    ></path>
+                                </svg>
                             </button>
                         </div>
+                        <h2
+                            class="text-[16px] text-[#212121] font-bold pb-4 pt-4"
+                        >
+                            Referral Code
+                        </h2>
+                        <div
+                            class="flex items-center justify-between bg-[#FFEBE1] from-orange-50 to-orange-100 rounded-xl px-4 py-3 shadow-sm"
+                        >
+                            <p
+                                class="text-heading-light font-semibold text-[#F25B0A] tracking-wider truncate"
+                            >
+                                {{ referralCode }}
+                            </p>
+                            <button
+                                @click="copyCode"
+                                class="p-2 bg-white bg-opacity-80 rounded-full hover:bg-opacity-100 transition-all ml-3 flex-shrink-0"
+                                title="Copy Code"
+                            >
+                                <svg
+                                    v-if="!copiedCode"
+                                    class="w-5 h-5 text-[#F25B0A]"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                    ></path>
+                                </svg>
+                                <svg
+                                    v-else
+                                    class="w-5 h-5 text-green-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- <h2
+                            class="text-[16px] text-[#212121] font-medium pb-4 pt-4"
+                        >
+                            Referral Code
+                        </h2>
+                        <div
+                            class="bg-[#FFEBE1] from-orange-50 to-orange-100 rounded-xl p-3 relative"
+                        >
+                            <p
+                                class="text-xl md:text-2xl font-bold text-[#F25B0A] text-center tracking-wider"
+                            >
+                                {{ referralCode }}
+                            </p>
+                            <button
+                                @click="copyCode"
+                                class="absolute top-2 right-2 p-1 bg-white bg-opacity-80 rounded-full hover:bg-opacity-100 transition-all"
+                                title="Copy Code"
+                            >
+                                <svg
+                                    v-if="!copiedCode"
+                                    class="w-5 h-5 text-[#F25B0A]"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                    ></path>
+                                </svg>
+                                <svg
+                                    v-else
+                                    class="w-5 h-5 text-green-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div> -->
 
                         <div
                             class="flex flex-col items-center w-full mt-10 mb-12"
@@ -105,6 +222,7 @@
                         >
                             Referral History ({{ referralHistory.length }})
                         </h2>
+
                         <div
                             :class="
                                 showAllReferrals
@@ -112,6 +230,7 @@
                                     : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'
                             "
                         >
+                            <!-- Empty state -->
                             <div
                                 v-if="referralHistory.length === 0"
                                 class="flex flex-col items-center justify-center w-full py-10 text-center"
@@ -127,24 +246,29 @@
                                     You have not referred anybody
                                 </p>
                             </div>
-                            <div
-                                v-else
-                                v-for="referral in referralHistory"
-                                :key="referral.id"
-                                class="flex items-center justify-between bg-gray-50 rounded-lg p-4 mb-3"
-                            >
-                                <h3
-                                    class="text-sm font-medium text-orange-500 md:text-base"
+                            <template v-else>
+                                <div
+                                    v-for="referral in referralHistory"
+                                    :key="referral.id"
+                                    class="grid grid-cols-[2fr_1fr_1fr] items-center bg-gray-50 rounded-lg p-4 mb-3 gap-2"
                                 >
-                                    {{ referral.name }}
-                                </h3>
-                                <p class="font-semibold text-gray-900">
-                                    {{ referral.reward }}
-                                </p>
-                                <p class="text-xs text-gray-500 md:text-sm">
-                                    {{ referral.date }}
-                                </p>
-                            </div>
+                                    <h3
+                                        class="text-sm font-medium text-orange-500 md:text-base truncate"
+                                    >
+                                        {{ referral.name }}
+                                    </h3>
+                                    <p
+                                        class="text-center font-semibold text-gray-900 text-sm sm:text-base"
+                                    >
+                                        {{ referral.reward }}
+                                    </p>
+                                    <p
+                                        class="text-right sm:text-center text-xs text-gray-500 md:text-sm"
+                                    >
+                                        {{ referral.date }}
+                                    </p>
+                                </div>
+                            </template>
                             <div
                                 v-if="!showAllReferrals"
                                 class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
@@ -245,215 +369,130 @@
                         </div>
                     </div>
 
-                    <div class="px-3 mb-2">
-                        <template v-if="relativeUsers && relativeUsers.length">
-                            <div
-                                class="grid grid-cols-[2fr_1fr_1fr] text-xs text-gray-500 font-medium mb-2 sm:grid-cols-[2fr_1fr_1fr]"
+                    <template v-if="relativeUsers.length > 0">
+                        <div
+                            class="grid grid-cols-[2fr_1fr_1fr] items-center rounded-lg p-3 mb-4 text-sm font-semibold text-gray-700"
+                        >
+                            <span>Highest Referrals</span>
+                            <span class="text-center">Referrals</span>
+                            <span class="text-right sm:text-center"
+                                >Rewards</span
                             >
-                                <span>Highest Referrals</span>
-                                <span class="text-center">Referrals</span>
-                                <span class="text-right sm:text-center"
-                                    >Rewards</span
-                                >
-                            </div>
-
-                            <div class="space-y-2">
-                                <div
-                                    v-for="user in relativeUsers"
-                                    :key="user.rank"
-                                    :class="[
-                                        'grid grid-cols-[2fr_1fr_1fr] items-center rounded-lg py-3 px-3 transition-all duration-300 text-sm sm:grid-cols-[2fr_1fr_1fr]',
-                                        user.is_current_user
-                                            ? 'bg-[#64961A] text-white'
-                                            : 'bg-[#FFEBE1] text-gray-900',
-                                    ]"
-                                >
+                        </div>
+                        <div class="space-y-2">
+                            <div
+                                v-for="user in relativeUsers"
+                                :key="user.rank"
+                                :class="[
+                                    'grid grid-cols-[2fr_1fr_1fr] items-center rounded-lg py-3 px-3 transition-all duration-300 text-sm sm:grid-cols-[2fr_1fr_1fr]',
+                                    user.is_current_user
+                                        ? 'bg-[#64961A] text-white'
+                                        : 'bg-[#FFEBE1] text-gray-900',
+                                ]"
+                            >
+                                <div class="flex items-center gap-3 truncate">
                                     <div
-                                        class="flex items-center gap-3 truncate"
+                                        class="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
+                                        style="
+                                            background-image: url('/images/LeaderBoard/posisionBD.png');
+                                            background-size: cover;
+                                            background-position: center;
+                                        "
                                     >
-                                        <div
-                                            class="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
-                                            style="
-                                                background-image: url('/images/LeaderBoard/posisionBD.png');
-                                                background-size: cover;
-                                                background-position: center;
-                                            "
+                                        <span
+                                            class="text-[#F25B0A] font-bold text-md"
+                                            >{{ user.rank }}</span
                                         >
-                                            <span
-                                                class="text-[#F25B0A] font-bold text-md"
-                                                >{{ user.rank }}</span
-                                            >
-                                        </div>
-
-                                        <div
-                                            :class="[
-                                                'w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0 transition-all duration-300',
-                                                user.is_current_user
-                                                    ? 'bg-orange-100'
-                                                    : 'bg-gray-800',
-                                            ]"
-                                        >
-                                            <span
-                                                :class="[
-                                                    'font-bold text-sm sm:text-base',
-                                                    user.is_current_user
-                                                        ? 'text-orange-600'
-                                                        : 'text-white',
-                                                ]"
-                                            >
-                                                {{
-                                                    user.name
-                                                        .charAt(0)
-                                                        .toUpperCase()
-                                                }}
-                                            </span>
-                                        </div>
-
-                                        <p class="truncate font-medium">
-                                            {{ user.name }}
-                                        </p>
                                     </div>
-                                    <div class="text-center font-semibold">
-                                        {{ user.total_referrals }}
-                                    </div>
-
-                                    <div
-                                        class="text-right sm:text-center font-semibold"
-                                    >
-                                        ₦{{ user.referral_balance }}
-                                    </div>
-                                </div>
-
-                                <template
-                                    v-if="currentUser && currentUser.rank > 9"
-                                >
-                                    <p
-                                        class="text-center text-xs text-gray-500 mt-4 mb-2"
-                                    >
-                                        Your Level
-                                    </p>
 
                                     <div
                                         :class="[
-                                            'grid grid-cols-[2fr_1fr_1fr] items-center rounded-lg py-3 px-3 transition-all duration-300 text-sm sm:grid-cols-[2fr_1fr_1fr]',
-                                            currentUser.rank <= 3
-                                                ? 'bg-gradient-to-b from-[#64961A] to-[#FF823F] text-white'
-                                                : 'bg-[#FFEBE1] text-gray-900',
+                                            'w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0 transition-all duration-300',
+                                            user.is_current_user
+                                                ? 'bg-orange-100'
+                                                : 'bg-gray-800',
                                         ]"
                                     >
-                                        <div
-                                            class="flex items-center gap-3 truncate"
+                                        <span
+                                            :class="[
+                                                'font-bold text-sm sm:text-base',
+                                                user.is_current_user
+                                                    ? 'text-orange-600'
+                                                    : 'text-white',
+                                            ]"
                                         >
-                                            <div
-                                                class="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
-                                            >
-                                                <span
-                                                    class="text-[#F25B0A] font-bold text-md"
-                                                    >{{
-                                                        currentUser.rank
-                                                    }}</span
-                                                >
-                                            </div>
-
-                                            <div
-                                                class="bg-orange-100 rounded-full w-8 h-8 flex items-center justify-center"
-                                            >
-                                                <span
-                                                    class="text-gray-800 font-bold text-sm"
-                                                >
-                                                    {{
-                                                        currentUser.name
-                                                            .charAt(0)
-                                                            .toUpperCase()
-                                                    }}
-                                                </span>
-                                            </div>
-
-                                            <p
-                                                :class="[
-                                                    'truncate font-medium',
-                                                    currentUser.rank <= 3
-                                                        ? 'text-white'
-                                                        : 'text-gray-900',
-                                                ]"
-                                            >
-                                                {{ currentUser.name }}
-                                            </p>
-                                        </div>
-
-                                        <div
-                                            class="text-center font-semibold"
-                                            :class="
-                                                currentUser.rank <= 3
-                                                    ? 'text-white'
-                                                    : 'text-gray-900'
-                                            "
-                                        >
-                                            {{ currentUser.total_referrals }}
-                                        </div>
-
-                                        <div
-                                            class="text-right sm:text-center font-semibold"
-                                            :class="
-                                                currentUser.rank <= 3
-                                                    ? 'text-white'
-                                                    : 'text-gray-900'
-                                            "
-                                        >
-                                            ₦{{ currentUser.referral_balance }}
-                                        </div>
+                                            {{
+                                                user.name
+                                                    .charAt(0)
+                                                    .toUpperCase()
+                                            }}
+                                        </span>
                                     </div>
-                                </template>
-                            </div>
-                        </template>
 
+                                    <p class="truncate font-medium">
+                                        {{ user.name }}
+                                    </p>
+                                </div>
+                                <div class="text-center font-semibold">
+                                    {{ user.total_referrals }}
+                                </div>
+
+                                <div
+                                    class="text-right sm:text-center font-semibold"
+                                >
+                                    ₦{{ user.referral_balance }}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div
+                            class="flex flex-col items-center justify-center text-center py-10"
+                        >
+                            <p
+                                class="text-sm font-semibold text-gray-600 md:text-base"
+                            >
+                                Top the leaderboard. Earn your crown. <br />
+                                Win weekly free meals, monthly cash rewards,
+                                <br />
+                                starts with just one referral. Refer your people
+                                to Yummeals now.
+                            </p>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="block md:hidden">
+                    <h2
+                        class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
+                    >
+                        Referral History ({{ referralHistory.length }})
+                    </h2>
+                    <div
+                        :class="
+                            showAllReferrals
+                                ? 'bg-white rounded-lg shadow-sm h-auto'
+                                : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'
+                        "
+                    >
+                        <div
+                            v-if="referralHistory.length === 0"
+                            class="flex flex-col items-center justify-center w-full py-10 text-center"
+                        >
+                            <img
+                                src="/images/social-icon/empty-referrals.png"
+                                alt="No referrals"
+                                class="object-contain w-40 h-40 mb-4"
+                            />
+                            <p
+                                class="text-sm font-semibold text-gray-600 md:text-base"
+                            >
+                                You have not referred anybody
+                            </p>
+                        </div>
                         <template v-else>
                             <div
-                                class="flex flex-col items-center justify-center text-center py-10"
-                            >
-                                <p
-                                    class="text-sm font-semibold text-gray-600 md:text-base"
-                                >
-                                    Top the leaderboard. Earn your crown. <br />
-                                    Win weekly free meals, monthly cash rewards,
-                                    <br />
-                                    starts with just one referral. Refer your
-                                    people to Yummeals now.
-                                </p>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="block md:hidden">
-                        <h2
-                            class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
-                        >
-                            Referral History ({{ referralHistory.length }})
-                        </h2>
-                        <div
-                            :class="
-                                showAllReferrals
-                                    ? 'bg-white rounded-lg shadow-sm h-auto'
-                                    : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'
-                            "
-                        >
-                            <div
-                                v-if="referralHistory.length === 0"
-                                class="flex flex-col items-center justify-center w-full py-10 text-center"
-                            >
-                                <img
-                                    src="/images/social-icon/empty-referrals.png"
-                                    alt="No referrals"
-                                    class="object-contain w-40 h-40 mb-4"
-                                />
-                                <p
-                                    class="text-sm font-semibold text-gray-600 md:text-base"
-                                >
-                                    You have not referred anybody
-                                </p>
-                            </div>
-                            <div
-                                v-else
                                 v-for="referral in referralHistory"
                                 :key="referral.id"
                                 class="grid grid-cols-5 sm:grid-cols-7 items-center bg-gray-50 rounded-lg p-4 mb-3 gap-2"
@@ -474,26 +513,26 @@
                                     {{ referral.date }}
                                 </p>
                             </div>
+                        </template>
 
-                            <div
-                                v-if="!showAllReferrals"
-                                class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
-                            ></div>
-                        </div>
-                        <div class="mt-3 text-center">
-                            <a
-                                v-if="totalReferrals > 5 && !showAllReferrals"
-                                @click="fetchAllReferrals"
-                                class="text-sm font-medium text-gray-700 underline cursor-pointer"
-                            >
-                                See all
-                            </a>
-                        </div>
+                        <div
+                            v-if="!showAllReferrals"
+                            class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
+                        ></div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <a
+                            v-if="totalReferrals > 5 && !showAllReferrals"
+                            @click="fetchAllReferrals"
+                            class="text-sm font-medium text-gray-700 underline cursor-pointer"
+                        >
+                            See all
+                        </a>
                     </div>
                 </div>
             </div>
-            <OfferComponent :limit="limit" />
         </div>
+        <OfferComponent :limit="limit" />
     </section>
 </template>
 
@@ -513,6 +552,7 @@ export default {
             referralLink: "",
             referralBalance: "₦0.00",
             copied: false,
+            copiedCode: false,
             referralHistory: [],
             totalReferrals: 0,
             showAllReferrals: false,
@@ -530,6 +570,11 @@ export default {
             navigator.clipboard.writeText(this.referralLink);
             this.copied = true;
             setTimeout(() => (this.copied = false), 2000);
+        },
+        copyCode() {
+            navigator.clipboard.writeText(this.referralCode);
+            this.copiedCode = true;
+            setTimeout(() => (this.copiedCode = false), 2000);
         },
         async fetchAllReferrals() {
             this.loading = true;

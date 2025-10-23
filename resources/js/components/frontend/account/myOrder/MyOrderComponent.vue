@@ -1,6 +1,6 @@
 <template>
     <LoadingComponent :props="loading" />
-    <section class="pt-28 pb-16">
+    <section class="pt-32 pb-16">
         <div class="container max-w-3xl">
             <router-link :to="{ name: 'frontend.home' }" class="mb-3 inline-flex items-center gap-2 text-primary"
                 v-if="activeOrders.length > 0 || previousOrders.length > 0">
@@ -109,7 +109,7 @@
                 </div>
                 <span class="w-full mb-4 text-center text-black">{{ $t('message.no_orders_found') }}</span>
                 <router-link :to="{ name: 'frontend.home' }"
-                    class="block w-full mx-auto max-w-[250px] py-3 rounded-3xl capitalize text-base font-medium leading-6 text-center bg-primary text-white">
+                    class="block w-full mx-auto max-w-[250px] py-3 rounded-lg capitalize text-base font-medium leading-6 text-center bg-primary text-white">
                     {{ $t('button.go_home') }}
                 </router-link>
             </div>
@@ -165,18 +165,18 @@
                 <div class="flex gap-6"
                     v-if="setting.site_online_payment_gateway === enums.activityEnum.ENABLE && order.transaction === null && order.payment_status === enums.paymentStatusEnum.UNPAID">
                     <router-link v-if="order.uuid" @click.prevent="closeModal"
-                        class="w-full rounded-3xl text-center font-medium leading-6 py-3 border border-primary text-primary bg-white"
+                        class="w-full rounded-lg text-center font-medium leading-6 py-3 border border-primary text-primary bg-white"
                         :to="{ name: 'frontend.myOrder.details', params: { id: order.uuid } }">
                         {{ $t('button.go_to_order') }}
                     </router-link>
                     <a v-if="order.uuid" :href="'/payment/' + order.uuid + '/pay'"
-                        class="w-full rounded-3xl text-center font-medium leading-6 py-3 text-white bg-primary">
+                        class="w-full rounded-lg text-center font-medium leading-6 py-3 text-white bg-primary">
                         {{ $t('button.pay_now') }}
                     </a>
                 </div>
 
                 <router-link v-else-if="order.uuid" @click.prevent="closeModal"
-                    class="w-full rounded-3xl text-center font-medium leading-6 py-3 text-white bg-primary"
+                    class="w-full rounded-lg text-center font-medium leading-6 py-3 text-white bg-primary"
                     :to="{ name: 'frontend.myOrder.details', params: { id: order.uuid } }">
                     {{ $t('button.go_to_order') }}
                 </router-link>

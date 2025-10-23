@@ -42,7 +42,7 @@
                     </div>
 
                     <button type="button"
-                        class="hidden md:block w-full rounded-3xl capitalize font-medium leading-6 py-3 text-white bg-primary"
+                        class="hidden md:block w-full rounded-lg capitalize font-medium leading-6 py-3 text-white bg-primary"
                         @click="orderSubmit">
                         {{ $t('button.place_order') }}
                     </button>
@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                             <button type="button"
-                                class="block md:hidden w-full rounded-3xl capitalize font-medium leading-6 py-3 text-white bg-primary"
+                                class="block md:hidden w-full rounded-lg capitalize font-medium leading-6 py-3 text-white bg-primary"
                                 @click="orderSubmit">
                                 {{ $t('button.place_order') }}
                             </button>

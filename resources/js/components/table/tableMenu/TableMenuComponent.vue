@@ -31,7 +31,7 @@
                     :disabled="itemProps.property.type !== null && itemProps.property.type === enums.itemTypeEnum.VEG"
                     @click.prevent="itemProps.property.type === enums.itemTypeEnum.NON_VEG ? itemTypeReset() : itemTypeSet(enums.itemTypeEnum.NON_VEG)"
                     :class="itemProps.property.type === enums.itemTypeEnum.NON_VEG ? 'veg-active' : ''" type="button"
-                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-3xl transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
+                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-lg transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
                     <img :src="setting.image_vag" alt="category" class="h-6">
                     <span class="capitalize text-sm font-normal text-heading-light tracking-[1px]">{{ $t('label.frontend_non_veg') }}</span>
                     <i
@@ -41,7 +41,7 @@
                     :disabled="itemProps.property.type !== null && itemProps.property.type === enums.itemTypeEnum.NON_VEG"
                     @click.prevent="itemProps.property.type === enums.itemTypeEnum.VEG ? itemTypeReset() : itemTypeSet(enums.itemTypeEnum.VEG)"
                     :class="itemProps.property.type === enums.itemTypeEnum.VEG ? 'veg-active' : ''" type="button"
-                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-3xl transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
+                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-lg transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
                     <img :src="setting.image_non_vag" alt="category" class="h-6">
                     <span class="capitalize text-sm font-normal text-heading-light tracking-[1px]">{{ $t('label.veg') }}</span>
                     <i
@@ -96,18 +96,18 @@
                 <div class="flex gap-6"
                     v-if="setting.site_online_payment_gateway === enums.activityEnum.ENABLE && order.transaction === null && order.payment_status === enums.paymentStatusEnum.UNPAID && paymentMethod === 'digitalPayment'">
                     <router-link @click.prevent="closeModal"
-                        class="w-full rounded-3xl text-center font-medium leading-6 py-3 border border-primary text-primary bg-white"
+                        class="w-full rounded-lg text-center font-medium leading-6 py-3 border border-primary text-primary bg-white"
                         :to="{ name: 'table.tableOrder.details', params: { slug: this.$route.params.slug, id: order.id } }">
                         {{ $t('button.go_to_order') }}
                     </router-link>
                     <a :href="'/payment/' + order.id + '/pay'"
-                        class="w-full rounded-3xl text-center font-medium leading-6 py-3 text-white bg-primary">
+                        class="w-full rounded-lg text-center font-medium leading-6 py-3 text-white bg-primary">
                         {{ $t('button.pay_now') }}
                     </a>
                 </div>
 
                 <router-link v-else @click.prevent="closeModal"
-                    class="w-full rounded-3xl text-center font-medium leading-6 py-3 text-white bg-primary"
+                    class="w-full rounded-lg text-center font-medium leading-6 py-3 text-white bg-primary"
                     :to="{ name: 'table.tableOrder.details', params: { slug: this.$route.params.slug, id: order.id } }">
                     {{ $t('button.go_to_order') }}
                 </router-link>

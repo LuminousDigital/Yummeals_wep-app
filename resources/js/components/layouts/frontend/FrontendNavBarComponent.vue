@@ -69,7 +69,7 @@
             </nav>
 
             <div class="flex flex-col items-center justify-end gap-3 w-full mt-4 lg:flex-row lg:w-fit lg:mt-0">
-                <form @submit.prevent="search"
+                <form v-if="showSearchBar" @submit.prevent="search"
                     class="header-search-group group flex items-center justify-center border gap-2 px-2 w-full lg:w-[20rem] h-12 rounded-lg transition focus-within:bg-white border-primary focus-within:border-primary">
                     <button type="submit" class="header-search-submit flex justify-center items-center pl-1 text-heading-light">
                         <i class="lab lab-search-normal !text-sm text-heading-light"></i>
@@ -173,7 +173,7 @@
                         ></i>
                     </button>
                     <div
-                        class="dropdown-list w-80 absolute top-12 ltr:right-0 rtl:left-0 z-[60] rounded-xl shadow-paper bg-white transition-all duration-300 scale-y-0 origin-top"
+                        class="dropdown-list w-80 absolute top-12 ltr:right-0 rtl:left-0 z-[70] rounded-xl shadow-paper bg-white transition-all duration-300 scale-y-0 origin-top"
                     >
                         <div class="flex items-center gap-3 p-4 mb-2">
                             <figure
@@ -484,6 +484,14 @@ export default {
         },
         defaultMenu: function () {
             return this.$store.getters.authDefaultMenu;
+        },
+        showSearchBar: function () {
+            const allowedRoutes = [
+                'frontend.home',
+                'frontend.menu',
+                'frontend.search'
+            ];
+            return allowedRoutes.includes(this.$route.name);
         },
     },
     mounted() {
