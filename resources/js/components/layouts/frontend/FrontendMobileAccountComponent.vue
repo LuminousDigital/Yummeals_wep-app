@@ -3,7 +3,7 @@
         class="profile-paper fixed top-0 left-0 z-[60] overflow-y-auto w-screen h-screen w-full p-4 shadow-paper bg-white">
         <div class="flex items-center gap-3 p-4 mb-2">
             <figure
-                class="flex-shrink-0 relative z-10 w-[68px] h-[68px] rounded-full border-2 border-dashed border-white bg-gradient-to-t from-[#FF7A00] to-[#FF016C] before:absolute before:inset-0 before:-z-10 before:rounded-full before:scale-[1.03] before:bg-white">
+                class="flex-shrink-0 relative z-10 w-[68px] h-[68px] rounded-full border-2 border-dashed border-white bg-gradient-to-t from-[#FF7A00] to-[#cb6200] before:absolute before:inset-0 before:-z-10 before:rounded-full before:scale-[1.03] before:bg-white">
                 <a class="relative w-full h-full scale-[0.98] overflow-hidden shadow-avatar rounded-full">
                     <img class="w-full h-full rounded-full object-cover" :src="profile.image" alt="avatar">
                     <label for="avatar"

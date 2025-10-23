@@ -13,9 +13,18 @@
             <span class="text-xs capitalize">{{ $t('label.menu') }}</span>
         </router-link>
 
-        <button @click.prevent="openCanvas('cart')" type="button" class="mobcart fa-solid fa-bag-shopping text-base w-12 h-12 leading-[48px] text-center rounded-full -mt-12 text-white bg-primary
-        relative after:absolute after:top-3 ltr:after:right-2.5 rtl:after:left-2.5 after:w-2 after:h-2 after:rounded-full
-        after:shadow " :class="subtotal > 0 ? ' after:bg-[#FFDB1F]' : ''"></button>
+        <div class="relative">
+            <button @click.prevent="openCanvas('cart')" type="button" ref="mobileCartButton" data-cart-icon class="mobcart text-base w-12 h-12 leading-[48px] text-center rounded-full -mt-12 text-white bg-primary">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </button>
+            <span
+                v-if="itemCount > 0"
+                :class="badgeAnimation ? 'animate-badge-pop' : ''"
+                class="absolute -top-2 -right-2 bg-primary text-white text-[12px] font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-white shadow-lg transition-all duration-300"
+            >
+                {{ itemCount }}
+            </span>
+        </div>
 
         <router-link v-if="logged && profile.role_id !== enums.roleEnum.ADMIN" :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
             class="flex flex-col items-center gap-1" :to="{ name: 'frontend.offers' }">
@@ -49,6 +58,7 @@ export default {
                 isActive: false,
             },
             currentRoute: "",
+            badgeAnimation: false,
             categoryProps: {
                 search: {
                     paginate: 0,
@@ -90,6 +100,9 @@ export default {
         },
         subtotal: function () {
             return this.$store.getters['frontendCart/subtotal'];
+        },
+        itemCount: function () {
+            return this.$store.getters['frontendCart/itemCount'];
         }
     },
     mounted() {
@@ -110,7 +123,62 @@ export default {
         profileActive: function () {
             return appService.profileOpen('.user-profile-dropdown-box');
         },
+        triggerCartAnimation: function (buttonElement) {
+            // Trigger badge pop animation
+            this.badgeAnimation = true;
+            setTimeout(() => {
+                this.badgeAnimation = false;
+            }, 300);
+        },
     }
 
 }
 </script>
+
+<style>
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.cart-icon-pop {
+    animation: cartIconPop 0.3s ease-out;
+}
+
+@keyframes cartIconPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.6);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes badgePop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-badge-pop {
+    animation: badgePop 0.3s ease-out;
+}
+
+.badge-pop {
+    animation: badgePop 0.3s ease-out;
+}
+</style>

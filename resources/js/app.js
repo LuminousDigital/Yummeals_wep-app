@@ -103,41 +103,17 @@ axios.interceptors.request.use(
 
 (function handleSocialAuthHash() {
     try {
-        const hash = location.hash || "";
-        console.debug("[SocialAuth] initial hash:", hash.length > 100 ? hash.slice(0, 100) + "…" : hash, "len=", hash.length);
-
-        // Mobile flow: do NOT mutate app state or navigate; let the app extract the payload
-        if (hash.indexOf("#social_mobile=") === 0) {
-            const b64 = decodeURIComponent(hash.substring("#social_mobile=".length));
-            console.debug("[SocialAuth] mobile hash detected; b64 length:", b64.length);
-            try {
-                const json = JSON.parse(atob(b64));
-                console.debug(
-                    "[SocialAuth] mobile payload parsed; keys=",
-                    Object.keys(json || {}),
-                    "token_present=",
-                    !!(json && json.token)
-                );
-            } catch (e) {
-                console.warn("[SocialAuth] mobile payload parse failed", e);
-            }
-            // Intentionally do nothing else; keep URL/hash intact
-            return;
-        }
-
-        // Web flow
-        if (hash.indexOf("#social=") === 0) {
-            const b64 = decodeURIComponent(hash.substring(8));
-            console.debug("[SocialAuth] web hash detected; b64 length:", b64.length);
+        if (location.hash && location.hash.indexOf("#social=") === 0) {
+            const b64 = decodeURIComponent(location.hash.substring(8));
             const json = JSON.parse(atob(b64));
-            console.debug(
-                "[SocialAuth] web payload parsed; keys=",
-                Object.keys(json || {}),
-                "token_present=",
-                !!(json && json.token)
-            );
-
             if (json && json.token) {
+                // Mark that we came from social to finish profile if currently on edit-profile
+                try {
+                    if ((location.pathname || "").endsWith("/edit-profile")) {
+                        store.commit('setSocialEntry', true);
+                    }
+                } catch (e) {}
+
                 store.commit("authLogin", json);
 
                 history.replaceState(
@@ -151,9 +127,11 @@ axios.interceptors.request.use(
                     }
                 } catch (e) {}
                 const carts = store.getters["frontendCart/lists"] || [];
-                const routeName = Array.isArray(carts) && carts.length > 0 ? "frontend.checkout" : "frontend.home";
-                console.debug("[SocialAuth] navigating to:", routeName);
-                router.replace({ name: routeName });
+                if (Array.isArray(carts) && carts.length > 0) {
+                    router.replace({ name: "frontend.checkout" });
+                } else {
+                    router.replace({ name: "frontend.home" });
+                }
             }
         }
     } catch (e) {

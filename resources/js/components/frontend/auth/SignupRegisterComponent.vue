@@ -24,7 +24,12 @@
           </div>
           <div class="col-12">
             <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.password') }}</label>
-            <input v-model="form.password" type="password" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
+            <div class="relative">
+              <input v-model="form.password" :type="showPassword ? 'text' : 'password'" class="w-full h-12 rounded-lg border px-4 pr-12 border-[#D9DBE9]">
+              <button type="button" @click="showPassword = !showPassword" class="absolute right-6 top-3 translate-y-[2px] text-gray-300">
+                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+              </button>
+            </div>
             <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
           </div>
           <div class="col-12">
@@ -113,7 +118,8 @@ export default {
         country_code: "",
         referral_code: ""
       },
-      errors: {}
+      errors: {},
+      showPassword: false
     };
   },
   computed: {
@@ -128,9 +134,6 @@ export default {
     if (referral) {
       this.form.referral_code = referral;
       this.$store.dispatch('frontendSignup/setReferralCode', referral);
-    } else {
-      const storedRef = this.$store.getters['frontendSignup/referralCode'];
-      if (storedRef) this.form.referral_code = storedRef;
     }
   },
   methods: {

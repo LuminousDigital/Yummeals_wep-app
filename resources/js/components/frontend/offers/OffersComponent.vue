@@ -1,5 +1,5 @@
 <template>
-    <LoadingComponent :props="loading" />
+    <LoadingComponent :props="{ isActive: loading }" />
     <section class="mt-6 ms:mt-10 mb-16">
         <div class="container">
             <div
@@ -10,14 +10,15 @@
                         <h1
                             class="text-[20px] md:text-2xl lg:text-3xl font-bold text-[rgb(242,91,10)] mb-6"
                         >
-                            Refer Your Friends and Win
+                            Send your friend a little food love!
                         </h1>
                         <p
                             class="text-[13px] md:text-[14px] lg:text-[16px] text-black leading-snug"
                         >
-                            Invite your friends to order with the Yummeals app
+                            When they order with your link, you both get 15%
+                            off.
                             <br />
-                            and get rewarded for every successful referral.
+                            Two discounts, one delicious connection
                         </p>
                     </div>
                     <!-- <p
@@ -49,7 +50,7 @@
                         >
                             <div class="p-3 md:p-4 bg-[#F6F6F6] flex-1 min-w-0">
                                 <p
-                                    class="text-[13px] sm:text-[14px] md:text-[15px] text-[#000000] font-medium truncate"
+                                    class="text-[13px] sm:text] md:text-[15px] text-[#000000] font-medium truncate"
                                 >
                                     {{ referralLink }}
                                 </p>
@@ -105,7 +106,11 @@
                             Referral History ({{ referralHistory.length }})
                         </h2>
                         <div
-                            :class="showAllReferrals ? 'bg-white rounded-lg shadow-sm h-auto' : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'"
+                            :class="
+                                showAllReferrals
+                                    ? 'bg-white rounded-lg shadow-sm h-auto'
+                                    : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'
+                            "
                         >
                             <div
                                 v-if="referralHistory.length === 0"
@@ -117,7 +122,7 @@
                                     class="object-contain w-40 h-40 mb-4"
                                 />
                                 <p
-                                    class="text-sm font-semibold text-orange-600 md:text-base"
+                                    class="text-sm font-semibold text-gray-600 md:text-base"
                                 >
                                     You have not referred anybody
                                 </p>
@@ -155,7 +160,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
                 <div class="space-y-4 sm:space-y-8 pt-2">
                     <h2
@@ -189,26 +193,46 @@
                             v-for="user in topThree"
                             :key="user.rank"
                             class="flex flex-col items-center rounded-lg p-3 sm:p-4 flex-1 max-w-[120px] sm:max-w-[155px] bg-gradient-to-b from-[#64961A] to-[#FF823F] shadow-lg"
-                            :class="user.rank === 1 ? 'h-40 sm:h-52' : 'h-32 sm:h-44'"
+                            :class="
+                                user.rank === 1
+                                    ? 'h-40 sm:h-52'
+                                    : 'h-32 sm:h-44'
+                            "
                         >
                             <div
                                 class="flex items-center justify-center mb-2 sm:mb-3"
-                                :class="user.rank === 1 ? 'w-10 h-10 sm:w-14 sm:h-14' : 'w-8 h-8 sm:w-12 sm:h-12'"
+                                :class="
+                                    user.rank === 1
+                                        ? 'w-10 h-10 sm:w-14 sm:h-14'
+                                        : 'w-8 h-8 sm:w-12 sm:h-12'
+                                "
                             >
                                 <img
                                     :src="user.trophy"
                                     :alt="`${user.rank} Trophy`"
                                     class="object-contain"
-                                    :class="user.rank === 1 ? 'h-10 sm:h-12' : 'h-8 sm:h-10'"
+                                    :class="
+                                        user.rank === 1
+                                            ? 'h-10 sm:h-12'
+                                            : 'h-8 sm:h-10'
+                                    "
                                 />
                             </div>
                             <div
                                 class="bg-orange-100 rounded-full flex items-center justify-center mb-2 sm:mb-3"
-                                :class="user.rank === 1 ? 'w-12 h-12 sm:w-16 sm:h-16' : 'w-8 h-8 sm:w-12 sm:h-12'"
+                                :class="
+                                    user.rank === 1
+                                        ? 'w-12 h-12 sm:w-16 sm:h-16'
+                                        : 'w-8 h-8 sm:w-12 sm:h-12'
+                                "
                             >
                                 <span
                                     class="text-orange-600 font-bold"
-                                    :class="user.rank === 1 ? 'text-lg sm:text-xl' : 'text-sm sm:text-base'"
+                                    :class="
+                                        user.rank === 1
+                                            ? 'text-lg sm:text-xl'
+                                            : 'text-sm sm:text-base'
+                                    "
                                 >
                                     {{ user.name.charAt(0).toUpperCase() }}
                                 </span>
@@ -221,67 +245,185 @@
                         </div>
                     </div>
 
-                    <div
-                        class="flex justify-between text-xs text-gray-500 mb-2 px-3"
-                    >
-                        <span>Highest referrals</span>
-                        <div class="flex gap-8 sm:gap-12">
-                            <span>Referrals</span>
-                            <span>Rewards</span>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <div
-                            v-for="user in relativeUsers"
-                            :key="user.rank"
-                            :class="['flex items-center justify-between rounded-lg py-2 px-3 h-16', user.is_current_user ? 'bg-[#64961A]' : 'bg-[#FFEBE1]']"
-                        >
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                                    <img
-                                        :src="`/images/LeaderBoard/${user.rank}th.png`"
-                                        :alt="`${user.rank} Trophy`"
-                                        class="object-contain h-8"
-                                    />
-                                </div>
-                                <div :class="['rounded-full flex items-center justify-center flex-shrink-0', user.is_current_user ? 'bg-orange-100 w-8 h-8' : 'bg-gray-800 w-8 h-8']">
-                                    <span :class="['font-bold', user.is_current_user ? 'text-orange-600 text-sm sm:text-base' : 'text-white text-sm']">
-                                        {{ user.name.charAt(0).toUpperCase() }}
-                                    </span>
-                                </div>
-                                <p :class="['text-sm font-medium truncate', user.is_current_user ? 'text-white' : 'text-gray-900']">{{ user.name }}</p>
+                    <div class="px-3 mb-2">
+                        <template v-if="relativeUsers && relativeUsers.length">
+                            <div
+                                class="grid grid-cols-[2fr_1fr_1fr] text-xs text-gray-500 font-medium mb-2 sm:grid-cols-[2fr_1fr_1fr]"
+                            >
+                                <span>Highest Referrals</span>
+                                <span class="text-center">Referrals</span>
+                                <span class="text-right sm:text-center"
+                                    >Rewards</span
+                                >
                             </div>
 
-                            <div :class="['flex gap-8 sm:gap-12 text-sm font-semibold flex-shrink-0', user.is_current_user ? 'text-white' : 'text-gray-900']">
-                                <span class="w-8 text-center">{{ user.total_referrals }}</span>
-                                <span class="w-16 text-right">₦{{ user.referral_balance }}</span>
-                            </div>
-                        </div>
-                        <p class="text-center text-xs text-gray-500 mt-4 mb-2" v-if="currentUser && currentUser.rank > 9">
-                            Your Level
-                        </p>
-                        <div v-if="currentUser && currentUser.rank > 9" :class="['flex items-center justify-between rounded-lg py-2 px-3 h-16', currentUser.rank <= 3 ? 'bg-gradient-to-b from-[#64961A] to-[#FF823F]' : 'bg-[#FFEBE1]']">
-                            <div class="flex items-center gap-3">
-                                <div class="rounded-full w-8 h-8 flex items-center justify-center">
-                                    <img
-                                        :src="`/images/LeaderBoard/${currentUser.rank}th.png`"
-                                        :alt="`${currentUser.rank} Trophy`"
-                                        class="object-contain h-8"
-                                    />
+                            <div class="space-y-2">
+                                <div
+                                    v-for="user in relativeUsers"
+                                    :key="user.rank"
+                                    :class="[
+                                        'grid grid-cols-[2fr_1fr_1fr] items-center rounded-lg py-3 px-3 transition-all duration-300 text-sm sm:grid-cols-[2fr_1fr_1fr]',
+                                        user.is_current_user
+                                            ? 'bg-[#64961A] text-white'
+                                            : 'bg-[#FFEBE1] text-gray-900',
+                                    ]"
+                                >
+                                    <div
+                                        class="flex items-center gap-3 truncate"
+                                    >
+                                        <div
+                                            class="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
+                                            style="
+                                                background-image: url('/images/LeaderBoard/posisionBD.png');
+                                                background-size: cover;
+                                                background-position: center;
+                                            "
+                                        >
+                                            <span
+                                                class="text-[#F25B0A] font-bold text-md"
+                                                >{{ user.rank }}</span
+                                            >
+                                        </div>
+
+                                        <div
+                                            :class="[
+                                                'w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0 transition-all duration-300',
+                                                user.is_current_user
+                                                    ? 'bg-orange-100'
+                                                    : 'bg-gray-800',
+                                            ]"
+                                        >
+                                            <span
+                                                :class="[
+                                                    'font-bold text-sm sm:text-base',
+                                                    user.is_current_user
+                                                        ? 'text-orange-600'
+                                                        : 'text-white',
+                                                ]"
+                                            >
+                                                {{
+                                                    user.name
+                                                        .charAt(0)
+                                                        .toUpperCase()
+                                                }}
+                                            </span>
+                                        </div>
+
+                                        <p class="truncate font-medium">
+                                            {{ user.name }}
+                                        </p>
+                                    </div>
+                                    <div class="text-center font-semibold">
+                                        {{ user.total_referrals }}
+                                    </div>
+
+                                    <div
+                                        class="text-right sm:text-center font-semibold"
+                                    >
+                                        ₦{{ user.referral_balance }}
+                                    </div>
                                 </div>
-                                <div class="bg-orange-100 rounded-full w-8 h-8 flex items-center justify-center">
-                                    <span class="text-gray-800 font-bold text-sm">
-                                        {{ currentUser.name.charAt(0).toUpperCase() }}
-                                    </span>
-                                </div>
-                                <p :class="['text-sm font-medium truncate', currentUser.rank <= 3 ? 'text-white' : 'text-gray-900']">{{ currentUser.name }}</p>
+
+                                <template
+                                    v-if="currentUser && currentUser.rank > 9"
+                                >
+                                    <p
+                                        class="text-center text-xs text-gray-500 mt-4 mb-2"
+                                    >
+                                        Your Level
+                                    </p>
+
+                                    <div
+                                        :class="[
+                                            'grid grid-cols-[2fr_1fr_1fr] items-center rounded-lg py-3 px-3 transition-all duration-300 text-sm sm:grid-cols-[2fr_1fr_1fr]',
+                                            currentUser.rank <= 3
+                                                ? 'bg-gradient-to-b from-[#64961A] to-[#FF823F] text-white'
+                                                : 'bg-[#FFEBE1] text-gray-900',
+                                        ]"
+                                    >
+                                        <div
+                                            class="flex items-center gap-3 truncate"
+                                        >
+                                            <div
+                                                class="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
+                                            >
+                                                <span
+                                                    class="text-[#F25B0A] font-bold text-md"
+                                                    >{{
+                                                        currentUser.rank
+                                                    }}</span
+                                                >
+                                            </div>
+
+                                            <div
+                                                class="bg-orange-100 rounded-full w-8 h-8 flex items-center justify-center"
+                                            >
+                                                <span
+                                                    class="text-gray-800 font-bold text-sm"
+                                                >
+                                                    {{
+                                                        currentUser.name
+                                                            .charAt(0)
+                                                            .toUpperCase()
+                                                    }}
+                                                </span>
+                                            </div>
+
+                                            <p
+                                                :class="[
+                                                    'truncate font-medium',
+                                                    currentUser.rank <= 3
+                                                        ? 'text-white'
+                                                        : 'text-gray-900',
+                                                ]"
+                                            >
+                                                {{ currentUser.name }}
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="text-center font-semibold"
+                                            :class="
+                                                currentUser.rank <= 3
+                                                    ? 'text-white'
+                                                    : 'text-gray-900'
+                                            "
+                                        >
+                                            {{ currentUser.total_referrals }}
+                                        </div>
+
+                                        <div
+                                            class="text-right sm:text-center font-semibold"
+                                            :class="
+                                                currentUser.rank <= 3
+                                                    ? 'text-white'
+                                                    : 'text-gray-900'
+                                            "
+                                        >
+                                            ₦{{ currentUser.referral_balance }}
+                                        </div>
+                                    </div>
+                                </template>
                             </div>
-                            <div class="flex gap-8 sm:gap-12 text-sm font-semibold" :class="currentUser.rank <= 3 ? 'text-white' : 'text-gray-900'">
-                                <span class="w-8 text-center">{{ currentUser.total_referrals }}</span>
-                                <span class="w-16 text-right">₦{{ currentUser.referral_balance }}</span>
+                        </template>
+
+                        <template v-else>
+                            <div
+                                class="flex flex-col items-center justify-center text-center py-10"
+                            >
+                                <p
+                                    class="text-sm font-semibold text-gray-600 md:text-base"
+                                >
+                                    Top the leaderboard. Earn your crown. <br />
+                                    Win weekly free meals, monthly cash rewards,
+                                    <br />
+                                    starts with just one referral. Refer your
+                                    people to Yummeals now.
+                                </p>
                             </div>
-                        </div>
+                        </template>
                     </div>
+
                     <div class="block md:hidden">
                         <h2
                             class="mb-4 text-sm font-semibold text-gray-900 md:text-lg lg:text-xl md:mb-6"
@@ -289,7 +431,11 @@
                             Referral History ({{ referralHistory.length }})
                         </h2>
                         <div
-                            :class="showAllReferrals ? 'bg-white rounded-lg shadow-sm h-auto' : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'"
+                            :class="
+                                showAllReferrals
+                                    ? 'bg-white rounded-lg shadow-sm h-auto'
+                                    : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'
+                            "
                         >
                             <div
                                 v-if="referralHistory.length === 0"
@@ -301,7 +447,7 @@
                                     class="object-contain w-40 h-40 mb-4"
                                 />
                                 <p
-                                    class="text-sm font-semibold text-orange-600 md:text-base"
+                                    class="text-sm font-semibold text-gray-600 md:text-base"
                                 >
                                     You have not referred anybody
                                 </p>
@@ -310,20 +456,25 @@
                                 v-else
                                 v-for="referral in referralHistory"
                                 :key="referral.id"
-                                class="flex items-center justify-between bg-gray-50 rounded-lg p-4 mb-3"
+                                class="grid grid-cols-5 sm:grid-cols-7 items-center bg-gray-50 rounded-lg p-4 mb-3 gap-2"
                             >
                                 <h3
-                                    class="text-sm font-medium text-orange-500 md:text-base"
+                                    class="col-span-3 sm:col-span-4 text-sm font-medium text-orange-500 md:text-base truncate"
                                 >
                                     {{ referral.name }}
                                 </h3>
-                                <p class="font-semibold text-gray-900">
+                                <p
+                                    class="col-span-1 text-right font-semibold text-gray-900 text-sm sm:text-base"
+                                >
                                     {{ referral.reward }}
                                 </p>
-                                <p class="text-xs text-gray-500 md:text-sm">
+                                <p
+                                    class="col-span-1 sm:col-span-2 text-right text-xs text-gray-500 md:text-sm"
+                                >
                                     {{ referral.date }}
                                 </p>
                             </div>
+
                             <div
                                 v-if="!showAllReferrals"
                                 class="absolute bottom-0 left-0 w-full h-6 pointer-events-none bg-gradient-to-t from-white to-transparent"
@@ -353,21 +504,22 @@ import axios from "axios";
 
 export default {
     name: "OffersComponent",
-    components: { OfferComponent },
+    components: { LoadingComponent, OfferComponent },
     data() {
         return {
+            loading: false,
             limit: null,
             referralCode: "",
             referralLink: "",
             referralBalance: "₦0.00",
             copied: false,
-                referralHistory: [],
-                totalReferrals: 0,
-                showAllReferrals: false,
-                socialIcons: [],
+            referralHistory: [],
+            totalReferrals: 0,
+            showAllReferrals: false,
+            socialIcons: [],
             topThree: [],
             relativeUsers: [],
-            currentUser: null
+            currentUser: null,
         };
     },
     mounted() {
@@ -380,12 +532,14 @@ export default {
             setTimeout(() => (this.copied = false), 2000);
         },
         async fetchAllReferrals() {
+            this.loading = true;
             try {
                 const response = await axios.get("/referral?per_page=100");
                 this.referralHistory = response.data.referrals.data.map(
                     (item, index) => ({
                         id: index + 1,
                         name: item.name ?? item.email ?? "Unknown",
+                        email: item.email ?? "",
                         date: new Date(item.created_at).toLocaleDateString(
                             "en-NG"
                         ),
@@ -397,9 +551,12 @@ export default {
                 this.showAllReferrals = true;
             } catch (error) {
                 console.error("Fetch all referrals error:", error);
+            } finally {
+                this.loading = false;
             }
         },
         async fetchReferralData() {
+            this.loading = true;
             try {
                 const response = await axios.get("/referral");
                 const data = response.data;
@@ -413,6 +570,7 @@ export default {
                     (item, index) => ({
                         id: index + 1,
                         name: item.name ?? item.email ?? "Unknown",
+                        email: item.email ?? "",
                         date: new Date(item.created_at).toLocaleDateString(
                             "en-NG"
                         ),
@@ -428,23 +586,42 @@ export default {
                     `Hey! ${referralName} picked you for a special surprise… Win FREE meals worth ₦1.5M for a whole year with YUMMEALS! Download the app and Sign Up Now to get started: ${this.referralLink}`
                 );
 
+                const topThree = data.leaderboard?.top_three ?? [];
                 const reorderedTopThree = [
-                    data.leaderboard.top_three[1], // 2nd place (left)
-                    data.leaderboard.top_three[0], // 1st place (middle)
-                    data.leaderboard.top_three[2]  // 3rd place (right)
-                ];
-                this.topThree = reorderedTopThree.map((user, index) => ({
-                    id: user.id,
-                    rank: index === 1 ? 1 : index === 0 ? 2 : 3,
-                    name: user.name,
-                    trophy: `/images/LeaderBoard/${index === 1 ? '1st' : index === 0 ? '2nd' : '3rd'}.png`,
-                    referrals: user.total_referrals,
-                    reward: `₦${user.referral_balance}`
-                }));
+                    topThree[1],
+                    topThree[0],
+                    topThree[2],
+                ]
+                    .filter(Boolean)
+                    .map((user, i, arr) => {
+                        const order =
+                            arr.length === 3
+                                ? [2, 1, 3]
+                                : arr.length === 2
+                                ? [1, 2]
+                                : [1];
+                        const rank = order[i];
+                        return {
+                            id: user?.id ?? i + 1,
+                            rank,
+                            name: user?.name ?? "Unknown",
+                            trophy: `/images/LeaderBoard/${
+                                rank === 1 ? "1st" : rank === 2 ? "2nd" : "3rd"
+                            }.png`,
+                            referrals: user?.total_referrals ?? 0,
+                            reward: `₦${user?.referral_balance ?? 0}`,
+                        };
+                    });
 
-                const relativeUsersArray = Object.values(data.leaderboard.relative_leaderboard.users);
-                this.currentUser = relativeUsersArray.find(user => user.is_current_user);
-                this.relativeUsers = relativeUsersArray.filter(user => user.rank > 3);
+                this.topThree = reorderedTopThree;
+
+                const relativeUsersArray = Object.values(
+                    data.leaderboard.relative_leaderboard.users
+                );
+                this.currentUser = relativeUsersArray.find(
+                    (user) => user.is_current_user
+                );
+                this.relativeUsers = relativeUsersArray;
 
                 this.socialIcons = [
                     {
@@ -476,6 +653,8 @@ export default {
             } catch (error) {
                 console.error("Referral fetch error:", error);
                 this.$toast?.error("Unable to load referral data.");
+            } finally {
+                this.loading = false;
             }
         },
     },

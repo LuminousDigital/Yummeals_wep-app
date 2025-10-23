@@ -68,9 +68,11 @@
                         </h4>
                     </div>
                     <VariationButton
+                        ref="variationButtonList"
                         :item="item"
                         @variation-click="variationModalShow"
                         @show-location-modal="handleLocationModal"
+                        @cart-animation-complete="onCartAnimationComplete"
                     />
                 </div>
             </div>
@@ -148,9 +150,11 @@
                 </button> -->
 
                     <VariationButton
+                        ref="variationButtonGrid"
                         :item="item"
                         @variation-click="variationModalShow"
                         @show-location-modal="handleLocationModal"
+                        @cart-animation-complete="onCartAnimationComplete"
                     />
                 </div>
             </div>
@@ -739,11 +743,12 @@ export default {
         handleGoToDeliveryModal() {
             this.showWaitlistModal = false;
 
+            // Temporarily disabled delivery address modal
             // Add this to force DeliveryModal to open after a short delay
-            setTimeout(() => {
-                this.waitlistKey += 1;
-                this.showDeliveryModal = true; // ✅ show DeliveryAddressModal
-            }, 300);
+            // setTimeout(() => {
+            //     this.waitlistKey += 1;
+            //     this.showDeliveryModal = true; // ✅ show DeliveryAddressModal
+            // }, 300);
         },
 
         openDeliveryModal(item) {
@@ -760,7 +765,9 @@ export default {
             } else if (isLocationCovered === "false") {
                 this.showWaitlistModal = true;
             } else {
-                this.showDeliveryModal = true;
+                // Temporarily disabled delivery address modal
+                // this.showDeliveryModal = true;
+                this.variationModalShow(item); // Allow proceeding without modal
             }
         },
         handleLocationModal(item) {
@@ -771,7 +778,9 @@ export default {
             if (isLocationCovered === "false") {
                 this.showWaitlistModal = true;
             } else {
-                this.showDeliveryModal = true;
+                // Temporarily disabled delivery address modal
+                // this.showDeliveryModal = true;
+                this.variationModalShow(item); // Allow proceeding without modal
             }
         },
         closeDeliveryModal() {
@@ -1148,9 +1157,27 @@ export default {
 
                         alertService.success(this.$t("message.add_to_cart"));
                         appService.modalHide("#item-variation-modal");
+
+                        // Trigger flying dot animation
+                        this.triggerFlyingDotAnimation();
                     })
                     .catch();
             }
+        },
+        triggerFlyingDotAnimation: function () {
+            // Trigger animation on the VariationButton
+            // Since there are multiple items, we need to find the correct one
+            // For now, we'll assume the first one or handle it differently
+            // This might need adjustment based on which item was added
+            const buttons = this.$refs.variationButtonList || this.$refs.variationButtonGrid;
+            if (buttons && buttons.length > 0) {
+                buttons[0].triggerAnimation();
+            } else if (buttons) {
+                buttons.triggerAnimation();
+            }
+        },
+        onCartAnimationComplete() {
+            // Handle animation complete if needed
         },
     },
 };

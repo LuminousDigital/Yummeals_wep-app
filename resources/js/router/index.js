@@ -125,6 +125,14 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
+    // Block authenticated users from visiting auth pages (login/signup/etc.)
+    try {
+        if (store.getters.authStatus && (to.name || "").startsWith("auth.")) {
+            next({ name: "frontend.home" });
+            return;
+        }
+    } catch (e) {}
+
     if (to.meta.auth === true) {
         if (!store.getters.authStatus) {
             next({ name: "auth.login" });

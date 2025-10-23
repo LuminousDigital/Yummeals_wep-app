@@ -9,6 +9,7 @@ use App\Enums\Source;
 use Dipokhalder\EnvEditor\EnvEditor;
 use Illuminate\Database\Seeder;
 use App\Models\Order;
+use Illuminate\Support\Str;
 
 class OrderTableSeeder extends Seeder
 {
@@ -45,6 +46,7 @@ class OrderTableSeeder extends Seeder
                     'delivery_boy_id'  => 4,
                     'reason'           => null,
                     'source'           => Source::WEB,
+                    'uuid'             => (string) Str::uuid(),
                     'created_at'       => now(),
                     'updated_at'       => now()
                 ],
@@ -71,6 +73,7 @@ class OrderTableSeeder extends Seeder
                     'delivery_boy_id'  => 4,
                     'reason'           => null,
                     'source'           => Source::WEB,
+                    'uuid'             => (string) Str::uuid(),
                     'created_at'       => now(),
                     'updated_at'       => now()
                 ],
@@ -97,6 +100,7 @@ class OrderTableSeeder extends Seeder
                     'delivery_boy_id'  => null,
                     'reason'           => null,
                     'source'           => Source::WEB,
+                    'uuid'             => (string) Str::uuid(),
                     'created_at'       => now(),
                     'updated_at'       => now()
                 ],
@@ -123,6 +127,7 @@ class OrderTableSeeder extends Seeder
                     'delivery_boy_id'  => 4,
                     'reason'           => null,
                     'source'           => Source::WEB,
+                    'uuid'             => (string) Str::uuid(),
                     'created_at'       => now(),
                     'updated_at'       => now()
                 ],
@@ -149,6 +154,7 @@ class OrderTableSeeder extends Seeder
                     'delivery_boy_id'    => null,
                     'reason'             => null,
                     'source'             => Source::POS,
+                    'uuid'               => (string) Str::uuid(),
                     'created_at'         => now(),
                     'updated_at'         => now()
                 ],
@@ -175,6 +181,7 @@ class OrderTableSeeder extends Seeder
                     'delivery_boy_id'    => null,
                     'reason'             => null,
                     'source'             => Source::POS,
+                    'uuid'               => (string) Str::uuid(),
                     'created_at'         => now(),
                     'updated_at'         => now()
                 ],

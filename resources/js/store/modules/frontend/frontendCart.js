@@ -28,6 +28,9 @@ export const frontendCart = {
         timeSlot: function (state) {
             return state.timeSlot;
         },
+        itemCount: function (state) {
+            return state.lists.reduce((total, item) => total + item.quantity, 0);
+        },
     },
     actions: {
         lists: function (context, payload) {
