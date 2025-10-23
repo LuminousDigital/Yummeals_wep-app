@@ -1,11 +1,10 @@
-@component('mail::message')
-    # Order Notification
+@extends('emails.layouts.base')
 
-    Hello {{ $name }},
+@section('title','Order Notification')
 
-    Order ID : {{$orderId}}
-    {{$message}}
-
-    Thanks,
-    {{ config('app.name') }}
-@endcomponent
+@section('content')
+    <h1 style="margin:0 0 10px 0;font-size:22px;line-height:1.3;color:#111827;">Order Notification</h1>
+    <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6;color:#374151;">Hello {{ $name }},</p>
+    <p style="margin:0 0 8px 0;font-size:14px;line-height:1.6;color:#111827;">Order ID : {{$orderId}}</p>
+    <p style="margin:0 0 16px 0;font-size:14px;line-height:1.6;color:#374151;">{{$message}}</p>
+@endsection

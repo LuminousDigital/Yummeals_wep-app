@@ -128,7 +128,7 @@ class SignupController extends Controller
                 ]);
                 $user->assignRole(EnumRole::CUSTOMER);
             }
-
+            
             try {
                 if (!empty($user->email) && ($user->wasRecentlyCreated || $wasGuest)) {
                     Mail::to($user->email)->send(new WelcomeMail($user->name));

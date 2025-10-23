@@ -30,6 +30,8 @@ class VerifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Email Verification")->markdown('emails.verify');
+        return $this->subject("Email Verification")
+            ->view('emails.verify')
+            ->with(['pin' => $this->pin]);
     }
 }

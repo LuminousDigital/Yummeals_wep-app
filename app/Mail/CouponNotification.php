@@ -23,6 +23,10 @@ class CouponNotification extends Mailable
     public function build()
     {
         return $this->subject($this->isAdmin ? 'New Coupon Winner' : 'Congratulations! You Won a Coupon')
-                   ->markdown('emails.couponNotification');
+                   ->view('emails.couponNotification')
+                   ->with([
+                       'data' => $this->data,
+                       'isAdmin' => $this->isAdmin,
+                   ]);
     }
 }

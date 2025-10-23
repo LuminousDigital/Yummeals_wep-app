@@ -27,6 +27,11 @@ class SubscriberMail extends Mailable
 
     public function build()
     {
-        return $this->subject("Subscriber Notification")->markdown('emails.subscriber');
+        return $this->subject("Subscriber Notification")
+            ->view('emails.subscriber')
+            ->with([
+                'title' => $this->title,
+                'message' => $this->message,
+            ]);
     }
 }
