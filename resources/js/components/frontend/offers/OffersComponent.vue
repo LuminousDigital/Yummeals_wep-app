@@ -55,10 +55,46 @@
                         <h2 class="text-[16px] text-[#212121] font-medium pb-4 pt-4">
                             Referral Code
                         </h2>
-                        <div class="bg-[#FFEBE1] from-orange-50 to-orange-100 rounded-xl p-3">
+                        <div class="bg-[#FFEBE1] from-orange-50 to-orange-100 rounded-xl p-3 relative">
                             <p class="text-xl md:text-2xl font-black text-[#F25B0A] text-center tracking-wider">
                                 {{ referralCode }}
                             </p>
+                            <button
+                                @click="copyCode"
+                                class="absolute top-2 right-2 p-1 bg-white bg-opacity-80 rounded-full hover:bg-opacity-100 transition-all"
+                                title="Copy Code"
+                            >
+                                <svg
+                                    v-if="!copiedCode"
+                                    class="w-5 h-5 text-[#F25B0A]"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                    ></path>
+                                </svg>
+                                <svg
+                                    v-else
+                                    class="w-5 h-5 text-green-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    ></path>
+                                </svg>
+                            </button>
                         </div>
 
 
@@ -517,6 +553,7 @@ export default {
             referralLink: "",
             referralBalance: "₦0.00",
             copied: false,
+            copiedCode: false,
             referralHistory: [],
             totalReferrals: 0,
             showAllReferrals: false,
@@ -534,6 +571,11 @@ export default {
             navigator.clipboard.writeText(this.referralLink);
             this.copied = true;
             setTimeout(() => (this.copied = false), 2000);
+        },
+        copyCode() {
+            navigator.clipboard.writeText(this.referralCode);
+            this.copiedCode = true;
+            setTimeout(() => (this.copiedCode = false), 2000);
         },
         async fetchAllReferrals() {
             this.loading = true;

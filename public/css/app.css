@@ -4873,6 +4873,9 @@ input:checked + div svg {
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
+.bg-opacity-80 {
+  --tw-bg-opacity: 0.8;
+}
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -6562,6 +6565,9 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .hover\:bg-\[\#d94d08\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(217 77 8 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-opacity-100:hover {
+  --tw-bg-opacity: 1;
 }
 .hover\:from-orange-50:hover {
   --tw-gradient-from: #fff7ed var(--tw-gradient-from-position);
