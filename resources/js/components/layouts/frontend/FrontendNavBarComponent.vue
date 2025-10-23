@@ -489,8 +489,7 @@ export default {
             const allowedRoutes = [
                 'frontend.home',
                 'frontend.menu',
-                'frontend.search',
-                'frontend.checkout'
+                'frontend.search'
             ];
             return allowedRoutes.includes(this.$route.name);
         },
