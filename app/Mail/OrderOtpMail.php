@@ -21,6 +21,11 @@ class OrderOtpMail extends Mailable
 
     public function build()
     {
-        return $this->subject("Confirm Your Order #{$this->orderId}")->markdown('emails.order-otp');
+        return $this->subject("Confirm Your Order #{$this->orderId}")
+            ->view('emails.order-otp')
+            ->with([
+                'otp' => $this->otp,
+                'orderId' => $this->orderId,
+            ]);
     }
 }

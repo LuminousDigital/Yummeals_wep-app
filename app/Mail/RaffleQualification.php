@@ -20,6 +20,7 @@ class RaffleQualification extends Mailable
     public function build()
     {
         return $this->subject('You now qualify for our raffle draw!')
-            ->markdown('emails.raffleQualification');
+            ->view('emails.raffleQualification')
+            ->with(['name' => $this->name]);
     }
 }
