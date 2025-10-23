@@ -1,3 +1,0 @@
-- [x] Add copiedCode: false to data() in OffersComponent.vue
-- [x] Add copyCode method to methods in OffersComponent.vue
-- [x] Update the referral code div template to include a copy icon button
