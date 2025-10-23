@@ -604,7 +604,7 @@
                     type="button"
                     :disabled="temp.total_price <= 0"
                     @click.prevent="addToCart"
-                    class="flex items-center justify-center gap-3 rounded-3xl text-base py-3 px-3 font-medium w-full text-white bg-primary"
+                    class="flex items-center justify-center gap-3 rounded-lg text-base py-3 px-3 font-medium w-full text-white bg-primary"
                 >
                     <i class="icon-bag-2"></i>
                     <span>

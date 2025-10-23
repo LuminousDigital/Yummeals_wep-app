@@ -98,7 +98,7 @@
 //                     </div>
 //                     <div class="col-12">
 //                         <button type="submit"
-//                             class="w-full h-12 font-medium text-center text-white capitalize rounded-3xl bg-primary">
+//                             class="w-full h-12 font-medium text-center text-white capitalize rounded-lg bg-primary">
 //                             {{ $t('button.sign_up') }}
 //                         </button>
 //                     </div>
