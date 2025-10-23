@@ -26,7 +26,7 @@
             </span>
         </div>
 
-        <router-link v-if="logged && profile.role_id !== enums.roleEnum.ADMIN" :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
+        <router-link v-if="logged && profile.role_id !== enums.roleEnum.ADMIN && profile.is_guest !== enums.askEnum.YES" :class="checkIsPathAndRoutePathSame('/offers') ? 'text-primary' : ''"
             class="flex flex-col items-center gap-1" :to="{ name: 'frontend.offers' }">
             <i class="fa-solid fa-tags text-base leading-none"></i>
             <span class="text-xs capitalize">{{ $t('label.offers') }}</span>
@@ -49,6 +49,7 @@
 <script>
 import statusEnum from "../../../enums/modules/statusEnum";
 import roleEnum from "../../../enums/modules/roleEnum";
+import askEnum from "../../../enums/modules/askEnum";
 import appService from "../../../services/appService";
 export default {
     name: "FrontendMobileNavBarComponent",
@@ -70,6 +71,7 @@ export default {
             },
             enums: {
                 roleEnum: roleEnum,
+                askEnum: askEnum,
             },
         };
     },

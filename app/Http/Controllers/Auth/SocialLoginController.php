@@ -83,6 +83,7 @@ class SocialLoginController extends Controller
         } catch (\Throwable $e) {}
         return $response;
     }
+    
     /**
      * Unified callback handler.
      */
@@ -148,6 +149,18 @@ class SocialLoginController extends Controller
             }
 
             $needsUpdate = $this->needsProfileUpdate($user);
+            // Temporary debug logs for profile completeness
+            try {
+                Log::debug('SocialLogin: profile completeness check', [
+                    'user_id' => $user->id,
+                    'was_recently_created' => (bool) ($user->wasRecentlyCreated ?? false),
+                    'name_present' => trim((string) $user->name) !== '',
+                    'email_present' => !empty($user->email),
+                    'phone_present' => !empty($user->phone),
+                    'needs_update' => $needsUpdate,
+                ]);
+            } catch (\Throwable $e) {}
+
             $dest = $needsUpdate ? '/edit-profile' : '/login';
             Log::info("SocialLogin: redirecting {$provider} auth to frontend", [
                 'base' => $front,
@@ -240,8 +253,19 @@ class SocialLoginController extends Controller
         /** @var User $user */
         $user = User::firstOrCreate($lookup, array_merge($data, $createDefaults));
 
+        if (!$user->wasRecentlyCreated && trim((string) $user->name) !== '') {
+            try {
+                Log::debug('SocialLogin: preserving existing name for returning user', [
+                    'user_id' => $user->id,
+                    'existing_name' => $user->name,
+                    'incoming_name' => $data['name'] ?? null,
+                ]);
+            } catch (\Throwable $e) {}
+            unset($data['name']);
+        }
+
         $user->fill($data);
-        // Ensure referral code (derived solely from $data) if still missing after fill
+
         if (empty($user->referral_code)) {
             try {
                 $code = $this->ensureReferralCode($data);
@@ -311,11 +335,17 @@ class SocialLoginController extends Controller
 
     private function needsProfileUpdate(User $user): bool
     {
+             Log::info('SocialLogin: referral code ensured', [
+                'usesssr' => $user,
+               
+            ]);
         $name = trim((string) $user->name);
         $parts = preg_split('/\s+/', $name);
         $firstMissing = empty($parts[0] ?? null);
         $lastMissing = empty($parts[1] ?? null);
-        return empty($user->email) || empty($user->phone) || $firstMissing || $lastMissing;
+        $emailMissing = empty($user->email);
+        $phoneMissing = empty($user->phone);
+        return $emailMissing || $phoneMissing || $firstMissing || $lastMissing;
     }
 
     /**
