@@ -5,7 +5,7 @@
             <h2 class="capitalize sm:my-8 mb-6 mt-6 sm:mt-0 text-center text-[22px] md:text-2xl font-normal leading-[34px] text-heading-light tracking-[1px]">
                 {{ $t('label.verify_email') }}</h2>
             <form @submit.prevent="verifyCode">
-                <label class="text-sm mb-1 first-letter:uppercase text-heading-light">{{
+                <label class="text-sm first-letter:uppercase text-heading-light mb-3">{{
                     $t('message.enter_the_code_sent_to')
                     }} <span class="font-medium">{{ resetInfo.email }}</span></label>
                 <input :class="errors.code ? 'invalid' : ''" v-model="form.code" type="number"
@@ -13,11 +13,11 @@
                 <small class="db-field-alert" v-if="errors.code">{{ errors.code[0] }}</small>
                 <br>
                 <button @click.prevent="resendCode" type="button"
-                    class="capitalize mb-6 mt-2 text-xs font-medium transition text-primary hover:underline">
+                    class="capitalize mb-6 mt-2 text-xs sm:text-sm w-full font-medium transition text-primary hover:underline text-right">
                     {{ $t('button.resend_code') }}
                 </button>
                 <button type="submit"
-                    class="w-full h-12 text-center capitalize font-medium rounded-3xl text-white bg-primary">
+                    class="w-full h-12 text-center capitalize font-medium rounded-lg text-white bg-primary">
                     {{ $t('button.continue') }}
                 </button>
             </form>
