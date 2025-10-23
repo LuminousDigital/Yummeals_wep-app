@@ -31,6 +31,7 @@ class UserResource extends JsonResource
             "total_referrals"  => $this->total_referrals,
             "image"            => $this->image,
             "role_id"          => $this->myRole,
+            "is_guest"         => (int) $this->is_guest,
             "country_code"     => $this->country_code,
             "order"            => $this->orders->count(),
             'create_date'      => AppLibrary::date($this->created_at),
