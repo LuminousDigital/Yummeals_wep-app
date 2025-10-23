@@ -131,6 +131,7 @@ export default {
     this.phoneChecking();
 
     const referral = this.$route.query.ref;
+    console.log({referral})
     if (referral) {
       this.form.referral_code = referral;
       this.$store.dispatch('frontendSignup/setReferralCode', referral);

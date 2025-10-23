@@ -20,6 +20,7 @@ class WelcomeMail extends Mailable
     public function build()
     {
         return $this->subject('Welcome to '.(string) (\Smartisan\Settings\Facades\Settings::group('company')->get('company_name') ?: config('app.name')))
-            ->markdown('emails.welcome');
+            ->view('emails.welcome')
+            ->with(['name' => $this->name]);
     }
 }
