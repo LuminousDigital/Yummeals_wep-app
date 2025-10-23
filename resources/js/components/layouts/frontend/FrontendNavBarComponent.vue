@@ -54,7 +54,7 @@
                     {{ $t('label.offers') }}
                 </router-link> -->
                 <router-link
-                    v-if="logged && profile.role_id !== enums.roleEnum.ADMIN"
+                    v-if="logged && profile.role_id !== enums.roleEnum.ADMIN && profile.is_guest !== enums.askEnum.YES"
                     :to="{ name: 'frontend.offers' }"
                     :class="
                         checkIsPathAndRoutePathSame('/referrals')
@@ -395,6 +395,7 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import activityEnum from "../../../enums/modules/activityEnum";
 import roleEnum from "../../../enums/modules/roleEnum";
+import askEnum from "../../../enums/modules/askEnum";
 import _ from "lodash";
 
 export default {
@@ -423,6 +424,7 @@ export default {
             enums: {
                 activityEnum: activityEnum,
                 roleEnum: roleEnum,
+                askEnum: askEnum,
             },
             branchProps: {
                 paginate: 0,
