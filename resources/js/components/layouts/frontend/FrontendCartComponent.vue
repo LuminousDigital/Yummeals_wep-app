@@ -116,7 +116,7 @@
                     </h4>
                 </div>
                 <router-link @click.prevent="closeSidebar" :to="{ name: 'frontend.checkout' }"
-                    class="rounded-3xl text-center capitalize text-[15px] py-3 px-3 w-full text-white bg-primary">
+                    class="rounded-lg text-center capitalize text-[15px] py-3 px-3 w-full text-white bg-primary">
                     {{ $t('button.proceed_checkout') }}
                 </router-link>
             </div>
