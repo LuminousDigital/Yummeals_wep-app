@@ -125,10 +125,13 @@ router.beforeEach((to, from, next) => {
         return;
     }
 
-    if ((to.name === "auth.signupPhone" || to.name === "auth.signupVerify" || to.name === "auth.signupRegister") && store.getters.authStatus) {
-        next({ name: "frontend.home" });
-        return;
-    }
+    // Block authenticated users from visiting auth pages (login/signup/etc.)
+    try {
+        if (store.getters.authStatus && (to.name || "").startsWith("auth.")) {
+            next({ name: "frontend.home" });
+            return;
+        }
+    } catch (e) {}
 
     if (to.meta.auth === true) {
         if (!store.getters.authStatus) {

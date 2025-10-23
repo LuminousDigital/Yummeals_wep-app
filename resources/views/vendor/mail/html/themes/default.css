@@ -1,0 +1,6 @@
+/* Custom mail theme */
+body { background-color: #f6f7fb !important; }
+a { color: #ff4d4f !important; }
+.button-primary, .button .button-primary { background-color: #ff4d4f !important; border-color: #ff4d4f !important; }
+.header { background: #ff4d4f !important; color: #ffffff !important; }
+.panel { border: 1px solid #f0f2f5 !important; }

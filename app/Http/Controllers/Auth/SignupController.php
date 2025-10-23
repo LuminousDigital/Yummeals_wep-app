@@ -23,6 +23,10 @@ use App\Models\ReferralBonus;
 use App\Events\ReferralSignedUp;
 use App\Models\ReferralTransaction;
 use App\Models\Currency;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+use App\Mail\RaffleQualification;
+use App\Services\NotificationSenderService;
 
 
 class SignupController extends Controller
@@ -90,9 +94,16 @@ class SignupController extends Controller
                 $referrer = User::whereNotNull('referral_code')
                     ->where('referral_code', $code)
                     ->first();
+                Log::info('[Signup] referral code resolved', [
+                    'code' => $code,
+                    'referrer_found' => (bool) $referrer,
+                    'referrer_id' => $referrer?->id,
+                ]);
             }
 
+            $wasGuest = false;
             if ($user) {
+                $wasGuest = ($user->is_guest == Ask::YES);
                 $user->name = $name;
                 $user->username = Str::slug($name);
                 $user->email = $request->post('email');
@@ -117,8 +128,20 @@ class SignupController extends Controller
                 ]);
                 $user->assignRole(EnumRole::CUSTOMER);
             }
+
+            try {
+                if (!empty($user->email) && ($user->wasRecentlyCreated || $wasGuest)) {
+                    Mail::to($user->email)->send(new WelcomeMail($user->name));
+                }
+            } catch (\Throwable $e) {}
+
             if ($referrer) {
                 if ($referrer->id !== $user->id) {
+                    Log::info('[Signup] referral flow', [
+                        'action' => 'dispatch_event_and_process_bonus',
+                        'referrer_id' => $referrer->id,
+                        'referee_id'  => $user->id,
+                    ]);
                     ReferralSignedUp::dispatch([
                         'referrer_id' => $referrer->id,
                         'referee_id'  => $user->id,
@@ -168,6 +191,7 @@ class SignupController extends Controller
             'notes' => 'New user signup bonus'
         ]);
 
+        $beforeTotalReferrals = (int) $referrer->total_referrals;
         DB::transaction(function () use ($referrer, $referralBonus, $referrerBonusRecord) {
             $referrer->increment('referral_balance', $referralBonus);
             $referrer->increment('total_referrals');
@@ -188,6 +212,34 @@ class SignupController extends Controller
                 ]
             ]);
         });
+
+        try {
+            $referrer->refresh();
+            Log::info('[Signup] referrer totals changed', [
+                'referrer_id' => $referrer->id,
+                'before' => $beforeTotalReferrals,
+                'after'  => (int) $referrer->total_referrals,
+            ]);
+        } catch (\Throwable $e) {
+            Log::info('[Signup] totals refresh failed', ['message' => $e->getMessage()]);
+        }
+
+        // Notify referrer exactly on 2nd referral
+        try {
+            $referrer->refresh();
+            if ((int) $referrer->total_referrals === 2) {
+                if (!empty($referrer->email)) {
+                    Mail::to($referrer->email)->send(new RaffleQualification($referrer->name));
+                }
+                app(NotificationSenderService::class)->sendToUser(
+                    $referrer,
+                    'Raffle Qualification',
+                    'Congrats! You now qualify for our raffle draw. Stay tuned for announcements.',
+                    null,
+                    'referral'
+                );
+            }
+        } catch (\Throwable $e) {}
 
         if ($refereeBonus > 0) {
             $refereeBonusRecord = ReferralBonus::create([
