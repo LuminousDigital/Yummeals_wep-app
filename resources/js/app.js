@@ -107,6 +107,13 @@ axios.interceptors.request.use(
             const b64 = decodeURIComponent(location.hash.substring(8));
             const json = JSON.parse(atob(b64));
             if (json && json.token) {
+                // Mark that we came from social to finish profile if currently on edit-profile
+                try {
+                    if ((location.pathname || "").endsWith("/edit-profile")) {
+                        store.commit('setSocialEntry', true);
+                    }
+                } catch (e) {}
+
                 store.commit("authLogin", json);
 
                 history.replaceState(
