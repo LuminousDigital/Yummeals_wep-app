@@ -1,6 +1,5 @@
 @extends('emails.layouts.base')
 
-@php($accent = '#22C55E')
 @section('title','Raffle Qualification')
 
 @section('content')

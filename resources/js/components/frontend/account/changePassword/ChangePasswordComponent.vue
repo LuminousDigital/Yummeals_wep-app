@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-12">
                             <button type="submit"
-                                class="w-full h-12 text-center capitalize font-medium rounded-3xl text-white bg-primary">
+                                class="w-full h-12 text-center capitalize font-medium rounded-lg text-white bg-primary">
                                 {{ $t('button.change_password') }}</button>
                         </div>
                     </div>
