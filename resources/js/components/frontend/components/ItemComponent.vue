@@ -185,7 +185,8 @@
     <div
         id="item-variation-modal"
         ref="itemVariationModal"
-        class="modal ff-modal"
+        class="modal ff-modal pt-28"
+        :style="{ zIndex: 9999 }"
     >
         <div class="modal-dialog max-w-[647px]" v-if="item">
             <div class="modal-header items-start border-none pb-0">

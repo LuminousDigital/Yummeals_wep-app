@@ -173,7 +173,7 @@
                         ></i>
                     </button>
                     <div
-                        class="dropdown-list w-80 absolute top-12 ltr:right-0 rtl:left-0 z-[60] rounded-xl shadow-paper bg-white transition-all duration-300 scale-y-0 origin-top"
+                        class="dropdown-list w-80 absolute top-12 ltr:right-0 rtl:left-0 z-[70] rounded-xl shadow-paper bg-white transition-all duration-300 scale-y-0 origin-top"
                     >
                         <div class="flex items-center gap-3 p-4 mb-2">
                             <figure
