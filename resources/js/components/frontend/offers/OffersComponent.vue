@@ -30,18 +30,6 @@
                         }}</span>
                     </p> -->
                     <div>
-                        <!-- <div class="flex items-center gap-3 pb-5">
-                            <h2
-                                class="text-[14px] md:text-[15px] lg:text-[17px] text-black font-medium"
-                            >
-                                Referral Code:
-                            </h2>
-                            <p
-                                class="text-[15px] md:text-base text-[rgb(242,91,10)] font-medium break-all"
-                            >
-                                {{ referralCode }}
-                            </p>
-                        </div> -->
                         <h2 class="text-[16px] text-[#212121] font-medium pb-4">
                             Referral Link
                         </h2>
@@ -64,6 +52,15 @@
                                 }}</span>
                             </button>
                         </div>
+                        <h2 class="text-[16px] text-[#212121] font-medium pb-4 pt-4">
+                            Referral Code
+                        </h2>
+                        <div class="bg-[#FFEBE1] from-orange-50 to-orange-100 rounded-xl p-3">
+                            <p class="text-xl md:text-2xl font-black text-[#F25B0A] text-center tracking-wider">
+                                {{ referralCode }}
+                            </p>
+                        </div>
+
 
                         <div
                             class="flex flex-col items-center w-full mt-10 mb-12"
@@ -105,6 +102,7 @@
                         >
                             Referral History ({{ referralHistory.length }})
                         </h2>
+
                         <div
                             :class="
                                 showAllReferrals
@@ -112,6 +110,7 @@
                                     : 'bg-white rounded-lg shadow-sm h-auto sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto hide-scrollbar relative'
                             "
                         >
+                            <!-- Empty state -->
                             <div
                                 v-if="referralHistory.length === 0"
                                 class="flex flex-col items-center justify-center w-full py-10 text-center"
@@ -127,23 +126,28 @@
                                     You have not referred anybody
                                 </p>
                             </div>
-                            <div
-                                v-else
-                                v-for="referral in referralHistory"
-                                :key="referral.id"
-                                class="flex items-center justify-between bg-gray-50 rounded-lg p-4 mb-3"
-                            >
-                                <h3
-                                    class="text-sm font-medium text-orange-500 md:text-base"
+                            <div v-else>
+                                <div
+                                    v-for="referral in referralHistory"
+                                    :key="referral.id"
+                                    class="grid grid-cols-[2fr_1fr_1fr] items-center bg-gray-50 rounded-lg p-4 mb-3 gap-2"
                                 >
-                                    {{ referral.name }}
-                                </h3>
-                                <p class="font-semibold text-gray-900">
-                                    {{ referral.reward }}
-                                </p>
-                                <p class="text-xs text-gray-500 md:text-sm">
-                                    {{ referral.date }}
-                                </p>
+                                    <h3
+                                        class="text-sm font-medium text-orange-500 md:text-base truncate"
+                                    >
+                                        {{ referral.name }}
+                                    </h3>
+                                    <p
+                                        class="text-center font-semibold text-gray-900 text-sm sm:text-base"
+                                    >
+                                        {{ referral.reward }}
+                                    </p>
+                                    <p
+                                        class="text-right sm:text-center text-xs text-gray-500 md:text-sm"
+                                    >
+                                        {{ referral.date }}
+                                    </p>
+                                </div>
                             </div>
                             <div
                                 v-if="!showAllReferrals"
@@ -324,7 +328,7 @@
                                     </div>
                                 </div>
 
-                                <template
+                                <!-- <template
                                     v-if="currentUser && currentUser.rank > 9"
                                 >
                                     <p
@@ -403,7 +407,7 @@
                                             ₦{{ currentUser.referral_balance }}
                                         </div>
                                     </div>
-                                </template>
+                                </template> -->
                             </div>
                         </template>
 

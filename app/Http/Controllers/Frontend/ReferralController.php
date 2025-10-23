@@ -47,29 +47,31 @@ class ReferralController extends Controller
         $userRank = null;
         $relativeUsers = collect();
 
-        if ($allUsers->isNotEmpty()) {
-            $userRank = $allUsers->search(function ($item) use ($user) {
-                return $item->id === $user->id;
-            });
+        if ($userRank !== false) {
+            $userRank += 1;
 
-            if ($userRank !== false) {
-                $userRank += 1;
+            $totalUsers = $allUsers->count();
+            $maxDisplay = 7;
 
-                $startIndex = max(0, $userRank - 3); 
-                $endIndex = min($allUsers->count() - 1, $userRank + 1); 
-
-                $relativeUsers = $allUsers->slice($startIndex, $endIndex - $startIndex + 1)
-                    ->map(function ($user, $index) use ($startIndex) {
-                        return [
-                            'rank' => $startIndex + $index + 1,
-                            'name' => $user->name,
-                            'referral_code' => $user->referral_code,
-                            'total_referrals' => $user->total_referrals,
-                            'referral_balance' => $user->referral_balance,
-                            'is_current_user' => $user->id === auth()->id(),
-                        ];
-                    });
+            if ($userRank <= $maxDisplay) {
+                $startIndex = 0;
+            } else {
+                $startIndex = max(0, $userRank - $maxDisplay);
             }
+
+            $relativeUsers = $allUsers
+                ->slice($startIndex, $maxDisplay)
+                ->values()
+                ->map(function ($u, $index) use ($startIndex) {
+                    return [
+                        'rank' => $startIndex + $index + 1,
+                        'name' => $u->name,
+                        'referral_code' => $u->referral_code,
+                        'total_referrals' => $u->total_referrals,
+                        'referral_balance' => $u->referral_balance,
+                        'is_current_user' => $u->id === auth()->id(),
+                    ];
+                });
         }
 
         return [
