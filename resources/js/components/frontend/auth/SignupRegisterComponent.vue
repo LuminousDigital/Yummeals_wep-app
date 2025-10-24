@@ -22,7 +22,7 @@
             <input v-model="form.last_name" type="text" class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]">
             <small class="db-field-alert" v-if="errors.last_name">{{ errors.last_name[0] }}</small>
           </div>
-          <div class="col-12">
+          <div class="col-12 sm:col-6">
             <label class="mb-1 text-sm capitalize text-heading-light">{{ $t('label.password') }}</label>
             <div class="relative">
               <input v-model="form.password" :type="showPassword ? 'text' : 'password'" class="w-full h-12 rounded-lg border px-4 pr-12 border-[#D9DBE9]">
@@ -31,6 +31,17 @@
               </button>
             </div>
             <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
+          </div>
+          <div class="col-12 sm:col-6">
+            <label class="mb-1 text-sm capitalize text-heading-light">Referral Code (optional)</label>
+            <input
+              v-model="form.referral_code"
+              type="text"
+              class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]"
+              :readonly="referralLocked"
+              placeholder="Enter referral code"
+            />
+            <small class="db-field-alert" v-if="errors.referral_code">{{ errors.referral_code[0] }}</small>
           </div>
           <div class="col-12">
             <button type="submit" class="w-full h-12 text-center text-white capitalize rounded-lg bg-primary">
@@ -87,7 +98,7 @@
 //                     </div>
 //                     <div class="col-12">
 //                         <button type="submit"
-//                             class="w-full h-12 font-medium text-center text-white capitalize rounded-3xl bg-primary">
+//                             class="w-full h-12 font-medium text-center text-white capitalize rounded-lg bg-primary">
 //                             {{ $t('button.sign_up') }}
 //                         </button>
 //                     </div>
@@ -119,7 +130,8 @@ export default {
         referral_code: ""
       },
       errors: {},
-      showPassword: false
+      showPassword: false,
+      referralLocked: false
     };
   },
   computed: {
@@ -134,6 +146,7 @@ export default {
     console.log({referral})
     if (referral) {
       this.form.referral_code = referral;
+      this.referralLocked = true; // disable editing if code comes from link
       this.$store.dispatch('frontendSignup/setReferralCode', referral);
     }
   },
@@ -151,7 +164,13 @@ export default {
       try {
         this.loading.isActive = true;
 
-        const response = await this.$store.dispatch("frontendSignup/signup", this.form);
+        // Prepare form data, excluding empty referral_code
+        const formData = { ...this.form };
+        if (!formData.referral_code.trim()) {
+          delete formData.referral_code;
+        }
+
+        const response = await this.$store.dispatch("frontendSignup/signup", formData);
         this.errors = {};
 
         const loginRes = await this.$store.dispatch("login", {

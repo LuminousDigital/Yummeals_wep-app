@@ -6,7 +6,7 @@
                 {{ $t('label.verify_number') }}
             </h2>
             <form @submit.prevent="save">
-                <label class="text-sm first-letter:uppercase mb-1 text-heading">
+                <label class="text-sm first-letter:uppercase mb-1 text-heading-light">
                     {{ $t('label.enter_the_code_sent_to') }}
                     <span class="font-medium">{{ props.form.code + '' + props.form.phone }}</span>
                 </label>

@@ -267,7 +267,7 @@
                         class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9]"></textarea>
                 </div>
                 <button type="button" :disabled="temp.total_price <= 0" @click.prevent="addToCart"
-                    class="flex items-center justify-center gap-3 rounded-3xl text-base py-3 px-3 font-medium w-full text-white bg-primary">
+                    class="flex items-center justify-center gap-3 rounded-lg text-base py-3 px-3 font-medium w-full text-white bg-primary">
                     <i class="icon-bag-2"></i>
                     <span>
                         {{ $t('button.add_to_cart') }} -

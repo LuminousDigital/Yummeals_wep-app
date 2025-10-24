@@ -148,7 +148,7 @@
                     </div>
                     <button
                         type="submit"
-                        class="rounded-3xl text-base py-3 px-3 font-medium w-full text-white bg-primary"
+                        class="rounded-lg text-base py-3 px-3 font-medium w-full text-white bg-primary"
                     >
                         {{ $t("button.confirm_location") }}
                     </button>

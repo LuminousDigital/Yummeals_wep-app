@@ -106,7 +106,7 @@
                                         "
                                         @click="editAddress"
                                         type="button"
-                                        class="group text-xs capitalize font-medium flex items-center rounded-3xl py-1.5 px-3 gap-1 text-[#00749B] bg-[#D6F5FF] transition hover:text-white hover:bg-[#00749B]"
+                                        class="group text-xs capitalize font-medium flex items-center rounded-lg py-1.5 px-3 gap-1 text-[#00749B] bg-[#D6F5FF] transition hover:text-white hover:bg-[#00749B]"
                                     >
                                         <i
                                             class="lab lab-edit-2 lab-font-size-13"
@@ -565,7 +565,7 @@
                             </div>
                             <button
                                 type="button"
-                                class="w-full rounded-3xl capitalize font-medium leading-6 py-3 text-white bg-primary"
+                                class="w-full rounded-lg capitalize font-medium leading-6 py-3 text-white bg-primary"
                                 @click="orderSubmit"
                             >
                                 {{ $t("button.place_order") }}
@@ -645,7 +645,7 @@
                     <li
                         v-for="todayTimeSlot in todayTimeSlots"
                         @click.prevent="selectDeliveryTime(todayTimeSlot)"
-                        class="w-full h-10 leading-10 rounded-3xl text-center text-sm cursor-pointer border text-heading"
+                        class="w-full h-10 leading-10 rounded-lg text-center text-sm cursor-pointer border text-heading"
                         :class="
                             timeSlot.is_advance_order ===
                                 isAdvanceOrderEnum.NO &&
@@ -683,7 +683,7 @@
                                 isAdvanceOrderEnum.YES
                             )
                         "
-                        class="w-full h-10 leading-10 rounded-3xl text-center text-sm cursor-pointer border text-heading"
+                        class="w-full h-10 leading-10 rounded-lg text-center text-sm cursor-pointer border text-heading"
                         :class="
                             timeSlot.is_advance_order ===
                                 isAdvanceOrderEnum.YES &&

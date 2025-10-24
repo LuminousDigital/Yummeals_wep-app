@@ -1,9 +1,9 @@
 <template>
     <aside @click="closeBackdrop($event)" id="cart"
-        class="w-screen h-full fixed top-[58px] lg:top-[74px] left-0 z-60 opacity-0 invisible bg-black/60 transition">
-        <div class="max-w-sm w-full h-screen absolute top-[72px] md:top-[91px] lg:top-[22px] right-0 translate-x-full bg-white transition">
+        class="w-screen h-full fixed top-[58px] lg:top-[74px] left-0 z-80 opacity-0 invisible bg-black/60 transition">
+        <div class="max-w-sm w-full h-screen absolute top-[22px] md:top-[11px] lg:top-[10px] right-0 translate-x-full bg-white transition">
             <div :class="carts.length === 0 || orderType === null ? 'flex items-center justify-center flex-col text-center overflow-y-auto' : 'thin-scrolling'"
-                class="h-[calc(96vh-200px)] lg:h-[calc(100vh-220px)] p-4 relative">
+                class="h-[calc(96vh-200px)] lg:h-[calc(100vh-220px)] p-4 mt-6 relative">
                 <h3 :class="carts.length === 0 || orderType === null ? 'mb-16' : 'mb-5'"
                     class="text-xl font-semibold capitalize text-center">
                     {{ $t('label.my_cart') }}
@@ -116,7 +116,7 @@
                     </h4>
                 </div>
                 <router-link @click.prevent="closeSidebar" :to="{ name: 'frontend.checkout' }"
-                    class="rounded-3xl text-center capitalize text-[15px] py-3 px-3 w-full text-white bg-primary">
+                    class="rounded-lg text-center capitalize text-[15px] py-3 px-3 w-full text-white bg-primary">
                     {{ $t('button.proceed_checkout') }}
                 </router-link>
             </div>

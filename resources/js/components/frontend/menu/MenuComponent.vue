@@ -10,7 +10,7 @@
                 <button :disabled="itemProps.type !== null && itemProps.type === itemTypeEnum.VEG"
                     @click.prevent="itemProps.type === itemTypeEnum.NON_VEG ? itemTypeReset() : itemTypeSet(itemTypeEnum.NON_VEG)"
                     :class="itemProps.type === itemTypeEnum.NON_VEG ? 'veg-active' : ''" type="button"
-                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-3xl transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
+                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-lg transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
                     <img :src="setting.image_vag" alt="category" class="h-6">
                     <span class="capitalize text-sm font-normal text-heading-light tracking-[1px]">{{ $t('label.frontend_non_veg') }}</span>
                     <i
@@ -19,7 +19,7 @@
                 <button :disabled="itemProps.type !== null && itemProps.type === itemTypeEnum.NON_VEG"
                     @click.prevent="itemProps.type === itemTypeEnum.VEG ? itemTypeReset() : itemTypeSet(itemTypeEnum.VEG)"
                     :class="itemProps.type === itemTypeEnum.VEG ? 'veg-active' : ''" type="button"
-                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-3xl transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
+                    class="flex items-center gap-3 w-fit pl-3 pr-4 py-1.5 rounded-lg transition hover:shadow-filter hover:bg-white bg-[#EFF0F6]">
                     <img :src="setting.image_non_vag" alt="category" class="h-6">
                     <span class="capitalize text-sm font-normal text-heading-light tracking-[1px]">{{ $t('label.veg') }}</span>
                     <i

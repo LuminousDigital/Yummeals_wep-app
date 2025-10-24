@@ -23,7 +23,7 @@
                 </div>
                 <span class="w-full mb-4 text-center text-black">{{ $t('message.no_items_found') }}</span>
                 <router-link :to="{ name: 'table.menu.table', params: { slug: this.$route.params.slug } }"
-                    class="block w-full mx-auto max-w-[250px] py-3 rounded-3xl capitalize text-base font-medium leading-6 text-center bg-primary text-white">
+                    class="block w-full mx-auto max-w-[250px] py-3 rounded-lg capitalize text-base font-medium leading-6 text-center bg-primary text-white">
                     {{ $t('button.go_home') }}
                 </router-link>
             </div>
