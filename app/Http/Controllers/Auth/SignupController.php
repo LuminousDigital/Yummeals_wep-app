@@ -134,7 +134,7 @@ class SignupController extends Controller
                     Mail::to($user->email)->send(new WelcomeMail($user->name));
                 }
             } catch (\Throwable $e) {
-                   Log::info('Mail Sending Error', [
+                   Log::info('Mailing Error', [
                         'error' => $e,
                     ]);
             }
