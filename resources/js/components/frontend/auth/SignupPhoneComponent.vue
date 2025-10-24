@@ -116,7 +116,7 @@ export default {
                         this.$router.push({ name: "auth.signupVerify" });
                     }
                     const referralCode = this.$store.getters['frontendSignup/referralCode'];
-                    if (referralCode && referralCode !== '') {
+                    if (referralCode && referralCode !== null && typeof referralCode !== 'object') {
                         this.$router.push({ name: "auth.signupRegister", query: { ref: referralCode } });
                     } else {
                         this.$router.push({ name: "auth.signupRegister" });
