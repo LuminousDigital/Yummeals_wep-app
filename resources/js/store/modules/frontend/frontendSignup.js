@@ -77,7 +77,7 @@ export const frontendSignup = {
     },
     resetState(state) {
       state.phone = {};
-      state.referralCode = {};
+      state.referralCode = null;
     },
   },
     // namespaced: true,

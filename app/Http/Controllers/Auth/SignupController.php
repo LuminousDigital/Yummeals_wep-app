@@ -133,7 +133,11 @@ class SignupController extends Controller
                 if (!empty($user->email) && ($user->wasRecentlyCreated || $wasGuest)) {
                     Mail::to($user->email)->send(new WelcomeMail($user->name));
                 }
-            } catch (\Throwable $e) {}
+            } catch (\Throwable $e) {
+                   Log::info('Mail Sending Error', [
+                        'error' => $e,
+                    ]);
+            }
 
             if ($referrer) {
                 if ($referrer->id !== $user->id) {
