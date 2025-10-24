@@ -24,7 +24,7 @@
                     <button
                         type="button"
                         @click="showPassword = !showPassword"
-                        class="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400"
+                        class="absolute right-6 top-1/2 -translate-y-[2px] text-gray-400"
                     >
                         <i
                             :class="
@@ -52,7 +52,7 @@
                     <button
                         type="button"
                         @click="showConfirmPassword = !showConfirmPassword"
-                        class="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400"
+                        class="absolute right-6 top-1/2 -translate-y-[2px] text-gray-400"
                     >
                         <i
                             :class="

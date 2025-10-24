@@ -3463,15 +3463,6 @@ input:checked + div svg {
 .z-\[9999\] {
   z-index: 9999;
 }
-.z-\[80\] {
-  z-index: 80;
-}
-.z-\[100\] {
-  z-index: 100;
-}
-.z-\[1000\] {
-  z-index: 1000;
-}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -4085,6 +4076,10 @@ input:checked + div svg {
 }
 .translate-y-\[2px\] {
   --tw-translate-y: 2px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-y-\[2px\] {
+  --tw-translate-y: -2px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-105 {
@@ -6981,10 +6976,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .md\:mt-0 {
     margin-top: 0px;
-  }
-
-  .md\:mt-12 {
-    margin-top: 3rem;
   }
 
   .md\:mt-4 {
