@@ -15,7 +15,7 @@
         ></div>
 
         <div
-            class="container flex flex-col lg:flex-row items-center justify-between"
+            class="container flex flex-col lg:flex-row items-center justify-between !pb-0 sm:!pb-6"
         >
             <div class="w-full lg:w-fit">
                 <router-link :to="{ name: 'frontend.home' }">
