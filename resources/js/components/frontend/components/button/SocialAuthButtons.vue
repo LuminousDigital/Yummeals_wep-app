@@ -16,10 +16,10 @@
         </svg>
         <span class="font-normal">Google</span>
       </button>
-      <button type="button" @click="goFacebook" class="w-full h-12 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 transition">
+      <!-- <button type="button" @click="goFacebook" class="w-full h-12 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 transition">
         <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.097 4.388 23.093 10.125 24v-8.437H7.078v-3.49h3.047V9.356c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.49 0-1.953.927-1.953 1.878v2.265h3.328l-.532 3.49h-2.796V24C19.612 23.093 24 18.097 24 12.073z"/></svg>
         <span class="font-normal">Facebook</span>
-      </button>
+      </button> -->
     </div>
   </div>
 </template>

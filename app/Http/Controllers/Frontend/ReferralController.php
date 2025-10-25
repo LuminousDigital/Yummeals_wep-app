@@ -83,6 +83,7 @@ class ReferralController extends Controller
     {
         return User::query()
             ->select(['id', 'name', 'referral_code', 'total_referrals', 'referral_balance'])
+            ->where('id', '!=', 1)
             ->where('total_referrals', '>', 0)
             ->orderBy('total_referrals', 'desc')
             ->orderBy('created_at', 'asc');
