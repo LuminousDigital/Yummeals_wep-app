@@ -2,7 +2,7 @@
     <LoadingComponent :props="loading" />
 
     <header class="shadow-xs bg-white ff-header" ref="ffHeader">
-        <div class="container flex flex-col lg:flex-row items-center justify-between">
+        <div class="container flex flex-col lg:flex-row items-center justify-between !pb-0 sm:!pb-6">
             <div class="w-full flex items-center justify-between gap-5 xl:gap-8 lg:justify-start lg:w-fit">
                 <router-link :to="{ name: 'table.menu.table', params: { slug: this.$route.params.slug } }">
                     <img class="w-32" :src="setting.theme_logo" alt="logo">
