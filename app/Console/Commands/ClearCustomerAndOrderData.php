@@ -34,6 +34,9 @@ class ClearCustomerAndOrderData extends Command
         // CUSTOMERS-RELATED: addresses, wallets, message_histories, messages, personal_access_tokens, referral_transactions, referral_bonuses, notifications (user rows), push_notifications (user rows), media (User, MessageHistory), model_has_roles, otps
         // DO NOT TRUNCATE: users (except customers), roles, permissions, settings, items, categories, taxes, branches, menus, languages, currencies
 
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         // 1) Clear all orders (children first)
         DB::table('order_items')->truncate();
         DB::table('order_addresses')->truncate();
