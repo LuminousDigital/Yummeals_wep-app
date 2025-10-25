@@ -21,7 +21,7 @@
             <img class="xst:absolute xst:bottom-5 xst:left-1/2 xst:-translate-x-1/2 sm:w-48 md:w-auto lg:mx-14"
                 :src="settings.image_order_track" alt="bg">
             <router-link v-if="Object.keys(currentOrder).length > 0"
-                :to="{ name: 'frontend.myOrder.details', params: { id: currentOrder.id } }"
+                :to="{ name: 'frontend.myOrder.details', params: { id: currentOrder.uuid } }"
                 class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-primary sm:bg-white">
                 <i class="lab lab-arrow-right-long lab-font-size-24 font-fill-primary-toggle"></i>
             </router-link>

@@ -264,7 +264,7 @@
                         {{ $t('label.special_instructions') }}
                     </h3>
                     <textarea v-model="temp.instruction" :placeholder="$t('message.add_note')"
-                        class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9]"></textarea>
+                        class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9] resize-none"></textarea>
                 </div>
                 <button type="button" :disabled="temp.total_price <= 0" @click.prevent="addToCart"
                     class="flex items-center justify-center gap-3 rounded-lg text-base py-3 px-3 font-medium w-full text-white bg-primary">

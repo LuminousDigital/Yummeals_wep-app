@@ -48,7 +48,7 @@
                                         <input type="hidden" v-model="form.country_code">
                                     </button>
                                 </div>
-                                <input disabled id="phone" type="text" v-on:keypress="phoneNumber($event)" v-model="form.phone"
+                                <input id="phone" type="text" v-on:keypress="phoneNumber($event)" v-model="form.phone"
                                     class="pl-4 text-sm w-full h-full text-heading-light-light focus:border focus:border-[#D9DBE9] focus:rounded-tr-lg  focus:rounded-br-lg">
                             </div>
                             <small class="db-field-alert" v-if="errors.phone">
