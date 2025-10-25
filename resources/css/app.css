@@ -114,7 +114,7 @@
     /*===================================
             COMPONENTS PART START
     ====================================*/
-    .ff-header .container { @apply sm:py-6 py-3 pb-4 fixed h-fit inset-0 z-[9999] bg-white shadow-sm }
+    .ff-header .container { @apply sm:py-6 py-3 pb-4 fixed h-fit inset-0 z-10 bg-white shadow-sm }
     .ff-header.active { @apply fixed top-0 left-0 w-full z-60 }
     #cart.active { @apply opacity-100 visible }
     #cart.active > div { @apply ltr:translate-x-0 rtl:-translate-x-0 }
@@ -142,8 +142,8 @@
     .add-btn:hover span { @apply text-white }
     .info-btn:hover svg { @apply fill-primary }
     #profile.active { @apply translate-x-0 }
-    .profile-paper { @apply invisible opacity-0 scale-0 transition }
-    .profile-paper.active { @apply visible opacity-100 scale-100 transition }
+    .profile-paper { @apply invisible opacity-0 scale-0 transition z-10 }
+    .profile-paper.active { @apply visible opacity-100 scale-100 transition z-70 }
     .veg-navs .veg-active { @apply shadow-filter bg-white }
     .veg-navs .veg-active i { @apply opacity-100 ltr:ml-0 rtl:mr-0 }
     .menu-slides .menu-category-active { @apply bg-primary-light border-primary }

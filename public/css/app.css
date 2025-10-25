@@ -890,7 +890,7 @@ video {
 .ff-header .container {
   position: fixed;
   inset: 0px;
-  z-index: 9999;
+  z-index: 10;
   height: -moz-fit-content;
   height: fit-content;
   --tw-bg-opacity: 1;
@@ -1044,6 +1044,7 @@ video {
 }
 .profile-paper {
   visibility: hidden;
+  z-index: 10;
   --tw-scale-x: 0;
   --tw-scale-y: 0;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1056,6 +1057,7 @@ video {
 }
 .profile-paper.active {
   visibility: visible;
+  z-index: 70;
   --tw-scale-x: 1;
   --tw-scale-y: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3415,9 +3417,6 @@ input:checked + div svg {
 .top-9 {
   top: 2.25rem;
 }
-.top-\[22px\] {
-  top: 22px;
-}
 .top-\[42px\] {
   top: 42px;
 }
@@ -3462,15 +3461,6 @@ input:checked + div svg {
 }
 .z-\[9999\] {
   z-index: 9999;
-}
-.z-\[80\] {
-  z-index: 80;
-}
-.z-\[100\] {
-  z-index: 100;
-}
-.z-\[1000\] {
-  z-index: 1000;
 }
 .col-span-1 {
   grid-column: span 1 / span 1;
@@ -4077,6 +4067,10 @@ input:checked + div svg {
 }
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-y-\[2px\] {
+  --tw-translate-y: -2px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .translate-x-full {
@@ -6951,10 +6945,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 @media (min-width: 768px) {
 
-  .md\:top-\[11px\] {
-    top: 11px;
-  }
-
   .md\:top-\[85px\] {
     top: 85px;
   }
@@ -6981,10 +6971,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .md\:mt-0 {
     margin-top: 0px;
-  }
-
-  .md\:mt-12 {
-    margin-top: 3rem;
   }
 
   .md\:mt-4 {
@@ -7151,10 +7137,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
   .lg\:bottom-8 {
     bottom: 2rem;
-  }
-
-  .lg\:top-\[10px\] {
-    top: 10px;
   }
 
   .lg\:top-\[22px\] {
