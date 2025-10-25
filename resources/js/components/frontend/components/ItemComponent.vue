@@ -597,7 +597,7 @@
                     <textarea
                         v-model="temp.instruction"
                         :placeholder="$t('message.add_note')"
-                        class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9]"
+                        class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9] resize-none"
                     ></textarea>
                 </div>
                 <button

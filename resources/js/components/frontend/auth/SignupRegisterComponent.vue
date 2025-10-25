@@ -33,13 +33,12 @@
             <small class="db-field-alert" v-if="errors.password">{{ errors.password[0] }}</small>
           </div>
           <div class="col-12 sm:col-6">
-            <label class="mb-1 text-sm capitalize text-heading-light">Referral Code (optional)</label>
+            <label class="mb-1 text-sm text-heading-light">Referral Code (optional)</label>
             <input
               v-model="form.referral_code"
               type="text"
               class="w-full h-12 rounded-lg border px-4 border-[#D9DBE9]"
               :readonly="referralLocked"
-              placeholder="Enter referral code"
             />
             <small class="db-field-alert" v-if="errors.referral_code">{{ errors.referral_code[0] }}</small>
           </div>
@@ -146,7 +145,7 @@ export default {
     console.log({referral})
     if (referral) {
       this.form.referral_code = referral;
-      this.referralLocked = true; // disable editing if code comes from link
+      this.referralLocked = true;
       this.$store.dispatch('frontendSignup/setReferralCode', referral);
     }
   },

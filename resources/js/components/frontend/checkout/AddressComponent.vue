@@ -41,7 +41,7 @@
                         </h3>
                         <textarea
                             v-model="props.form.apartment"
-                            class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9]"
+                            class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9] resize-none"
                         ></textarea>
                     </div>
                     <div class="mb-6">

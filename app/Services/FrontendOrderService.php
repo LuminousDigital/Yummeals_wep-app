@@ -105,7 +105,7 @@ class FrontendOrderService
                         'user_id'          => Auth::user()->id,
                         'uuid'             => Str::uuid(),
                         'status'           => OrderStatus::DEFAULT,
-                        // 'order_datetime'   => date('Y-m-d H:i:s'),
+                        'order_datetime'   => date('Y-m-d H:i:s'),
                         // 'preparation_time' => Settings::group('order_setup')->get('order_setup_food_preparation_time')
                     ]
                 );

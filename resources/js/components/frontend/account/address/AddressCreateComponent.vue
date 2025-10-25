@@ -26,7 +26,7 @@
                             $t('label.apartment_and_flat')
                         }}</label>
                         <textarea id="apartment" v-model="props.form.apartment"
-                            class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9]"></textarea>
+                            class="h-12 w-full rounded-lg border py-1.5 px-2 placeholder:text-[10px] placeholder:text-[#6E7191] border-[#D9DBE9] resize-none"></textarea>
                     </div>
                     <div class="mb-6">
                         <h3 class="capitalize font-medium mb-2">{{ $t('label.add_label') }}</h3>
